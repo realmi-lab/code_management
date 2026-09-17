@@ -1,0 +1,13 @@
+{
+  "success": true,
+  "synthetic_input": true,
+  "message": "30초 후에 인증해 주세요.",
+  "reason": "'이후'를 '후'로 바꾸고 '인증해주세요'를 '인증해 주세요'로 띄어쓰기하여 자연스럽게 다듬었습니다. 30초라는 수치와 대기 후 인증이라는 조건은 그대로 유지했습니다.",
+  "profile": {
+    "requested_model": "deepseek/deepseek-v4.1-flash",
+    "requested_effort": "low",
+    "observed_model": "deepseek/deepseek-v4.1-flash",
+    "observed_effort": "low"
+  },
+  "elapsed_seconds": 3.67
+}

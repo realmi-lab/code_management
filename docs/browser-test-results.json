@@ -1,0 +1,29 @@
+{
+  "passed": 14,
+  "checks": [
+    "접속 키 로그인",
+    "정확한 코드번호 조회·원문 표시",
+    "기획서용 원문 복사",
+    "코드 상세·근거 조회",
+    "상황 설명 검색",
+    "이후/이내 조건 차이 표시",
+    "초안 저장·정식 번호 미발급",
+    "데모 초안 검토·번호 발급·등록",
+    "파일 업로드→미리보기→등록·HTML 이스케이프",
+    "코드 목록 파일 내보내기",
+    "충돌 항목 선택·사유 입력 후 원문 갱신",
+    "기획서 줄별 코드 검토",
+    "엑셀 양식 다운로드",
+    "390px 모바일 화면·가로 넘침 없음"
+  ],
+  "javascript_errors": [],
+  "real_browser": "Chromium via Playwright",
+  "transport": "FastAPI TestClient bridge (offline)",
+  "not_tested": [
+    "사용자 Docker Local 배포",
+    "실제 회사 엑셀",
+    "실제 AI 모델 응답 품질",
+    "브라우저 직접 HTTP/CSP/클립보드 권한"
+  ],
+  "server": "in-process test instance"
+}

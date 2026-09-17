@@ -1,0 +1,32 @@
+{
+  "synthetic_data": true,
+  "actual_model": true,
+  "mode": "ai_query",
+  "queries": [
+    "이미 가입된 전화번호",
+    "휴대폰 번호 중복 가입",
+    "기존 가입 번호 재가입 안내"
+  ],
+  "codes": [
+    "EX-0201",
+    "EX-0102",
+    "EX-0203",
+    "EX-0101",
+    "EX-0204",
+    "EX-0105",
+    "EX-0103",
+    "EX-0202"
+  ],
+  "messages": [
+    "이미 가입된 휴대폰 번호입니다. 로그인해주세요.",
+    "인증번호를 다시 확인해주세요.",
+    "사용 가능한 이메일입니다."
+  ],
+  "profile": {
+    "requested_model": "deepseek/deepseek-v4.1-flash",
+    "requested_effort": "low",
+    "observed_model": "deepseek/deepseek-v4.1-flash",
+    "observed_effort": "low"
+  },
+  "elapsed_seconds": 4.56
+}

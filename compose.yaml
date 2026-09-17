@@ -1,0 +1,25 @@
+name: code-management
+services:
+  app:
+    build: .
+    init: true
+    env_file:
+      - .env
+    environment:
+      DATA_DIR: /app/data
+    ports:
+      - "127.0.0.1:${PORT:-8766}:8000"
+    volumes:
+      - catalog-data:/app/data
+    extra_hosts:
+      - "host.docker.internal:host-gateway"
+    read_only: true
+    tmpfs:
+      - /tmp:size=128m,mode=1777
+    cap_drop:
+      - ALL
+    security_opt:
+      - no-new-privileges:true
+    restart: unless-stopped
+volumes:
+  catalog-data:

@@ -1,0 +1,23 @@
+{
+  "user_photo_transcription": true,
+  "synthetic_data": false,
+  "model_called": false,
+  "offline_harness": false,
+  "catalogue_mutations": false,
+  "checks": [
+    "authenticated_33_photo_rows_through_proxy",
+    "exact_code_preserves_source_type_title_and_review_note",
+    "detail_keeps_all_worksheet_fields_and_photo_source",
+    "multiline_raw_message_copy_and_edit_preserved",
+    "bracket_labels_order_and_variables_preserved_in_body",
+    "basic_situation_search_returns_photo_catalogue",
+    "catalogue_columns_and_literal_bracket_labels",
+    "photo_notice_and_demo_scope_are_separate",
+    "mobile_raw_message_14px_and_no_document_overflow",
+    "direct_access_hides_general_access_lock",
+    "all_api_requests_use_proxy_prefix",
+    "no_browser_javascript_errors"
+  ],
+  "passed": true,
+  "javascript_errors": 0
+}

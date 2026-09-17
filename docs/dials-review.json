@@ -1,0 +1,631 @@
+{
+  "offline_harness": false,
+  "model_called": false,
+  "catalogue_mutations": false,
+  "checks": [
+    {
+      "draft_compare": {
+        "width": 1440,
+        "documentFits": true,
+        "columns": "525.906px",
+        "cardWidths": [
+          524.837890625,
+          523.993896484375,
+          522.4873657226562,
+          520.701171875,
+          520.647216796875,
+          520.647216796875,
+          520.647216796875,
+          520.647216796875
+        ],
+        "cardFits": true
+      }
+    },
+    {
+      "draft_compare": {
+        "width": 1024,
+        "documentFits": true,
+        "columns": "387.109px",
+        "cardWidths": [
+          386.7628173828125,
+          386.516845703125,
+          386.0726318359375,
+          385.224853515625,
+          383.947021484375,
+          383.947021484375,
+          383.947021484375,
+          383.947021484375
+        ],
+        "cardFits": true
+      }
+    },
+    {
+      "draft_compare": {
+        "width": 850,
+        "documentFits": true,
+        "columns": "384.5px",
+        "cardWidths": [
+          384.3530578613281,
+          384.23974609375,
+          384.0537414550781,
+          383.73193359375,
+          383.1270751953125,
+          383.1270751953125,
+          383.1270751953125,
+          383.1270751953125
+        ],
+        "cardFits": true
+      }
+    },
+    {
+      "draft_compare": {
+        "width": 641,
+        "documentFits": true,
+        "columns": "280px",
+        "cardWidths": [
+          279.9620361328125,
+          279.9223937988281,
+          279.85791015625,
+          279.75341796875,
+          279.578369140625,
+          279.578369140625,
+          279.578369140625,
+          279.578369140625
+        ],
+        "cardFits": true
+      }
+    },
+    {
+      "draft_compare": {
+        "width": 390,
+        "documentFits": true,
+        "columns": "339px",
+        "cardWidths": [
+          338.99072265625,
+          338.9705810546875,
+          338.93377685546875,
+          338.872802734375,
+          338.7742919921875,
+          338.7742919921875,
+          338.7742919921875,
+          338.7742919921875
+        ],
+        "cardFits": true
+      }
+    },
+    {
+      "draft_compare": {
+        "width": 320,
+        "documentFits": true,
+        "columns": "277px",
+        "cardWidths": [
+          277,
+          276.9970703125,
+          276.98583984375,
+          276.96337890625,
+          276.92474365234375,
+          276.92474365234375,
+          276.92474365234375,
+          276.92474365234375
+        ],
+        "cardFits": true
+      }
+    },
+    "expanded_source_and_literal_bracket_text",
+    {
+      "long_dom_text": {
+        "width": 1440,
+        "documentFits": true,
+        "content": [
+          {
+            "class": "code-card featured",
+            "fits": false,
+            "client": 1026,
+            "scroll": 1456
+          },
+          {
+            "class": "card-fields",
+            "fits": false,
+            "client": 211,
+            "scroll": 1432
+          },
+          {
+            "class": "card-title",
+            "fits": true,
+            "client": 706,
+            "scroll": 706
+          },
+          {
+            "class": "card-message",
+            "fits": true,
+            "client": 651,
+            "scroll": 651
+          }
+        ]
+      }
+    },
+    {
+      "long_dom_text": {
+        "width": 1024,
+        "documentFits": true,
+        "content": [
+          {
+            "class": "code-card featured",
+            "fits": false,
+            "client": 755,
+            "scroll": 1456
+          },
+          {
+            "class": "card-fields",
+            "fits": false,
+            "client": 143,
+            "scroll": 1432
+          },
+          {
+            "class": "card-title",
+            "fits": true,
+            "client": 503,
+            "scroll": 503
+          },
+          {
+            "class": "card-message",
+            "fits": true,
+            "client": 503,
+            "scroll": 503
+          }
+        ]
+      }
+    },
+    {
+      "long_dom_text": {
+        "width": 850,
+        "documentFits": true,
+        "content": [
+          {
+            "class": "code-card featured",
+            "fits": false,
+            "client": 785,
+            "scroll": 1454
+          },
+          {
+            "class": "card-fields",
+            "fits": false,
+            "client": 741,
+            "scroll": 1432
+          },
+          {
+            "class": "card-title",
+            "fits": true,
+            "client": 741,
+            "scroll": 741
+          },
+          {
+            "class": "card-message",
+            "fits": true,
+            "client": 651,
+            "scroll": 651
+          }
+        ]
+      }
+    },
+    {
+      "long_dom_text": {
+        "width": 390,
+        "documentFits": true,
+        "content": [
+          {
+            "class": "code-card featured",
+            "fits": false,
+            "client": 337,
+            "scroll": 1450
+          },
+          {
+            "class": "card-fields",
+            "fits": false,
+            "client": 301,
+            "scroll": 1432
+          },
+          {
+            "class": "card-title",
+            "fits": true,
+            "client": 301,
+            "scroll": 301
+          },
+          {
+            "class": "card-message",
+            "fits": true,
+            "client": 301,
+            "scroll": 301
+          }
+        ]
+      }
+    },
+    {
+      "long_dom_text": {
+        "width": 320,
+        "documentFits": true,
+        "content": [
+          {
+            "class": "code-card featured",
+            "fits": false,
+            "client": 275,
+            "scroll": 1450
+          },
+          {
+            "class": "card-fields",
+            "fits": false,
+            "client": 239,
+            "scroll": 1432
+          },
+          {
+            "class": "card-title",
+            "fits": true,
+            "client": 239,
+            "scroll": 239
+          },
+          {
+            "class": "card-message",
+            "fits": true,
+            "client": 239,
+            "scroll": 239
+          }
+        ]
+      }
+    },
+    {
+      "reduced_motion": {
+        "animation": "none",
+        "transform": "none",
+        "transition": "0s"
+      }
+    },
+    "reduced_motion_dialog"
+  ],
+  "issues": [],
+  "javascript_errors": [],
+  "prior_issues_resolved": [
+    {
+      "long_dom_text_clipped": {
+        "width": 1440,
+        "documentFits": true,
+        "content": [
+          {
+            "class": "code-card featured",
+            "fits": false,
+            "client": 1026,
+            "scroll": 1456
+          },
+          {
+            "class": "card-fields",
+            "fits": false,
+            "client": 211,
+            "scroll": 1432
+          },
+          {
+            "class": "card-title",
+            "fits": true,
+            "client": 706,
+            "scroll": 706
+          },
+          {
+            "class": "card-message",
+            "fits": true,
+            "client": 651,
+            "scroll": 651
+          }
+        ]
+      }
+    },
+    {
+      "long_dom_text_clipped": {
+        "width": 1024,
+        "documentFits": true,
+        "content": [
+          {
+            "class": "code-card featured",
+            "fits": false,
+            "client": 755,
+            "scroll": 1456
+          },
+          {
+            "class": "card-fields",
+            "fits": false,
+            "client": 143,
+            "scroll": 1432
+          },
+          {
+            "class": "card-title",
+            "fits": true,
+            "client": 503,
+            "scroll": 503
+          },
+          {
+            "class": "card-message",
+            "fits": true,
+            "client": 503,
+            "scroll": 503
+          }
+        ]
+      }
+    },
+    {
+      "long_dom_text_clipped": {
+        "width": 850,
+        "documentFits": true,
+        "content": [
+          {
+            "class": "code-card featured",
+            "fits": false,
+            "client": 785,
+            "scroll": 1454
+          },
+          {
+            "class": "card-fields",
+            "fits": false,
+            "client": 741,
+            "scroll": 1432
+          },
+          {
+            "class": "card-title",
+            "fits": true,
+            "client": 741,
+            "scroll": 741
+          },
+          {
+            "class": "card-message",
+            "fits": true,
+            "client": 651,
+            "scroll": 651
+          }
+        ]
+      }
+    },
+    {
+      "long_dom_text_clipped": {
+        "width": 390,
+        "documentFits": true,
+        "content": [
+          {
+            "class": "code-card featured",
+            "fits": false,
+            "client": 337,
+            "scroll": 1450
+          },
+          {
+            "class": "card-fields",
+            "fits": false,
+            "client": 301,
+            "scroll": 1432
+          },
+          {
+            "class": "card-title",
+            "fits": true,
+            "client": 301,
+            "scroll": 301
+          },
+          {
+            "class": "card-message",
+            "fits": true,
+            "client": 301,
+            "scroll": 301
+          }
+        ]
+      }
+    },
+    {
+      "long_dom_text_clipped": {
+        "width": 320,
+        "documentFits": true,
+        "content": [
+          {
+            "class": "code-card featured",
+            "fits": false,
+            "client": 275,
+            "scroll": 1450
+          },
+          {
+            "class": "card-fields",
+            "fits": false,
+            "client": 239,
+            "scroll": 1432
+          },
+          {
+            "class": "card-title",
+            "fits": true,
+            "client": 239,
+            "scroll": 239
+          },
+          {
+            "class": "card-message",
+            "fits": true,
+            "client": 239,
+            "scroll": 239
+          }
+        ]
+      }
+    }
+  ],
+  "long_content_recheck": [
+    {
+      "width": 1440,
+      "documentFits": true,
+      "content": [
+        {
+          "class": "code-card featured",
+          "fits": true,
+          "client": 1026,
+          "scroll": 1026
+        },
+        {
+          "class": "code-id",
+          "fits": true,
+          "client": 211,
+          "scroll": 211
+        },
+        {
+          "class": "card-fields",
+          "fits": true,
+          "client": 211,
+          "scroll": 211
+        },
+        {
+          "class": "card-title",
+          "fits": true,
+          "client": 706,
+          "scroll": 706
+        },
+        {
+          "class": "card-message",
+          "fits": true,
+          "client": 651,
+          "scroll": 651
+        }
+      ]
+    },
+    {
+      "width": 1024,
+      "documentFits": true,
+      "content": [
+        {
+          "class": "code-card featured",
+          "fits": true,
+          "client": 755,
+          "scroll": 755
+        },
+        {
+          "class": "code-id",
+          "fits": true,
+          "client": 143,
+          "scroll": 143
+        },
+        {
+          "class": "card-fields",
+          "fits": true,
+          "client": 143,
+          "scroll": 143
+        },
+        {
+          "class": "card-title",
+          "fits": true,
+          "client": 503,
+          "scroll": 503
+        },
+        {
+          "class": "card-message",
+          "fits": true,
+          "client": 503,
+          "scroll": 503
+        }
+      ]
+    },
+    {
+      "width": 850,
+      "documentFits": true,
+      "content": [
+        {
+          "class": "code-card featured",
+          "fits": true,
+          "client": 785,
+          "scroll": 785
+        },
+        {
+          "class": "code-id",
+          "fits": true,
+          "client": 302,
+          "scroll": 302
+        },
+        {
+          "class": "card-fields",
+          "fits": true,
+          "client": 741,
+          "scroll": 741
+        },
+        {
+          "class": "card-title",
+          "fits": true,
+          "client": 741,
+          "scroll": 741
+        },
+        {
+          "class": "card-message",
+          "fits": true,
+          "client": 651,
+          "scroll": 651
+        }
+      ]
+    },
+    {
+      "width": 390,
+      "documentFits": true,
+      "content": [
+        {
+          "class": "code-card featured",
+          "fits": true,
+          "client": 337,
+          "scroll": 337
+        },
+        {
+          "class": "code-id",
+          "fits": true,
+          "client": 226,
+          "scroll": 226
+        },
+        {
+          "class": "card-fields",
+          "fits": true,
+          "client": 301,
+          "scroll": 301
+        },
+        {
+          "class": "card-title",
+          "fits": true,
+          "client": 301,
+          "scroll": 301
+        },
+        {
+          "class": "card-message",
+          "fits": true,
+          "client": 301,
+          "scroll": 301
+        }
+      ]
+    },
+    {
+      "width": 320,
+      "documentFits": true,
+      "content": [
+        {
+          "class": "code-card featured",
+          "fits": true,
+          "client": 275,
+          "scroll": 275
+        },
+        {
+          "class": "code-id",
+          "fits": true,
+          "client": 164,
+          "scroll": 164
+        },
+        {
+          "class": "card-fields",
+          "fits": true,
+          "client": 239,
+          "scroll": 239
+        },
+        {
+          "class": "card-title",
+          "fits": true,
+          "client": 239,
+          "scroll": 239
+        },
+        {
+          "class": "card-message",
+          "fits": true,
+          "client": 239,
+          "scroll": 239
+        }
+      ]
+    }
+  ],
+  "passed": true
+}

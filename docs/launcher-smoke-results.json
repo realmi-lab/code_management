@@ -1,0 +1,13 @@
+{
+  "passed": 6,
+  "checks": [
+    "bootstrap: nonempty private key, mode600, repeat does not overwrite",
+    "native run.py: actual loopback HTTP health response",
+    "native HTTP: missing access key rejected, valid key accepted",
+    "native HTTP: static index served",
+    "backup: live SQLite snapshot integrity and private file permissions",
+    "container entrypoint refuses missing credentials (Python-only check, not Docker run)"
+  ],
+  "docker_engine": null,
+  "external_model_calls": false
+}

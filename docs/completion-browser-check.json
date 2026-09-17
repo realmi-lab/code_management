@@ -1,0 +1,15 @@
+{
+  "synthetic_data": true,
+  "mock_model": true,
+  "offline_harness": false,
+  "checks": [
+    "authenticated_http_ui",
+    "draft_create_edit",
+    "excel_handoff_import_review_link",
+    "ai_search_expansion_and_original_result",
+    "basic_search_opt_out",
+    "mobile_no_horizontal_overflow",
+    "no_browser_javascript_errors"
+  ],
+  "success": true
+}

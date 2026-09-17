@@ -1,0 +1,12 @@
+{
+  "repository": "https://github.com/urstory/urstory-rag",
+  "upstream_commit": "75661c676aec650e52f75dd068b687a4cb6a63b7",
+  "upstream_file": "backend/app/services/search/rrf.py",
+  "upstream_blob_sha_reference": "5b6353d6175f5a02ca7e8837c501ebabbbf4f5b6",
+  "license": "MIT",
+  "reuse_scope": "RRFCombiner ranking-fusion logic. Local model import and copied source formatting adapted. Not a byte-identical upstream file and not the complete upstream stack.",
+  "bundled_sha256": {
+    "vendor/urstory_rag/rrf.py": "d47cb28506c3100c6cee6b1364609a7b600550792d2df53beea8ce6c7f8851d4",
+    "vendor/urstory_rag/LICENSE": "3982326e5eee2666ac6f5baa86e20a1b6d2563eee83d586c39fc91876111c489"
+  }
+}

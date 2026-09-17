@@ -1,0 +1,120 @@
+{
+  "offline_harness": false,
+  "model_called": false,
+  "catalogue_mutations": false,
+  "checks": [
+    "key_text_contrast_AA",
+    "all_8_views_fit_1440px",
+    "all_8_views_fit_390px",
+    "all_8_views_fit_320px",
+    "keyboard_focus_visible"
+  ],
+  "contrast_samples": [
+    {
+      "selector": ".nav-item.active",
+      "ratio": 9.23,
+      "color": "rgb(41, 63, 45)",
+      "background": [
+        228,
+        233,
+        223
+      ]
+    },
+    {
+      "selector": ".nav-item:not(.active)",
+      "ratio": 6.12,
+      "color": "rgb(87, 94, 84)",
+      "background": [
+        244,
+        245,
+        241
+      ]
+    },
+    {
+      "selector": ".primary",
+      "ratio": 9.44,
+      "color": "rgb(255, 255, 255)",
+      "background": [
+        65,
+        72,
+        63
+      ]
+    },
+    {
+      "selector": ".check",
+      "ratio": 5.74,
+      "color": "rgb(100, 103, 98)",
+      "background": [
+        255,
+        255,
+        255
+      ]
+    },
+    {
+      "selector": ".search-overview",
+      "ratio": 5.49,
+      "color": "rgb(100, 103, 98)",
+      "background": [
+        250,
+        250,
+        248
+      ]
+    },
+    {
+      "selector": ".card-message",
+      "ratio": 14.36,
+      "color": "rgb(39, 43, 40)",
+      "background": [
+        255,
+        255,
+        255
+      ]
+    },
+    {
+      "selector": ".source",
+      "ratio": 5.62,
+      "color": "rgb(100, 103, 98)",
+      "background": [
+        252,
+        253,
+        249
+      ]
+    },
+    {
+      "selector": ".source-review summary",
+      "ratio": 5.82,
+      "color": "rgb(128, 96, 31)",
+      "background": [
+        255,
+        255,
+        255
+      ]
+    },
+    {
+      "selector": ".tag",
+      "ratio": 5.71,
+      "color": "rgb(82, 98, 73)",
+      "background": [
+        238,
+        240,
+        233
+      ]
+    },
+    {
+      "selector": ".breadcrumb",
+      "ratio": 5.57,
+      "color": "rgb(100, 103, 98)",
+      "background": [
+        251,
+        252,
+        249
+      ]
+    }
+  ],
+  "passed": true,
+  "javascript_errors": 0,
+  "failed_assets": [],
+  "external_requests": [],
+  "font": "Pretendard Variable",
+  "base_font": "14px"
+}
