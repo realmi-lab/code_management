@@ -16,7 +16,10 @@ def load_env(path):
         key,value=line.split('=',1);key=key.strip();value=value.strip()
         if not re.fullmatch(r'[A-Z][A-Z0-9_]*',key):raise ValueError('Invalid .env key')
         if len(value)>=2 and value[0]==value[-1] and value[0] in ('"',"'"):value=value[1:-1]
-        os.environ.setdefault(key,value)
+        if key.startswith('ADMIN_'):
+            os.environ[key]=value
+        else:
+            os.environ.setdefault(key,value)
 
 if __name__=='__main__':
     os.chdir(ROOT);load_env(ROOT/'.env')
