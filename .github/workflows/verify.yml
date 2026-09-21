@@ -1,0 +1,103 @@
+name: Verify integrated catalogue
+
+on:
+  pull_request:
+  push:
+  workflow_dispatch:
+    inputs:
+      build_frontend:
+        description: Build the complete pinned upstream frontend Docker image
+        type: boolean
+        default: false
+
+permissions:
+  contents: read
+
+concurrency:
+  group: verify-${{ github.workflow }}-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  contracts:
+    name: Source integrity and isolated regression checks
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+    env:
+      PYTHONDONTWRITEBYTECODE: '1'
+      PYTHONPATH: extensions
+      VERIFICATION_DIR: .local/ci-verification
+    steps:
+      - uses: actions/checkout@v6
+      - uses: actions/setup-python@v6
+        with:
+          python-version: '3.12'
+          cache: pip
+          cache-dependency-path: integration_tests/requirements.txt
+      - uses: actions/setup-node@v6
+        with:
+          node-version: '22'
+      - name: Install isolated test dependencies
+        run: python -m pip install -r integration_tests/requirements.txt
+      - name: Fetch and verify every pinned upstream file
+        run: |
+          python scripts/manage.py prepare
+          python scripts/manage.py verify
+      - name: Installer and extension tests without external AI keys
+        run: |
+          mkdir -p "$VERIFICATION_DIR"
+          python -m unittest discover -s tests -v
+          python -m pytest integration_tests -q --junitxml="$VERIFICATION_DIR/integration-junit.xml"
+      - name: JavaScript and patch syntax
+        run: |
+          node --check extensions/code_agent/static/app.js
+          node --check deploy/patch_frontend.mjs
+          node --check deploy/patch_provider_frontend.mjs
+          python - <<'PY'
+          import ast
+          from pathlib import Path
+          for directory in ('extensions/code_agent', 'scripts', 'deploy'):
+              for path in Path(directory).rglob('*.py'):
+                  ast.parse(path.read_text(), filename=str(path))
+          PY
+      - name: Real loopback HTTP with explicit auth and AI test doubles
+        run: python integration_tests/native_http_check.py
+      - name: Install Chromium for isolated UI checks
+        run: |
+          python -m playwright install --with-deps chromium
+          python - <<'PY' >> "$GITHUB_ENV"
+          from playwright.sync_api import sync_playwright
+          with sync_playwright() as p:
+              print('CHROMIUM_PATH=' + p.chromium.executable_path)
+          PY
+      - name: Browser catalogue and provider settings with test doubles
+        run: |
+          python integration_tests/browser_check.py
+          python integration_tests/browser_ai_settings_check.py
+      - name: Confirm test imports did not change pinned upstream
+        if: always()
+        run: python scripts/manage.py verify
+      - name: Upload non-secret synthetic test reports
+        if: always()
+        uses: actions/upload-artifact@v7
+        with:
+          name: isolated-verification
+          path: .local/ci-verification/
+          if-no-files-found: ignore
+
+  frontend-build:
+    name: Optional complete upstream frontend build
+    if: github.event_name == 'workflow_dispatch' && inputs.build_frontend
+    needs: contracts
+    runs-on: ubuntu-latest
+    timeout-minutes: 30
+    env:
+      PYTHONDONTWRITEBYTECODE: '1'
+    steps:
+      - uses: actions/checkout@v6
+      - uses: actions/setup-python@v6
+        with:
+          python-version: '3.12'
+      - name: Prepare the verified pinned source
+        run: python scripts/manage.py prepare
+      - name: Build complete Next.js frontend and catalogue integration
+        run: docker build --file deploy/frontend.Dockerfile --tag code-management-frontend:ci .

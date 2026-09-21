@@ -1,0 +1,13 @@
+{
+  "cases": 12,
+  "top1": 1.0,
+  "hit_at_8": 1.0,
+  "mrr_at_8": 1.0,
+  "errors": 0,
+  "median_seconds": 11.283999999999999,
+  "originals_match": true,
+  "production_unchanged": true,
+  "sample_count": 279,
+  "answer_completed": 2,
+  "independent_llm_judge": false
+}

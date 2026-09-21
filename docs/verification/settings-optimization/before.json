@@ -1,0 +1,85 @@
+{
+  "chunking_strategy": "auto",
+  "chunk_size": 1024,
+  "chunk_overlap": 200,
+  "contextual_chunking_enabled": false,
+  "contextual_chunking_model": "deepseek/deepseek-v4.1-flash",
+  "contextual_chunking_max_doc_chars": 2000,
+  "embedding_provider": "local",
+  "embedding_model": "local:intfloat/multilingual-e5-base@d128750597153bb5987e10b1c3493a34e5a4502a:pad1536:v1",
+  "search_mode": "hybrid",
+  "keyword_engine": "elasticsearch",
+  "rrf_constant": 60,
+  "vector_weight": 0.5,
+  "keyword_weight": 0.5,
+  "reranking_enabled": true,
+  "reranker_model": "dragonkue/bge-reranker-v2-m3-ko",
+  "reranker_top_k": 8,
+  "retriever_top_k": 20,
+  "hyde_enabled": true,
+  "hyde_model": "deepseek/deepseek-v4.1-flash",
+  "cascading_bm25_threshold": 3.0,
+  "cascading_min_qualifying_docs": 3,
+  "cascading_min_doc_score": 1.0,
+  "cascading_fallback_vector_weight": 0.3,
+  "cascading_fallback_keyword_weight": 0.7,
+  "query_expansion_enabled": true,
+  "query_expansion_max_keywords": 10,
+  "multi_query_enabled": true,
+  "multi_query_count": 4,
+  "multi_query_model": "deepseek/deepseek-v4.1-flash",
+  "exact_citation_enabled": true,
+  "numeric_verification_enabled": true,
+  "guardrails": {
+    "pii_detection": {
+      "enabled": true,
+      "action": "mask",
+      "patterns": [
+        "주민등록번호",
+        "외국인등록번호",
+        "휴대전화",
+        "일반전화",
+        "사업자등록번호",
+        "여권번호",
+        "운전면허번호",
+        "이메일",
+        "계좌번호"
+      ],
+      "llm_verification": true
+    },
+    "injection_detection": {
+      "enabled": true,
+      "action": "block",
+      "block_message": "이 질문은 처리할 수 없습니다."
+    },
+    "hallucination_detection": {
+      "enabled": true,
+      "action": "warn",
+      "threshold": 0.8,
+      "judge_model": "deepseek/deepseek-v4.1-flash"
+    },
+    "retrieval_gate": {
+      "enabled": true,
+      "min_top_score": 0.3,
+      "min_doc_count": 1,
+      "min_doc_score": 0.2,
+      "soft_mode": true,
+      "not_found_message": "관련 문서를 충분히 찾지 못했습니다. 다른 키워드로 검색해 주세요."
+    },
+    "faithfulness": {
+      "enabled": true,
+      "action": "warn",
+      "threshold": 0.9
+    }
+  },
+  "pii_detection_enabled": true,
+  "injection_detection_enabled": true,
+  "hallucination_detection_enabled": true,
+  "retrieval_quality_gate_enabled": true,
+  "faithfulness_enabled": true,
+  "cache_enabled": true,
+  "cache_search_ttl": 3600,
+  "llm_provider": "commandcode",
+  "llm_model": "deepseek/deepseek-v4.1-flash",
+  "system_prompt": ""
+}

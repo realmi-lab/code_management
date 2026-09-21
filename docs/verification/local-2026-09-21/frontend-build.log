@@ -1,0 +1,125 @@
+#0 building with "desktop-linux" instance using docker driver
+
+#1 [internal] load build definition from frontend.Dockerfile
+#1 transferring dockerfile: 1.16kB done
+#1 DONE 0.0s
+
+#2 [internal] load metadata for docker.io/library/node:22-alpine
+#2 DONE 1.3s
+
+#3 [internal] load .dockerignore
+#3 transferring context: 289B done
+#3 DONE 0.0s
+
+#4 [builder  1/11] FROM docker.io/library/node:22-alpine@sha256:b6f26b36c8ff49624cfdac716b8ea1138d606df02586a77d364bb5536a634f85
+#4 resolve docker.io/library/node:22-alpine@sha256:b6f26b36c8ff49624cfdac716b8ea1138d606df02586a77d364bb5536a634f85 done
+#4 DONE 0.0s
+
+#5 [internal] load build context
+#5 transferring context: 11.20kB 0.0s done
+#5 DONE 0.0s
+
+#6 [builder  6/11] COPY extensions/frontend ./
+#6 CACHED
+
+#7 [builder  7/11] COPY deploy/patch_frontend.mjs /tmp/patch_frontend.mjs
+#7 CACHED
+
+#8 [builder  4/11] RUN corepack enable && pnpm install --frozen-lockfile
+#8 CACHED
+
+#9 [builder  2/11] WORKDIR /app
+#9 CACHED
+
+#10 [builder  3/11] COPY upstream/frontend/package.json upstream/frontend/pnpm-lock.yaml ./
+#10 CACHED
+
+#11 [builder  5/11] COPY upstream/frontend ./
+#11 CACHED
+
+#12 [builder  8/11] RUN node /tmp/patch_frontend.mjs
+#12 CACHED
+
+#13 [builder  9/11] COPY deploy/patch_provider_frontend.mjs /tmp/patch_provider_frontend.mjs
+#13 DONE 0.2s
+
+#14 [builder 10/11] RUN node /tmp/patch_provider_frontend.mjs
+#14 DONE 0.2s
+
+#15 [builder 11/11] RUN mkdir -p public && pnpm build
+#15 0.273 
+#15 0.273 > frontend@0.1.0 build /app
+#15 0.273 > next build
+#15 0.273 
+#15 0.594 ▲ Next.js 16.2.6 (Turbopack)
+#15 0.594 
+#15 0.611   Creating an optimized production build ...
+#15 3.433 ✓ Compiled successfully in 2.7s
+#15 3.438   Running TypeScript ...
+#15 6.297   Finished TypeScript in 2.9s ...
+#15 6.298   Collecting page data using 9 workers ...
+#15 6.598   Generating static pages using 9 workers (0/28) ...
+#15 6.757   Generating static pages using 9 workers (7/28) 
+#15 6.770   Generating static pages using 9 workers (14/28) 
+#15 6.826   Generating static pages using 9 workers (21/28) 
+#15 6.838 ✓ Generating static pages using 9 workers (28/28) in 240ms
+#15 6.842   Finalizing page optimization ...
+#15 7.159 
+#15 7.160 Route (app)
+#15 7.160 ┌ ○ /
+#15 7.160 ├ ○ /_not-found
+#15 7.160 ├ ○ /codes
+#15 7.160 ├ ○ /documents
+#15 7.160 ├ ƒ /documents/[id]
+#15 7.160 ├ ○ /evaluation
+#15 7.160 ├ ○ /evaluation/compare
+#15 7.160 ├ ○ /evaluation/datasets
+#15 7.160 ├ ○ /evaluation/runs
+#15 7.160 ├ ○ /login
+#15 7.160 ├ ○ /monitoring
+#15 7.160 ├ ○ /monitoring/metrics
+#15 7.160 ├ ○ /monitoring/traces
+#15 7.160 ├ ○ /search
+#15 7.160 ├ ○ /settings
+#15 7.160 ├ ○ /settings/api-keys
+#15 7.160 ├ ○ /settings/chunking
+#15 7.160 ├ ○ /settings/embedding
+#15 7.160 ├ ○ /settings/generation
+#15 7.160 ├ ○ /settings/guardrails
+#15 7.160 ├ ○ /settings/hyde
+#15 7.160 ├ ○ /settings/profile
+#15 7.160 ├ ○ /settings/reranking
+#15 7.160 ├ ○ /settings/search
+#15 7.160 ├ ○ /settings/system
+#15 7.160 ├ ○ /settings/users
+#15 7.160 └ ○ /settings/watcher
+#15 7.160 
+#15 7.160 
+#15 7.160 ○  (Static)   prerendered as static content
+#15 7.160 ƒ  (Dynamic)  server-rendered on demand
+#15 7.160 
+#15 DONE 7.3s
+
+#16 [runner 3/6] RUN addgroup -S appgroup && adduser -S appuser -G appgroup
+#16 CACHED
+
+#17 [runner 4/6] COPY --from=builder --chown=appuser:appgroup /app/.next/standalone ./
+#17 DONE 0.2s
+
+#18 [runner 5/6] COPY --from=builder --chown=appuser:appgroup /app/.next/static ./.next/static
+#18 DONE 0.0s
+
+#19 [runner 6/6] COPY --from=builder --chown=appuser:appgroup /app/public ./public
+#19 DONE 0.0s
+
+#20 exporting to image
+#20 exporting layers
+#20 exporting layers 0.6s done
+#20 exporting manifest sha256:c25f0027a0a1f266ae0bb97d6d80687a924305fcce02464abdc551183a6426cb done
+#20 exporting config sha256:371712b0935d12ef80717f76ede8b43982c0404ca566046ec211e24393d74db1 done
+#20 exporting attestation manifest sha256:6e8e116231caa061f1d598704fc54d4a0a1e10eec003e59755780e348bb49ba6 done
+#20 exporting manifest list sha256:66d671c6ed908df539508e6dd0ade112fccd1e2bca12c94f09bfde270b3c7d08 done
+#20 naming to docker.io/library/code-management-full-web:75661c6 done
+#20 unpacking to docker.io/library/code-management-full-web:75661c6
+#20 unpacking to docker.io/library/code-management-full-web:75661c6 0.2s done
+#20 DONE 0.8s

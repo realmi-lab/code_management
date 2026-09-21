@@ -1,0 +1,28 @@
+{
+  "completed": 10,
+  "target": 10,
+  "answered": 8,
+  "judged": 8,
+  "judge_average": 98.375,
+  "good": 8,
+  "fail_under_40": 0,
+  "answer_errors": 2,
+  "judge_errors": 0,
+  "search_hit_count": 8,
+  "top1_count": 7,
+  "keyword_recall_all": 0.8,
+  "median_answer_seconds": 31.5575,
+  "all_returned_originals_match": true,
+  "judge_independent_model": false,
+  "unique_questions": 5,
+  "rounds": 2,
+  "all_search": false,
+  "no_drafts": true,
+  "unchanged": {
+    "production": true,
+    "settings": true,
+    "provider": true,
+    "corpus": true
+  },
+  "blocked_validation_events": 0
+}

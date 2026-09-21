@@ -1,0 +1,17 @@
+{
+  "passed": true,
+  "transport": "real localhost HTTP via httpx",
+  "auth_and_model": "test doubles; NOT upstream services",
+  "checks": [
+    "unauthenticated_401",
+    "authenticated_status",
+    "static_workspace_HTTP",
+    "exact_lookup_HTTP",
+    "retry_idempotency_HTTP",
+    "thread_owner_isolation_HTTP",
+    "draft_creation_HTTP",
+    "explicit_approval_HTTP",
+    "registered_original_HTTP",
+    "audit_HTTP"
+  ]
+}

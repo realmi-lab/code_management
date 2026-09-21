@@ -1,0 +1,60 @@
+/Users/apple/Documents/ChatGPT/code_management/.test-venv/lib/python3.14/site-packages/fastapi/testclient.py:1: StarletteDeprecationWarning: Using `httpx` with `starlette.testclient` is deprecated; install `httpx2` instead.
+  from starlette.testclient import TestClient as TestClient  # noqa
+{
+  "browser": "Chromium",
+  "transport": "real-loopback-HTTP",
+  "authentication": "test dependency; NOT upstream JWT",
+  "retrieval_and_LLM": "ScriptedGateway test double",
+  "checks": [
+    {
+      "name": "same_origin_auth_handoff",
+      "passed": true
+    },
+    {
+      "name": "exact_original_message",
+      "passed": true
+    },
+    {
+      "name": "conversational_search",
+      "passed": true
+    },
+    {
+      "name": "followup_ordinal_and_condition_comparison",
+      "passed": true
+    },
+    {
+      "name": "new_draft_not_automatically_registered",
+      "passed": true
+    },
+    {
+      "name": "explicit_admin_registration",
+      "passed": true
+    },
+    {
+      "name": "registered_catalogue_updated",
+      "passed": true
+    },
+    {
+      "name": "file_selection_preview_commit",
+      "passed": true
+    },
+    {
+      "name": "approval_audit_user_and_reason",
+      "passed": true
+    },
+    {
+      "name": "conversation_persisted_and_restored",
+      "passed": true
+    },
+    {
+      "name": "mobile_390px_no_horizontal_overflow",
+      "passed": true
+    },
+    {
+      "name": "no_browser_javascript_errors",
+      "passed": true
+    }
+  ],
+  "passed": true,
+  "javascript_errors": []
+}

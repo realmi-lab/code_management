@@ -1,0 +1,310 @@
+ Image code-management-full-rag-frontend Building 
+ Image code-management-full-api:75661c6 Building 
+#1 [internal] load local bake definitions
+#1 reading from stdin 2.35kB done
+#1 DONE 0.0s
+
+#2 [rag-frontend internal] load build definition from frontend.Dockerfile
+#2 transferring dockerfile: 2.50kB done
+#2 DONE 0.0s
+
+#3 [rag-api internal] load build definition from backend.Dockerfile
+#3 transferring dockerfile: 2.54kB done
+#3 DONE 0.0s
+
+#4 [rag-frontend internal] load metadata for docker.io/library/node:22-alpine
+#4 DONE 1.2s
+
+#5 [rag-api internal] load metadata for docker.io/library/python:3.12-slim
+#5 DONE 1.2s
+
+#6 [rag-api internal] load .dockerignore
+#6 transferring context: 289B done
+#6 DONE 0.0s
+
+#7 [rag-frontend builder  1/33] FROM docker.io/library/node:22-alpine@sha256:b6f26b36c8ff49624cfdac716b8ea1138d606df02586a77d364bb5536a634f85
+#7 resolve docker.io/library/node:22-alpine@sha256:b6f26b36c8ff49624cfdac716b8ea1138d606df02586a77d364bb5536a634f85 done
+#7 DONE 0.0s
+
+#8 [rag-api runtime  5/19] ADD --checksum=sha256:e57f64187974277726a3417ca6f181ec5403676c717672eef6a748a7b20e0106 https://raw.githubusercontent.com/nltk/nltk_data/550b6625bcef1f2abff2ff770a5a0d272c9c6b2a/packages/tokenizers/punkt_tab.zip /tmp/punkt_tab.zip
+#8 DONE 0.0s
+
+#9 [rag-frontend internal] load build context
+#9 transferring context: 17.04kB 0.0s done
+#9 DONE 0.0s
+
+#10 [rag-api builder 1/6] FROM docker.io/library/python:3.12-slim@sha256:2f17fc044b579bab302c2e8054d3a686e2cb9a83de48e70534b94cd8ebbe06a9
+#10 resolve docker.io/library/python:3.12-slim@sha256:2f17fc044b579bab302c2e8054d3a686e2cb9a83de48e70534b94cd8ebbe06a9 0.0s done
+#10 DONE 0.0s
+
+#11 [rag-frontend builder  2/33] WORKDIR /app
+#11 CACHED
+
+#12 [rag-frontend builder  4/33] RUN corepack enable && pnpm install --frozen-lockfile
+#12 CACHED
+
+#13 [rag-frontend builder  3/33] COPY upstream/frontend/package.json upstream/frontend/pnpm-lock.yaml ./
+#13 CACHED
+
+#14 [rag-frontend builder  5/33] COPY upstream/frontend ./
+#14 CACHED
+
+#15 [rag-api internal] load build context
+#15 transferring context: 23.52kB 0.0s done
+#15 DONE 0.0s
+
+#16 [rag-frontend builder  6/33] COPY extensions/frontend ./
+#16 DONE 0.1s
+
+#17 [rag-api runtime  5/19] ADD --checksum=sha256:e57f64187974277726a3417ca6f181ec5403676c717672eef6a748a7b20e0106 https://raw.githubusercontent.com/nltk/nltk_data/550b6625bcef1f2abff2ff770a5a0d272c9c6b2a/packages/tokenizers/punkt_tab.zip /tmp/punkt_tab.zip
+#17 CACHED
+
+#18 [rag-api builder 3/6] RUN apt-get update && apt-get install -y --no-install-recommends build-essential git     && rm -rf /var/lib/apt/lists/*
+#18 CACHED
+
+#19 [rag-api runtime  6/19] RUN python -m zipfile -e /tmp/punkt_tab.zip /usr/local/share/nltk_data/tokenizers && rm /tmp/punkt_tab.zip
+#19 CACHED
+
+#20 [rag-api builder 2/6] WORKDIR /build
+#20 CACHED
+
+#21 [rag-api builder 5/6] COPY extensions/requirements.txt /build/catalog-requirements.txt
+#21 CACHED
+
+#22 [rag-api runtime  4/19] COPY --from=builder /install /usr/local
+#22 CACHED
+
+#23 [rag-api runtime  2/19] RUN apt-get update && apt-get install -y --no-install-recommends libglib2.0-0 libgl1     && rm -rf /var/lib/apt/lists/*     && groupadd --gid 10001 appuser     && useradd --uid 10001 --gid 10001 --create-home appuser
+#23 CACHED
+
+#24 [rag-api builder 4/6] COPY upstream/backend /build/backend
+#24 CACHED
+
+#25 [rag-api builder 6/6] RUN pip install --no-cache-dir --prefix=/install /build/backend -r /build/catalog-requirements.txt
+#25 CACHED
+
+#26 [rag-api runtime  3/19] WORKDIR /app
+#26 CACHED
+
+#27 [rag-api runtime  7/19] COPY --chown=10001:10001 upstream/backend /app
+#27 CACHED
+
+#28 [rag-frontend builder  7/33] COPY deploy/patch_frontend.mjs /tmp/patch_frontend.mjs
+#28 DONE 0.0s
+
+#29 [rag-api runtime  8/19] COPY --chown=10001:10001 extensions/code_agent /app/code_agent
+#29 DONE 0.0s
+
+#30 [rag-api runtime  9/19] COPY deploy/patch_backend.py /tmp/patch_backend.py
+#30 DONE 0.0s
+
+#31 [rag-frontend builder  8/33] RUN node /tmp/patch_frontend.mjs
+#31 DONE 0.1s
+
+#32 [rag-api runtime 10/19] RUN python /tmp/patch_backend.py /app
+#32 DONE 0.2s
+
+#33 [rag-frontend builder  9/33] COPY deploy/patch_provider_frontend.mjs /tmp/patch_provider_frontend.mjs
+#33 DONE 0.0s
+
+#34 [rag-api runtime 11/19] COPY deploy/patch_provider.py /tmp/patch_provider.py
+#34 DONE 0.0s
+
+#35 [rag-frontend builder 10/33] RUN node /tmp/patch_provider_frontend.mjs
+#35 DONE 0.2s
+
+#36 [rag-api runtime 12/19] RUN python /tmp/patch_provider.py /app
+#36 DONE 0.2s
+
+#37 [rag-frontend builder 11/33] COPY deploy/patch_experience.mjs /tmp/patch_experience.mjs
+#37 DONE 0.0s
+
+#38 [rag-api runtime 13/19] COPY deploy/patch_local_access.py /tmp/patch_local_access.py
+#38 DONE 0.0s
+
+#39 [rag-frontend builder 12/33] RUN node /tmp/patch_experience.mjs
+#39 DONE 0.2s
+
+#40 [rag-api runtime 14/19] RUN python /tmp/patch_local_access.py /app
+#40 DONE 0.2s
+
+#41 [rag-frontend builder 13/33] COPY deploy/patch_local_access_frontend.mjs /tmp/patch_local_access_frontend.mjs
+#41 DONE 0.0s
+
+#42 [rag-api runtime 15/19] COPY deploy/patch_chunking.py /tmp/patch_chunking.py
+#42 DONE 0.0s
+
+#43 [rag-frontend builder 14/33] RUN node /tmp/patch_local_access_frontend.mjs
+#43 DONE 0.1s
+
+#44 [rag-frontend builder 15/33] COPY deploy/patch_settings_availability_frontend.mjs /tmp/patch_settings_availability_frontend.mjs
+#44 DONE 0.0s
+
+#45 [rag-api runtime 16/19] RUN python /tmp/patch_chunking.py /app
+#45 DONE 0.2s
+
+#46 [rag-frontend builder 16/33] RUN node /tmp/patch_settings_availability_frontend.mjs
+#46 DONE 0.1s
+
+#47 [rag-api runtime 17/19] COPY deploy/patch_monitoring.py /tmp/patch_monitoring.py
+#47 DONE 0.0s
+
+#48 [rag-frontend builder 17/33] COPY deploy/patch_settings_selection_frontend.mjs /tmp/patch_settings_selection_frontend.mjs
+#48 DONE 0.0s
+
+#49 [rag-api runtime 18/19] RUN python /tmp/patch_monitoring.py /app
+#49 DONE 0.2s
+
+#50 [rag-frontend builder 18/33] RUN node /tmp/patch_settings_selection_frontend.mjs
+#50 DONE 0.1s
+
+#51 [rag-frontend builder 19/33] COPY deploy/patch_chunking_frontend.mjs /tmp/patch_chunking_frontend.mjs
+#51 DONE 0.0s
+
+#52 [rag-frontend builder 20/33] RUN node /tmp/patch_chunking_frontend.mjs
+#52 ...
+
+#53 [rag-api runtime 19/19] RUN mkdir -p /app/uploads /app/run /watch /home/appuser/.cache /app/private-settings     && chown -R 10001:10001 /app/uploads /app/run /watch /home/appuser/.cache /app/private-settings
+#53 DONE 0.2s
+
+#52 [rag-frontend builder 20/33] RUN node /tmp/patch_chunking_frontend.mjs
+#52 DONE 0.2s
+
+#54 [rag-frontend builder 21/33] COPY deploy/patch_watcher_frontend.mjs /tmp/patch_watcher_frontend.mjs
+#54 DONE 0.1s
+
+#55 [rag-api] exporting to image
+#55 exporting layers
+#55 ...
+
+#56 [rag-frontend builder 22/33] RUN node /tmp/patch_watcher_frontend.mjs
+#56 DONE 0.1s
+
+#55 [rag-api] exporting to image
+#55 exporting layers 0.1s done
+#55 exporting manifest sha256:b2fc4f9a30cf25e9ff2eb25794f7f0ac1b154b1dcaf2cab86b23e556855ae74d done
+#55 exporting config sha256:f28dcc5a5f586558a9309615958db139ad3449df20ff8c2c98b0f88c819746d6 done
+#55 exporting attestation manifest sha256:248e50aa4f2aa8e3cc66019c4f835bbfabde014a525e85c4cd6ba7d1733a388b done
+#55 exporting manifest list sha256:05ed11393939129b8fa65ef816ba678c2f670d3f2ac0ec791077417b1c953279 done
+#55 naming to docker.io/library/code-management-full-api:75661c6 done
+#55 unpacking to docker.io/library/code-management-full-api:75661c6 0.1s done
+#55 DONE 0.3s
+
+#57 [rag-frontend builder 23/33] COPY deploy/patch_evaluation_frontend.mjs /tmp/patch_evaluation_frontend.mjs
+#57 DONE 0.0s
+
+#58 [rag-api] resolving provenance for metadata file
+#58 DONE 0.0s
+
+#59 [rag-frontend builder 24/33] RUN node /tmp/patch_evaluation_frontend.mjs
+#59 DONE 0.1s
+
+#60 [rag-frontend builder 25/33] COPY deploy/patch_proxy_timeout_frontend.mjs /tmp/patch_proxy_timeout_frontend.mjs
+#60 DONE 0.0s
+
+#61 [rag-frontend builder 26/33] RUN node /tmp/patch_proxy_timeout_frontend.mjs
+#61 0.117 {"patch":"catalogue-proxy-timeout","file":"next.config.ts","before":"0ed1b0792c7b45f37cad9f66b9653760e17015dd512219e79a56bc28a570e4e3","after":"d51032de16f200130b0e17a2192d980940e7e01168e9632e5a70ca0991ee52f7"}
+#61 DONE 0.1s
+
+#62 [rag-frontend builder 27/33] COPY deploy/patch_catalog_surfaces.mjs /tmp/patch_catalog_surfaces.mjs
+#62 DONE 0.0s
+
+#63 [rag-frontend builder 28/33] RUN node /tmp/patch_catalog_surfaces.mjs
+#63 DONE 0.1s
+
+#64 [rag-frontend builder 29/33] COPY deploy/patch_search_persistence.mjs /tmp/patch_search_persistence.mjs
+#64 DONE 0.0s
+
+#65 [rag-frontend builder 30/33] RUN node /tmp/patch_search_persistence.mjs
+#65 DONE 0.1s
+
+#66 [rag-frontend builder 31/33] COPY deploy/patch_monitoring_frontend.mjs /tmp/patch_monitoring_frontend.mjs
+#66 DONE 0.0s
+
+#67 [rag-frontend builder 32/33] RUN node /tmp/patch_monitoring_frontend.mjs
+#67 DONE 0.1s
+
+#68 [rag-frontend builder 33/33] RUN mkdir -p public && pnpm build
+#68 0.239 
+#68 0.239 > frontend@0.1.0 build /app
+#68 0.239 > next build
+#68 0.239 
+#68 0.507 ▲ Next.js 16.2.6 (Turbopack)
+#68 0.507 - Experiments (use with caution):
+#68 0.507   · proxyTimeout: 300000
+#68 0.507 
+#68 0.522   Creating an optimized production build ...
+#68 3.869 ✓ Compiled successfully in 3.2s
+#68 3.876   Running TypeScript ...
+#68 10.14   Finished TypeScript in 6.3s ...
+#68 10.15   Collecting page data using 9 workers ...
+#68 10.80   Generating static pages using 9 workers (0/28) ...
+#68 11.13   Generating static pages using 9 workers (7/28) 
+#68 11.15   Generating static pages using 9 workers (14/28) 
+#68 11.27   Generating static pages using 9 workers (21/28) 
+#68 11.31 ✓ Generating static pages using 9 workers (28/28) in 511ms
+#68 11.33   Finalizing page optimization ...
+#68 11.74 
+#68 11.74 Route (app)
+#68 11.74 ┌ ○ /
+#68 11.74 ├ ○ /_not-found
+#68 11.74 ├ ○ /codes
+#68 11.74 ├ ○ /documents
+#68 11.74 ├ ƒ /documents/[id]
+#68 11.74 ├ ○ /evaluation
+#68 11.74 ├ ○ /evaluation/compare
+#68 11.74 ├ ○ /evaluation/datasets
+#68 11.74 ├ ○ /evaluation/runs
+#68 11.74 ├ ○ /login
+#68 11.74 ├ ○ /monitoring
+#68 11.74 ├ ○ /monitoring/metrics
+#68 11.74 ├ ○ /monitoring/traces
+#68 11.74 ├ ○ /search
+#68 11.74 ├ ○ /settings
+#68 11.74 ├ ○ /settings/api-keys
+#68 11.74 ├ ○ /settings/chunking
+#68 11.74 ├ ○ /settings/embedding
+#68 11.74 ├ ○ /settings/generation
+#68 11.74 ├ ○ /settings/guardrails
+#68 11.74 ├ ○ /settings/hyde
+#68 11.74 ├ ○ /settings/profile
+#68 11.74 ├ ○ /settings/reranking
+#68 11.74 ├ ○ /settings/search
+#68 11.74 ├ ○ /settings/system
+#68 11.74 ├ ○ /settings/users
+#68 11.74 └ ○ /settings/watcher
+#68 11.74 
+#68 11.74 
+#68 11.74 ○  (Static)   prerendered as static content
+#68 11.74 ƒ  (Dynamic)  server-rendered on demand
+#68 11.74 
+#68 DONE 11.9s
+
+#69 [rag-frontend runner 3/6] RUN addgroup -S appgroup && adduser -S appuser -G appgroup
+#69 CACHED
+
+#70 [rag-frontend runner 4/6] COPY --from=builder --chown=appuser:appgroup /app/.next/standalone ./
+#70 DONE 0.2s
+
+#71 [rag-frontend runner 5/6] COPY --from=builder --chown=appuser:appgroup /app/.next/static ./.next/static
+#71 DONE 0.0s
+
+#72 [rag-frontend runner 6/6] COPY --from=builder --chown=appuser:appgroup /app/public ./public
+#72 DONE 0.0s
+
+#73 [rag-frontend] exporting to image
+#73 exporting layers
+#73 exporting layers 0.7s done
+#73 exporting manifest sha256:0174a3b26fdb44c851b2432bdb47c83c700878ec64c8c7fc8bed1e83ff0f2088 done
+#73 exporting config sha256:83b06fa6b0a221e8f0672712aa25a32f4091512f6a4dafc7ca078e181e39034f done
+#73 exporting attestation manifest sha256:362fb19b5c9ef360f8d7ab9c0f070728459f69da1c74226af65e150012b550cb done
+#73 exporting manifest list sha256:f2f824d50485ec05b0d9d2a1065121ddf36a31c25ceb84b332ef25f7b3d0242e done
+#73 naming to docker.io/library/code-management-full-rag-frontend:latest done
+#73 unpacking to docker.io/library/code-management-full-rag-frontend:latest
+#73 unpacking to docker.io/library/code-management-full-rag-frontend:latest 0.3s done
+#73 DONE 1.0s
+
+#74 [rag-frontend] resolving provenance for metadata file
+#74 DONE 0.0s
+ Image code-management-full-api:75661c6 Built 
+ Image code-management-full-rag-frontend Built 

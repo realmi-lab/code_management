@@ -1,0 +1,10 @@
+{
+  "passed": true,
+  "scope": "patched upstream LLM, live Command Code HTTP, synthetic prompt only",
+  "full_stack": false,
+  "embeddings_tested": false,
+  "provider": "commandcode",
+  "model": "deepseek/deepseek-v4.1-flash",
+  "reasoning_effort": "high",
+  "expected_response_received": true
+}

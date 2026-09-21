@@ -1,0 +1,11 @@
+{
+  "catalog_version": 2,
+  "indexed_version": 2,
+  "pg_vectors": 279,
+  "es_documents": 279,
+  "same_ids": true,
+  "production_codes": 0,
+  "db_business_columns_present": true,
+  "all_business_fields_indexed": true,
+  "model": "local:intfloat/multilingual-e5-base@d128750597153bb5987e10b1c3493a34e5a4502a:pad1536:v1|pii-policy-2"
+}

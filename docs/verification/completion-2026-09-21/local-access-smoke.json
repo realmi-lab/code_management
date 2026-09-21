@@ -1,0 +1,40 @@
+{
+  "at": "2026-09-21T00:51:06.278117+00:00",
+  "real_http": true,
+  "passed": true,
+  "checks": [
+    {
+      "name": "direct_api_readiness",
+      "passed": true
+    },
+    {
+      "name": "frontend_to_api_proxy",
+      "passed": true
+    },
+    {
+      "name": "local_access_without_credentials",
+      "passed": true
+    },
+    {
+      "name": "document_listing",
+      "passed": true,
+      "document_count": 0
+    },
+    {
+      "name": "catalogue_uses_upstream_identity",
+      "passed": true
+    },
+    {
+      "name": "integrated_catalogue_listing",
+      "passed": true,
+      "catalogue_count": 0
+    }
+  ],
+  "rag_request_sent": false,
+  "provider_call_independently_verified": false,
+  "quality_verified": false,
+  "run_id": "e8508979-f03c-4684-8a6f-6552b0f4e1f1",
+  "started_at": "2026-09-21T00:51:06.210547+00:00",
+  "state": "completed",
+  "finished_at": "2026-09-21T00:51:06.278466+00:00"
+}

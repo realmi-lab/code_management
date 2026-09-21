@@ -1,0 +1,15 @@
+{
+  "passed": true,
+  "authentication": "test dependency, NOT upstream JWT",
+  "external_AI_calls": false,
+  "local_model_health": "explicit synthetic health double, NOT live service",
+  "checks": [
+    "unavailable_local_embedding_explicit_and_disabled",
+    "deepseek_saved_and_reloaded",
+    "anthropic_saved_and_reloaded",
+    "openai_saved_and_reloaded",
+    "claude_with_local_embedding_without_openai_dependency",
+    "claude_with_separate_openai_embedding_key_and_no_browser_key_retention",
+    "mobile_no_horizontal_overflow"
+  ]
+}

@@ -1,0 +1,15 @@
+[
+  {
+    "round": 2,
+    "id": 67,
+    "original_error": "RuntimeError: Judge subprocess failed; exit 1",
+    "answer_sha256": "7ff76c4a5d4edb248759a8683839b231653298b97e4b2b7c097e5dbdee8287f3",
+    "same_saved_answer": true,
+    "judge": {
+      "score": 93,
+      "reason": "메시지코드, 문구, 메뉴, 노출 조건 등 정답의 핵심 정보가 모두 정확히 일치합니다. 다만 정답에 없는 '맞춤법 검사 상태' 관련 부가 정보를 덧붙여 완전성과 관련성에서 약간의 감점이 있습니다.",
+      "model": "deepseek/deepseek-v4.1-flash"
+    },
+    "seconds": 4.015
+  }
+]

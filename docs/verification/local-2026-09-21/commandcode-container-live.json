@@ -1,0 +1,7 @@
+{
+  "provider": "commandcode",
+  "model": "deepseek/deepseek-v4.1-flash",
+  "reasoning_effort": "high",
+  "passed": true,
+  "scope": "built production image LLM, live API, synthetic prompt; not full RAG"
+}

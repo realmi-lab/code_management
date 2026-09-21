@@ -1,0 +1,70 @@
+{
+  "services": [
+    {
+      "name": "code-management-full-rag-frontend-1",
+      "status": "Up 32 seconds (healthy)",
+      "ports": "127.0.0.1:3500->3000/tcp"
+    },
+    {
+      "name": "code-management-full-rag-api-1",
+      "status": "Up About a minute (healthy)",
+      "ports": "127.0.0.1:8010->8000/tcp"
+    },
+    {
+      "name": "code-management-full-rag-beat-1",
+      "status": "Up 6 minutes",
+      "ports": "8000/tcp"
+    },
+    {
+      "name": "code-management-full-rag-worker-1",
+      "status": "Up 6 minutes (healthy)",
+      "ports": "8000/tcp"
+    },
+    {
+      "name": "code-management-full-postgres-1",
+      "status": "Up 6 minutes (healthy)",
+      "ports": "5432/tcp"
+    },
+    {
+      "name": "code-management-full-redis-1",
+      "status": "Up 6 minutes (healthy)",
+      "ports": "6379/tcp"
+    },
+    {
+      "name": "code-management-full-langfuse-web-1",
+      "status": "Up 6 minutes (healthy)",
+      "ports": "127.0.0.1:3100->3000/tcp"
+    },
+    {
+      "name": "code-management-full-langfuse-worker-1",
+      "status": "Up 9 minutes",
+      "ports": "3030/tcp"
+    },
+    {
+      "name": "code-management-full-local-embeddings-1",
+      "status": "Up 9 minutes (healthy)",
+      "ports": "8000/tcp"
+    },
+    {
+      "name": "code-management-full-langfuse-redis-1",
+      "status": "Up 9 minutes (healthy)",
+      "ports": "6379/tcp"
+    },
+    {
+      "name": "code-management-full-clickhouse-1",
+      "status": "Up 9 minutes (healthy)",
+      "ports": "8123/tcp, 9000/tcp, 9009/tcp"
+    },
+    {
+      "name": "code-management-full-elasticsearch-1",
+      "status": "Up 9 minutes (healthy)",
+      "ports": "9200/tcp, 9300/tcp"
+    },
+    {
+      "name": "code-management-full-langfuse-minio-1",
+      "status": "Up 9 minutes (healthy)",
+      "ports": "9000/tcp"
+    }
+  ],
+  "scope": "Docker process/health status only; not inference quality"
+}

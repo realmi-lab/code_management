@@ -1,0 +1,26 @@
+{
+  "domain_api_tests": {
+    "passed": 251,
+    "external_services": "scripted where stated in each test"
+  },
+  "installer_tests": {
+    "passed": 72
+  },
+  "native_http": {
+    "passed": 10,
+    "auth_and_llm": "test doubles"
+  },
+  "python_syntax": "passed",
+  "javascript_syntax": "passed",
+  "typescript_syntax": "tsx-syntax.json",
+  "pinned_upstream_files_verified": 384,
+  "deployed_api_hashes": "deployed-hashes.json",
+  "ui": {
+    "url": "http://localhost:3500/codes",
+    "scope": "real demo database and live model via in-app browser",
+    "query": "기존 회원 전화번호로 다시 가입하려는 경우",
+    "displayed_code": "EX-0201",
+    "displayed_original": "이미 가입된 휴대폰 번호입니다. 로그인해주세요.",
+    "line_breaks_visually_checked": true
+  }
+}

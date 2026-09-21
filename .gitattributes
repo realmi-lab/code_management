@@ -1,0 +1,5 @@
+# Preserve captured output and third-party assets byte-for-byte.
+docs/verification/**/*.log -whitespace
+docs/verification/**/*.csv -whitespace
+extensions/code_agent/static/vendor/** -whitespace
+extensions/frontend/public/workspace-vendor/** -whitespace

@@ -1,0 +1,242 @@
+[
+  {
+    "code": "AT-1923",
+    "message": "메뉴확인 30초 이후에 인증해주세요.",
+    "menu": "메뉴 인증",
+    "trigger": "메뉴 확인 후 30초가 지나기 전에 인증 버튼을 누른 경우",
+    "notes": "사용자가 제공한 예시를 바탕으로 한 데모. 조건은 예시용입니다.",
+    "status": "active",
+    "revision": 1,
+    "source": {
+      "kind": "demo",
+      "synthetic": true,
+      "filename": "GitHub 합성 예시 · 실제 회사 목록 아님",
+      "catalog_fields": {}
+    }
+  },
+  {
+    "code": "EX-0101",
+    "message": "인증번호를 발송했습니다.",
+    "menu": "휴대폰 인증",
+    "trigger": "인증번호 전송 성공",
+    "notes": "합성 예시",
+    "status": "active",
+    "revision": 1,
+    "source": {
+      "kind": "demo",
+      "synthetic": true,
+      "filename": "GitHub 합성 예시 · 실제 회사 목록 아님",
+      "catalog_fields": {}
+    }
+  },
+  {
+    "code": "EX-0102",
+    "message": "인증번호를 다시 확인해주세요.",
+    "menu": "휴대폰 인증",
+    "trigger": "입력한 인증번호 불일치",
+    "notes": "합성 예시",
+    "status": "active",
+    "revision": 1,
+    "source": {
+      "kind": "demo",
+      "synthetic": true,
+      "filename": "GitHub 합성 예시 · 실제 회사 목록 아님",
+      "catalog_fields": {}
+    }
+  },
+  {
+    "code": "EX-0103",
+    "message": "인증번호가 만료되었습니다. 다시 요청해주세요.",
+    "menu": "휴대폰 인증",
+    "trigger": "유효시간이 지난 인증번호 입력",
+    "notes": "합성 예시",
+    "status": "active",
+    "revision": 1,
+    "source": {
+      "kind": "demo",
+      "synthetic": true,
+      "filename": "GitHub 합성 예시 · 실제 회사 목록 아님",
+      "catalog_fields": {}
+    }
+  },
+  {
+    "code": "EX-0104",
+    "message": "30초 이내에 인증을 완료해주세요.",
+    "menu": "기기 인증",
+    "trigger": "인증 시작 후 완료 제한시간 안내",
+    "notes": "AT-1923과 시간의 방향이 다른 합성 예시",
+    "status": "active",
+    "revision": 1,
+    "source": {
+      "kind": "demo",
+      "synthetic": true,
+      "filename": "GitHub 합성 예시 · 실제 회사 목록 아님",
+      "catalog_fields": {}
+    }
+  },
+  {
+    "code": "EX-0105",
+    "message": "인증번호는 {seconds}초 후에 다시 요청할 수 있습니다.",
+    "menu": "휴대폰 인증",
+    "trigger": "재발송 대기시간 안내",
+    "notes": "변수명은 변경하지 않습니다. 합성 예시",
+    "status": "active",
+    "revision": 1,
+    "source": {
+      "kind": "demo",
+      "synthetic": true,
+      "filename": "GitHub 합성 예시 · 실제 회사 목록 아님",
+      "catalog_fields": {}
+    }
+  },
+  {
+    "code": "EX-0201",
+    "message": "이미 가입된 휴대폰 번호입니다. 로그인해주세요.",
+    "menu": "회원가입",
+    "trigger": "기존 회원의 번호로 신규 가입 요청",
+    "notes": "합성 예시",
+    "status": "active",
+    "revision": 1,
+    "source": {
+      "kind": "demo",
+      "synthetic": true,
+      "filename": "GitHub 합성 예시 · 실제 회사 목록 아님",
+      "catalog_fields": {}
+    }
+  },
+  {
+    "code": "EX-0202",
+    "message": "필수 약관에 동의해주세요.",
+    "menu": "회원가입",
+    "trigger": "필수 약관 미동의",
+    "notes": "합성 예시",
+    "status": "active",
+    "revision": 1,
+    "source": {
+      "kind": "demo",
+      "synthetic": true,
+      "filename": "GitHub 합성 예시 · 실제 회사 목록 아님",
+      "catalog_fields": {}
+    }
+  },
+  {
+    "code": "EX-0203",
+    "message": "사용 가능한 이메일입니다.",
+    "menu": "회원가입",
+    "trigger": "이메일 중복 확인 통과",
+    "notes": "합성 예시",
+    "status": "active",
+    "revision": 1,
+    "source": {
+      "kind": "demo",
+      "synthetic": true,
+      "filename": "GitHub 합성 예시 · 실제 회사 목록 아님",
+      "catalog_fields": {}
+    }
+  },
+  {
+    "code": "EX-0204",
+    "message": "이미 사용 중인 이메일입니다.",
+    "menu": "회원가입",
+    "trigger": "이메일 중복 확인 실패",
+    "notes": "합성 예시",
+    "status": "active",
+    "revision": 1,
+    "source": {
+      "kind": "demo",
+      "synthetic": true,
+      "filename": "GitHub 합성 예시 · 실제 회사 목록 아님",
+      "catalog_fields": {}
+    }
+  },
+  {
+    "code": "EX-0301",
+    "message": "비밀번호를 다시 확인해주세요.",
+    "menu": "로그인",
+    "trigger": "비밀번호 불일치",
+    "notes": "합성 예시",
+    "status": "active",
+    "revision": 1,
+    "source": {
+      "kind": "demo",
+      "synthetic": true,
+      "filename": "GitHub 합성 예시 · 실제 회사 목록 아님",
+      "catalog_fields": {}
+    }
+  },
+  {
+    "code": "EX-0302",
+    "message": "로그인이 필요합니다.",
+    "menu": "공통",
+    "trigger": "로그인하지 않은 상태에서 회원 전용 메뉴 접근",
+    "notes": "합성 예시",
+    "status": "active",
+    "revision": 1,
+    "source": {
+      "kind": "demo",
+      "synthetic": true,
+      "filename": "GitHub 합성 예시 · 실제 회사 목록 아님",
+      "catalog_fields": {}
+    }
+  },
+  {
+    "code": "EX-0401",
+    "message": "변경사항을 저장하지 않고 나가시겠습니까?",
+    "menu": "공통",
+    "trigger": "수정 중인 화면 이탈",
+    "notes": "합성 예시",
+    "status": "active",
+    "revision": 1,
+    "source": {
+      "kind": "demo",
+      "synthetic": true,
+      "filename": "GitHub 합성 예시 · 실제 회사 목록 아님",
+      "catalog_fields": {}
+    }
+  },
+  {
+    "code": "EX-0402",
+    "message": "네트워크 연결을 확인하고 다시 시도해주세요.",
+    "menu": "공통",
+    "trigger": "통신 연결 실패",
+    "notes": "합성 예시",
+    "status": "active",
+    "revision": 1,
+    "source": {
+      "kind": "demo",
+      "synthetic": true,
+      "filename": "GitHub 합성 예시 · 실제 회사 목록 아님",
+      "catalog_fields": {}
+    }
+  },
+  {
+    "code": "EX-0403",
+    "message": "접근 권한이 없습니다.",
+    "menu": "공통",
+    "trigger": "권한 없는 메뉴 접근",
+    "notes": "합성 예시",
+    "status": "active",
+    "revision": 1,
+    "source": {
+      "kind": "demo",
+      "synthetic": true,
+      "filename": "GitHub 합성 예시 · 실제 회사 목록 아님",
+      "catalog_fields": {}
+    }
+  },
+  {
+    "code": "EX-0901",
+    "message": "10초 뒤 다시 인증해주세요.",
+    "menu": "구버전 인증",
+    "trigger": "폐기된 인증 흐름",
+    "notes": "폐기 상태 확인용 합성 예시",
+    "status": "retired",
+    "revision": 1,
+    "source": {
+      "kind": "demo",
+      "synthetic": true,
+      "filename": "GitHub 합성 예시 · 실제 회사 목록 아님",
+      "catalog_fields": {}
+    }
+  }
+]

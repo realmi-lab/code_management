@@ -1,0 +1,75 @@
+#0 building with "desktop-linux" instance using docker driver
+
+#1 [internal] load build definition from backend.Dockerfile
+#1 transferring dockerfile: 1.78kB done
+#1 DONE 0.0s
+
+#2 [internal] load metadata for docker.io/library/python:3.12-slim
+#2 DONE 1.2s
+
+#3 [internal] load .dockerignore
+#3 transferring context: 289B done
+#3 DONE 0.0s
+
+#4 [builder 1/6] FROM docker.io/library/python:3.12-slim@sha256:2f17fc044b579bab302c2e8054d3a686e2cb9a83de48e70534b94cd8ebbe06a9
+#4 resolve docker.io/library/python:3.12-slim@sha256:2f17fc044b579bab302c2e8054d3a686e2cb9a83de48e70534b94cd8ebbe06a9 0.0s done
+#4 DONE 0.0s
+
+#5 [internal] load build context
+#5 transferring context: 943.29kB 0.0s done
+#5 DONE 0.0s
+
+#6 [builder 4/6] COPY upstream/backend /build/backend
+#6 CACHED
+
+#7 [runtime  2/11] RUN apt-get update && apt-get install -y --no-install-recommends libglib2.0-0 libgl1     && rm -rf /var/lib/apt/lists/*     && groupadd --gid 10001 appuser     && useradd --uid 10001 --gid 10001 --create-home appuser
+#7 CACHED
+
+#8 [builder 6/6] RUN pip install --no-cache-dir --prefix=/install /build/backend -r /build/catalog-requirements.txt
+#8 CACHED
+
+#9 [builder 5/6] COPY extensions/requirements.txt /build/catalog-requirements.txt
+#9 CACHED
+
+#10 [runtime  3/11] WORKDIR /app
+#10 CACHED
+
+#11 [runtime  4/11] COPY --from=builder /install /usr/local
+#11 CACHED
+
+#12 [builder 2/6] WORKDIR /build
+#12 CACHED
+
+#13 [builder 3/6] RUN apt-get update && apt-get install -y --no-install-recommends build-essential git     && rm -rf /var/lib/apt/lists/*
+#13 CACHED
+
+#14 [runtime  5/11] COPY --chown=10001:10001 upstream/backend /app
+#14 CACHED
+
+#15 [runtime  6/11] COPY --chown=10001:10001 extensions/code_agent /app/code_agent
+#15 DONE 0.1s
+
+#16 [runtime  7/11] COPY deploy/patch_backend.py /tmp/patch_backend.py
+#16 DONE 0.0s
+
+#17 [runtime  8/11] RUN python /tmp/patch_backend.py /app
+#17 DONE 0.2s
+
+#18 [runtime  9/11] COPY deploy/patch_provider.py /tmp/patch_provider.py
+#18 DONE 0.0s
+
+#19 [runtime 10/11] RUN python /tmp/patch_provider.py /app
+#19 DONE 0.2s
+
+#20 [runtime 11/11] RUN mkdir -p /app/uploads /app/run /watch /home/appuser/.cache     && chown -R 10001:10001 /app/uploads /app/run /watch /home/appuser/.cache
+#20 DONE 0.1s
+
+#21 exporting to image
+#21 exporting layers 0.1s done
+#21 exporting manifest sha256:2c135c55b1bd26a5b5be7e3ced0b58164db4734f48f2ae2894535714fd0862f7 done
+#21 exporting config sha256:ba2332982d00318cc2bea48abb5dccd51979d22e21758c7905f2522c5fb9cc8f done
+#21 exporting attestation manifest sha256:37a767df8aadeaca98c40e5adbc90b89097ec2e95d080a76285bb8797d0ec258 done
+#21 exporting manifest list sha256:19d95f932af7fe1cce5bd4dc365e3864e56e7ca544426b139cda2b2fd8b61927 done
+#21 naming to docker.io/library/code-management-full-api:75661c6 done
+#21 unpacking to docker.io/library/code-management-full-api:75661c6 0.0s done
+#21 DONE 0.1s

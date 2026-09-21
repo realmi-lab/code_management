@@ -1,0 +1,13 @@
+{
+  "passed": true,
+  "built_next_ui": true,
+  "write_and_evaluation_responses": "synthetic browser fixtures",
+  "provider_calls": false,
+  "production_mutations": false,
+  "checks": [
+    "requested_search_preferences_remain_editable_without_embeddings",
+    "hyde_and_chunking_prerequisites_visible",
+    "watcher_directory_reaches_request_without_starting_real_job",
+    "unmeasured_metrics_distinguished_from_true_zero"
+  ]
+}

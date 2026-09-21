@@ -1,0 +1,10 @@
+{
+  "rows": 37,
+  "valid_dates": 37,
+  "durations_present": 37,
+  "statuses": {
+    "success": 20,
+    "error": 5,
+    "unknown": 12
+  }
+}

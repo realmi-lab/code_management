@@ -1,0 +1,9 @@
+{
+  "repository": "https://github.com/realmi-lab/code_management",
+  "commit": "f739e89aec0e8341697394857f005713ef2af5a1",
+  "path": "catalog/demo.py",
+  "source_git_blob": "ac0656cf968fac805d15c6b87634d6b233094e20",
+  "extraction": "ast.literal_eval of SAMPLES only; downloaded Python was not executed",
+  "count": 16,
+  "sha256": "07a1dd5af0d2df77ef9acd297a50b8b7f18a9d9482d4bf4cdc507464ba9399e0"
+}

@@ -1,0 +1,9 @@
+/* Catalogue fills the original app shell; global styling is shared by all routes. */
+body:has(.codes-shell) #main-content {padding:16px 28px 24px;overflow:hidden;scrollbar-gutter:auto}
+body:has(.codes-shell) .workspace-content {height:100%}
+.codes-shell {height:100%;min-height:0}
+.codes-frame {display:block;width:100%;height:100%;border:0;border-radius:0;background:white}
+.codes-shell > [role="alert"] {padding:8px 16px;background:#fbefea;color:#a13931}
+.codes-shell:has(> [role="alert"]) {display:flex;flex-direction:column}
+.codes-shell:has(> [role="alert"]) .codes-frame {flex:1;min-height:0}
+@media(max-width:767px){body:has(.codes-shell) #main-content{padding:0}}

@@ -1,0 +1,6 @@
+{
+  "passed": true,
+  "file": "extensions/frontend/src/app/codes/page.tsx",
+  "scope": "TypeScript/JSX syntax transpilation ONLY, NOT full upstream typecheck or Next build",
+  "errors": []
+}

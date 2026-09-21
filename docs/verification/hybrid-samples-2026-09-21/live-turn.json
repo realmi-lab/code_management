@@ -1,0 +1,256 @@
+{
+  "elapsed_seconds": 58.0783071249989,
+  "result": {
+    "action": "search",
+    "answer": "가장 가까운 것은 AT-1923으로, 적용 메뉴는 메뉴 인증이며 '메뉴확인 30초 이후에 인증해주세요.'라고 안내하고, 노출 조건은 메뉴 확인 후 30초가 지나기 전에 인증 버튼을 누른 경우입니다. 본인인증 쪽에서는 SM-1020이 '본인인증은 30초 이후에 다시 시도해주세요.'라고 안내하며, 노출 조건은 직전 요청 후 30초가 지나지 않은 경우입니다. 다만 이 건들을 포함해 제시된 자료는 실제 회사 등록 코드가 아닌 합성 예시이고, 문구가 비슷하다는 점이 기존 알림의 재사용 확정을 의미하지는 않습니다. 반대로 EX-0104, SM-1021, SM-1035, SM-1217은 30초 이내 완료를 요구하는 방향이라 30초 대기 안내와는 목적이 다릅니다.",
+    "candidates": [
+      {
+        "code": "AT-1923",
+        "message": "메뉴확인 30초 이후에 인증해주세요.",
+        "menu": "메뉴 인증",
+        "trigger": "메뉴 확인 후 30초가 지나기 전에 인증 버튼을 누른 경우",
+        "notes": "사용자가 제공한 예시를 바탕으로 한 데모. 조건은 예시용입니다.",
+        "status": "active",
+        "revision": 1,
+        "source": {
+          "kind": "demo",
+          "synthetic": true,
+          "filename": "GitHub 합성 예시 · 실제 회사 목록 아님",
+          "catalog_fields": {}
+        }
+      },
+      {
+        "code": "SM-1216",
+        "message": "알림 설정 변경은 30초 이후에 다시 시도해주세요.",
+        "menu": "알림설정",
+        "trigger": "직전 요청 후 30초가 지나지 않은 경우",
+        "notes": "AI가 만든 합성 테스트 자료입니다. 실제 회사 정책·한도·등록 코드가 아닙니다.",
+        "status": "active",
+        "revision": 1,
+        "source": {
+          "kind": "synthetic_json",
+          "synthetic": true,
+          "filename": "sample_catalog_300.json",
+          "catalog_fields": {
+            "business": "알림설정",
+            "message_type": "alert",
+            "title": "알림설정 · 30초 대기",
+            "purpose": "재요청 대기 안내"
+          }
+        }
+      },
+      {
+        "code": "SM-1020",
+        "message": "본인인증은 30초 이후에 다시 시도해주세요.",
+        "menu": "본인인증",
+        "trigger": "직전 요청 후 30초가 지나지 않은 경우",
+        "notes": "AI가 만든 합성 테스트 자료입니다. 실제 회사 정책·한도·등록 코드가 아닙니다.",
+        "status": "active",
+        "revision": 1,
+        "source": {
+          "kind": "synthetic_json",
+          "synthetic": true,
+          "filename": "sample_catalog_300.json",
+          "catalog_fields": {
+            "business": "본인인증",
+            "message_type": "alert",
+            "title": "본인인증 · 30초 대기",
+            "purpose": "재요청 대기 안내"
+          }
+        }
+      },
+      {
+        "code": "SM-1076",
+        "message": "보안 설정 변경은 30초 이후에 다시 시도해주세요.",
+        "menu": "보안설정",
+        "trigger": "직전 요청 후 30초가 지나지 않은 경우",
+        "notes": "AI가 만든 합성 테스트 자료입니다. 실제 회사 정책·한도·등록 코드가 아닙니다.",
+        "status": "active",
+        "revision": 1,
+        "source": {
+          "kind": "synthetic_json",
+          "synthetic": true,
+          "filename": "sample_catalog_300.json",
+          "catalog_fields": {
+            "business": "보안설정",
+            "message_type": "alert",
+            "title": "보안설정 · 30초 대기",
+            "purpose": "재요청 대기 안내"
+          }
+        }
+      },
+      {
+        "code": "EX-0104",
+        "message": "30초 이내에 인증을 완료해주세요.",
+        "menu": "기기 인증",
+        "trigger": "인증 시작 후 완료 제한시간 안내",
+        "notes": "AT-1923과 시간의 방향이 다른 합성 예시",
+        "status": "active",
+        "revision": 1,
+        "source": {
+          "kind": "demo",
+          "synthetic": true,
+          "filename": "GitHub 합성 예시 · 실제 회사 목록 아님",
+          "catalog_fields": {}
+        }
+      },
+      {
+        "code": "SM-1021",
+        "message": "본인인증을 30초 이내에 완료해주세요.",
+        "menu": "본인인증",
+        "trigger": "처리 유효시간이 30초인 합성 시나리오",
+        "notes": "AI가 만든 합성 테스트 자료입니다. 실제 회사 정책·한도·등록 코드가 아닙니다.",
+        "status": "active",
+        "revision": 1,
+        "source": {
+          "kind": "synthetic_json",
+          "synthetic": true,
+          "filename": "sample_catalog_300.json",
+          "catalog_fields": {
+            "business": "본인인증",
+            "message_type": "banner",
+            "title": "본인인증 · 30초 제한",
+            "purpose": "유효시간 안내"
+          }
+        }
+      },
+      {
+        "code": "SM-1035",
+        "message": "로그인을 30초 이내에 완료해주세요.",
+        "menu": "로그인",
+        "trigger": "처리 유효시간이 30초인 합성 시나리오",
+        "notes": "AI가 만든 합성 테스트 자료입니다. 실제 회사 정책·한도·등록 코드가 아닙니다.",
+        "status": "active",
+        "revision": 1,
+        "source": {
+          "kind": "synthetic_json",
+          "synthetic": true,
+          "filename": "sample_catalog_300.json",
+          "catalog_fields": {
+            "business": "로그인",
+            "message_type": "banner",
+            "title": "로그인 · 30초 제한",
+            "purpose": "유효시간 안내"
+          }
+        }
+      },
+      {
+        "code": "SM-1217",
+        "message": "알림 설정 변경을 30초 이내에 완료해주세요.",
+        "menu": "알림설정",
+        "trigger": "처리 유효시간이 30초인 합성 시나리오",
+        "notes": "AI가 만든 합성 테스트 자료입니다. 실제 회사 정책·한도·등록 코드가 아닙니다.",
+        "status": "active",
+        "revision": 1,
+        "source": {
+          "kind": "synthetic_json",
+          "synthetic": true,
+          "filename": "sample_catalog_300.json",
+          "catalog_fields": {
+            "business": "알림설정",
+            "message_type": "banner",
+            "title": "알림설정 · 30초 제한",
+            "purpose": "유효시간 안내"
+          }
+        }
+      }
+    ],
+    "comparisons": [],
+    "missing_codes": [],
+    "selected_code": null,
+    "catalog_version": 1,
+    "trace": [
+      {
+        "name": "guardrail_input",
+        "passed": true,
+        "duration_ms": 0.04,
+        "results_count": null,
+        "detail": null
+      },
+      {
+        "name": "question_classification",
+        "passed": true,
+        "duration_ms": 0.0,
+        "results_count": null,
+        "detail": {
+          "category": "explanatory",
+          "indicators": []
+        }
+      },
+      {
+        "name": "multi_query",
+        "passed": true,
+        "duration_ms": 3555.63,
+        "results_count": null,
+        "detail": {
+          "variants": [
+            "인증 전에 30초 기다리라는 알림 있어?",
+            "인증 전에 30초 대기하라는 안내 문구가 있나요?",
+            "인증을 진행하기 전에 30초 동안 기다리라는 알림이 표시되나요?",
+            "본인 인증 전 30초 대기 안내가 제공되는지 확인할 수 있나요?"
+          ]
+        }
+      },
+      {
+        "name": "hyde",
+        "passed": true,
+        "duration_ms": 5260.8,
+        "results_count": null,
+        "detail": {
+          "generated_length": 296
+        }
+      },
+      {
+        "name": "vector_search",
+        "passed": true,
+        "duration_ms": 477.3,
+        "results_count": 20,
+        "detail": null
+      },
+      {
+        "name": "keyword_search",
+        "passed": true,
+        "duration_ms": 477.3,
+        "results_count": 20,
+        "detail": null
+      },
+      {
+        "name": "rrf_fusion",
+        "passed": true,
+        "duration_ms": 0.06,
+        "results_count": 32,
+        "detail": null
+      },
+      {
+        "name": "reranking",
+        "passed": true,
+        "duration_ms": 5702.82,
+        "results_count": 8,
+        "detail": null
+      },
+      {
+        "name": "retrieval_gate",
+        "passed": true,
+        "duration_ms": 0.01,
+        "results_count": 8,
+        "detail": {
+          "top_score": 0.7985635380419643
+        }
+      },
+      {
+        "name": "guardrail_pii",
+        "passed": true,
+        "duration_ms": 0.14,
+        "results_count": null,
+        "detail": {
+          "pii_found": false
+        }
+      }
+    ],
+    "draft": null,
+    "ai_used": true,
+    "namespace": "demo",
+    "thread_id": "00b487f1-08d3-4387-9cda-c0c8bfb406fa",
+    "version": 1
+  }
+}

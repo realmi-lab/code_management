@@ -1,0 +1,5 @@
+ Container code-management-full-db-migrate-run-f166478dc321 Creating 
+ Container code-management-full-db-migrate-run-f166478dc321 Created 
+INFO  [alembic.runtime.migration] Context impl PostgresqlImpl.
+INFO  [alembic.runtime.migration] Will assume transactional DDL.
+Code catalog schema ready.

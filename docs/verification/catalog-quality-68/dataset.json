@@ -1,0 +1,546 @@
+[
+  {
+    "query": "인증 전에 30초 기다리라는 알림 있어?",
+    "expected_code": "AT-1923",
+    "kind": "manual_paraphrase",
+    "id": 1,
+    "ground_truth": "메시지코드: AT-1923\n문구: 메뉴확인 30초 이후에 인증해주세요.\n메뉴: 메뉴 인증\n노출 조건: 메뉴 확인 후 30초가 지나기 전에 인증 버튼을 누른 경우",
+    "expected_message": "메뉴확인 30초 이후에 인증해주세요."
+  },
+  {
+    "query": "인증번호 전송에 성공했을 때 보여줄 문구",
+    "expected_code": "EX-0101",
+    "kind": "manual_paraphrase",
+    "id": 2,
+    "ground_truth": "메시지코드: EX-0101\n문구: 인증번호를 발송했습니다.\n메뉴: 휴대폰 인증\n노출 조건: 인증번호 전송 성공",
+    "expected_message": "인증번호를 발송했습니다."
+  },
+  {
+    "query": "입력한 인증번호가 틀렸을 때 안내",
+    "expected_code": "EX-0102",
+    "kind": "manual_paraphrase",
+    "id": 3,
+    "ground_truth": "메시지코드: EX-0102\n문구: 인증번호를 다시 확인해주세요.\n메뉴: 휴대폰 인증\n노출 조건: 입력한 인증번호 불일치",
+    "expected_message": "인증번호를 다시 확인해주세요."
+  },
+  {
+    "query": "인증번호 유효시간이 지난 경우",
+    "expected_code": "EX-0103",
+    "kind": "manual_paraphrase",
+    "id": 4,
+    "ground_truth": "메시지코드: EX-0103\n문구: 인증번호가 만료되었습니다. 다시 요청해주세요.\n메뉴: 휴대폰 인증\n노출 조건: 유효시간이 지난 인증번호 입력",
+    "expected_message": "인증번호가 만료되었습니다. 다시 요청해주세요."
+  },
+  {
+    "query": "인증을 30초 안에 끝내야 한다는 안내",
+    "expected_code": "EX-0104",
+    "kind": "manual_paraphrase",
+    "id": 5,
+    "ground_truth": "메시지코드: EX-0104\n문구: 30초 이내에 인증을 완료해주세요.\n메뉴: 기기 인증\n노출 조건: 인증 시작 후 완료 제한시간 안내",
+    "expected_message": "30초 이내에 인증을 완료해주세요."
+  },
+  {
+    "query": "인증번호 재발송까지 남은 초를 표시하는 문구",
+    "expected_code": "EX-0105",
+    "kind": "manual_paraphrase",
+    "id": 6,
+    "ground_truth": "메시지코드: EX-0105\n문구: 인증번호는 {seconds}초 후에 다시 요청할 수 있습니다.\n메뉴: 휴대폰 인증\n노출 조건: 재발송 대기시간 안내",
+    "expected_message": "인증번호는 {seconds}초 후에 다시 요청할 수 있습니다."
+  },
+  {
+    "query": "기존 회원 전화번호로 다시 가입하려는 경우",
+    "expected_code": "EX-0201",
+    "kind": "manual_paraphrase",
+    "id": 7,
+    "ground_truth": "메시지코드: EX-0201\n문구: 이미 가입된 휴대폰 번호입니다. 로그인해주세요.\n메뉴: 회원가입\n노출 조건: 기존 회원의 번호로 신규 가입 요청",
+    "expected_message": "이미 가입된 휴대폰 번호입니다. 로그인해주세요."
+  },
+  {
+    "query": "필수 이용약관에 동의하지 않았을 때",
+    "expected_code": "EX-0202",
+    "kind": "manual_paraphrase",
+    "id": 8,
+    "ground_truth": "메시지코드: EX-0202\n문구: 필수 약관에 동의해주세요.\n메뉴: 회원가입\n노출 조건: 필수 약관 미동의",
+    "expected_message": "필수 약관에 동의해주세요."
+  },
+  {
+    "query": "이메일 중복 검사 결과 이미 쓰고 있는 주소인 경우",
+    "expected_code": "EX-0204",
+    "kind": "manual_paraphrase",
+    "id": 9,
+    "ground_truth": "메시지코드: EX-0204\n문구: 이미 사용 중인 이메일입니다.\n메뉴: 회원가입\n노출 조건: 이메일 중복 확인 실패",
+    "expected_message": "이미 사용 중인 이메일입니다."
+  },
+  {
+    "query": "수정 내용을 저장하지 않은 채 화면을 나갈 때 확인",
+    "expected_code": "EX-0401",
+    "kind": "manual_paraphrase",
+    "id": 10,
+    "ground_truth": "메시지코드: EX-0401\n문구: 변경사항을 저장하지 않고 나가시겠습니까?\n메뉴: 공통\n노출 조건: 수정 중인 화면 이탈",
+    "expected_message": "변경사항을 저장하지 않고 나가시겠습니까?"
+  },
+  {
+    "query": "인터넷 연결에 실패해서 다시 시도해야 하는 경우",
+    "expected_code": "EX-0402",
+    "kind": "manual_paraphrase",
+    "id": 11,
+    "ground_truth": "메시지코드: EX-0402\n문구: 네트워크 연결을 확인하고 다시 시도해주세요.\n메뉴: 공통\n노출 조건: 통신 연결 실패",
+    "expected_message": "네트워크 연결을 확인하고 다시 시도해주세요."
+  },
+  {
+    "query": "권한이 없는 메뉴에 들어가려고 할 때",
+    "expected_code": "EX-0403",
+    "kind": "manual_paraphrase",
+    "id": 12,
+    "ground_truth": "메시지코드: EX-0403\n문구: 접근 권한이 없습니다.\n메뉴: 공통\n노출 조건: 권한 없는 메뉴 접근",
+    "expected_message": "접근 권한이 없습니다."
+  },
+  {
+    "query": "로그인 메뉴에서 최종 실행 전 사용자 확인이 필요한 경우 상황에 표시할 기존 알림을 찾아줘.",
+    "expected_code": "SM-1039",
+    "kind": "menu_trigger_template",
+    "id": 13,
+    "ground_truth": "메시지코드: SM-1039\n문구: 로그인을 진행하시겠습니까?\n메뉴: 로그인\n노출 조건: 최종 실행 전 사용자 확인이 필요한 경우",
+    "expected_message": "로그인을 진행하시겠습니까?"
+  },
+  {
+    "query": "본인인증 메뉴에서 동일한 요청이 이미 접수된 경우 상황에 표시할 기존 알림을 찾아줘.",
+    "expected_code": "SM-1023",
+    "kind": "menu_trigger_template",
+    "id": 14,
+    "ground_truth": "메시지코드: SM-1023\n문구: 이미 본인인증을 요청했습니다. 처리 결과를 확인해주세요.\n메뉴: 본인인증\n노출 조건: 동일한 요청이 이미 접수된 경우",
+    "expected_message": "이미 본인인증을 요청했습니다. 처리 결과를 확인해주세요."
+  },
+  {
+    "query": "매도주문 메뉴에서 입력 형식 또는 입력값이 유효하지 않은 경우 상황에 표시할 기존 알림을 찾아줘.",
+    "expected_code": "SM-1173",
+    "kind": "menu_trigger_template",
+    "id": 15,
+    "ground_truth": "메시지코드: SM-1173\n문구: 매도 주문 정보를 다시 확인해주세요.\n메뉴: 매도주문\n노출 조건: 입력 형식 또는 입력값이 유효하지 않은 경우",
+    "expected_message": "매도 주문 정보를 다시 확인해주세요."
+  },
+  {
+    "query": "매수주문 메뉴에서 직전 요청 후 30초가 지나지 않은 경우 상황에 표시할 기존 알림을 찾아줘.",
+    "expected_code": "SM-1160",
+    "kind": "menu_trigger_template",
+    "id": 16,
+    "ground_truth": "메시지코드: SM-1160\n문구: 매수 주문은 30초 이후에 다시 시도해주세요.\n메뉴: 매수주문\n노출 조건: 직전 요청 후 30초가 지나지 않은 경우",
+    "expected_message": "매수 주문은 30초 이후에 다시 시도해주세요."
+  },
+  {
+    "query": "예약주문 메뉴에서 일시적인 처리 오류가 발생한 경우 상황에 표시할 기존 알림을 찾아줘.",
+    "expected_code": "SM-1199",
+    "kind": "menu_trigger_template",
+    "id": 17,
+    "ground_truth": "메시지코드: SM-1199\n문구: 예약 주문에 실패했습니다. 잠시 후 다시 시도해주세요.\n메뉴: 예약주문\n노출 조건: 일시적인 처리 오류가 발생한 경우",
+    "expected_message": "예약 주문에 실패했습니다. 잠시 후 다시 시도해주세요."
+  },
+  {
+    "query": "계좌관리 메뉴에서 시도 횟수가 5회를 초과한 합성 시나리오 상황에 표시할 기존 알림을 찾아줘.",
+    "expected_code": "SM-1092",
+    "kind": "menu_trigger_template",
+    "id": 18,
+    "ground_truth": "메시지코드: SM-1092\n문구: 계좌 등록 시도 횟수가 5회를 초과했습니다. 10분 후 다시 시도해주세요.\n메뉴: 계좌관리\n노출 조건: 시도 횟수가 5회를 초과한 합성 시나리오",
+    "expected_message": "계좌 등록 시도 횟수가 5회를 초과했습니다. 10분 후 다시 시도해주세요."
+  },
+  {
+    "query": "회원탈퇴 메뉴에서 요청이 정상 처리된 경우 상황에 표시할 기존 알림을 찾아줘.",
+    "expected_code": "SM-1267",
+    "kind": "menu_trigger_template",
+    "id": 19,
+    "ground_truth": "메시지코드: SM-1267\n문구: 탈퇴 신청이 완료되었습니다.\n메뉴: 회원탈퇴\n노출 조건: 요청이 정상 처리된 경우",
+    "expected_message": "탈퇴 신청이 완료되었습니다."
+  },
+  {
+    "query": "원화입금 메뉴에서 일시적인 처리 오류가 발생한 경우 상황에 표시할 기존 알림을 찾아줘.",
+    "expected_code": "SM-1101",
+    "kind": "menu_trigger_template",
+    "id": 20,
+    "ground_truth": "메시지코드: SM-1101\n문구: 원화 입금 신청에 실패했습니다. 잠시 후 다시 시도해주세요.\n메뉴: 원화입금\n노출 조건: 일시적인 처리 오류가 발생한 경우",
+    "expected_message": "원화 입금 신청에 실패했습니다. 잠시 후 다시 시도해주세요."
+  },
+  {
+    "query": "본인인증 메뉴에서 처리 요청 후 결과를 기다리는 경우 상황에 표시할 기존 알림을 찾아줘.",
+    "expected_code": "SM-1016",
+    "kind": "menu_trigger_template",
+    "id": 21,
+    "ground_truth": "메시지코드: SM-1016\n문구: 본인인증을 처리하고 있습니다. 잠시만 기다려주세요.\n메뉴: 본인인증\n노출 조건: 처리 요청 후 결과를 기다리는 경우",
+    "expected_message": "본인인증을 처리하고 있습니다. 잠시만 기다려주세요."
+  },
+  {
+    "query": "고객문의 메뉴에서 최종 실행 전 사용자 확인이 필요한 경우 상황에 표시할 기존 알림을 찾아줘.",
+    "expected_code": "SM-1235",
+    "kind": "menu_trigger_template",
+    "id": 22,
+    "ground_truth": "메시지코드: SM-1235\n문구: 문의 접수를 진행하시겠습니까?\n메뉴: 고객문의\n노출 조건: 최종 실행 전 사용자 확인이 필요한 경우",
+    "expected_message": "문의 접수를 진행하시겠습니까?"
+  },
+  {
+    "query": "원화출금 메뉴에서 시도 횟수가 5회를 초과한 합성 시나리오 상황에 표시할 기존 알림을 찾아줘.",
+    "expected_code": "SM-1120",
+    "kind": "menu_trigger_template",
+    "id": 23,
+    "ground_truth": "메시지코드: SM-1120\n문구: 원화 출금 신청 시도 횟수가 5회를 초과했습니다. 10분 후 다시 시도해주세요.\n메뉴: 원화출금\n노출 조건: 시도 횟수가 5회를 초과한 합성 시나리오",
+    "expected_message": "원화 출금 신청 시도 횟수가 5회를 초과했습니다. 10분 후 다시 시도해주세요."
+  },
+  {
+    "query": "매수주문 메뉴에서 로그인하지 않은 상태에서 요청한 경우 상황에 표시할 기존 알림을 찾아줘.",
+    "expected_code": "SM-1164",
+    "kind": "menu_trigger_template",
+    "id": 24,
+    "ground_truth": "메시지코드: SM-1164\n문구: 매수 주문을 진행하려면 먼저 로그인해주세요.\n메뉴: 매수주문\n노출 조건: 로그인하지 않은 상태에서 요청한 경우",
+    "expected_message": "매수 주문을 진행하려면 먼저 로그인해주세요."
+  },
+  {
+    "query": "알림설정 메뉴에서 동일한 요청이 이미 접수된 경우 상황에 표시할 기존 알림을 찾아줘.",
+    "expected_code": "SM-1219",
+    "kind": "menu_trigger_template",
+    "id": 25,
+    "ground_truth": "메시지코드: SM-1219\n문구: 이미 알림 설정 변경을 요청했습니다. 처리 결과를 확인해주세요.\n메뉴: 알림설정\n노출 조건: 동일한 요청이 이미 접수된 경우",
+    "expected_message": "이미 알림 설정 변경을 요청했습니다. 처리 결과를 확인해주세요."
+  },
+  {
+    "query": "원화출금 메뉴에서 로그인하지 않은 상태에서 요청한 경우 상황에 표시할 기존 알림을 찾아줘.",
+    "expected_code": "SM-1122",
+    "kind": "menu_trigger_template",
+    "id": 26,
+    "ground_truth": "메시지코드: SM-1122\n문구: 원화 출금 신청을 진행하려면 먼저 로그인해주세요.\n메뉴: 원화출금\n노출 조건: 로그인하지 않은 상태에서 요청한 경우",
+    "expected_message": "원화 출금 신청을 진행하려면 먼저 로그인해주세요."
+  },
+  {
+    "query": "회원가입 메뉴에서 입력 형식 또는 입력값이 유효하지 않은 경우 상황에 표시할 기존 알림을 찾아줘.",
+    "expected_code": "SM-1005",
+    "kind": "menu_trigger_template",
+    "id": 27,
+    "ground_truth": "메시지코드: SM-1005\n문구: 가입 신청 정보를 다시 확인해주세요.\n메뉴: 회원가입\n노출 조건: 입력 형식 또는 입력값이 유효하지 않은 경우",
+    "expected_message": "가입 신청 정보를 다시 확인해주세요."
+  },
+  {
+    "query": "로그인 메뉴에서 처리 유효시간이 30초인 합성 시나리오 상황에 표시할 기존 알림을 찾아줘.",
+    "expected_code": "SM-1035",
+    "kind": "menu_trigger_template",
+    "id": 28,
+    "ground_truth": "메시지코드: SM-1035\n문구: 로그인을 30초 이내에 완료해주세요.\n메뉴: 로그인\n노출 조건: 처리 유효시간이 30초인 합성 시나리오",
+    "expected_message": "로그인을 30초 이내에 완료해주세요."
+  },
+  {
+    "query": "예약주문 메뉴에서 시도 횟수가 5회를 초과한 합성 시나리오 상황에 표시할 기존 알림을 찾아줘.",
+    "expected_code": "SM-1204",
+    "kind": "menu_trigger_template",
+    "id": 29,
+    "ground_truth": "메시지코드: SM-1204\n문구: 예약 주문 시도 횟수가 5회를 초과했습니다. 10분 후 다시 시도해주세요.\n메뉴: 예약주문\n노출 조건: 시도 횟수가 5회를 초과한 합성 시나리오",
+    "expected_message": "예약 주문 시도 횟수가 5회를 초과했습니다. 10분 후 다시 시도해주세요."
+  },
+  {
+    "query": "고객문의 메뉴에서 입력 형식 또는 입력값이 유효하지 않은 경우 상황에 표시할 기존 알림을 찾아줘.",
+    "expected_code": "SM-1229",
+    "kind": "menu_trigger_template",
+    "id": 30,
+    "ground_truth": "메시지코드: SM-1229\n문구: 문의 접수 정보를 다시 확인해주세요.\n메뉴: 고객문의\n노출 조건: 입력 형식 또는 입력값이 유효하지 않은 경우",
+    "expected_message": "문의 접수 정보를 다시 확인해주세요."
+  },
+  {
+    "query": "매도주문 메뉴에서 직전 요청 후 30초가 지나지 않은 경우 상황에 표시할 기존 알림을 찾아줘.",
+    "expected_code": "SM-1174",
+    "kind": "menu_trigger_template",
+    "id": 31,
+    "ground_truth": "메시지코드: SM-1174\n문구: 매도 주문은 30초 이후에 다시 시도해주세요.\n메뉴: 매도주문\n노출 조건: 직전 요청 후 30초가 지나지 않은 경우",
+    "expected_message": "매도 주문은 30초 이후에 다시 시도해주세요."
+  },
+  {
+    "query": "가상자산입금 메뉴에서 진행 중 작업의 취소를 선택한 경우 상황에 표시할 기존 알림을 찾아줘.",
+    "expected_code": "SM-1138",
+    "kind": "menu_trigger_template",
+    "id": 32,
+    "ground_truth": "메시지코드: SM-1138\n문구: 진행 중인 입금 주소 발급을 취소하시겠습니까?\n메뉴: 가상자산입금\n노출 조건: 진행 중 작업의 취소를 선택한 경우",
+    "expected_message": "진행 중인 입금 주소 발급을 취소하시겠습니까?"
+  },
+  {
+    "query": "조건비교 메뉴에서 최소 금액보다 작은 값을 입력한 합성 사례 상황에 표시할 기존 알림을 찾아줘.",
+    "expected_code": "SM-1281",
+    "kind": "menu_trigger_template",
+    "id": 33,
+    "ground_truth": "메시지코드: SM-1281\n문구: 출금 금액은 1,000원 이상 입력해주세요.\n메뉴: 조건비교\n노출 조건: 최소 금액보다 작은 값을 입력한 합성 사례",
+    "expected_message": "출금 금액은 1,000원 이상 입력해주세요."
+  },
+  {
+    "query": "조건비교 메뉴에서 최대 금액보다 큰 값을 입력한 합성 사례 상황에 표시할 기존 알림을 찾아줘.",
+    "expected_code": "SM-1282",
+    "kind": "menu_trigger_template",
+    "id": 34,
+    "ground_truth": "메시지코드: SM-1282\n문구: 출금 금액은 1,000,000원 이하로 입력해주세요.\n메뉴: 조건비교\n노출 조건: 최대 금액보다 큰 값을 입력한 합성 사례",
+    "expected_message": "출금 금액은 1,000,000원 이하로 입력해주세요."
+  },
+  {
+    "query": "주소록 메뉴에서 동일한 요청이 이미 접수된 경우 상황에 표시할 기존 알림을 찾아줘.",
+    "expected_code": "SM-1261",
+    "kind": "menu_trigger_template",
+    "id": 35,
+    "ground_truth": "메시지코드: SM-1261\n문구: 이미 출금 주소 등록을 요청했습니다. 처리 결과를 확인해주세요.\n메뉴: 주소록\n노출 조건: 동일한 요청이 이미 접수된 경우",
+    "expected_message": "이미 출금 주소 등록을 요청했습니다. 처리 결과를 확인해주세요."
+  },
+  {
+    "query": "주문취소 메뉴에서 입력 형식 또는 입력값이 유효하지 않은 경우 상황에 표시할 기존 알림을 찾아줘.",
+    "expected_code": "SM-1187",
+    "kind": "menu_trigger_template",
+    "id": 36,
+    "ground_truth": "메시지코드: SM-1187\n문구: 주문 취소 정보를 다시 확인해주세요.\n메뉴: 주문취소\n노출 조건: 입력 형식 또는 입력값이 유효하지 않은 경우",
+    "expected_message": "주문 취소 정보를 다시 확인해주세요."
+  },
+  {
+    "query": "알림설정 메뉴에서 요청이 정상 처리된 경우 상황에 표시할 기존 알림을 찾아줘.",
+    "expected_code": "SM-1211",
+    "kind": "menu_trigger_template",
+    "id": 37,
+    "ground_truth": "메시지코드: SM-1211\n문구: 알림 설정 변경이 완료되었습니다.\n메뉴: 알림설정\n노출 조건: 요청이 정상 처리된 경우",
+    "expected_message": "알림 설정 변경이 완료되었습니다."
+  },
+  {
+    "query": "계좌관리 메뉴에서 로그인하지 않은 상태에서 요청한 경우 상황에 표시할 기존 알림을 찾아줘.",
+    "expected_code": "SM-1094",
+    "kind": "menu_trigger_template",
+    "id": 38,
+    "ground_truth": "메시지코드: SM-1094\n문구: 계좌 등록을 진행하려면 먼저 로그인해주세요.\n메뉴: 계좌관리\n노출 조건: 로그인하지 않은 상태에서 요청한 경우",
+    "expected_message": "계좌 등록을 진행하려면 먼저 로그인해주세요."
+  },
+  {
+    "query": "원화입금 메뉴에서 입력 형식 또는 입력값이 유효하지 않은 경우 상황에 표시할 기존 알림을 찾아줘.",
+    "expected_code": "SM-1103",
+    "kind": "menu_trigger_template",
+    "id": 39,
+    "ground_truth": "메시지코드: SM-1103\n문구: 원화 입금 신청 정보를 다시 확인해주세요.\n메뉴: 원화입금\n노출 조건: 입력 형식 또는 입력값이 유효하지 않은 경우",
+    "expected_message": "원화 입금 신청 정보를 다시 확인해주세요."
+  },
+  {
+    "query": "회원탈퇴 메뉴에서 입력 형식 또는 입력값이 유효하지 않은 경우 상황에 표시할 기존 알림을 찾아줘.",
+    "expected_code": "SM-1271",
+    "kind": "menu_trigger_template",
+    "id": 40,
+    "ground_truth": "메시지코드: SM-1271\n문구: 탈퇴 신청 정보를 다시 확인해주세요.\n메뉴: 회원탈퇴\n노출 조건: 입력 형식 또는 입력값이 유효하지 않은 경우",
+    "expected_message": "탈퇴 신청 정보를 다시 확인해주세요."
+  },
+  {
+    "query": "보안설정 메뉴에서 요청이 정상 처리된 경우 상황에 표시할 기존 알림을 찾아줘.",
+    "expected_code": "SM-1071",
+    "kind": "menu_trigger_template",
+    "id": 41,
+    "ground_truth": "메시지코드: SM-1071\n문구: 보안 설정 변경이 완료되었습니다.\n메뉴: 보안설정\n노출 조건: 요청이 정상 처리된 경우",
+    "expected_message": "보안 설정 변경이 완료되었습니다."
+  },
+  {
+    "query": "가상자산입금 메뉴에서 입력 형식 또는 입력값이 유효하지 않은 경우 상황에 표시할 기존 알림을 찾아줘.",
+    "expected_code": "SM-1131",
+    "kind": "menu_trigger_template",
+    "id": 42,
+    "ground_truth": "메시지코드: SM-1131\n문구: 입금 주소 발급 정보를 다시 확인해주세요.\n메뉴: 가상자산입금\n노출 조건: 입력 형식 또는 입력값이 유효하지 않은 경우",
+    "expected_message": "입금 주소 발급 정보를 다시 확인해주세요."
+  },
+  {
+    "query": "고객문의 메뉴에서 일시적인 처리 오류가 발생한 경우 상황에 표시할 기존 알림을 찾아줘.",
+    "expected_code": "SM-1227",
+    "kind": "menu_trigger_template",
+    "id": 43,
+    "ground_truth": "메시지코드: SM-1227\n문구: 문의 접수에 실패했습니다. 잠시 후 다시 시도해주세요.\n메뉴: 고객문의\n노출 조건: 일시적인 처리 오류가 발생한 경우",
+    "expected_message": "문의 접수에 실패했습니다. 잠시 후 다시 시도해주세요."
+  },
+  {
+    "query": "알림설정 메뉴에서 시도 횟수가 5회를 초과한 합성 시나리오 상황에 표시할 기존 알림을 찾아줘.",
+    "expected_code": "SM-1218",
+    "kind": "menu_trigger_template",
+    "id": 44,
+    "ground_truth": "메시지코드: SM-1218\n문구: 알림 설정 변경 시도 횟수가 5회를 초과했습니다. 10분 후 다시 시도해주세요.\n메뉴: 알림설정\n노출 조건: 시도 횟수가 5회를 초과한 합성 시나리오",
+    "expected_message": "알림 설정 변경 시도 횟수가 5회를 초과했습니다. 10분 후 다시 시도해주세요."
+  },
+  {
+    "query": "회원가입 메뉴에서 처리 요청 후 결과를 기다리는 경우 상황에 표시할 기존 알림을 찾아줘.",
+    "expected_code": "SM-1002",
+    "kind": "menu_trigger_template",
+    "id": 45,
+    "ground_truth": "메시지코드: SM-1002\n문구: 가입 신청을 처리하고 있습니다. 잠시만 기다려주세요.\n메뉴: 회원가입\n노출 조건: 처리 요청 후 결과를 기다리는 경우",
+    "expected_message": "가입 신청을 처리하고 있습니다. 잠시만 기다려주세요."
+  },
+  {
+    "query": "보안설정 메뉴에서 시도 횟수가 5회를 초과한 합성 시나리오 상황에 표시할 기존 알림을 찾아줘.",
+    "expected_code": "SM-1078",
+    "kind": "menu_trigger_template",
+    "id": 46,
+    "ground_truth": "메시지코드: SM-1078\n문구: 보안 설정 변경 시도 횟수가 5회를 초과했습니다. 10분 후 다시 시도해주세요.\n메뉴: 보안설정\n노출 조건: 시도 횟수가 5회를 초과한 합성 시나리오",
+    "expected_message": "보안 설정 변경 시도 횟수가 5회를 초과했습니다. 10분 후 다시 시도해주세요."
+  },
+  {
+    "query": "매도주문 메뉴에서 필수 입력 항목이 비어 있는 경우 상황에 표시할 기존 알림을 찾아줘.",
+    "expected_code": "SM-1172",
+    "kind": "menu_trigger_template",
+    "id": 47,
+    "ground_truth": "메시지코드: SM-1172\n문구: 매도 주문에 필요한 항목을 모두 입력해주세요.\n메뉴: 매도주문\n노출 조건: 필수 입력 항목이 비어 있는 경우",
+    "expected_message": "매도 주문에 필요한 항목을 모두 입력해주세요."
+  },
+  {
+    "query": "예약주문 메뉴에서 로그인하지 않은 상태에서 요청한 경우 상황에 표시할 기존 알림을 찾아줘.",
+    "expected_code": "SM-1206",
+    "kind": "menu_trigger_template",
+    "id": 48,
+    "ground_truth": "메시지코드: SM-1206\n문구: 예약 주문을 진행하려면 먼저 로그인해주세요.\n메뉴: 예약주문\n노출 조건: 로그인하지 않은 상태에서 요청한 경우",
+    "expected_message": "예약 주문을 진행하려면 먼저 로그인해주세요."
+  },
+  {
+    "query": "비밀번호 메뉴에서 로그인하지 않은 상태에서 요청한 경우 상황에 표시할 기존 알림을 찾아줘.",
+    "expected_code": "SM-1052",
+    "kind": "menu_trigger_template",
+    "id": 49,
+    "ground_truth": "메시지코드: SM-1052\n문구: 비밀번호 변경을 진행하려면 먼저 로그인해주세요.\n메뉴: 비밀번호\n노출 조건: 로그인하지 않은 상태에서 요청한 경우",
+    "expected_message": "비밀번호 변경을 진행하려면 먼저 로그인해주세요."
+  },
+  {
+    "query": "가상자산출금 메뉴에서 일시적인 처리 오류가 발생한 경우 상황에 표시할 기존 알림을 찾아줘.",
+    "expected_code": "SM-1143",
+    "kind": "menu_trigger_template",
+    "id": 50,
+    "ground_truth": "메시지코드: SM-1143\n문구: 가상자산 출금 신청에 실패했습니다. 잠시 후 다시 시도해주세요.\n메뉴: 가상자산출금\n노출 조건: 일시적인 처리 오류가 발생한 경우",
+    "expected_message": "가상자산 출금 신청에 실패했습니다. 잠시 후 다시 시도해주세요."
+  },
+  {
+    "query": "보안설정 메뉴에서 직전 요청 후 30초가 지나지 않은 경우 상황에 표시할 기존 알림을 찾아줘.",
+    "expected_code": "SM-1076",
+    "kind": "menu_trigger_template",
+    "id": 51,
+    "ground_truth": "메시지코드: SM-1076\n문구: 보안 설정 변경은 30초 이후에 다시 시도해주세요.\n메뉴: 보안설정\n노출 조건: 직전 요청 후 30초가 지나지 않은 경우",
+    "expected_message": "보안 설정 변경은 30초 이후에 다시 시도해주세요."
+  },
+  {
+    "query": "본인인증 메뉴에서 요청이 정상 처리된 경우 상황에 표시할 기존 알림을 찾아줘.",
+    "expected_code": "SM-1015",
+    "kind": "menu_trigger_template",
+    "id": 52,
+    "ground_truth": "메시지코드: SM-1015\n문구: 본인인증이 완료되었습니다.\n메뉴: 본인인증\n노출 조건: 요청이 정상 처리된 경우",
+    "expected_message": "본인인증이 완료되었습니다."
+  },
+  {
+    "query": "기기관리 메뉴에서 입력 형식 또는 입력값이 유효하지 않은 경우 상황에 표시할 기존 알림을 찾아줘.",
+    "expected_code": "SM-1061",
+    "kind": "menu_trigger_template",
+    "id": 53,
+    "ground_truth": "메시지코드: SM-1061\n문구: 기기 등록 정보를 다시 확인해주세요.\n메뉴: 기기관리\n노출 조건: 입력 형식 또는 입력값이 유효하지 않은 경우",
+    "expected_message": "기기 등록 정보를 다시 확인해주세요."
+  },
+  {
+    "query": "예약주문 메뉴에서 처리 요청 후 결과를 기다리는 경우 상황에 표시할 기존 알림을 찾아줘.",
+    "expected_code": "SM-1198",
+    "kind": "menu_trigger_template",
+    "id": 54,
+    "ground_truth": "메시지코드: SM-1198\n문구: 예약 주문을 처리하고 있습니다. 잠시만 기다려주세요.\n메뉴: 예약주문\n노출 조건: 처리 요청 후 결과를 기다리는 경우",
+    "expected_message": "예약 주문을 처리하고 있습니다. 잠시만 기다려주세요."
+  },
+  {
+    "query": "기기관리 메뉴에서 재요청 대기시간을 변수로 표시하는 경우 상황에 표시할 기존 알림을 찾아줘.",
+    "expected_code": "SM-1069",
+    "kind": "menu_trigger_template",
+    "id": 55,
+    "ground_truth": "메시지코드: SM-1069\n문구: 기기 등록은 {seconds}초 후에 다시 요청할 수 있습니다.\n메뉴: 기기관리\n노출 조건: 재요청 대기시간을 변수로 표시하는 경우",
+    "expected_message": "기기 등록은 {seconds}초 후에 다시 요청할 수 있습니다."
+  },
+  {
+    "query": "가상자산입금 메뉴에서 직전 요청 후 30초가 지나지 않은 경우 상황에 표시할 기존 알림을 찾아줘.",
+    "expected_code": "SM-1132",
+    "kind": "menu_trigger_template",
+    "id": 56,
+    "ground_truth": "메시지코드: SM-1132\n문구: 입금 주소 발급은 30초 이후에 다시 시도해주세요.\n메뉴: 가상자산입금\n노출 조건: 직전 요청 후 30초가 지나지 않은 경우",
+    "expected_message": "입금 주소 발급은 30초 이후에 다시 시도해주세요."
+  },
+  {
+    "query": "비밀번호 메뉴에서 처리 유효시간이 30초인 합성 시나리오 상황에 표시할 기존 알림을 찾아줘.",
+    "expected_code": "SM-1049",
+    "kind": "menu_trigger_template",
+    "id": 57,
+    "ground_truth": "메시지코드: SM-1049\n문구: 비밀번호 변경을 30초 이내에 완료해주세요.\n메뉴: 비밀번호\n노출 조건: 처리 유효시간이 30초인 합성 시나리오",
+    "expected_message": "비밀번호 변경을 30초 이내에 완료해주세요."
+  },
+  {
+    "query": "기기관리 메뉴에서 필수 입력 항목이 비어 있는 경우 상황에 표시할 기존 알림을 찾아줘.",
+    "expected_code": "SM-1060",
+    "kind": "menu_trigger_template",
+    "id": 58,
+    "ground_truth": "메시지코드: SM-1060\n문구: 기기 등록에 필요한 항목을 모두 입력해주세요.\n메뉴: 기기관리\n노출 조건: 필수 입력 항목이 비어 있는 경우",
+    "expected_message": "기기 등록에 필요한 항목을 모두 입력해주세요."
+  },
+  {
+    "query": "원화출금 메뉴에서 필수 입력 항목이 비어 있는 경우 상황에 표시할 기존 알림을 찾아줘.",
+    "expected_code": "SM-1116",
+    "kind": "menu_trigger_template",
+    "id": 59,
+    "ground_truth": "메시지코드: SM-1116\n문구: 원화 출금 신청에 필요한 항목을 모두 입력해주세요.\n메뉴: 원화출금\n노출 조건: 필수 입력 항목이 비어 있는 경우",
+    "expected_message": "원화 출금 신청에 필요한 항목을 모두 입력해주세요."
+  },
+  {
+    "query": "회원탈퇴 메뉴에서 직전 요청 후 30초가 지나지 않은 경우 상황에 표시할 기존 알림을 찾아줘.",
+    "expected_code": "SM-1272",
+    "kind": "menu_trigger_template",
+    "id": 60,
+    "ground_truth": "메시지코드: SM-1272\n문구: 탈퇴 신청은 30초 이후에 다시 시도해주세요.\n메뉴: 회원탈퇴\n노출 조건: 직전 요청 후 30초가 지나지 않은 경우",
+    "expected_message": "탈퇴 신청은 30초 이후에 다시 시도해주세요."
+  },
+  {
+    "query": "알림설정 메뉴에서 재요청 대기시간을 변수로 표시하는 경우 상황에 표시할 기존 알림을 찾아줘.",
+    "expected_code": "SM-1223",
+    "kind": "menu_trigger_template",
+    "id": 61,
+    "ground_truth": "메시지코드: SM-1223\n문구: 알림 설정 변경은 {seconds}초 후에 다시 요청할 수 있습니다.\n메뉴: 알림설정\n노출 조건: 재요청 대기시간을 변수로 표시하는 경우",
+    "expected_message": "알림 설정 변경은 {seconds}초 후에 다시 요청할 수 있습니다."
+  },
+  {
+    "query": "매수주문 메뉴에서 진행 중 작업의 취소를 선택한 경우 상황에 표시할 기존 알림을 찾아줘.",
+    "expected_code": "SM-1166",
+    "kind": "menu_trigger_template",
+    "id": 62,
+    "ground_truth": "메시지코드: SM-1166\n문구: 진행 중인 매수 주문을 취소하시겠습니까?\n메뉴: 매수주문\n노출 조건: 진행 중 작업의 취소를 선택한 경우",
+    "expected_message": "진행 중인 매수 주문을 취소하시겠습니까?"
+  },
+  {
+    "query": "로그인 메뉴에서 로그인하지 않은 상태에서 요청한 경우 상황에 표시할 기존 알림을 찾아줘.",
+    "expected_code": "SM-1038",
+    "kind": "menu_trigger_template",
+    "id": 63,
+    "ground_truth": "메시지코드: SM-1038\n문구: 로그인을 진행하려면 먼저 로그인해주세요.\n메뉴: 로그인\n노출 조건: 로그인하지 않은 상태에서 요청한 경우",
+    "expected_message": "로그인을 진행하려면 먼저 로그인해주세요."
+  },
+  {
+    "query": "원화출금 메뉴에서 최종 실행 전 사용자 확인이 필요한 경우 상황에 표시할 기존 알림을 찾아줘.",
+    "expected_code": "SM-1123",
+    "kind": "menu_trigger_template",
+    "id": 64,
+    "ground_truth": "메시지코드: SM-1123\n문구: 원화 출금 신청을 진행하시겠습니까?\n메뉴: 원화출금\n노출 조건: 최종 실행 전 사용자 확인이 필요한 경우",
+    "expected_message": "원화 출금 신청을 진행하시겠습니까?"
+  },
+  {
+    "query": "본인인증 메뉴에서 재요청 대기시간을 변수로 표시하는 경우 상황에 표시할 기존 알림을 찾아줘.",
+    "expected_code": "SM-1027",
+    "kind": "menu_trigger_template",
+    "id": 65,
+    "ground_truth": "메시지코드: SM-1027\n문구: 본인인증은 {seconds}초 후에 다시 요청할 수 있습니다.\n메뉴: 본인인증\n노출 조건: 재요청 대기시간을 변수로 표시하는 경우",
+    "expected_message": "본인인증은 {seconds}초 후에 다시 요청할 수 있습니다."
+  },
+  {
+    "query": "기기관리 메뉴에서 처리 유효시간이 30초인 합성 시나리오 상황에 표시할 기존 알림을 찾아줘.",
+    "expected_code": "SM-1063",
+    "kind": "menu_trigger_template",
+    "id": 66,
+    "ground_truth": "메시지코드: SM-1063\n문구: 기기 등록을 30초 이내에 완료해주세요.\n메뉴: 기기관리\n노출 조건: 처리 유효시간이 30초인 합성 시나리오",
+    "expected_message": "기기 등록을 30초 이내에 완료해주세요."
+  },
+  {
+    "query": "계좌관리 메뉴에서 처리 유효시간이 30초인 합성 시나리오 상황에 표시할 기존 알림을 찾아줘.",
+    "expected_code": "SM-1091",
+    "kind": "menu_trigger_template",
+    "id": 67,
+    "ground_truth": "메시지코드: SM-1091\n문구: 계좌 등록을 30초 이내에 완료해주세요.\n메뉴: 계좌관리\n노출 조건: 처리 유효시간이 30초인 합성 시나리오",
+    "expected_message": "계좌 등록을 30초 이내에 완료해주세요."
+  },
+  {
+    "query": "본인인증 메뉴에서 직전 요청 후 30초가 지나지 않은 경우 상황에 표시할 기존 알림을 찾아줘.",
+    "expected_code": "SM-1020",
+    "kind": "menu_trigger_template",
+    "id": 68,
+    "ground_truth": "메시지코드: SM-1020\n문구: 본인인증은 30초 이후에 다시 시도해주세요.\n메뉴: 본인인증\n노출 조건: 직전 요청 후 30초가 지나지 않은 경우",
+    "expected_message": "본인인증은 30초 이후에 다시 시도해주세요."
+  }
+]

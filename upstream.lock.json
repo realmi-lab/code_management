@@ -1,0 +1,19 @@
+{
+  "repository": "https://github.com/urstory/urstory-rag.git",
+  "commit": "75661c676aec650e52f75dd068b687a4cb6a63b7",
+  "tree": "6e5ebcef24cfc575f5659329d946cc56c103c9ca",
+  "verified_via": "GitHub connector branches/main",
+  "checked_at": "2026-09-18",
+  "source_policy": "Fetch and verify the entire original tree; never substitute the legacy catalogue for the upstream application.",
+  "required_files": [
+    "LICENSE", "README.md", "backend/pyproject.toml", "backend/alembic.ini",
+    "backend/app/main.py", "backend/app/worker.py",
+    "backend/app/services/search/hybrid.py", "backend/app/services/search/rrf.py",
+    "backend/app/services/search/keyword_es.py", "backend/app/services/search/vector.py",
+    "backend/app/services/reranking/korean.py", "backend/app/services/hyde/generator.py",
+    "backend/app/services/search/multi_query.py", "backend/app/services/guardrails/numeric_verifier.py",
+    "backend/app/api/evaluation.py", "backend/app/api/openai_compat.py",
+    "backend/app/monitoring/langfuse.py", "frontend/package.json", "frontend/pnpm-lock.yaml",
+    "frontend/next.config.ts", "docker-compose.yml", "docker-compose.prod.yml"
+  ]
+}

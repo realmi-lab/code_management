@@ -1,0 +1,19 @@
+{
+  "completed": 68,
+  "target": 68,
+  "answered": 63,
+  "judged": 63,
+  "judge_average": 89.7936507936508,
+  "good": 63,
+  "fail_under_40": 0,
+  "answer_errors": 5,
+  "judge_errors": 0,
+  "search_hit_count": 63,
+  "top1_count": 62,
+  "keyword_recall_all": 0.8933759867583397,
+  "median_answer_seconds": 43.224,
+  "all_returned_originals_match": true,
+  "judge_independent_model": false,
+  "elapsed_seconds": 1660,
+  "production_unchanged": true
+}

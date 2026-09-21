@@ -1,0 +1,1 @@
+{"passed": true, "real_haystack_nltk_splitter": true, "external_inference": false, "production_data_written": false, "checks": [{"language": "en", "zero_overlap_chunks": 20, "half_overlap_chunks": 39, "header_chunks": 20}, {"language": "ko", "zero_overlap_chunks": 20, "half_overlap_chunks": 39, "header_chunks": 20}]}

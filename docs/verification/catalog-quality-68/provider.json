@@ -1,0 +1,21 @@
+{
+  "version": 9,
+  "provider": "commandcode",
+  "model": "deepseek/deepseek-v4.1-flash",
+  "embedding": "local",
+  "configured": {
+    "commandcode": true,
+    "deepseek": false,
+    "anthropic": false,
+    "openai": false
+  },
+  "models": {
+    "commandcode": "deepseek/deepseek-v4.1-flash",
+    "deepseek": "deepseek-flash",
+    "anthropic": "claude-sonnet-5",
+    "openai": "gpt-4.1-mini"
+  },
+  "local_configured": true,
+  "local_available": true,
+  "local_state": "ready"
+}

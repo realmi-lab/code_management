@@ -1,0 +1,33 @@
+{
+  "date": "2026-09-18",
+  "integration": {
+    "tests": 84,
+    "failures": 0,
+    "errors": 0,
+    "skipped": 0
+  },
+  "installer_tests": 58,
+  "browser_offline_checks": 14,
+  "native_HTTP_checks": 10,
+  "source_full_tree_present": false,
+  "docker_full_stack_tested": false,
+  "real_model_tested": false,
+  "user_Docker_Local_changed": false,
+  "notes": [
+    "UI used local assets and TestClient bridge.",
+    "Authentication and model/retrieval replaced only in tests.",
+    "Native HTTP used actual Uvicorn plus same explicit test doubles."
+  ],
+  "sample_200": {
+    "xlsx_records": 200,
+    "active": 190,
+    "retired": 10,
+    "import_errors": 0,
+    "import_warnings": 0,
+    "natural_search_top": "AT-2011",
+    "direction_difference_detected": true,
+    "draft_similar_candidate": "AT-2127",
+    "approved_test_code": "AT-2301",
+    "external_rag_llm": "test doubles"
+  }
+}

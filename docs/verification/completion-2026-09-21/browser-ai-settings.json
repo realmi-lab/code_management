@@ -1,0 +1,12 @@
+{
+  "passed": true,
+  "authentication": "test dependency, NOT upstream JWT",
+  "external_AI_calls": false,
+  "checks": [
+    "deepseek_saved_and_reloaded",
+    "anthropic_saved_and_reloaded",
+    "openai_saved_and_reloaded",
+    "claude_with_local_embedding_without_openai_dependency",
+    "mobile_no_horizontal_overflow"
+  ]
+}

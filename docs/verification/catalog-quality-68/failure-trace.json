@@ -1,0 +1,122 @@
+[
+  {
+    "case": 7,
+    "timestamp": "2026-09-21T05:30:37.971205Z",
+    "thread_id": "ff51a858-03f9-4822-907d-5aeb9357a534",
+    "request_id": "78218b4d-c9d7-4348-a122-b8327174e5a0",
+    "stage": "numeric",
+    "status": "passed",
+    "missing_quantities": [],
+    "ungrounded_numbers": []
+  },
+  {
+    "case": 7,
+    "timestamp": "2026-09-21T05:30:57.984620Z",
+    "thread_id": "ff51a858-03f9-4822-907d-5aeb9357a534",
+    "request_id": "78218b4d-c9d7-4348-a122-b8327174e5a0",
+    "stage": "grounded_ratio",
+    "status": "passed",
+    "score": 0.83,
+    "threshold": 0.8,
+    "verdict": "PASS",
+    "reasons": [
+      "[\"등록 자료에 추가 분기 조건은 없습니다.\"]"
+    ],
+    "error_type": null
+  },
+  {
+    "case": 7,
+    "timestamp": "2026-09-21T05:31:05.658129Z",
+    "thread_id": "ff51a858-03f9-4822-907d-5aeb9357a534",
+    "request_id": "78218b4d-c9d7-4348-a122-b8327174e5a0",
+    "stage": "faithfulness_score",
+    "status": "blocked",
+    "score": 0.8,
+    "threshold": 0.9,
+    "verdict": "UNFAITHFUL",
+    "reasons": [
+      ""
+    ],
+    "error_type": null
+  },
+  {
+    "case": 27,
+    "timestamp": "2026-09-21T05:39:26.412641Z",
+    "thread_id": "6016c9b4-6d03-4aa4-a248-20619ba21295",
+    "request_id": "130ec0e0-e060-414b-9fee-f73d6cedde35",
+    "stage": "numeric",
+    "status": "passed",
+    "missing_quantities": [],
+    "ungrounded_numbers": []
+  },
+  {
+    "case": 27,
+    "timestamp": "2026-09-21T05:39:45.815374Z",
+    "thread_id": "6016c9b4-6d03-4aa4-a248-20619ba21295",
+    "request_id": "130ec0e0-e060-414b-9fee-f73d6cedde35",
+    "stage": "grounded_ratio",
+    "status": "blocked",
+    "score": 0.57,
+    "threshold": 0.8,
+    "verdict": "FAIL",
+    "reasons": [
+      "[\"같은 노출 조건의 나열된 코드들이 적용 메뉴만 다르다는 주장\", \"등록 문구는 DB 원문으로 별도 확인이 필요하다는 주장\", \"카탈로그상 노출 조건 외 세부 비교 정보는 없다는 주장\"]"
+    ],
+    "error_type": null
+  },
+  {
+    "case": 27,
+    "timestamp": "2026-09-21T05:39:45.815834Z",
+    "thread_id": "6016c9b4-6d03-4aa4-a248-20619ba21295",
+    "request_id": "130ec0e0-e060-414b-9fee-f73d6cedde35",
+    "stage": "faithfulness_score",
+    "status": "passed",
+    "score": 1.0,
+    "threshold": 0.9,
+    "verdict": "FAITHFUL",
+    "reasons": [
+      "없음"
+    ],
+    "error_type": null
+  },
+  {
+    "case": 67,
+    "timestamp": "2026-09-21T05:55:13.677117Z",
+    "thread_id": "0e7f7317-4dcc-48be-b1a8-891ded162768",
+    "request_id": "6a5118c0-eb4f-4ef8-b410-04329cee9d43",
+    "stage": "numeric",
+    "status": "passed",
+    "missing_quantities": [],
+    "ungrounded_numbers": []
+  },
+  {
+    "case": 67,
+    "timestamp": "2026-09-21T05:55:30.400857Z",
+    "thread_id": "0e7f7317-4dcc-48be-b1a8-891ded162768",
+    "request_id": "6a5118c0-eb4f-4ef8-b410-04329cee9d43",
+    "stage": "grounded_ratio",
+    "status": "passed",
+    "score": 0.8,
+    "threshold": 0.8,
+    "verdict": "PASS",
+    "reasons": [
+      "[\"등록 문구 원문은 DB에서 별도로 제공됩니다.\"]"
+    ],
+    "error_type": null
+  },
+  {
+    "case": 67,
+    "timestamp": "2026-09-21T05:55:37.204859Z",
+    "thread_id": "0e7f7317-4dcc-48be-b1a8-891ded162768",
+    "request_id": "6a5118c0-eb4f-4ef8-b410-04329cee9d43",
+    "stage": "faithfulness_score",
+    "status": "blocked",
+    "score": 0.85,
+    "threshold": 0.9,
+    "verdict": "UNFAITHFUL",
+    "reasons": [
+      ""
+    ],
+    "error_type": null
+  }
+]

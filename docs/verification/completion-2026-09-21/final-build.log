@@ -1,0 +1,291 @@
+ Image code-management-full-rag-frontend Building 
+ Image code-management-full-api:75661c6 Building 
+#1 [internal] load local bake definitions
+#1 reading from stdin 2.35kB done
+#1 DONE 0.0s
+
+#2 [rag-api internal] load build definition from backend.Dockerfile
+#2 transferring dockerfile: 1.93kB done
+#2 DONE 0.0s
+
+#3 [rag-frontend internal] load build definition from frontend.Dockerfile
+#3 transferring dockerfile: 1.28kB done
+#3 DONE 0.0s
+
+#4 [rag-frontend internal] load metadata for docker.io/library/node:22-alpine
+#4 DONE 0.9s
+
+#5 [rag-api internal] load metadata for docker.io/library/python:3.12-slim
+#5 DONE 0.9s
+
+#6 [rag-api internal] load .dockerignore
+#6 transferring context: 289B done
+#6 DONE 0.0s
+
+#7 [rag-frontend builder  1/13] FROM docker.io/library/node:22-alpine@sha256:b6f26b36c8ff49624cfdac716b8ea1138d606df02586a77d364bb5536a634f85
+#7 resolve docker.io/library/node:22-alpine@sha256:b6f26b36c8ff49624cfdac716b8ea1138d606df02586a77d364bb5536a634f85 done
+#7 DONE 0.0s
+
+#8 [rag-frontend internal] load build context
+#8 transferring context: 156.71kB done
+#8 DONE 0.0s
+
+#9 [rag-frontend builder  3/13] COPY upstream/frontend/package.json upstream/frontend/pnpm-lock.yaml ./
+#9 CACHED
+
+#10 [rag-frontend builder  2/13] WORKDIR /app
+#10 CACHED
+
+#11 [rag-frontend builder  4/13] RUN corepack enable && pnpm install --frozen-lockfile
+#11 CACHED
+
+#12 [rag-frontend builder  5/13] COPY upstream/frontend ./
+#12 CACHED
+
+#13 [rag-api builder 1/6] FROM docker.io/library/python:3.12-slim@sha256:2f17fc044b579bab302c2e8054d3a686e2cb9a83de48e70534b94cd8ebbe06a9
+#13 resolve docker.io/library/python:3.12-slim@sha256:2f17fc044b579bab302c2e8054d3a686e2cb9a83de48e70534b94cd8ebbe06a9 done
+#13 DONE 0.0s
+
+#14 [rag-api internal] load build context
+#14 transferring context: 61.87kB done
+#14 DONE 0.0s
+
+#15 [rag-frontend builder  6/13] COPY extensions/frontend ./
+#15 DONE 0.0s
+
+#16 [rag-api runtime  2/13] RUN apt-get update && apt-get install -y --no-install-recommends libglib2.0-0 libgl1     && rm -rf /var/lib/apt/lists/*     && groupadd --gid 10001 appuser     && useradd --uid 10001 --gid 10001 --create-home appuser
+#16 CACHED
+
+#17 [rag-api builder 6/6] RUN pip install --no-cache-dir --prefix=/install /build/backend -r /build/catalog-requirements.txt
+#17 CACHED
+
+#18 [rag-api builder 3/6] RUN apt-get update && apt-get install -y --no-install-recommends build-essential git     && rm -rf /var/lib/apt/lists/*
+#18 CACHED
+
+#19 [rag-api builder 5/6] COPY extensions/requirements.txt /build/catalog-requirements.txt
+#19 CACHED
+
+#20 [rag-api runtime  4/13] COPY --from=builder /install /usr/local
+#20 CACHED
+
+#21 [rag-api builder 2/6] WORKDIR /build
+#21 CACHED
+
+#22 [rag-api runtime  3/13] WORKDIR /app
+#22 CACHED
+
+#23 [rag-api builder 4/6] COPY upstream/backend /build/backend
+#23 CACHED
+
+#24 [rag-api runtime  5/13] COPY --chown=10001:10001 upstream/backend /app
+#24 CACHED
+
+#25 [rag-api runtime  6/13] COPY --chown=10001:10001 extensions/code_agent /app/code_agent
+#25 DONE 0.0s
+
+#26 [rag-frontend builder  7/13] COPY deploy/patch_frontend.mjs /tmp/patch_frontend.mjs
+#26 DONE 0.0s
+
+#27 [rag-api runtime  7/13] COPY deploy/patch_backend.py /tmp/patch_backend.py
+#27 DONE 0.0s
+
+#28 [rag-frontend builder  8/13] RUN node /tmp/patch_frontend.mjs
+#28 DONE 0.1s
+
+#29 [rag-api runtime  8/13] RUN python /tmp/patch_backend.py /app
+#29 DONE 0.2s
+
+#30 [rag-frontend builder  9/13] COPY deploy/patch_provider_frontend.mjs /tmp/patch_provider_frontend.mjs
+#30 DONE 0.0s
+
+#31 [rag-api runtime  9/13] COPY deploy/patch_provider.py /tmp/patch_provider.py
+#31 DONE 0.0s
+
+#32 [rag-frontend builder 10/13] RUN node /tmp/patch_provider_frontend.mjs
+#32 DONE 0.1s
+
+#33 [rag-api runtime 10/13] RUN python /tmp/patch_provider.py /app
+#33 DONE 0.2s
+
+#34 [rag-frontend builder 11/13] COPY deploy/patch_local_access_frontend.mjs /tmp/patch_local_access_frontend.mjs
+#34 DONE 0.0s
+
+#35 [rag-api runtime 11/13] COPY deploy/patch_local_access.py /tmp/patch_local_access.py
+#35 DONE 0.0s
+
+#36 [rag-frontend builder 12/13] RUN node /tmp/patch_local_access_frontend.mjs
+#36 DONE 0.1s
+
+#37 [rag-api runtime 12/13] RUN python /tmp/patch_local_access.py /app
+#37 DONE 0.2s
+
+#38 [rag-frontend builder 13/13] RUN mkdir -p public && pnpm build
+#38 ...
+
+#39 [rag-api runtime 13/13] RUN mkdir -p /app/uploads /app/run /watch /home/appuser/.cache /app/private-settings     && chown -R 10001:10001 /app/uploads /app/run /watch /home/appuser/.cache /app/private-settings
+#39 DONE 0.1s
+
+#40 [rag-api] exporting to image
+#40 exporting layers 0.1s done
+#40 exporting manifest sha256:2c6ff538477b85b086485c22d3f9187f7990d19e0e20bd084a2dfb36ddc6f349 done
+#40 exporting config sha256:aa5e681262be023174eb108eb7cbe1d3cee4fe4d9aed16757b9727a37c2b6763 done
+#40 exporting attestation manifest sha256:ea66fccbe94d13816fcda447c3f8079e87ea12ac4702e3bb54c8e4cbaf8acce5 done
+#40 exporting manifest list sha256:48f6073584cb75e1e79b6f2c8ba1f0a797980c51acc10e5a24ffea30a68c9bd9
+#40 exporting manifest list sha256:48f6073584cb75e1e79b6f2c8ba1f0a797980c51acc10e5a24ffea30a68c9bd9 done
+#40 naming to docker.io/library/code-management-full-api:75661c6 done
+#40 unpacking to docker.io/library/code-management-full-api:75661c6 0.0s done
+#40 DONE 0.2s
+
+#41 [rag-api] resolving provenance for metadata file
+#41 DONE 0.0s
+
+#38 [rag-frontend builder 13/13] RUN mkdir -p public && pnpm build
+#38 0.306 
+#38 0.306 > frontend@0.1.0 build /app
+#38 0.306 > next build
+#38 0.306 
+#38 0.605 ▲ Next.js 16.2.6 (Turbopack)
+#38 0.605 
+#38 0.621   Creating an optimized production build ...
+#38 3.331 ✓ Compiled successfully in 2.6s
+#38 3.337   Running TypeScript ...
+#38 6.013   Finished TypeScript in 2.7s ...
+#38 6.014   Collecting page data using 9 workers ...
+#38 6.353   Generating static pages using 9 workers (0/28) ...
+#38 6.481   Generating static pages using 9 workers (7/28) 
+#38 6.498   Generating static pages using 9 workers (14/28) 
+#38 6.544   Generating static pages using 9 workers (21/28) 
+#38 6.550 ✓ Generating static pages using 9 workers (28/28) in 197ms
+#38 6.553   Finalizing page optimization ...
+#38 6.847 
+#38 6.848 Route (app)
+#38 6.848 ┌ ○ /
+#38 6.848 ├ ○ /_not-found
+#38 6.848 ├ ○ /codes
+#38 6.848 ├ ○ /documents
+#38 6.848 ├ ƒ /documents/[id]
+#38 6.848 ├ ○ /evaluation
+#38 6.848 ├ ○ /evaluation/compare
+#38 6.848 ├ ○ /evaluation/datasets
+#38 6.848 ├ ○ /evaluation/runs
+#38 6.848 ├ ƒ /local/session
+#38 6.848 ├ ○ /login
+#38 6.848 ├ ○ /monitoring
+#38 6.848 ├ ○ /monitoring/metrics
+#38 6.848 ├ ○ /monitoring/traces
+#38 6.848 ├ ○ /search
+#38 6.848 ├ ○ /settings
+#38 6.848 ├ ○ /settings/api-keys
+#38 6.848 ├ ○ /settings/chunking
+#38 6.848 ├ ○ /settings/embedding
+#38 6.848 ├ ○ /settings/generation
+#38 6.848 ├ ○ /settings/guardrails
+#38 6.848 ├ ○ /settings/hyde
+#38 6.848 ├ ○ /settings/profile
+#38 6.848 ├ ○ /settings/reranking
+#38 6.848 ├ ○ /settings/search
+#38 6.848 ├ ○ /settings/system
+#38 6.848 ├ ○ /settings/users
+#38 6.848 └ ○ /settings/watcher
+#38 6.848 
+#38 6.848 
+#38 6.848 ○  (Static)   prerendered as static content
+#38 6.848 ƒ  (Dynamic)  server-rendered on demand
+#38 6.848 
+#38 DONE 7.0s
+
+#42 [rag-frontend runner 3/6] RUN addgroup -S appgroup && adduser -S appuser -G appgroup
+#42 CACHED
+
+#43 [rag-frontend runner 4/6] COPY --from=builder --chown=appuser:appgroup /app/.next/standalone ./
+#43 DONE 0.2s
+
+#44 [rag-frontend runner 5/6] COPY --from=builder --chown=appuser:appgroup /app/.next/static ./.next/static
+#44 DONE 0.0s
+
+#45 [rag-frontend runner 6/6] COPY --from=builder --chown=appuser:appgroup /app/public ./public
+#45 DONE 0.0s
+
+#46 [rag-frontend] exporting to image
+#46 exporting layers
+#46 exporting layers 0.6s done
+#46 exporting manifest sha256:f8a16d907f5ab28128ceb2ddffdb73945599b8293029eac8fe5b324eb4e57f91 done
+#46 exporting config sha256:09c57896098c8dfe29a7c3bfee6ab2fb0ddaf37476b2aaf47951e393d77304f2 done
+#46 exporting attestation manifest sha256:573b990f8cca3cdc8898bf0fa2588eb5a057bb5f22ce39279af45218681a7e70 done
+#46 exporting manifest list sha256:1a3e7cd3d24f2ac36da34b6a924777975b09accb613054b69be6a31c44146337 done
+#46 naming to docker.io/library/code-management-full-rag-frontend:latest done
+#46 unpacking to docker.io/library/code-management-full-rag-frontend:latest
+#46 unpacking to docker.io/library/code-management-full-rag-frontend:latest 0.2s done
+#46 DONE 0.8s
+
+#47 [rag-frontend] resolving provenance for metadata file
+#47 DONE 0.0s
+ Image code-management-full-api:75661c6 Built 
+ Image code-management-full-rag-frontend Built 
+ Container code-management-full-elasticsearch-1 Running 
+ Container code-management-full-redis-1 Running 
+ Container code-management-full-postgres-1 Running 
+ Container code-management-full-db-migrate-1 Recreate 
+ Container code-management-full-db-migrate-1 Recreated 
+ Container code-management-full-rag-beat-1 Recreate 
+ Container code-management-full-rag-api-1 Recreate 
+ Container code-management-full-rag-worker-1 Recreate 
+ Container code-management-full-rag-beat-1 Recreated 
+ Container code-management-full-rag-worker-1 Recreated 
+ Container code-management-full-rag-api-1 Recreated 
+ Container code-management-full-rag-frontend-1 Recreate 
+ Container code-management-full-rag-frontend-1 Recreated 
+ Container code-management-full-postgres-1 Waiting 
+ Container code-management-full-postgres-1 Healthy 
+ Container code-management-full-db-migrate-1 Starting 
+ Container code-management-full-db-migrate-1 Started 
+ Container code-management-full-postgres-1 Waiting 
+ Container code-management-full-redis-1 Waiting 
+ Container code-management-full-elasticsearch-1 Waiting 
+ Container code-management-full-db-migrate-1 Waiting 
+ Container code-management-full-elasticsearch-1 Waiting 
+ Container code-management-full-elasticsearch-1 Waiting 
+ Container code-management-full-db-migrate-1 Waiting 
+ Container code-management-full-postgres-1 Waiting 
+ Container code-management-full-redis-1 Waiting 
+ Container code-management-full-db-migrate-1 Waiting 
+ Container code-management-full-postgres-1 Waiting 
+ Container code-management-full-redis-1 Waiting 
+ Container code-management-full-postgres-1 Healthy 
+ Container code-management-full-elasticsearch-1 Healthy 
+ Container code-management-full-redis-1 Healthy 
+ Container code-management-full-postgres-1 Healthy 
+ Container code-management-full-redis-1 Healthy 
+ Container code-management-full-elasticsearch-1 Healthy 
+ Container code-management-full-redis-1 Healthy 
+ Container code-management-full-elasticsearch-1 Healthy 
+ Container code-management-full-postgres-1 Healthy 
+ Container code-management-full-db-migrate-1 Exited 
+ Container code-management-full-rag-beat-1 Starting 
+ Container code-management-full-db-migrate-1 Exited 
+ Container code-management-full-rag-api-1 Starting 
+ Container code-management-full-db-migrate-1 Exited 
+ Container code-management-full-rag-worker-1 Starting 
+ Container code-management-full-rag-worker-1 Started 
+ Container code-management-full-rag-api-1 Started 
+ Container code-management-full-rag-api-1 Waiting 
+ Container code-management-full-rag-beat-1 Started 
+ Container code-management-full-rag-api-1 Healthy 
+ Container code-management-full-rag-frontend-1 Starting 
+ Container code-management-full-rag-frontend-1 Started 
+ Container code-management-full-rag-api-1 Waiting 
+ Container code-management-full-db-migrate-1 Waiting 
+ Container code-management-full-rag-frontend-1 Waiting 
+ Container code-management-full-rag-worker-1 Waiting 
+ Container code-management-full-elasticsearch-1 Waiting 
+ Container code-management-full-rag-beat-1 Waiting 
+ Container code-management-full-redis-1 Waiting 
+ Container code-management-full-postgres-1 Waiting 
+ Container code-management-full-db-migrate-1 Exited 
+ Container code-management-full-postgres-1 Healthy 
+ Container code-management-full-elasticsearch-1 Healthy 
+ Container code-management-full-redis-1 Healthy 
+ Container code-management-full-rag-beat-1 Healthy 
+ Container code-management-full-rag-worker-1 Healthy 
+ Container code-management-full-rag-api-1 Healthy 
+ Container code-management-full-rag-frontend-1 Healthy 

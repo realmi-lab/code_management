@@ -1,0 +1,12 @@
+{
+  "schema_version": 2,
+  "count": 300,
+  "synthetic": true,
+  "original_github_samples": 16,
+  "new_synthetic_samples": 284,
+  "generator": "scripts/generate_catalog_samples.py",
+  "original_provenance": "github_samples.provenance.json",
+  "sha256": "25d16ca6d223c2291ae425cbabf7575827814fe74406c4ae20f9ab3acfbdd545",
+  "active": 279,
+  "retired": 21
+}

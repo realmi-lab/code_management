@@ -1,0 +1,13 @@
+{
+  "passed": true,
+  "real_model": "local:intfloat/multilingual-e5-base@d128750597153bb5987e10b1c3493a34e5a4502a:pad1536:v1",
+  "synthetic_only": true,
+  "external_inference": false,
+  "dimensions": 1536,
+  "scores": [
+    0.8716044470749991,
+    0.8131278033168421,
+    0.8277212460060271
+  ],
+  "expected_first": true
+}

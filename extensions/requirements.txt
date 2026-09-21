@@ -1,0 +1,3 @@
+# Additive domain dependencies. Upstream dependencies are NOT removed.
+psycopg[binary]>=3.2,<4
+defusedxml>=0.7.1,<1

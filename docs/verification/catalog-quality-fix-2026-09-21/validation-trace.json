@@ -1,0 +1,346 @@
+[
+  {
+    "round": 1,
+    "case": 5,
+    "timestamp": "2026-09-21T07:16:35.882301Z",
+    "thread_id": "0548f3e1-1d22-46c9-a1c3-4ee19bdf68be",
+    "request_id": "37587d1b-6489-46e1-b628-b3a31fc1ba77",
+    "stage": "numeric",
+    "status": "passed",
+    "missing_quantities": [],
+    "ungrounded_numbers": []
+  },
+  {
+    "round": 1,
+    "case": 2,
+    "timestamp": "2026-09-21T07:16:38.842232Z",
+    "thread_id": "27246a79-5687-4ac5-817d-5350b6547ada",
+    "request_id": "4117e308-2c8b-486a-8172-f980b64e1a76",
+    "stage": "numeric",
+    "status": "passed",
+    "missing_quantities": [],
+    "ungrounded_numbers": []
+  },
+  {
+    "round": 1,
+    "case": 5,
+    "timestamp": "2026-09-21T07:16:41.138088Z",
+    "thread_id": "0548f3e1-1d22-46c9-a1c3-4ee19bdf68be",
+    "request_id": "37587d1b-6489-46e1-b628-b3a31fc1ba77",
+    "stage": "grounded_ratio",
+    "status": "passed",
+    "score": 1.0,
+    "threshold": 0.8,
+    "verdict": "PASS",
+    "reasons": [
+      "[]"
+    ],
+    "error_type": null
+  },
+  {
+    "round": 1,
+    "case": 2,
+    "timestamp": "2026-09-21T07:16:42.155152Z",
+    "thread_id": "27246a79-5687-4ac5-817d-5350b6547ada",
+    "request_id": "4117e308-2c8b-486a-8172-f980b64e1a76",
+    "stage": "grounded_ratio",
+    "status": "passed",
+    "score": 1.0,
+    "threshold": 0.8,
+    "verdict": "PASS",
+    "reasons": [
+      "[]"
+    ],
+    "error_type": null
+  },
+  {
+    "round": 1,
+    "case": 2,
+    "timestamp": "2026-09-21T07:16:43.419501Z",
+    "thread_id": "27246a79-5687-4ac5-817d-5350b6547ada",
+    "request_id": "4117e308-2c8b-486a-8172-f980b64e1a76",
+    "stage": "faithfulness_score",
+    "status": "passed",
+    "score": 1.0,
+    "threshold": 0.9,
+    "verdict": "FAITHFUL",
+    "reasons": [
+      "없음"
+    ],
+    "error_type": null
+  },
+  {
+    "round": 1,
+    "case": 5,
+    "timestamp": "2026-09-21T07:16:49.430626Z",
+    "thread_id": "0548f3e1-1d22-46c9-a1c3-4ee19bdf68be",
+    "request_id": "37587d1b-6489-46e1-b628-b3a31fc1ba77",
+    "stage": "faithfulness_score",
+    "status": "passed",
+    "score": 1.0,
+    "threshold": 0.9,
+    "verdict": "FAITHFUL",
+    "reasons": [
+      "[]"
+    ],
+    "error_type": null
+  },
+  {
+    "round": 1,
+    "case": 27,
+    "timestamp": "2026-09-21T07:17:25.116413Z",
+    "thread_id": "5f4c5768-7519-4acd-9b29-92cec36080a5",
+    "request_id": "6b615b78-a376-436d-9865-324f78b91bf1",
+    "stage": "numeric",
+    "status": "passed",
+    "missing_quantities": [],
+    "ungrounded_numbers": []
+  },
+  {
+    "round": 1,
+    "case": 27,
+    "timestamp": "2026-09-21T07:17:27.719531Z",
+    "thread_id": "5f4c5768-7519-4acd-9b29-92cec36080a5",
+    "request_id": "6b615b78-a376-436d-9865-324f78b91bf1",
+    "stage": "grounded_ratio",
+    "status": "passed",
+    "score": 1.0,
+    "threshold": 0.8,
+    "verdict": "PASS",
+    "reasons": [
+      "[]"
+    ],
+    "error_type": null
+  },
+  {
+    "round": 1,
+    "case": 27,
+    "timestamp": "2026-09-21T07:17:28.233836Z",
+    "thread_id": "5f4c5768-7519-4acd-9b29-92cec36080a5",
+    "request_id": "6b615b78-a376-436d-9865-324f78b91bf1",
+    "stage": "faithfulness_score",
+    "status": "passed",
+    "score": 1.0,
+    "threshold": 0.9,
+    "verdict": "FAITHFUL",
+    "reasons": [
+      "없음"
+    ],
+    "error_type": null
+  },
+  {
+    "round": 2,
+    "case": 2,
+    "timestamp": "2026-09-21T07:17:50.086601Z",
+    "thread_id": "165d140e-a41d-4b05-846e-4c422b755fdf",
+    "request_id": "4a8a7255-e10a-4940-81df-91e7e8a12aff",
+    "stage": "numeric",
+    "status": "passed",
+    "missing_quantities": [],
+    "ungrounded_numbers": []
+  },
+  {
+    "round": 2,
+    "case": 5,
+    "timestamp": "2026-09-21T07:17:52.188651Z",
+    "thread_id": "276ef49f-8f46-4720-b566-564b889de080",
+    "request_id": "20256957-704a-4a9a-8092-70defe4a881f",
+    "stage": "numeric",
+    "status": "passed",
+    "missing_quantities": [],
+    "ungrounded_numbers": []
+  },
+  {
+    "round": 2,
+    "case": 2,
+    "timestamp": "2026-09-21T07:17:54.364056Z",
+    "thread_id": "165d140e-a41d-4b05-846e-4c422b755fdf",
+    "request_id": "4a8a7255-e10a-4940-81df-91e7e8a12aff",
+    "stage": "faithfulness_score",
+    "status": "passed",
+    "score": 1.0,
+    "threshold": 0.9,
+    "verdict": "FAITHFUL",
+    "reasons": [
+      "없음"
+    ],
+    "error_type": null
+  },
+  {
+    "round": 2,
+    "case": 5,
+    "timestamp": "2026-09-21T07:17:55.479655Z",
+    "thread_id": "276ef49f-8f46-4720-b566-564b889de080",
+    "request_id": "20256957-704a-4a9a-8092-70defe4a881f",
+    "stage": "grounded_ratio",
+    "status": "passed",
+    "score": 1.0,
+    "threshold": 0.8,
+    "verdict": "PASS",
+    "reasons": [
+      "[]"
+    ],
+    "error_type": null
+  },
+  {
+    "round": 2,
+    "case": 2,
+    "timestamp": "2026-09-21T07:17:57.249334Z",
+    "thread_id": "165d140e-a41d-4b05-846e-4c422b755fdf",
+    "request_id": "4a8a7255-e10a-4940-81df-91e7e8a12aff",
+    "stage": "grounded_ratio",
+    "status": "passed",
+    "score": 1.0,
+    "threshold": 0.8,
+    "verdict": "PASS",
+    "reasons": [
+      "[]"
+    ],
+    "error_type": null
+  },
+  {
+    "round": 2,
+    "case": 5,
+    "timestamp": "2026-09-21T07:18:00.731731Z",
+    "thread_id": "276ef49f-8f46-4720-b566-564b889de080",
+    "request_id": "20256957-704a-4a9a-8092-70defe4a881f",
+    "stage": "faithfulness_score",
+    "status": "passed",
+    "score": 1.0,
+    "threshold": 0.9,
+    "verdict": "FAITHFUL",
+    "reasons": [
+      "없음"
+    ],
+    "error_type": null
+  },
+  {
+    "round": 2,
+    "case": 7,
+    "timestamp": "2026-09-21T07:18:30.437240Z",
+    "thread_id": "932c8018-e605-4842-bc7b-7da57e8505a7",
+    "request_id": "b895dfc8-54dc-4169-b4c9-1563867c1964",
+    "stage": "numeric",
+    "status": "passed",
+    "missing_quantities": [],
+    "ungrounded_numbers": []
+  },
+  {
+    "round": 2,
+    "case": 27,
+    "timestamp": "2026-09-21T07:18:30.484315Z",
+    "thread_id": "7d355a2c-0528-4d59-9571-2150f1507d29",
+    "request_id": "37cb2330-66ef-4ab0-8d4a-038abe3a4519",
+    "stage": "numeric",
+    "status": "passed",
+    "missing_quantities": [],
+    "ungrounded_numbers": []
+  },
+  {
+    "round": 2,
+    "case": 27,
+    "timestamp": "2026-09-21T07:18:33.503364Z",
+    "thread_id": "7d355a2c-0528-4d59-9571-2150f1507d29",
+    "request_id": "37cb2330-66ef-4ab0-8d4a-038abe3a4519",
+    "stage": "grounded_ratio",
+    "status": "passed",
+    "score": 1.0,
+    "threshold": 0.8,
+    "verdict": "PASS",
+    "reasons": [
+      "[]"
+    ],
+    "error_type": null
+  },
+  {
+    "round": 2,
+    "case": 27,
+    "timestamp": "2026-09-21T07:18:33.644001Z",
+    "thread_id": "7d355a2c-0528-4d59-9571-2150f1507d29",
+    "request_id": "37cb2330-66ef-4ab0-8d4a-038abe3a4519",
+    "stage": "faithfulness_score",
+    "status": "passed",
+    "score": 1.0,
+    "threshold": 0.9,
+    "verdict": "FAITHFUL",
+    "reasons": [
+      "[]"
+    ],
+    "error_type": null
+  },
+  {
+    "round": 2,
+    "case": 7,
+    "timestamp": "2026-09-21T07:18:33.959192Z",
+    "thread_id": "932c8018-e605-4842-bc7b-7da57e8505a7",
+    "request_id": "b895dfc8-54dc-4169-b4c9-1563867c1964",
+    "stage": "grounded_ratio",
+    "status": "passed",
+    "score": 1.0,
+    "threshold": 0.8,
+    "verdict": "PASS",
+    "reasons": [
+      "[]"
+    ],
+    "error_type": null
+  },
+  {
+    "round": 2,
+    "case": 7,
+    "timestamp": "2026-09-21T07:18:35.349816Z",
+    "thread_id": "932c8018-e605-4842-bc7b-7da57e8505a7",
+    "request_id": "b895dfc8-54dc-4169-b4c9-1563867c1964",
+    "stage": "faithfulness_score",
+    "status": "passed",
+    "score": 1.0,
+    "threshold": 0.9,
+    "verdict": "FAITHFUL",
+    "reasons": [
+      "없음"
+    ],
+    "error_type": null
+  },
+  {
+    "round": 2,
+    "case": 67,
+    "timestamp": "2026-09-21T07:18:44.596039Z",
+    "thread_id": "639bbe0b-3706-4900-b1cd-6c4e5629fcb0",
+    "request_id": "f782b3db-a6ad-44e3-8405-6d11289a02c3",
+    "stage": "numeric",
+    "status": "passed",
+    "missing_quantities": [],
+    "ungrounded_numbers": []
+  },
+  {
+    "round": 2,
+    "case": 67,
+    "timestamp": "2026-09-21T07:18:49.240762Z",
+    "thread_id": "639bbe0b-3706-4900-b1cd-6c4e5629fcb0",
+    "request_id": "f782b3db-a6ad-44e3-8405-6d11289a02c3",
+    "stage": "grounded_ratio",
+    "status": "passed",
+    "score": 1.0,
+    "threshold": 0.8,
+    "verdict": "PASS",
+    "reasons": [
+      "[]"
+    ],
+    "error_type": null
+  },
+  {
+    "round": 2,
+    "case": 67,
+    "timestamp": "2026-09-21T07:18:50.532787Z",
+    "thread_id": "639bbe0b-3706-4900-b1cd-6c4e5629fcb0",
+    "request_id": "f782b3db-a6ad-44e3-8405-6d11289a02c3",
+    "stage": "faithfulness_score",
+    "status": "passed",
+    "score": 1.0,
+    "threshold": 0.9,
+    "verdict": "FAITHFUL",
+    "reasons": [
+      "없음"
+    ],
+    "error_type": null
+  }
+]

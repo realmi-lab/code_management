@@ -1,0 +1,13 @@
+{
+  "passed": true,
+  "original_next": true,
+  "original_JWT": false,
+  "local_access": true,
+  "synthetic_catalog_inserted": false,
+  "checks": [
+    "headerless_local_mode",
+    "real_backend_AI_settings_read",
+    "admin_keyword_mode_saved_and_reloaded",
+    "original_search_mode_restored"
+  ]
+}

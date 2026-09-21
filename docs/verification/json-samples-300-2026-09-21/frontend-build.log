@@ -1,0 +1,121 @@
+ Image code-management-full-rag-frontend Building 
+#1 [internal] load local bake definitions
+#1 reading from stdin 2.33kB done
+#1 DONE 0.0s
+
+#2 [internal] load build definition from frontend.Dockerfile
+#2 transferring dockerfile: 2.02kB done
+#2 DONE 0.0s
+
+#3 [internal] load metadata for docker.io/library/node:22-alpine
+#3 DONE 1.3s
+
+#4 [internal] load .dockerignore
+#4 transferring context: 289B done
+#4 DONE 0.0s
+
+#5 [builder  1/25] FROM docker.io/library/node:22-alpine@sha256:b6f26b36c8ff49624cfdac716b8ea1138d606df02586a77d364bb5536a634f85
+#5 resolve docker.io/library/node:22-alpine@sha256:b6f26b36c8ff49624cfdac716b8ea1138d606df02586a77d364bb5536a634f85 done
+#5 DONE 0.0s
+
+#6 [internal] load build context
+#6 transferring context: 849.55kB 0.0s done
+#6 DONE 0.0s
+
+#7 [builder  2/25] WORKDIR /app
+#7 CACHED
+
+#8 [builder 14/25] RUN node /tmp/patch_local_access_frontend.mjs
+#8 CACHED
+
+#9 [builder 13/25] COPY deploy/patch_local_access_frontend.mjs /tmp/patch_local_access_frontend.mjs
+#9 CACHED
+
+#10 [runner 3/6] RUN addgroup -S appgroup && adduser -S appuser -G appgroup
+#10 CACHED
+
+#11 [builder  7/25] COPY deploy/patch_frontend.mjs /tmp/patch_frontend.mjs
+#11 CACHED
+
+#12 [builder  3/25] COPY upstream/frontend/package.json upstream/frontend/pnpm-lock.yaml ./
+#12 CACHED
+
+#13 [builder 17/25] COPY deploy/patch_settings_selection_frontend.mjs /tmp/patch_settings_selection_frontend.mjs
+#13 CACHED
+
+#14 [builder 25/25] RUN mkdir -p public && pnpm build
+#14 CACHED
+
+#15 [builder  4/25] RUN corepack enable && pnpm install --frozen-lockfile
+#15 CACHED
+
+#16 [builder  9/25] COPY deploy/patch_provider_frontend.mjs /tmp/patch_provider_frontend.mjs
+#16 CACHED
+
+#17 [builder 22/25] RUN node /tmp/patch_watcher_frontend.mjs
+#17 CACHED
+
+#18 [builder 23/25] COPY deploy/patch_evaluation_frontend.mjs /tmp/patch_evaluation_frontend.mjs
+#18 CACHED
+
+#19 [builder 20/25] RUN node /tmp/patch_chunking_frontend.mjs
+#19 CACHED
+
+#20 [runner 5/6] COPY --from=builder --chown=appuser:appgroup /app/.next/static ./.next/static
+#20 CACHED
+
+#21 [builder 11/25] COPY deploy/patch_experience.mjs /tmp/patch_experience.mjs
+#21 CACHED
+
+#22 [builder  8/25] RUN node /tmp/patch_frontend.mjs
+#22 CACHED
+
+#23 [builder 12/25] RUN node /tmp/patch_experience.mjs
+#23 CACHED
+
+#24 [builder 16/25] RUN node /tmp/patch_settings_availability_frontend.mjs
+#24 CACHED
+
+#25 [builder 10/25] RUN node /tmp/patch_provider_frontend.mjs
+#25 CACHED
+
+#26 [builder 19/25] COPY deploy/patch_chunking_frontend.mjs /tmp/patch_chunking_frontend.mjs
+#26 CACHED
+
+#27 [builder 18/25] RUN node /tmp/patch_settings_selection_frontend.mjs
+#27 CACHED
+
+#28 [builder 24/25] RUN node /tmp/patch_evaluation_frontend.mjs
+#28 CACHED
+
+#29 [builder  5/25] COPY upstream/frontend ./
+#29 CACHED
+
+#30 [builder 15/25] COPY deploy/patch_settings_availability_frontend.mjs /tmp/patch_settings_availability_frontend.mjs
+#30 CACHED
+
+#31 [builder 21/25] COPY deploy/patch_watcher_frontend.mjs /tmp/patch_watcher_frontend.mjs
+#31 CACHED
+
+#32 [builder  6/25] COPY extensions/frontend ./
+#32 CACHED
+
+#33 [runner 4/6] COPY --from=builder --chown=appuser:appgroup /app/.next/standalone ./
+#33 CACHED
+
+#34 [runner 6/6] COPY --from=builder --chown=appuser:appgroup /app/public ./public
+#34 CACHED
+
+#35 exporting to image
+#35 exporting layers done
+#35 exporting manifest sha256:4bfa2e83675915c25b403dd7d1d45e854bb3389b573b851ab4bdc3b0aa01b8a6 done
+#35 exporting config sha256:b8443699c80622c6c99b43b7414d4cd7c3108fcc268c531939e610611c58bf6f done
+#35 exporting attestation manifest sha256:f1286724574cbfc830197758f01d2fddb0e141e9c343f72b95b58e914dd1a754 done
+#35 exporting manifest list sha256:74cf5de29db704e5e7bdaabd95b10949755a70d565412b961bcba50537d6cb09 done
+#35 naming to docker.io/library/code-management-full-rag-frontend:latest done
+#35 unpacking to docker.io/library/code-management-full-rag-frontend:latest done
+#35 DONE 0.0s
+
+#36 resolving provenance for metadata file
+#36 DONE 0.0s
+ Image code-management-full-rag-frontend Built 

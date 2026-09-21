@@ -1,0 +1,22 @@
+{
+  "at": "2026-09-18T07:21:28.005480+00:00",
+  "checks": [
+    {
+      "check": "source_tree",
+      "ok": false,
+      "detail": "원본 전체 소스가 없습니다. prepare 또는 start를 실행하세요."
+    },
+    {
+      "check": "docker",
+      "ok": false,
+      "detail": "docker 실행 파일이 없습니다."
+    },
+    {
+      "check": "environment",
+      "ok": false,
+      "detail": "OPENAI_API_KEY not configured"
+    }
+  ],
+  "passed": false,
+  "note": "Preflight only. This is not an LLM quality, security or deployment certification."
+}

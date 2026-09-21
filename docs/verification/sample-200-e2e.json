@@ -1,0 +1,21 @@
+{
+  "sample_file": "/mnt/data/final_work/code_management/examples/sample_code_catalog_200.xlsx",
+  "parsed_records": 200,
+  "active_records": 190,
+  "retired_records": 10,
+  "catalog_version_after_import": 1,
+  "exact_lookup": {
+    "code": "AT-2001",
+    "message": "메뉴 확인 후 30초 이후에 인증해주세요."
+  },
+  "natural_search_top": "AT-2011",
+  "comparison_target": "AT-2011",
+  "direction_difference_detected": true,
+  "draft_message": "보안 설정 변경 후 48시간 동안 출금이 제한됩니다.",
+  "draft_similar_candidate_found": true,
+  "approved_new_code": "AT-2301",
+  "final_catalog_count": 201,
+  "elapsed_ms": 111.82,
+  "external_services": "RAG retrieval/LLM are deterministic test doubles; production store/import/agent/approval code is real.",
+  "passed": true
+}

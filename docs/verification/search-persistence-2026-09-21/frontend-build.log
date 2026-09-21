@@ -1,0 +1,195 @@
+ Image code-management-full-rag-frontend Building 
+#1 [internal] load local bake definitions
+#1 reading from stdin 2.33kB done
+#1 DONE 0.0s
+
+#2 [internal] load build definition from frontend.Dockerfile
+#2 transferring dockerfile: 2.38kB done
+#2 DONE 0.0s
+
+#3 [internal] load metadata for docker.io/library/node:22-alpine
+#3 DONE 1.3s
+
+#4 [internal] load .dockerignore
+#4 transferring context: 289B done
+#4 DONE 0.0s
+
+#5 [builder  1/31] FROM docker.io/library/node:22-alpine@sha256:b6f26b36c8ff49624cfdac716b8ea1138d606df02586a77d364bb5536a634f85
+#5 resolve docker.io/library/node:22-alpine@sha256:b6f26b36c8ff49624cfdac716b8ea1138d606df02586a77d364bb5536a634f85 done
+#5 DONE 0.0s
+
+#6 [internal] load build context
+#6 transferring context: 21.89kB 0.0s done
+#6 DONE 0.0s
+
+#7 [builder  3/31] COPY upstream/frontend/package.json upstream/frontend/pnpm-lock.yaml ./
+#7 CACHED
+
+#8 [builder  2/31] WORKDIR /app
+#8 CACHED
+
+#9 [builder  4/31] RUN corepack enable && pnpm install --frozen-lockfile
+#9 CACHED
+
+#10 [builder  5/31] COPY upstream/frontend ./
+#10 CACHED
+
+#11 [builder  6/31] COPY extensions/frontend ./
+#11 DONE 0.0s
+
+#12 [builder  7/31] COPY deploy/patch_frontend.mjs /tmp/patch_frontend.mjs
+#12 DONE 0.0s
+
+#13 [builder  8/31] RUN node /tmp/patch_frontend.mjs
+#13 DONE 0.1s
+
+#14 [builder  9/31] COPY deploy/patch_provider_frontend.mjs /tmp/patch_provider_frontend.mjs
+#14 DONE 0.0s
+
+#15 [builder 10/31] RUN node /tmp/patch_provider_frontend.mjs
+#15 DONE 0.1s
+
+#16 [builder 11/31] COPY deploy/patch_experience.mjs /tmp/patch_experience.mjs
+#16 DONE 0.0s
+
+#17 [builder 12/31] RUN node /tmp/patch_experience.mjs
+#17 DONE 0.1s
+
+#18 [builder 13/31] COPY deploy/patch_local_access_frontend.mjs /tmp/patch_local_access_frontend.mjs
+#18 DONE 0.0s
+
+#19 [builder 14/31] RUN node /tmp/patch_local_access_frontend.mjs
+#19 DONE 0.1s
+
+#20 [builder 15/31] COPY deploy/patch_settings_availability_frontend.mjs /tmp/patch_settings_availability_frontend.mjs
+#20 DONE 0.0s
+
+#21 [builder 16/31] RUN node /tmp/patch_settings_availability_frontend.mjs
+#21 DONE 0.1s
+
+#22 [builder 17/31] COPY deploy/patch_settings_selection_frontend.mjs /tmp/patch_settings_selection_frontend.mjs
+#22 DONE 0.0s
+
+#23 [builder 18/31] RUN node /tmp/patch_settings_selection_frontend.mjs
+#23 DONE 0.1s
+
+#24 [builder 19/31] COPY deploy/patch_chunking_frontend.mjs /tmp/patch_chunking_frontend.mjs
+#24 DONE 0.0s
+
+#25 [builder 20/31] RUN node /tmp/patch_chunking_frontend.mjs
+#25 DONE 0.1s
+
+#26 [builder 21/31] COPY deploy/patch_watcher_frontend.mjs /tmp/patch_watcher_frontend.mjs
+#26 DONE 0.0s
+
+#27 [builder 22/31] RUN node /tmp/patch_watcher_frontend.mjs
+#27 DONE 0.1s
+
+#28 [builder 23/31] COPY deploy/patch_evaluation_frontend.mjs /tmp/patch_evaluation_frontend.mjs
+#28 DONE 0.0s
+
+#29 [builder 24/31] RUN node /tmp/patch_evaluation_frontend.mjs
+#29 DONE 0.1s
+
+#30 [builder 25/31] COPY deploy/patch_proxy_timeout_frontend.mjs /tmp/patch_proxy_timeout_frontend.mjs
+#30 DONE 0.0s
+
+#31 [builder 26/31] RUN node /tmp/patch_proxy_timeout_frontend.mjs
+#31 0.108 {"patch":"catalogue-proxy-timeout","file":"next.config.ts","before":"0ed1b0792c7b45f37cad9f66b9653760e17015dd512219e79a56bc28a570e4e3","after":"d51032de16f200130b0e17a2192d980940e7e01168e9632e5a70ca0991ee52f7"}
+#31 DONE 0.1s
+
+#32 [builder 27/31] COPY deploy/patch_catalog_surfaces.mjs /tmp/patch_catalog_surfaces.mjs
+#32 DONE 0.0s
+
+#33 [builder 28/31] RUN node /tmp/patch_catalog_surfaces.mjs
+#33 DONE 0.1s
+
+#34 [builder 29/31] COPY deploy/patch_search_persistence.mjs /tmp/patch_search_persistence.mjs
+#34 DONE 0.0s
+
+#35 [builder 30/31] RUN node /tmp/patch_search_persistence.mjs
+#35 DONE 0.1s
+
+#36 [builder 31/31] RUN mkdir -p public && pnpm build
+#36 0.230 
+#36 0.230 > frontend@0.1.0 build /app
+#36 0.230 > next build
+#36 0.230 
+#36 0.511 ▲ Next.js 16.2.6 (Turbopack)
+#36 0.511 - Experiments (use with caution):
+#36 0.511   · proxyTimeout: 300000
+#36 0.511 
+#36 0.530   Creating an optimized production build ...
+#36 68.94 ✓ Compiled successfully in 68s
+#36 68.94   Running TypeScript ...
+#36 75.25   Finished TypeScript in 6.3s ...
+#36 75.25   Collecting page data using 9 workers ...
+#36 76.15   Generating static pages using 9 workers (0/28) ...
+#36 76.76   Generating static pages using 9 workers (7/28) 
+#36 76.77   Generating static pages using 9 workers (14/28) 
+#36 76.89   Generating static pages using 9 workers (21/28) 
+#36 76.96 ✓ Generating static pages using 9 workers (28/28) in 801ms
+#36 76.96   Finalizing page optimization ...
+#36 77.51 
+#36 77.51 Route (app)
+#36 77.51 ┌ ○ /
+#36 77.51 ├ ○ /_not-found
+#36 77.51 ├ ○ /codes
+#36 77.51 ├ ○ /documents
+#36 77.51 ├ ƒ /documents/[id]
+#36 77.51 ├ ○ /evaluation
+#36 77.51 ├ ○ /evaluation/compare
+#36 77.51 ├ ○ /evaluation/datasets
+#36 77.51 ├ ○ /evaluation/runs
+#36 77.51 ├ ○ /login
+#36 77.51 ├ ○ /monitoring
+#36 77.51 ├ ○ /monitoring/metrics
+#36 77.51 ├ ○ /monitoring/traces
+#36 77.51 ├ ○ /search
+#36 77.51 ├ ○ /settings
+#36 77.51 ├ ○ /settings/api-keys
+#36 77.51 ├ ○ /settings/chunking
+#36 77.51 ├ ○ /settings/embedding
+#36 77.51 ├ ○ /settings/generation
+#36 77.51 ├ ○ /settings/guardrails
+#36 77.51 ├ ○ /settings/hyde
+#36 77.51 ├ ○ /settings/profile
+#36 77.51 ├ ○ /settings/reranking
+#36 77.51 ├ ○ /settings/search
+#36 77.51 ├ ○ /settings/system
+#36 77.51 ├ ○ /settings/users
+#36 77.51 └ ○ /settings/watcher
+#36 77.51 
+#36 77.51 
+#36 77.51 ○  (Static)   prerendered as static content
+#36 77.51 ƒ  (Dynamic)  server-rendered on demand
+#36 77.51 
+#36 DONE 77.7s
+
+#37 [runner 3/6] RUN addgroup -S appgroup && adduser -S appuser -G appgroup
+#37 CACHED
+
+#38 [runner 4/6] COPY --from=builder --chown=appuser:appgroup /app/.next/standalone ./
+#38 DONE 0.3s
+
+#39 [runner 5/6] COPY --from=builder --chown=appuser:appgroup /app/.next/static ./.next/static
+#39 DONE 0.1s
+
+#40 [runner 6/6] COPY --from=builder --chown=appuser:appgroup /app/public ./public
+#40 DONE 0.1s
+
+#41 exporting to image
+#41 exporting layers
+#41 exporting layers 1.2s done
+#41 exporting manifest sha256:9ea84c986bbffe008ded5d7a43c0b4facb821f97c86dce6e11178793e08f5bc7 done
+#41 exporting config sha256:2855bb0d136777f197e6ed4afdf9e106b0f9b157a16d238046a96e1f606f2f03 done
+#41 exporting attestation manifest sha256:db784ad67240adb1c226df0af2327bf9068e292afa6b09e382576239e8364da8 0.0s done
+#41 exporting manifest list sha256:d51807664360f909d82328957d3a3b044e5113bea37674fe05d049253adbb82f done
+#41 naming to docker.io/library/code-management-full-rag-frontend:latest done
+#41 unpacking to docker.io/library/code-management-full-rag-frontend:latest
+#41 unpacking to docker.io/library/code-management-full-rag-frontend:latest 0.4s done
+#41 DONE 1.8s
+
+#42 resolving provenance for metadata file
+#42 DONE 0.0s
+ Image code-management-full-rag-frontend Built 

@@ -1,0 +1,15 @@
+{
+  "browser": "actual in-app browser",
+  "catalog_query": "인증번호 전송 성공",
+  "result": "EX-0101",
+  "navigation": "search -> settings -> search",
+  "restored": [
+    "catalog query",
+    "8 search results and trace",
+    "selected EX-0101 details",
+    "general document query",
+    "HyDE disabled option"
+  ],
+  "reload_restored": true,
+  "model": "actual search pipeline; no mock browser data"
+}

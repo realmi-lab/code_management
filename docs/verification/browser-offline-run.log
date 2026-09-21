@@ -1,0 +1,67 @@
+{
+  "passed": true,
+  "browser": "Chromium",
+  "transport": "offline assets + real FastAPI TestClient bridge",
+  "auth": "synthetic dependency + synthetic postMessage; NOT original JWT/Next",
+  "model": "ScriptedGateway",
+  "clipboard": "test double",
+  "checks": [
+    {
+      "name": "workspace_render_and_test_identity",
+      "passed": true
+    },
+    {
+      "name": "exact_original_message",
+      "passed": true
+    },
+    {
+      "name": "copy_payload_original_preserved",
+      "passed": true
+    },
+    {
+      "name": "conversational_search",
+      "passed": true
+    },
+    {
+      "name": "ordinal_selection_and_condition_comparison",
+      "passed": true
+    },
+    {
+      "name": "draft_not_registered_automatically",
+      "passed": true
+    },
+    {
+      "name": "explicit_admin_registration",
+      "passed": true
+    },
+    {
+      "name": "registered_item_in_catalogue",
+      "passed": true
+    },
+    {
+      "name": "file_input_preview_commit",
+      "passed": true
+    },
+    {
+      "name": "uploaded_html_rendered_as_text_not_code",
+      "passed": true
+    },
+    {
+      "name": "approval_audit_visible",
+      "passed": true
+    },
+    {
+      "name": "conversation_restore_reflects_registration",
+      "passed": true
+    },
+    {
+      "name": "mobile_390px_without_horizontal_overflow",
+      "passed": true
+    },
+    {
+      "name": "no_javascript_errors",
+      "passed": true
+    }
+  ],
+  "javascript_errors": []
+}

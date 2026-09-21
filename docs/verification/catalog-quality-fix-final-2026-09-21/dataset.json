@@ -1,0 +1,42 @@
+[
+  {
+    "query": "인증번호 전송에 성공했을 때 보여줄 문구",
+    "expected_code": "EX-0101",
+    "kind": "manual_paraphrase",
+    "id": 2,
+    "ground_truth": "메시지코드: EX-0101\n문구: 인증번호를 발송했습니다.\n메뉴: 휴대폰 인증\n노출 조건: 인증번호 전송 성공",
+    "expected_message": "인증번호를 발송했습니다."
+  },
+  {
+    "query": "인증을 30초 안에 끝내야 한다는 안내",
+    "expected_code": "EX-0104",
+    "kind": "manual_paraphrase",
+    "id": 5,
+    "ground_truth": "메시지코드: EX-0104\n문구: 30초 이내에 인증을 완료해주세요.\n메뉴: 기기 인증\n노출 조건: 인증 시작 후 완료 제한시간 안내",
+    "expected_message": "30초 이내에 인증을 완료해주세요."
+  },
+  {
+    "query": "기존 회원 전화번호로 다시 가입하려는 경우",
+    "expected_code": "EX-0201",
+    "kind": "manual_paraphrase",
+    "id": 7,
+    "ground_truth": "메시지코드: EX-0201\n문구: 이미 가입된 휴대폰 번호입니다. 로그인해주세요.\n메뉴: 회원가입\n노출 조건: 기존 회원의 번호로 신규 가입 요청",
+    "expected_message": "이미 가입된 휴대폰 번호입니다. 로그인해주세요."
+  },
+  {
+    "query": "회원가입 메뉴에서 입력 형식 또는 입력값이 유효하지 않은 경우 상황에 표시할 기존 알림을 찾아줘.",
+    "expected_code": "SM-1005",
+    "kind": "menu_trigger_template",
+    "id": 27,
+    "ground_truth": "메시지코드: SM-1005\n문구: 가입 신청 정보를 다시 확인해주세요.\n메뉴: 회원가입\n노출 조건: 입력 형식 또는 입력값이 유효하지 않은 경우",
+    "expected_message": "가입 신청 정보를 다시 확인해주세요."
+  },
+  {
+    "query": "계좌관리 메뉴에서 처리 유효시간이 30초인 합성 시나리오 상황에 표시할 기존 알림을 찾아줘.",
+    "expected_code": "SM-1091",
+    "kind": "menu_trigger_template",
+    "id": 67,
+    "ground_truth": "메시지코드: SM-1091\n문구: 계좌 등록을 30초 이내에 완료해주세요.\n메뉴: 계좌관리\n노출 조건: 처리 유효시간이 30초인 합성 시나리오",
+    "expected_message": "계좌 등록을 30초 이내에 완료해주세요."
+  }
+]

@@ -1,0 +1,13 @@
+{
+  "tables": {
+    "cm_sample_codes": 300,
+    "cm_codes": 0,
+    "cm_sample_bootstrap": 1
+  },
+  "version": 3,
+  "indexed_version": 3,
+  "vectors": 279,
+  "es_documents": 279,
+  "same_ids": true,
+  "rows_without_json": 300
+}

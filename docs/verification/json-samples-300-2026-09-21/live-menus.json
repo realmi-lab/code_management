@@ -1,0 +1,21 @@
+{
+  "passed": true,
+  "url": "http://localhost:3500/codes",
+  "mocks": false,
+  "external_ai_called": false,
+  "checks": [
+    "엑셀·CSV 파일 가져오기 메뉴·버튼·입력 제거",
+    "실제 Next/API에서 JSON 샘플 300건 조회",
+    "목록 검색·상세·실제 클립보드 복사",
+    "샘플 JSON 300건 다운로드",
+    "300건 목록의 페이지 이동",
+    "폐기 항목 필터·복사 차단",
+    "실제 API의 원문·규칙 비교: 이후/이내 차이",
+    "기획서 4줄 검토: 등록·폐기·미등록·조건 차이",
+    "실제 변경 기록 조회·새로고침 (현재 0건)",
+    "390px 모바일: 표 영역 안에서 스크롤, 문서 가로 넘침 없음",
+    "운영 목록·버전 불변, JavaScript 오류 0건"
+  ],
+  "production_total": 0,
+  "sample_total": 300
+}

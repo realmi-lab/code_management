@@ -1,0 +1,664 @@
+[
+  {
+    "query": "인증 전에 30초 기다리라는 알림 있어?",
+    "expected_code": "AT-1923",
+    "thread_id": "33ddd7b6-f9e0-4b87-a9c7-f99da56907c7",
+    "result": {
+      "action": "search",
+      "answer": "메시지코드: AT-1923\n문구: 메뉴확인 30초 이후에 인증해주세요.\n용도: 메뉴 인증에서 메뉴 확인 후 30초가 지나기 전에 인증 버튼을 누른 경우 노출\n다른 코드: SM-1020은 본인인증 재시도 안내로, 직전 요청 후 30초가 지나지 않은 경우에 해당\n다른 코드: EX-0104는 30초 이내 인증 완료 안내로 방향이 반대\n확인할 점: AT-1923은 메뉴 확인이라는 선행 조건이 붙은 인증 전 대기 안내",
+      "candidates": [
+        {
+          "id": "be13eec6-1ae9-49dd-9a34-836bb4862f94",
+          "code": "AT-1923",
+          "message": "메뉴확인 30초 이후에 인증해주세요.",
+          "menu": "메뉴 인증",
+          "trigger": "메뉴 확인 후 30초가 지나기 전에 인증 버튼을 누른 경우",
+          "notes": "사용자가 제공한 예시를 바탕으로 한 데모. 조건은 예시용입니다.",
+          "status": "active",
+          "revision": 1,
+          "source": {
+            "kind": "demo",
+            "synthetic": true,
+            "filename": "GitHub 합성 예시 · 실제 회사 목록 아님",
+            "catalog_fields": {}
+          },
+          "updated_at": "2026-09-21T02:45:36.554821+00:00",
+          "business": "메뉴 인증",
+          "message_type": "alert",
+          "purpose": "메뉴 확인 후 30초가 지나기 전에 인증 버튼을 누른 경우",
+          "title": "메뉴확인 30초 이후에 인증해주세요.",
+          "spelling_check": "미검사",
+          "title_en": "Please authenticate at least 30 seconds after checking the menu.",
+          "contents_en": "Please authenticate at least 30 seconds after checking the menu.",
+          "added_date": "2026-09-21",
+          "message_code": "AT-1923"
+        },
+        {
+          "id": "4bee29cd-afe7-46f2-b680-0450e43a6017",
+          "code": "SM-1020",
+          "message": "본인인증은 30초 이후에 다시 시도해주세요.",
+          "menu": "본인인증",
+          "trigger": "직전 요청 후 30초가 지나지 않은 경우",
+          "notes": "AI가 만든 합성 테스트 자료입니다. 실제 회사 정책·한도·등록 코드가 아닙니다.",
+          "status": "active",
+          "revision": 1,
+          "source": {
+            "kind": "synthetic_json",
+            "synthetic": true,
+            "filename": "sample_catalog_300.json",
+            "catalog_fields": {
+              "business": "본인인증",
+              "message_type": "alert",
+              "title": "본인인증 · 30초 대기",
+              "purpose": "재요청 대기 안내"
+            }
+          },
+          "updated_at": "2026-09-21T02:45:36.564619+00:00",
+          "business": "본인인증",
+          "message_type": "alert",
+          "purpose": "재요청 대기 안내",
+          "title": "본인인증은 30초 이후에 다시 시도해주세요.",
+          "spelling_check": "미검사",
+          "title_en": "Please wait 30 seconds before retrying Identity verification.",
+          "contents_en": "Please wait 30 seconds before retrying Identity verification.",
+          "added_date": "2026-09-21",
+          "message_code": "SM-1020"
+        },
+        {
+          "id": "804b20cd-3851-485b-a015-2e53babbf580",
+          "code": "SM-1034",
+          "message": "로그인은 30초 이후에 다시 시도해주세요.",
+          "menu": "로그인",
+          "trigger": "직전 요청 후 30초가 지나지 않은 경우",
+          "notes": "AI가 만든 합성 테스트 자료입니다. 실제 회사 정책·한도·등록 코드가 아닙니다.",
+          "status": "active",
+          "revision": 1,
+          "source": {
+            "kind": "synthetic_json",
+            "synthetic": true,
+            "filename": "sample_catalog_300.json",
+            "catalog_fields": {
+              "business": "로그인",
+              "message_type": "alert",
+              "title": "로그인 · 30초 대기",
+              "purpose": "재요청 대기 안내"
+            }
+          },
+          "updated_at": "2026-09-21T02:45:36.568026+00:00",
+          "business": "로그인",
+          "message_type": "alert",
+          "purpose": "재요청 대기 안내",
+          "title": "로그인은 30초 이후에 다시 시도해주세요.",
+          "spelling_check": "미검사",
+          "title_en": "Please wait 30 seconds before retrying Login.",
+          "contents_en": "Please wait 30 seconds before retrying Login.",
+          "added_date": "2026-09-21",
+          "message_code": "SM-1034"
+        },
+        {
+          "id": "f187c2d3-56a4-490d-9b1a-11a109bba0ed",
+          "code": "SM-1062",
+          "message": "기기 등록은 30초 이후에 다시 시도해주세요.",
+          "menu": "기기관리",
+          "trigger": "직전 요청 후 30초가 지나지 않은 경우",
+          "notes": "AI가 만든 합성 테스트 자료입니다. 실제 회사 정책·한도·등록 코드가 아닙니다.",
+          "status": "active",
+          "revision": 1,
+          "source": {
+            "kind": "synthetic_json",
+            "synthetic": true,
+            "filename": "sample_catalog_300.json",
+            "catalog_fields": {
+              "business": "기기관리",
+              "message_type": "alert",
+              "title": "기기관리 · 30초 대기",
+              "purpose": "재요청 대기 안내"
+            }
+          },
+          "updated_at": "2026-09-21T02:45:36.577741+00:00",
+          "business": "기기관리",
+          "message_type": "alert",
+          "purpose": "재요청 대기 안내",
+          "title": "기기 등록은 30초 이후에 다시 시도해주세요.",
+          "spelling_check": "미검사",
+          "title_en": "Please wait 30 seconds before retrying Device registration.",
+          "contents_en": "Please wait 30 seconds before retrying Device registration.",
+          "added_date": "2026-09-21",
+          "message_code": "SM-1062"
+        },
+        {
+          "id": "9a1ece60-bb56-4f2a-b52f-1d52f01d314b",
+          "code": "SM-1216",
+          "message": "알림 설정 변경은 30초 이후에 다시 시도해주세요.",
+          "menu": "알림설정",
+          "trigger": "직전 요청 후 30초가 지나지 않은 경우",
+          "notes": "AI가 만든 합성 테스트 자료입니다. 실제 회사 정책·한도·등록 코드가 아닙니다.",
+          "status": "active",
+          "revision": 1,
+          "source": {
+            "kind": "synthetic_json",
+            "synthetic": true,
+            "filename": "sample_catalog_300.json",
+            "catalog_fields": {
+              "business": "알림설정",
+              "message_type": "alert",
+              "title": "알림설정 · 30초 대기",
+              "purpose": "재요청 대기 안내"
+            }
+          },
+          "updated_at": "2026-09-21T02:45:36.644889+00:00",
+          "business": "알림설정",
+          "message_type": "alert",
+          "purpose": "재요청 대기 안내",
+          "title": "알림 설정 변경은 30초 이후에 다시 시도해주세요.",
+          "spelling_check": "미검사",
+          "title_en": "Please wait 30 seconds before retrying Notification settings change.",
+          "contents_en": "Please wait 30 seconds before retrying Notification settings change.",
+          "added_date": "2026-09-21",
+          "message_code": "SM-1216"
+        },
+        {
+          "id": "0ffdc2c2-57a4-4dbc-9e3d-04d75cdd680d",
+          "code": "SM-1006",
+          "message": "가입 신청은 30초 이후에 다시 시도해주세요.",
+          "menu": "회원가입",
+          "trigger": "직전 요청 후 30초가 지나지 않은 경우",
+          "notes": "AI가 만든 합성 테스트 자료입니다. 실제 회사 정책·한도·등록 코드가 아닙니다.",
+          "status": "active",
+          "revision": 1,
+          "source": {
+            "kind": "synthetic_json",
+            "synthetic": true,
+            "filename": "sample_catalog_300.json",
+            "catalog_fields": {
+              "business": "회원가입",
+              "message_type": "alert",
+              "title": "회원가입 · 30초 대기",
+              "purpose": "재요청 대기 안내"
+            }
+          },
+          "updated_at": "2026-09-21T02:45:36.561443+00:00",
+          "business": "회원가입",
+          "message_type": "alert",
+          "purpose": "재요청 대기 안내",
+          "title": "가입 신청은 30초 이후에 다시 시도해주세요.",
+          "spelling_check": "미검사",
+          "title_en": "Please wait 30 seconds before retrying Sign-up.",
+          "contents_en": "Please wait 30 seconds before retrying Sign-up.",
+          "added_date": "2026-09-21",
+          "message_code": "SM-1006"
+        },
+        {
+          "id": "02a87632-d32a-4f1a-ad36-f7bf4344eb40",
+          "code": "SM-1076",
+          "message": "보안 설정 변경은 30초 이후에 다시 시도해주세요.",
+          "menu": "보안설정",
+          "trigger": "직전 요청 후 30초가 지나지 않은 경우",
+          "notes": "AI가 만든 합성 테스트 자료입니다. 실제 회사 정책·한도·등록 코드가 아닙니다.",
+          "status": "active",
+          "revision": 1,
+          "source": {
+            "kind": "synthetic_json",
+            "synthetic": true,
+            "filename": "sample_catalog_300.json",
+            "catalog_fields": {
+              "business": "보안설정",
+              "message_type": "alert",
+              "title": "보안설정 · 30초 대기",
+              "purpose": "재요청 대기 안내"
+            }
+          },
+          "updated_at": "2026-09-21T02:45:36.591500+00:00",
+          "business": "보안설정",
+          "message_type": "alert",
+          "purpose": "재요청 대기 안내",
+          "title": "보안 설정 변경은 30초 이후에 다시 시도해주세요.",
+          "spelling_check": "미검사",
+          "title_en": "Please wait 30 seconds before retrying Security settings change.",
+          "contents_en": "Please wait 30 seconds before retrying Security settings change.",
+          "added_date": "2026-09-21",
+          "message_code": "SM-1076"
+        },
+        {
+          "id": "1ca0bae4-ebba-4a88-9e02-7578f533cb38",
+          "code": "EX-0104",
+          "message": "30초 이내에 인증을 완료해주세요.",
+          "menu": "기기 인증",
+          "trigger": "인증 시작 후 완료 제한시간 안내",
+          "notes": "AT-1923과 시간의 방향이 다른 합성 예시",
+          "status": "active",
+          "revision": 1,
+          "source": {
+            "kind": "demo",
+            "synthetic": true,
+            "filename": "GitHub 합성 예시 · 실제 회사 목록 아님",
+            "catalog_fields": {}
+          },
+          "updated_at": "2026-09-21T02:45:36.556954+00:00",
+          "business": "기기 인증",
+          "message_type": "alert",
+          "purpose": "인증 시작 후 완료 제한시간 안내",
+          "title": "30초 이내에 인증을 완료해주세요.",
+          "spelling_check": "미검사",
+          "title_en": "Please complete authentication within 30 seconds.",
+          "contents_en": "Please complete authentication within 30 seconds.",
+          "added_date": "2026-09-21",
+          "message_code": "EX-0104"
+        }
+      ],
+      "comparisons": [],
+      "missing_codes": [],
+      "selected_code": null,
+      "catalog_version": 3,
+      "trace": [
+        {
+          "name": "guardrail_input",
+          "passed": true,
+          "duration_ms": 0.02,
+          "results_count": null,
+          "detail": null
+        },
+        {
+          "name": "question_classification",
+          "passed": true,
+          "duration_ms": 0.0,
+          "results_count": null,
+          "detail": {
+            "category": "explanatory",
+            "indicators": []
+          }
+        },
+        {
+          "name": "vector_search",
+          "passed": true,
+          "duration_ms": 224.64,
+          "results_count": 20,
+          "detail": null
+        },
+        {
+          "name": "keyword_search",
+          "passed": true,
+          "duration_ms": 224.64,
+          "results_count": 20,
+          "detail": null
+        },
+        {
+          "name": "rrf_fusion",
+          "passed": true,
+          "duration_ms": 0.05,
+          "results_count": 33,
+          "detail": null
+        },
+        {
+          "name": "reranking",
+          "passed": true,
+          "duration_ms": 18689.56,
+          "results_count": 8,
+          "detail": null
+        },
+        {
+          "name": "retrieval_gate",
+          "passed": true,
+          "duration_ms": 0.02,
+          "results_count": 8,
+          "detail": {
+            "top_score": 0.7632961329632764
+          }
+        },
+        {
+          "name": "guardrail_pii",
+          "passed": true,
+          "duration_ms": 0.72,
+          "results_count": null,
+          "detail": {
+            "pii_found": false
+          }
+        }
+      ],
+      "draft": null,
+      "ai_used": true,
+      "namespace": "demo",
+      "thread_id": "33ddd7b6-f9e0-4b87-a9c7-f99da56907c7",
+      "version": 1
+    },
+    "seconds": 51.527
+  },
+  {
+    "query": "기존 회원 전화번호로 다시 가입하려는 경우",
+    "expected_code": "EX-0201",
+    "thread_id": "91f355f1-e77c-4808-879b-75794abf45e3",
+    "result": {
+      "action": "search",
+      "answer": "메시지코드: EX-0201\n문구: 이미 가입된 휴대폰 번호입니다. 로그인해주세요.\n용도: 회원가입 화면에서 기존 회원의 번호로 신규 가입을 요청한 경우 로그인으로 유도하는 알림입니다.\n다른 코드: SM-1006은 같은 회원가입 메뉴이지만 노출 조건이 직전 요청 후 30초 미경과에 해당하는 재요청 대기 안내라 기존 번호 재가입과는 목적이 다릅니다.\n확인할 점: EX-0201의 등록 자료는 합성 예시(실제 회사 목록 아님)로 표시되어 있어 실제 운영 정책 반영 여부는 미확인입니다.",
+      "candidates": [
+        {
+          "id": "9bb6b1da-b00e-4850-bac2-21c56ac81ee4",
+          "code": "EX-0201",
+          "message": "이미 가입된 휴대폰 번호입니다. 로그인해주세요.",
+          "menu": "회원가입",
+          "trigger": "기존 회원의 번호로 신규 가입 요청",
+          "notes": "합성 예시",
+          "status": "active",
+          "revision": 1,
+          "source": {
+            "kind": "demo",
+            "synthetic": true,
+            "filename": "GitHub 합성 예시 · 실제 회사 목록 아님",
+            "catalog_fields": {}
+          },
+          "updated_at": "2026-09-21T02:45:36.557562+00:00",
+          "business": "회원가입",
+          "message_type": "alert",
+          "purpose": "기존 회원의 번호로 신규 가입 요청",
+          "title": "이미 가입된 휴대폰 번호입니다. 로그인해주세요.",
+          "spelling_check": "미검사",
+          "title_en": "This phone number is already registered. Please log in.",
+          "contents_en": "This phone number is already registered. Please log in.",
+          "added_date": "2026-09-21",
+          "message_code": "EX-0201"
+        },
+        {
+          "id": "0ffdc2c2-57a4-4dbc-9e3d-04d75cdd680d",
+          "code": "SM-1006",
+          "message": "가입 신청은 30초 이후에 다시 시도해주세요.",
+          "menu": "회원가입",
+          "trigger": "직전 요청 후 30초가 지나지 않은 경우",
+          "notes": "AI가 만든 합성 테스트 자료입니다. 실제 회사 정책·한도·등록 코드가 아닙니다.",
+          "status": "active",
+          "revision": 1,
+          "source": {
+            "kind": "synthetic_json",
+            "synthetic": true,
+            "filename": "sample_catalog_300.json",
+            "catalog_fields": {
+              "business": "회원가입",
+              "message_type": "alert",
+              "title": "회원가입 · 30초 대기",
+              "purpose": "재요청 대기 안내"
+            }
+          },
+          "updated_at": "2026-09-21T02:45:36.561443+00:00",
+          "business": "회원가입",
+          "message_type": "alert",
+          "purpose": "재요청 대기 안내",
+          "title": "가입 신청은 30초 이후에 다시 시도해주세요.",
+          "spelling_check": "미검사",
+          "title_en": "Please wait 30 seconds before retrying Sign-up.",
+          "contents_en": "Please wait 30 seconds before retrying Sign-up.",
+          "added_date": "2026-09-21",
+          "message_code": "SM-1006"
+        },
+        {
+          "id": "1540b358-00bb-4153-9b63-cae6908376f9",
+          "code": "SM-1272",
+          "message": "탈퇴 신청은 30초 이후에 다시 시도해주세요.",
+          "menu": "회원탈퇴",
+          "trigger": "직전 요청 후 30초가 지나지 않은 경우",
+          "notes": "AI가 만든 합성 테스트 자료입니다. 실제 회사 정책·한도·등록 코드가 아닙니다.",
+          "status": "active",
+          "revision": 1,
+          "source": {
+            "kind": "synthetic_json",
+            "synthetic": true,
+            "filename": "sample_catalog_300.json",
+            "catalog_fields": {
+              "business": "회원탈퇴",
+              "message_type": "alert",
+              "title": "회원탈퇴 · 30초 대기",
+              "purpose": "재요청 대기 안내"
+            }
+          },
+          "updated_at": "2026-09-21T02:45:36.660234+00:00",
+          "business": "회원탈퇴",
+          "message_type": "alert",
+          "purpose": "재요청 대기 안내",
+          "title": "탈퇴 신청은 30초 이후에 다시 시도해주세요.",
+          "spelling_check": "미검사",
+          "title_en": "Please wait 30 seconds before retrying Account closure.",
+          "contents_en": "Please wait 30 seconds before retrying Account closure.",
+          "added_date": "2026-09-21",
+          "message_code": "SM-1272"
+        },
+        {
+          "id": "804b20cd-3851-485b-a015-2e53babbf580",
+          "code": "SM-1034",
+          "message": "로그인은 30초 이후에 다시 시도해주세요.",
+          "menu": "로그인",
+          "trigger": "직전 요청 후 30초가 지나지 않은 경우",
+          "notes": "AI가 만든 합성 테스트 자료입니다. 실제 회사 정책·한도·등록 코드가 아닙니다.",
+          "status": "active",
+          "revision": 1,
+          "source": {
+            "kind": "synthetic_json",
+            "synthetic": true,
+            "filename": "sample_catalog_300.json",
+            "catalog_fields": {
+              "business": "로그인",
+              "message_type": "alert",
+              "title": "로그인 · 30초 대기",
+              "purpose": "재요청 대기 안내"
+            }
+          },
+          "updated_at": "2026-09-21T02:45:36.568026+00:00",
+          "business": "로그인",
+          "message_type": "alert",
+          "purpose": "재요청 대기 안내",
+          "title": "로그인은 30초 이후에 다시 시도해주세요.",
+          "spelling_check": "미검사",
+          "title_en": "Please wait 30 seconds before retrying Login.",
+          "contents_en": "Please wait 30 seconds before retrying Login.",
+          "added_date": "2026-09-21",
+          "message_code": "SM-1034"
+        },
+        {
+          "id": "580430c8-e724-4141-b003-877137ca3f66",
+          "code": "SM-1008",
+          "message": "가입 신청 시도 횟수가 5회를 초과했습니다. 10분 후 다시 시도해주세요.",
+          "menu": "회원가입",
+          "trigger": "시도 횟수가 5회를 초과한 합성 시나리오",
+          "notes": "AI가 만든 합성 테스트 자료입니다. 실제 회사 정책·한도·등록 코드가 아닙니다.",
+          "status": "active",
+          "revision": 1,
+          "source": {
+            "kind": "synthetic_json",
+            "synthetic": true,
+            "filename": "sample_catalog_300.json",
+            "catalog_fields": {
+              "business": "회원가입",
+              "message_type": "alert",
+              "title": "회원가입 · 횟수 초과",
+              "purpose": "요청 제한 안내"
+            }
+          },
+          "updated_at": "2026-09-21T02:45:36.561909+00:00",
+          "business": "회원가입",
+          "message_type": "alert",
+          "purpose": "요청 제한 안내",
+          "title": "가입 신청 시도 횟수가 5회를 초과했습니다. 10분 후 다시 시도해주세요.",
+          "spelling_check": "미검사",
+          "title_en": "You have exceeded 5 attempts for Sign-up. Please try again in 10 minutes.",
+          "contents_en": "You have exceeded 5 attempts for Sign-up. Please try again in 10 minutes.",
+          "added_date": "2026-09-21",
+          "message_code": "SM-1008"
+        },
+        {
+          "id": "9a1ece60-bb56-4f2a-b52f-1d52f01d314b",
+          "code": "SM-1216",
+          "message": "알림 설정 변경은 30초 이후에 다시 시도해주세요.",
+          "menu": "알림설정",
+          "trigger": "직전 요청 후 30초가 지나지 않은 경우",
+          "notes": "AI가 만든 합성 테스트 자료입니다. 실제 회사 정책·한도·등록 코드가 아닙니다.",
+          "status": "active",
+          "revision": 1,
+          "source": {
+            "kind": "synthetic_json",
+            "synthetic": true,
+            "filename": "sample_catalog_300.json",
+            "catalog_fields": {
+              "business": "알림설정",
+              "message_type": "alert",
+              "title": "알림설정 · 30초 대기",
+              "purpose": "재요청 대기 안내"
+            }
+          },
+          "updated_at": "2026-09-21T02:45:36.644889+00:00",
+          "business": "알림설정",
+          "message_type": "alert",
+          "purpose": "재요청 대기 안내",
+          "title": "알림 설정 변경은 30초 이후에 다시 시도해주세요.",
+          "spelling_check": "미검사",
+          "title_en": "Please wait 30 seconds before retrying Notification settings change.",
+          "contents_en": "Please wait 30 seconds before retrying Notification settings change.",
+          "added_date": "2026-09-21",
+          "message_code": "SM-1216"
+        },
+        {
+          "id": "38b2ff67-135c-4f80-9ce5-498cfdafbcfb",
+          "code": "SM-1048",
+          "message": "비밀번호 변경은 30초 이후에 다시 시도해주세요.",
+          "menu": "비밀번호",
+          "trigger": "직전 요청 후 30초가 지나지 않은 경우",
+          "notes": "AI가 만든 합성 테스트 자료입니다. 실제 회사 정책·한도·등록 코드가 아닙니다.",
+          "status": "active",
+          "revision": 1,
+          "source": {
+            "kind": "synthetic_json",
+            "synthetic": true,
+            "filename": "sample_catalog_300.json",
+            "catalog_fields": {
+              "business": "비밀번호",
+              "message_type": "alert",
+              "title": "비밀번호 · 30초 대기",
+              "purpose": "재요청 대기 안내"
+            }
+          },
+          "updated_at": "2026-09-21T02:45:36.573325+00:00",
+          "business": "비밀번호",
+          "message_type": "alert",
+          "purpose": "재요청 대기 안내",
+          "title": "비밀번호 변경은 30초 이후에 다시 시도해주세요.",
+          "spelling_check": "미검사",
+          "title_en": "Please wait 30 seconds before retrying Password change.",
+          "contents_en": "Please wait 30 seconds before retrying Password change.",
+          "added_date": "2026-09-21",
+          "message_code": "SM-1048"
+        },
+        {
+          "id": "7d09d86a-e0fb-448d-9f72-f435fab81f69",
+          "code": "SM-1269",
+          "message": "탈퇴 신청에 실패했습니다. 잠시 후 다시 시도해주세요.",
+          "menu": "회원탈퇴",
+          "trigger": "일시적인 처리 오류가 발생한 경우",
+          "notes": "AI가 만든 합성 테스트 자료입니다. 실제 회사 정책·한도·등록 코드가 아닙니다.",
+          "status": "active",
+          "revision": 1,
+          "source": {
+            "kind": "synthetic_json",
+            "synthetic": true,
+            "filename": "sample_catalog_300.json",
+            "catalog_fields": {
+              "business": "회원탈퇴",
+              "message_type": "alert",
+              "title": "회원탈퇴 · 재시도",
+              "purpose": "오류 안내"
+            }
+          },
+          "updated_at": "2026-09-21T02:45:36.659456+00:00",
+          "business": "회원탈퇴",
+          "message_type": "alert",
+          "purpose": "오류 안내",
+          "title": "탈퇴 신청에 실패했습니다. 잠시 후 다시 시도해주세요.",
+          "spelling_check": "미검사",
+          "title_en": "Account closure failed. Please try again later.",
+          "contents_en": "Account closure failed. Please try again later.",
+          "added_date": "2026-09-21",
+          "message_code": "SM-1269"
+        }
+      ],
+      "comparisons": [],
+      "missing_codes": [],
+      "selected_code": null,
+      "catalog_version": 3,
+      "trace": [
+        {
+          "name": "guardrail_input",
+          "passed": true,
+          "duration_ms": 0.04,
+          "results_count": null,
+          "detail": null
+        },
+        {
+          "name": "question_classification",
+          "passed": true,
+          "duration_ms": 0.0,
+          "results_count": null,
+          "detail": {
+            "category": "regulatory",
+            "indicators": [
+              "금액"
+            ]
+          }
+        },
+        {
+          "name": "vector_search",
+          "passed": true,
+          "duration_ms": 285.89,
+          "results_count": 20,
+          "detail": null
+        },
+        {
+          "name": "keyword_search",
+          "passed": true,
+          "duration_ms": 285.89,
+          "results_count": 20,
+          "detail": null
+        },
+        {
+          "name": "rrf_fusion",
+          "passed": true,
+          "duration_ms": 0.06,
+          "results_count": 36,
+          "detail": null
+        },
+        {
+          "name": "reranking",
+          "passed": true,
+          "duration_ms": 15601.93,
+          "results_count": 8,
+          "detail": null
+        },
+        {
+          "name": "retrieval_gate",
+          "passed": true,
+          "duration_ms": 0.01,
+          "results_count": 8,
+          "detail": {
+            "top_score": 0.8115559798493004
+          }
+        },
+        {
+          "name": "guardrail_pii",
+          "passed": true,
+          "duration_ms": 0.58,
+          "results_count": null,
+          "detail": {
+            "pii_found": false
+          }
+        }
+      ],
+      "draft": null,
+      "ai_used": true,
+      "namespace": "demo",
+      "thread_id": "91f355f1-e77c-4808-879b-75794abf45e3",
+      "version": 1
+    },
+    "seconds": 36.574
+  },
+  {
+    "query": "수정 내용을 저장하지 않은 채 화면을 나갈 때 확인",
+    "expected_code": "EX-0401",
+    "thread_id": "8d13ebc9-6d0b-4013-b9a9-a650b1da00fa",
+    "error": "HTTP Error 422: Unprocessable Entity",
+    "seconds": 17.102
+  }
+]
