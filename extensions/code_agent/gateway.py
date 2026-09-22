@@ -11,6 +11,34 @@ log=logging.getLogger(__name__)
 INDEX='cm_catalog_chunks_v1'
 def catalog_index(namespace='production'):return INDEX+'__demo' if namespace=='demo' else INDEX
 def index_identity(model):return model+'|pii-policy-2'
+RERANK_CANDIDATES=12
+
+def rerank_text(rec):
+    """What the neural reranker scores: the registered wording, menu and trigger only."""
+    parts=[rec['message']]
+    if rec.get('menu'): parts.append('메뉴: '+rec['menu'])
+    if rec.get('trigger'): parts.append('노출 조건: '+rec['trigger'])
+    return '\n'.join(parts)
+
+class CatalogReranker:
+    """Bounded use of the upstream neural reranker for catalogue hits.
+
+    The indexed chunk carries every business field (English copy, notes, ...).
+    Scoring that full dump for 30+ RRF hits took ~14 s on CPU and blocked the
+    event loop for every other request. Score only the top RRF candidates on
+    the registered wording/menu/trigger and run the blocking model in a worker
+    thread. Hits are still resolved against DB originals by code/revision in
+    UrstoryGateway.search, so the shortened text never reaches the user.
+    """
+    def __init__(self,base,records,redact=lambda value:value,limit=RERANK_CANDIDATES):
+        self.base=base; self.records=records; self.redact=redact; self.limit=limit
+    async def rerank(self,query,documents,top_k=5,**options):
+        docs=[]
+        for doc in documents[:max(top_k,self.limit)]:
+            rec=self.records.get((doc.metadata or {}).get('code'))
+            docs.append(doc.model_copy(update={'content':self.redact(rerank_text(rec))}) if rec else doc)
+        # base.rerank only awaits nothing (pure model.predict); run it on its own loop off-thread.
+        return await asyncio.to_thread(asyncio.run,self.base.rerank(query,docs,top_k=top_k,**options))
 
 class UrstoryGateway:
     def __init__(self,store,monitor=None): self.store=store; self.monitor=monitor; self._safety_instance=None; self.cache=SearchCache()
@@ -119,15 +147,16 @@ class UrstoryGateway:
         llm=await self._llm(settings)
         embedder=OpenAIEmbedding(api_key=env.openai_api_key,model=settings.embedding_model,dimensions=1536)
         keyword=CatalogKeyword(es_url=env.elasticsearch_url,index_name=catalog_index(getattr(self.store,'namespace','production')))
+        current={r['code']:r for r in records}
         engine=HybridSearchOrchestrator(embedder=embedder,vector_engine=CatalogVector(database._async_session_factory),keyword_engine=keyword,
-            reranker=base.reranker,hyde_generator=HyDEGenerator(llm=llm),llm=llm,langfuse_monitor=self.monitor)
+            reranker=CatalogReranker(base.reranker,current,self.safety.redact),hyde_generator=HyDEGenerator(llm=llm),llm=llm,langfuse_monitor=self.monitor)
         try:
             result=await asyncio.wait_for(engine.search(query,settings,generate_answer=False),timeout=150)
             # A hard retrieval-gate failure must not become a catalogue explanation.
             steps=[step.model_dump() for step in result.trace]
             if any(step.get('name')=='retrieval_gate' and not step.get('passed') and not (step.get('detail') or {}).get('soft_fail') for step in steps):
                 raise DomainError('검색 근거가 충분하지 않습니다. 다른 조건으로 다시 검색해주세요.',422)
-            current={r['code']:r for r in records}; found=[];seen=set()
+            found=[];seen=set()
             for hit in result.documents:
                 meta=hit.metadata or {}; rec=current.get(meta.get('code'))
                 # Never trust model/index copies as the source of truth.

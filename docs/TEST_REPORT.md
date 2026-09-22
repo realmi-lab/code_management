@@ -216,3 +216,33 @@ Langfuse 최대 limit=100을 위반하던 통계 조회(limit=1000)를 수정했
 확장/API 251개, 설치 72개, 대역 인증/모델을 사용하는 native HTTP 10개, Python/JS 및 TS/TSX 6개 파일 구문, upstream 384개 파일 계약 검증 통과. 실제 API 반영 파일 해시 일치 확인. 실제 브라우저에서 EX-0201 원문과 줄바꿈 확인.
 
 최종 실제 모델 검사는 기존 실패 5문항 × 2회로, 응답 10/10 성공·정답 10/10 첫 번째·GOOD 10/10·평균 98.6점이었다. 별도 채점 호출 한 번 실패해 저장된 답변을 변경하지 않고 재채점한 결과를 별도 기록했다. 실제 검색 8회는 PGVector/Nori/RRF/리랭커, 나머지 2회는 검색 캐시를 사용했다. 전체 68문항 재평가나 회사 데이터 검증은 아니다. 생성과 채점 모델은 동일하다. 첫 수정본의 형식 오류 2회와 원래 68문항 기록을 보존했다. 상세: [최종 수정 검증](verification/catalog-quality-fix-final-2026-09-21/README.md).
+
+## 2026-09-22 카탈로그 리랭킹 범위 축소 및 무관 질의 후보 제거
+
+실측에서 카탈로그 검색 한 번 14.5초 중 리랭킹이 14.3초였다(벡터+키워드 0.2초). 원인은 색인 청크의 전체 업무 필드(영문 문구·비고 포함)를 RRF 후보 30여 건 전부에 대해 크로스인코더로 채점하고, 그 동기 호출이 이벤트 루프를 막는 것이었다. `gateway.CatalogReranker`가 원본 리랭커를 감싸 RRF 상위 12건만 등록 문구·메뉴·노출 조건 텍스트로 채점하고 워커 스레드에서 실행한다. 결과는 기존과 같이 코드/리비전으로 DB 원문과 대조한다. 원본 소스는 변경하지 않았다.
+
+또한 무관 질의(예: 날씨)가 retrieval_gate(top_score 0.65)를 통과해 후보 8건이 대화에 저장되던 문제를, 근거 검증을 통과한 설명이 코드를 하나도 인용하지 않으면 후보를 비우고 `no_relevant_candidate` trace를 남기는 방식으로 처리했다.
+
+재빌드·재기동 후 실측(demo 279건, 로컬 E5 + Nori + bge-reranker-v2-m3-ko): 비캐시 검색 8건 2.1~3.1초(리랭킹 2.8초), 정답 1위 7건 동일 유지(AT-1923·EX-0101·EX-0201). 실제 대화 턴은 날씨 질의 16.7초·후보 0건, 30초 인증 질의 28.1초·AT-1923 원문 응답. 확장/API 검사 256개, 설치 unittest 72개 통과. 무관 질의 판정은 설명 모델의 인용에 의존하므로 모델 없는 키워드 모드에는 적용되지 않는다.
+
+## 2026-09-22 인계 TODO 처리: 브라우저 검사 재실행 · 원본 테스트 DB 연결 · 대화 턴 지연 원인
+
+브라우저 검사 3종을 이 Mac에서 재실행했다. 스크립트는 `CHROMIUM_PATH` → `/usr/bin/chromium` → Playwright 설치 Chromium 순으로 실행 파일을 찾도록 바꿨다. 이 Mac의 venv(Playwright 1.63)는 headless shell 1243을 요구하지만 캐시에는 1234만 있어, `CHROMIUM_PATH`로 `chromium-1234`의 Google Chrome for Testing을 지정해 실행했다. 결과는 오프라인 브리지 14개, loopback HTTP 14개, 세션 복원 10개 모두 통과이며 JavaScript 오류는 없다. 증거: `verification/browser-offline-results.json`, `verification/browser-results.json`, `verification/browser-session-results.json`(2026-09-22). 인증·모델·클립보드는 검사 대역이며 원본 JWT·Next·실제 모델 검증이 아니다.
+
+`scripts/test_upstream.py`는 `--network none`이라 원본 conftest가 요구하는 PostgreSQL(localhost:5432)에 접속하지 못해 112개 에러 후 중단됐다. 이제 내부 전용 Docker 네트워크에 일회성 pgvector PostgreSQL(원본 conftest 기본 계정·`shared_test` DB, `upstream/infra/init-db.sql`로 vector 확장 생성)을 띄우고 `DATABASE_URL`로 연결한 뒤 실행이 끝나면 컨테이너와 네트워크를 삭제한다. 운영 볼륨은 사용하지 않으며 인터넷 접근도 없다. 실행 결과는 4분 5초에 611 통과·27 실패·5 건너뜀·7 제외(performance)이다. 실패 27개의 원인은 (1) 인증 API 11개: 가입 요청 429와 그에 따른 `access_token` 누락, (2) Redis·Elasticsearch·임베딩 서비스 부재 5개(ConnectError)와 외부 이름 해석 실패 2개, Redis 캐시 1개, (3) 패치로 달라진 응답 형식 8개(health 응답의 `openai` 항목 5개, Claude 응답 처리 2개, 설정 응답 검증 1개)로, DB 연결 실패는 남지 않았다. 원본 전체 384개 파일 계약 검증은 통과했다. 이 결과는 라이브 RAG 벤치마크가 아니다.
+
+대화 턴 지연을 실제 API에서 3회 계측했다: 42.1초(Plan 3.5·설명 3.8·충실도 7.0·근거 32.8), 40.2초(Plan 4.8·설명 18.1·근거 3.5·충실도 14.9), 28.0초(Plan 3.2·설명 4.3·충실도 11.4·근거 18.7). 충실도·근거 판정은 이미 병렬이며 한 턴은 Plan + 설명 + max(충실도, 근거)로 구성된다. 컨테이너 안에서 같은 근거·답변으로 판정 호출만 반복한 결과 프롬프트는 약 1,000토큰, 응답은 55~86자인데 완료 토큰이 738~8,697개(거의 전부 reasoning 토큰)로 편차가 커 5.5초에서 41.2초까지 걸렸다. 출력 길이를 제한하는 지시를 추가해도 추론 토큰은 줄지 않았다. Command Code의 `reasoning_effort`는 `low|medium|high|xhigh|max`만 받고 `none`/`minimal`은 400으로 거부하며, `thinking: disabled`는 무시된다(3,613~6,204 추론 토큰). 따라서 현재 공급자·모델(DeepSeek V4.1 Flash, low)에서는 판정 지연을 파라미터로 줄일 수 없다. 남은 선택지는 판정 단계에 추론 없는 모델을 쓰는 것(공급자 확인 필요)이나 판정 자체를 유지한 채 지연을 감수하는 것이며, 검증을 약화하는 캐시·생략은 적용하지 않았다.
+
+문서 정리: README의 `CODE_CATALOG_AUTHORITY` 기본값 설명을 compose·`.env`의 실제 기본값 `system`으로 맞췄고, `docs/STATUS.md`를 2026-09-22 기준으로 갱신했다. 확장/API 검사 256개, 설치 unittest 72개, native HTTP 10개 통과(대역 인증·모델). API 컨테이너의 `gateway.py`·`agent.py`·`safety.py`·`api.py` sha256이 작업 트리와 일치한다. production 목록은 0건이라 등록→색인→검색→초안→승인 종단간은 여전히 미수행이며, 합성 데이터를 production에 넣지 않는 원칙에 따라 실제 항목 제공 전에는 수행하지 않는다.
+
+## 2026-09-22 판정 단계 모델 옵션과 후보 실측
+
+인계 TODO의 "판정 단계 모델" 항목을 처리했다. 충실도·근거 판정 두 단계만 다른 모델로 바꾸는 `CODE_LLM_JUDGE_MODEL`과 `CODE_LLM_JUDGE_REASONING_EFFORT`(low·medium·high·none, none은 파라미터 생략) 환경 변수를 추가했다. 비어 있으면 기존과 같이 생성 모델이 판정한다. 판정 전송(`routing.JudgeLLM`)은 같은 공급자·키를 쓰고 temperature 0이며, 생성·HyDE·재작성·RAGAS 평가 모델은 바뀌지 않는다. 상태 API의 `llm.judge_model`과 트레이스 단계에 실제 판정 모델을 기록하고, 잘못된 값은 오류로 중단하며 원래 모델로 몰래 되돌아가지 않는다. compose.yaml은 `scripts/render_compose.py`로 재생성했다. 확장/API 검사 263개(신규 7개: 옵션 해석, 판정 단계 한정 적용, 실제 패치 전송의 model·reasoning_effort 본문, safety 단계 교체), 설치 unittest 72개, native HTTP 10개 통과. 이 코드는 아직 실행 중인 API 컨테이너에 반영하지 않았다.
+
+후보 실측은 실행 중인 서비스를 건드리지 않도록 같은 이미지의 일회용 컨테이너에 작업 트리 코드를 읽기 전용으로 마운트해 실제 Command Code를 호출했다. 합성 답변·근거 1쌍을 원본 FaithfulnessChecker/HallucinationDetector와 StrictJudge 경로로 두 판정을 동시에 실행했다.
+
+- 현재 모델 DeepSeek V4.1 Flash(low): 판정 한 턴 13~44초, 충실도 추론 토큰 2천~9.5천. `reasoning_effort`를 생략해도 17~24초로 같다. 이 합성 근거에서는 등록 원문 그대로인 답변도 충실도 판정이 3회 모두 차단했고, 틀린 답변(30초를 60초로 바꾸고 이메일 전송 문장을 추가)은 2회 모두 차단했다. 실제 API에서는 같은 문구가 통과한 기록(9/21·9/22)이 있으므로 합성 근거 형식의 차이로 판단하며, 아래 후보 비교는 같은 입력을 놓고 견준 상대 결과다.
+- Command Code의 `claude-*` 모델은 `/provider/v1/messages` 전용이라 이 옵션(chat/completions)으로 쓸 수 없다. `gpt-5.4-mini`, `gemini-3.1/3.5-flash-lite`는 현재 요금제 밖(403 MODEL_NOT_IN_PLAN)이고 `MiniMax-M2.7`은 공급자 없음(400)이다.
+- 요금제로 호출 가능한 13개 중 정답 3회 통과와 오답 3회 차단을 모두 만족한 모델은 네 개다. `inclusionai/ling-3.0-flash-sante:free`는 정답 3.7~5.8초·오답 3.9~5.2초·추론 300~700, `thinkingmachines/inkling-small`은 8.6~12초·4.0~4.5초·추론 700~2천, `z-ai/glm-5.3-flashx`는 7.2~9.5초·8.3~10.6초·추론 400~700, `poolside/laguna-s-2.1-free`는 2.8~6.7초·3.9~28.6초·추론 0이다.
+- 제외 사유: `xiaomi/mimo-v2.6-flash`는 정답 1/3 차단과 오답 근거 판정 1회 형식 불량(502), `deepseek-v4-flash`와 `Step-3.7-Flash`는 정답 3/3 차단, `deepseek-v4-flash-fast`와 `GLM-5.2-Fast`는 정답 2/3 차단, `Qwen3.8-Flash`는 120초 초과 1회, `Kimi-K2.6`·`Qwen3.7-Flash`·`glm-5.3-flash`는 정확하나 15~55초.
+- 한계: 답변 1종·근거 1쌍·3회 표본이라 위양성률 추정이 아니다. `:free` 모델의 데이터 정책과 속도 제한은 확인하지 않았다. 판정 모델 전환은 사용자 결정 사항이며 기본값은 바꾸지 않았다. 원시 결과는 `verification/judge-model-bench-2026-09-22.json`에 있다.

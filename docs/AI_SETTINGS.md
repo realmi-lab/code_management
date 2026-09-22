@@ -41,6 +41,23 @@ Claude 또는 DeepSeek와 OpenAI 임베딩을 조합하려면 OpenAI 키도 필�
 
 로컬 서비스가 아직 없는 설치에서는 `.env`에 `CODE_EMBEDDING_PROVIDER=local`을 설정한 뒤 `python3 scripts/manage.py start`로 모델 서비스를 준비해야 합니다. 화면은 로컬 서비스의 실제 준비 상태와 고정 모델 식별자를 확인하고, 준비되지 않은 로컬 선택을 비활성화합니다. 로컬 모드를 저장하는 것만으로 모델 컨테이너를 새로 설치하거나 기동하지 않습니다. 의미 검색 중 로컬 모델 연결에 실패해도 키워드 검색으로 몰래 전환하지 않습니다.
 
+## 판정 단계 모델 (선택)
+
+대화 답변은 생성 뒤 충실도(faithfulness)·근거(grounding) 판정을 통과해야 저장됩니다. 기본값은 판정도 생성 모델과 같은 모델·같은 `reasoning_effort`로 수행하는 것이며, 2026-09-22 실측에서 DeepSeek V4.1 Flash(low)의 판정 한 번은 응답이 55~86자인데도 추론 토큰 3천~9천 개로 17~44초가 걸렸습니다. `reasoning_effort`로는 줄일 수 없습니다.
+
+판정 두 단계만 다른 모델로 바꾸려면 `.env`에 다음을 설정하고 `python3 scripts/manage.py start`로 재기동합니다.
+
+| 변수 | 기본값 | 의미 |
+|---|---|---|
+| `CODE_LLM_JUDGE_MODEL` | 비어 있음 | 판정에 쓸 모델명. 비어 있으면 생성 모델을 그대로 사용 |
+| `CODE_LLM_JUDGE_REASONING_EFFORT` | 비어 있음 | 판정 호출의 `reasoning_effort`. `low`/`medium`/`high` 또는 파라미터를 보내지 않는 `none`. 비어 있으면 `CODE_LLM_REASONING_EFFORT`를 따름. Command Code에서만 전송 |
+
+- 생성·HyDE·다중 질의·형식/근거 재작성·RAGAS 평가는 이 설정의 영향을 받지 않고 관리자 화면의 모델을 계속 씁니다. 판정 전송은 같은 공급자·같은 키를 쓰며 temperature 0입니다.
+- 상태 API(`GET /api/code-catalog/status`)의 `llm.judge_model`에 실제 판정 모델이 표시됩니다. 트레이스의 `catalog-Explanation/faithfulness`·`/grounding` 단계도 판정 모델을 기록합니다.
+- 잘못된 값(허용되지 않은 문자·`minimal` 등)은 판정 시점에 오류로 중단하며 원래 모델로 몰래 되돌아가지 않습니다.
+- Command Code의 Claude 계열(`claude-*`)은 `/provider/v1/messages` 경로만 허용해 이 옵션(chat/completions)으로는 쓸 수 없고, 요금제에 없는 모델은 403(`MODEL_NOT_IN_PLAN`)으로 실패합니다. 후보 모델별 실측은 [검증 보고서](TEST_REPORT.md)의 2026-09-22 항목을 보세요.
+- 이 옵션은 판정을 생략하거나 캐시하지 않습니다. 판정 기준(충실도 0.9·근거 0.8, 형식 불량은 502)은 그대로입니다.
+
 ## 설정과 키의 보관
 
 초기 선택은 `.env`의 `CODE_LLM_PROVIDER`, `CODE_LLM_MODEL`, `CODE_EMBEDDING_PROVIDER`와 공급자 키에서 읽습니다. 관리자 화면에서 저장한 뒤에는 `CODE_AI_SETTINGS_FILE`이 가리키는 서버 파일을 우선합니다. 기본 Compose 경로는 `/app/private-settings/ai.json`이며 `ai-settings` 전용 볼륨에 저장합니다. API와 작업자가 같은 설정을 읽습니다.

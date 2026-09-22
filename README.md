@@ -14,7 +14,7 @@
 
 원본 고정 버전 384개 파일 검증과 전체 프론트엔드·백엔드 Docker 빌드를 수행했습니다. 실제 Command Code 경유 DeepSeek 호출과 Mac의 Docker 안에서 실행한 로컬 E5 모델의 합성 문장 벡터 검사를 통과했습니다. PostgreSQL·Nori·Redis·Langfuse·원본 Next/API·작업자도 기동했습니다. 실제 Next 화면의 무로그인 진입·AI 설정 저장 및 재조회와 실제 HTTP 6개 검사를 통과했습니다. 확장 테스트 142개와 설치 도구 테스트 59개가 통과했으며, 실제 목록은 문서·카탈로그 모두 0건입니다. **직접 DeepSeek / Claude / OpenAI 키의 실제 호출과 카탈로그 전체 검색·초안·승인 종단간 검증은 완료되지 않았습니다.**
 
-설정 방법과 각 검색 방식의 차이는 [AI 설정 안내](docs/AI_SETTINGS.md), 검사별 근거와 현재 제한은 [검증 보고서](docs/TEST_REPORT.md)를 확인하세요. 아래 9월 18일 전달 기록과 [이전 로컬 검증 보고서](docs/LOCAL_VERIFICATION_2026-09-21.md)는 당시 수행 범위를 보존한 기록입니다.
+대화 답변의 충실도·근거 판정만 다른 모델로 돌리려면 `.env`에 `CODE_LLM_JUDGE_MODEL`(선택 `CODE_LLM_JUDGE_REASONING_EFFORT`)을 설정합니다. 비워 두면 지금처럼 생성 모델이 판정합니다. 설정 방법과 각 검색 방식의 차이는 [AI 설정 안내](docs/AI_SETTINGS.md), 검사별 근거와 현재 제한은 [검증 보고서](docs/TEST_REPORT.md)를 확인하세요. 아래 9월 18일 전달 기록과 [이전 로컬 검증 보고서](docs/LOCAL_VERIFICATION_2026-09-21.md)는 당시 수행 범위를 보존한 기록입니다.
 
 ## 통합 구성
 
@@ -92,7 +92,7 @@ python3 scripts/manage.py start
 
 초안은 번호가 없는 상태입니다. 기본 로컬 모드에서는 접속자 모두 같은 관리자 신원을 공유합니다. 선택형 JWT 모드의 일반 사용자는 자신의 대화와 초안을 보고 작성할 수 있고, 관리자는 초안 목록·가져오기·변경 기록·등록을 처리합니다. 다른 사람의 개인 대화는 관리자에게도 공개하지 않습니다.
 
-기본 `CODE_CATALOG_AUTHORITY=excel`에서는 **엑셀 절차에서 확정된 번호인지 관리자가 확인한 뒤 직접 입력**합니다. 시스템을 공식 목록으로 운영하기로 결정했다면 `system`으로 설정할 수 있습니다. 두 모드 모두 현재 통합판은 관리자가 승인한 번호를 직접 입력하며 AI가 다음 번호를 추측하지 않습니다.
+`CODE_CATALOG_AUTHORITY=excel`에서는 **엑셀 절차에서 확정된 번호인지 관리자가 확인한 뒤 직접 입력**합니다. 시스템을 공식 목록으로 운영하기로 결정했다면 `system`으로 설정합니다. compose.yaml과 현재 `.env`의 기본값은 `system`이며, 엑셀 확인 절차를 쓰려면 `.env`에서 `excel`로 바꿉니다. 두 모드 모두 현재 통합판은 관리자가 승인한 번호를 직접 입력하며 AI가 다음 번호를 추측하지 않습니다.
 
 최신 목록으로 다시 검토하고 중복 후보를 확인한 후 사유를 적어 등록합니다. 등록·변경은 DB 트랜잭션과 버전 검사를 거치고 승인자 ID를 기록합니다. 기존 번호와 폐기 번호를 재사용하지 않습니다. 초안 저장이나 대화에서 ‘등록해’라는 말만으로 정식 등록하지 않습니다.
 
@@ -147,7 +147,7 @@ python3 scripts/smoke.py
 python3 scripts/test_upstream.py
 ```
 
-브라우저 검사 스크립트는 `CHROMIUM_PATH` 환경변수 또는 기본 `/usr/bin/chromium`을 사용합니다. 모의 로그인·LLM은 `integration_tests/` 안에만 있고 운영 Docker 이미지의 확장 코드에는 포함하지 않습니다.
+브라우저 검사 스크립트는 `CHROMIUM_PATH` 환경변수, 없으면 `/usr/bin/chromium`, 그것도 없으면 Playwright가 설치한 Chromium을 사용합니다. Mac에서는 `playwright install chromium`을 실행했거나 `CHROMIUM_PATH`로 Chromium 실행 파일(예: `~/Library/Caches/ms-playwright/chromium-*/chrome-mac-arm64/Google Chrome for Testing.app/Contents/MacOS/Google Chrome for Testing`)을 지정해야 합니다. `scripts/test_upstream.py`는 원본 테스트용 PostgreSQL(pgvector)을 내부 전용 Docker 네트워크에 일회성으로 띄운 뒤 삭제하며, 운영 볼륨은 건드리지 않습니다. 모의 로그인·LLM은 `integration_tests/` 안에만 있고 운영 Docker 이미지의 확장 코드에는 포함하지 않습니다.
 
 ## 운영 전 확인
 

@@ -32,6 +32,8 @@ def build_compose() -> dict:
         'COMMANDCODE_API_KEY': '${COMMANDCODE_API_KEY:-}',
         'CODE_LLM_MODEL': '${CODE_LLM_MODEL:-}',
         'CODE_LLM_REASONING_EFFORT': '${CODE_LLM_REASONING_EFFORT:-high}',
+        'CODE_LLM_JUDGE_MODEL': '${CODE_LLM_JUDGE_MODEL:-}',
+        'CODE_LLM_JUDGE_REASONING_EFFORT': '${CODE_LLM_JUDGE_REASONING_EFFORT:-}',
         'JWT_SECRET_KEY': '${JWT_SECRET_KEY:?Run configure}',
         'ADMIN_USERNAME': '${ADMIN_USERNAME:-admin}',
         'ADMIN_PASSWORD': '${ADMIN_PASSWORD:-}',

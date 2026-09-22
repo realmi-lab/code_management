@@ -59,6 +59,7 @@ def admin(actor):
 class Store:
     namespace="production"
     state_table=state
+    code_table=codes
     def __init__(self,url):
         if url.startswith('postgresql+asyncpg:'): url=url.replace('postgresql+asyncpg:','postgresql+psycopg:',1)
         kw={'pool_pre_ping':True}
@@ -84,7 +85,9 @@ class Store:
             migrated_rows=c.execute(select(codes)).mappings().all()
             for rec in migrated_rows:
                 values=business_values(dict(rec))
-                c.execute(update(codes).where(codes.c.id==rec['id']).values(**{k:values[k] for k in EXTRA_COLUMNS}))
+                changes={k:values[k] for k in EXTRA_COLUMNS if rec.get(k)!=values[k]}
+                # Skip no-op rewrites so every restart does not update the whole table.
+                if changes:c.execute(update(codes).where(codes.c.id==rec['id']).values(**changes))
             if migrated_rows and not set(EXTRA_COLUMNS)<=existing:
                 c.execute(update(state).where(state.c.id==1).values(version=state.c.version+1,index_error=''))
         SampleStore(self).initialize_catalog()
@@ -100,24 +103,40 @@ class Store:
 
     def _state(self,c): return row(c.execute(select(state).where(state.c.id==1)).mappings().one())
     def status(self):
-        with self.engine.connect() as c: return self._state(c)
+        table=self.state_table
+        with self.engine.connect() as c: return row(c.execute(select(table).where(table.c.id==1)).mappings().one())
     def _bump(self,c,expected):
         changed=c.execute(update(state).where(state.c.id==1,state.c.version==expected).values(version=expected+1,index_error=''))
         if changed.rowcount!=1: raise DomainError('목록이 변경되었습니다. 최신 후보를 검토하고 다시 실행해주세요.')
         return expected+1
     def snapshot(self,retired=False):
-        # Lock the single catalog state row during this short snapshot; all writers use it.
+        # Share-lock the single catalog state row during this short snapshot; all writers
+        # take it exclusively, so readers block writers but not each other.
+        state_table,table=self.state_table,self.code_table
         with self.engine.begin() as c:
-            s=row(c.execute(select(state).where(state.c.id==1).with_for_update()).mappings().one())
-            q=select(codes).order_by(codes.c.code)
-            if not retired: q=q.where(codes.c.status=='active')
+            s=row(c.execute(select(state_table).where(state_table.c.id==1).with_for_update(read=True)).mappings().one())
+            q=select(table).order_by(table.c.code)
+            if not retired: q=q.where(table.c.status=='active')
             return s, [normalized_record(dict(v)) for v in c.execute(q).mappings()]
     def get_code(self,code):
         try: code=canonical_code(code)
         except ValueError as exc: raise DomainError(str(exc),422) from exc
+        table=self.code_table
         with self.engine.connect() as c:
-            value=row(c.execute(select(codes).where(codes.c.code==code)).mappings().first())
+            value=row(c.execute(select(table).where(table.c.code==code)).mappings().first())
             return normalized_record(value) if value else None
+    def get_codes(self,values):
+        """Batch form of get_code: one query; result keyed by each value as given."""
+        try: wanted={v:canonical_code(v) for v in values}
+        except ValueError as exc: raise DomainError(str(exc),422) from exc
+        if not wanted: return {}
+        table=self.code_table
+        with self.engine.connect() as c:
+            rows={r['code']:r for r in c.execute(select(table).where(table.c.code.in_(set(wanted.values())))).mappings()}
+        return {v:normalized_record(dict(rows[code])) for v,code in wanted.items() if code in rows}
+    def has_codes(self):
+        table=self.code_table
+        with self.engine.connect() as c: return c.execute(select(table.c.id).limit(1)).first() is not None
     def save_preview(self,actor,parsed):
         admin(actor)
         s,existing=self.snapshot(True); by_code={v['code']:v for v in existing}
@@ -197,8 +216,8 @@ class Store:
                 current_draft=row(c.execute(select(drafts).where(drafts.c.id==t['draft']['id'],drafts.c.owner==actor.id)).mappings().first())
                 t['draft']=current_draft
             return t
-    def replay(self,actor,thread_id,request_id,fingerprint):
-        self.get_thread(actor,thread_id)
+    def replay(self,actor,thread_id,request_id,fingerprint,checked=False):
+        if not checked: self.get_thread(actor,thread_id)
         with self.engine.connect() as c:
             t=row(c.execute(select(turns).where(turns.c.thread_id==thread_id,turns.c.request_id==request_id)).mappings().first())
             if not t: return None
@@ -290,6 +309,7 @@ class SampleStore(Store):
     """Immutable JSON catalogue; separate index publication and conversation scope."""
     namespace='demo'
     state_table=sample_state
+    code_table=sample_codes
     def __init__(self,base):self.engine=base.engine
     def source(self):
         with self.engine.connect() as c:
@@ -310,17 +330,4 @@ class SampleStore(Store):
                 c.execute(insert(sample_codes).values(id=uid(),updated_at=now(),**values))
             c.execute(insert(sample_bootstrap).values(id=1,source_hash=source_hash,count=len(records),created_at=now()))
             c.execute(update(sample_state).where(sample_state.c.id==1).values(version=current['version']+(1 if current['source_hash'] else 0),index_error='',source_hash=source_hash))
-    def status(self):
-        with self.engine.connect() as c:return row(c.execute(select(sample_state).where(sample_state.c.id==1)).mappings().one())
-    def snapshot(self,retired=False):
-        with self.engine.begin() as c:
-            state_row=dict(c.execute(select(sample_state).where(sample_state.c.id==1).with_for_update()).mappings().one())
-            query=select(sample_codes).order_by(sample_codes.c.code)
-            if not retired:query=query.where(sample_codes.c.status=='active')
-            return state_row,[normalized_record(dict(r)) for r in c.execute(query).mappings()]
-    def get_code(self,code):
-        try:code=canonical_code(code)
-        except ValueError as exc:raise DomainError(str(exc),422) from exc
-        with self.engine.connect() as c:
-            rec=c.execute(select(sample_codes).where(sample_codes.c.code==code)).mappings().first()
-            return normalized_record(dict(rec)) if rec else None
+    # status/snapshot/get_code are inherited and read state_table/code_table above.

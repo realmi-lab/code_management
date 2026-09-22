@@ -95,6 +95,16 @@ class CatalogSafety:
         value=re.sub(r'(?i)(?:sk-|cc_)[A-Za-z0-9_-]{12,}','[SECRET]',value)
         return self.redact(value)
 
+    def judge_llm(self, llm, stage):
+        """One judge transport per stage: CODE_LLM_JUDGE_* pins a separate model, else the caller's LLM."""
+        from .provider import judge_configured
+        judge=None
+        if judge_configured():
+            from .routing import JudgeLLM
+            judge=JudgeLLM()
+        if hasattr(llm,'for_stage'):return llm.for_stage(stage,judge)
+        return judge or llm
+
     async def prepare(self, payload, llm):
         from app.services.guardrails.injection import PromptInjectionDetector
         safe = self.redact(payload)
@@ -130,8 +140,8 @@ class CatalogSafety:
             raise NumericGroundingError()
         if not numeric.passed:
             raise NumericGroundingError()
-        faith_llm=llm.for_stage('faithfulness') if hasattr(llm,'for_stage') else llm
-        hall_llm=llm.for_stage('grounding') if hasattr(llm,'for_stage') else llm
+        faith_llm=self.judge_llm(llm,'faithfulness')
+        hall_llm=self.judge_llm(llm,'grounding')
         # Independent checks inspect the same immutable answer/evidence; both must pass.
         checks=await asyncio.gather(
             FaithfulnessChecker(StrictJudge(faith_llm, 'faithfulness_score', {'FAITHFUL','UNFAITHFUL'},self.diagnostic_redact)).verify(answer, documents),

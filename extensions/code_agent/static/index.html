@@ -5,101 +5,56 @@
 <meta name="viewport" content="width=device-width,initial-scale=1">
 <title>알림 코드 작업실</title>
 <link rel="stylesheet" href="styles.css">
-<link rel="stylesheet" href="editorial.css">
 </head>
 <body>
 <a class="skip-link" href="#main">본문으로 건너뛰기</a>
 
-<div id="auth" class="auth">작업실에 연결하고 있습니다.</div>
+<div id="auth" class="auth" role="status"><span class="auth-spinner" aria-hidden="true"></span>작업실에 연결하고 있습니다.</div>
 
 <div id="app" hidden>
-<header class="app-header">
+<header class="localnav">
   <div class="brand">
     <h1>알림 코드 작업실</h1>
+    <details class="help"><summary aria-label="작업실 설명">?</summary><div class="help-pop">등록 문구 검색 · 조건 비교 · 초안 작성. 번호와 문구는 DB 원문 그대로 보여 주며, 신규 문구는 관리자 승인 전까지 초안으로 남습니다. 검색 결과가 재사용 확정을 의미하지는 않습니다.</div></details>
   </div>
+  <nav class="tabs" role="tablist" aria-label="작업 메뉴">
+    <button id="tab-chat" data-view="chat" role="tab" aria-selected="true" aria-controls="chat" tabindex="0" type="button">대화로 찾기</button>
+    <button id="tab-compare" data-view="compare" role="tab" aria-selected="false" aria-controls="compare" tabindex="-1" type="button">문구 비교</button>
+    <button id="tab-review" data-view="review" role="tab" aria-selected="false" aria-controls="review" tabindex="-1" type="button">기획서 검토</button>
+    <button id="tab-catalog" data-view="catalog" role="tab" aria-selected="false" aria-controls="catalog" tabindex="-1" type="button">전체 코드</button>
+    <button id="tab-drafts" data-view="drafts" role="tab" aria-selected="false" aria-controls="drafts" tabindex="-1" type="button">초안함</button>
+    <button id="tab-audit" data-view="audit" role="tab" aria-selected="false" aria-controls="audit" tabindex="-1" type="button" class="admin">변경 기록</button>
+    <button id="tab-ai-settings" data-view="ai-settings" role="tab" aria-selected="false" aria-controls="ai-settings" tabindex="-1" type="button" class="admin">AI 설정</button>
+  </nav>
   <div class="header-right">
-    <span id="who" class="identity"></span>
-    <span id="index-state" class="status-pill"></span>
-    <button id="index" class="btn btn-quiet admin" type="button">검색 준비</button>
+    <button id="index" class="btn btn-solid btn-sm admin" type="button">검색 준비</button>
   </div>
 </header>
 
-<nav class="tabs" role="tablist" aria-label="작업 메뉴">
-  <button id="tab-chat" data-view="chat" role="tab" aria-selected="true" aria-controls="chat" tabindex="0" type="button">대화로 찾기</button>
-  <button id="tab-compare" data-view="compare" role="tab" aria-selected="false" aria-controls="compare" tabindex="-1" type="button">문구 비교</button>
-  <button id="tab-review" data-view="review" role="tab" aria-selected="false" aria-controls="review" tabindex="-1" type="button">기획서 검토</button>
-  <button id="tab-catalog" data-view="catalog" role="tab" aria-selected="false" aria-controls="catalog" tabindex="-1" type="button">전체 코드</button>
-  <button id="tab-drafts" data-view="drafts" role="tab" aria-selected="false" aria-controls="drafts" tabindex="-1" type="button">초안함</button>
-  <button id="tab-audit" data-view="audit" role="tab" aria-selected="false" aria-controls="audit" tabindex="-1" type="button" class="admin">변경 기록</button>
-  <button id="tab-ai-settings" data-view="ai-settings" role="tab" aria-selected="false" aria-controls="ai-settings" tabindex="-1" type="button" class="admin">AI 설정</button>
-</nav>
+<div id="notice" class="notice" role="status" aria-live="polite"></div>
 
-<div id="notice" class="notice enter" role="status" aria-live="polite"></div>
-
-<div id="error" class="error-banner enter" hidden>
+<div id="error" class="error-banner" hidden>
   <p class="error-message" role="alert"></p>
   <button id="error-dismiss" class="btn btn-quiet error-dismiss" type="button">오류 닫기</button>
 </div>
 
 <main id="main" tabindex="-1">
-<div id="catalog-scope" class="catalog-scope">
-  <label for="catalog-namespace">조회할 목록</label>
-  <select id="catalog-namespace"><option value="production">실제 목록</option><option value="demo" selected>DB 샘플 · 300건</option></select>
-  <p id="catalog-scope-note" class="muted" role="status">현재 등록된 실제 목록을 사용합니다.</p>
-</div>
-<section id="compare" class="view" role="tabpanel" aria-labelledby="tab-compare" hidden>
- <h2>문구 비교</h2>
- <form id="compare-form" class="card inspection-form">
-  <label for="compare-message">비교할 문구<textarea id="compare-message" required maxlength="4000" rows="4" placeholder="비교할 문구를 입력하세요"></textarea></label>
-  <div class="two"><label for="compare-menu">메뉴<input id="compare-menu" maxlength="200"></label><label for="compare-trigger">노출 조건<input id="compare-trigger" maxlength="1000"></label></div>
-  <label for="compare-mode">비교 방식<select id="compare-mode"><option value="catalog_rules">원문·규칙 비교 · AI 호출 없음</option><option value="semantic">의미 검색 후보와 규칙 비교 · 검색 준비 필요</option></select></label>
-  <p class="muted small">시간·숫자·이후/이내·변수 차이를 확인합니다. 유사 문구가 있어도 재사용이 확정되지는 않습니다.</p>
-  <button type="submit" class="btn btn-solid">문구 비교</button>
- </form>
- <div id="compare-results" class="inspection-results" aria-live="polite"></div>
-</section>
-<section id="review" class="view" role="tabpanel" aria-labelledby="tab-review" hidden>
- <h2>기획서 검토</h2>
- <form id="review-form" class="card inspection-form">
-  <label for="review-text">문구 · 코드번호<textarea id="review-text" required maxlength="16000" rows="8" placeholder="한 줄에 하나씩 입력하세요&#10;AT-1923&#10;AT-1923: 30초 이내에 인증해주세요."></textarea></label>
-  <label for="review-mode">검토 방식<select id="review-mode"><option value="catalog_rules">원문·규칙 검토 · AI 호출 없음</option><option value="semantic">의미 검색 후보와 규칙 검토 · 검색 준비 필요</option></select></label>
-  <p class="muted small">최대 30줄. 코드번호·미등록 여부·폐기 상태와 문구의 조건 차이를 줄별로 검토합니다.</p>
-  <button type="submit" class="btn btn-solid">검토</button>
- </form>
- <div id="review-results" class="inspection-results" aria-live="polite"></div>
-</section>
-<section id="ai-settings" class="view" role="tabpanel" aria-labelledby="tab-ai-settings" hidden>
-  <form id="ai-settings-form" class="card">
-    <h2>AI와 검색 방식</h2>
-    <p>대화·문구 작성에 사용할 AI를 선택하세요. API 키는 서버에만 보관합니다.</p>
-    <label for="ai-provider">AI 공급자</label>
-    <select id="ai-provider"><option value="deepseek">DeepSeek</option><option value="anthropic">Claude</option><option value="openai">OpenAI</option></select>
-    <div id="deepseek-connection"><label for="ai-deepseek-connection">DeepSeek 연결</label><select id="ai-deepseek-connection"><option value="deepseek">DeepSeek API 키</option><option value="commandcode">기존 Command Code 연결</option></select></div>
-    <label for="ai-model">모델</label><input id="ai-model" type="text" required maxlength="160" autocomplete="off">
-    <label for="ai-key">API 키</label><input id="ai-key" type="password" autocomplete="new-password" placeholder="변경할 때만 입력" maxlength="4096">
-    <p id="ai-key-status" role="status"></p>
-    <label for="ai-embedding">검색 방식</label>
-    <select id="ai-embedding"><option value="none">임베딩 없이 · 키워드 검색</option><option value="local">이 Mac의 로컬 임베딩 · 의미 + 키워드 검색</option><option value="openai">OpenAI 임베딩 · 의미 + 키워드 검색</option></select>
-    <div id="ai-embedding-key-field" hidden><label for="ai-embedding-key">검색용 OpenAI API 키</label><input id="ai-embedding-key" type="password" autocomplete="new-password" maxlength="4096" placeholder="변경할 때만 입력"><p id="ai-embedding-key-status" role="status"></p></div>
-    <p id="ai-local-status" role="status"></p>
-    <p>키워드 검색은 코드번호와 단어를 기준으로 찾습니다. 의미 검색은 표현이 달라도 뜻이 비슷한 알림을 찾습니다. 로컬 임베딩은 별도 API 키가 필요 없습니다.</p>
-    <p>검색 방식을 바꾸면 인덱스를 다시 준비해야 합니다. 일반 문서도 다시 인덱싱해주세요.</p>
-    <button id="ai-save" type="submit" class="btn btn-solid">설정 저장</button>
-    <p id="ai-settings-result" role="status"></p>
-  </form>
-</section>
 
 <section id="chat" class="view" role="tabpanel" aria-labelledby="tab-chat">
-  <aside class="rail">
-    <button id="new-thread" class="btn btn-solid btn-block" type="button">새 대화</button>
-    <h2 class="rail-heading">대화 기록</h2>
+  <aside class="rail" aria-label="대화 기록">
+    <button id="new-thread" class="btn btn-outline btn-block" type="button"><svg class="icon" viewBox="0 0 24 24" aria-hidden="true"><path d="M12 5v14M5 12h14"/></svg>새 대화</button>
     <div id="threads" class="threads"></div>
-    <p class="rail-note">기존 문구는 그대로.<br>신규 문구는 승인 전 초안으로.</p>
   </aside>
   <div class="conversation">
-    <div id="messages" class="messages">
+    <div id="messages" class="messages" aria-live="polite">
       <div class="welcome">
-        <p class="workflow-note">기존 문구 조회 <span aria-hidden="true">→</span> 조건 비교 <span aria-hidden="true">→</span> 초안 작성 <span aria-hidden="true">→</span> 관리자 승인</p>
+        <div class="title-row"><h2>어떤 알림을 찾고 계신가요?</h2><details class="help"><summary aria-label="설명 보기">?</summary><div class="help-pop">상황을 문장으로 설명하거나 코드번호를 입력하세요. 등록된 번호와 문구는 DB 원문 그대로 보여 드립니다. Enter로 보내고 Shift+Enter로 줄을 바꿉니다.</div></details></div>
+        <ol class="workflow-note" aria-label="작업 순서">
+          <li><span>1</span>기존 문구 조회</li>
+          <li><span>2</span>조건 비교</li>
+          <li><span>3</span>초안 작성</li>
+          <li><span>4</span>관리자 승인</li>
+        </ol>
         <ul class="examples">
           <li><button class="example" type="button" data-query="인증 전에 30초 기다리라는 알림 있어?">
             <span class="example-tag">상황 검색</span>
@@ -143,88 +98,141 @@
           <button id="send" class="btn btn-solid" type="submit">보내기 ↑</button>
         </div>
       </div>
-      <details>
-        <summary>비교할 문구 · 적용 조건</summary>
-        <label for="proposed">직접 작성한 표시 문구
-          <textarea id="proposed" rows="2" maxlength="4000"></textarea>
-        </label>
-        <div class="two">
-          <label for="menu">적용 메뉴<input id="menu" maxlength="200"></label>
-          <label for="trigger">노출 조건<input id="trigger" maxlength="1000"></label>
-        </div>
-      </details>
     </form>
+  </div>
+</section>
+
+<section id="compare" class="view" role="tabpanel" aria-labelledby="tab-compare" hidden>
+  <div class="section-title">
+    <div class="title-row"><h2>문구 비교</h2><details class="help"><summary aria-label="설명 보기">?</summary><div class="help-pop">새 문구를 등록 목록과 비교해 시간·숫자·이후/이내·변수 차이를 확인합니다. 유사 문구가 있어도 재사용이 확정되지는 않습니다.</div></details></div>
+  </div>
+  <div class="inspection-layout">
+    <form id="compare-form" class="card inspection-form">
+      <label for="compare-message">비교할 문구<textarea id="compare-message" required maxlength="4000" rows="4" placeholder="비교할 문구를 입력하세요"></textarea></label>
+      <div class="two"><label for="compare-menu">메뉴<input id="compare-menu" maxlength="200"></label><label for="compare-trigger">노출 조건<input id="compare-trigger" maxlength="1000"></label></div>
+      <label for="compare-mode">비교 방식<select id="compare-mode"><option value="catalog_rules">원문·규칙 비교 · AI 호출 없음</option><option value="semantic">의미 검색 후보와 규칙 비교 · 검색 준비 필요</option></select></label>
+      <button type="submit" class="btn btn-solid btn-block">문구 비교</button>
+    </form>
+    <div id="compare-results" class="inspection-results" aria-live="polite"></div>
+  </div>
+</section>
+
+<section id="review" class="view" role="tabpanel" aria-labelledby="tab-review" hidden>
+  <div class="section-title">
+    <div class="title-row"><h2>기획서 검토</h2><details class="help"><summary aria-label="설명 보기">?</summary><div class="help-pop">코드번호·미등록 여부·폐기 상태와 문구의 조건 차이를 줄별로 검토합니다. 최대 30줄까지 한 번에 검토합니다.</div></details></div>
+  </div>
+  <div class="inspection-layout">
+    <form id="review-form" class="card inspection-form">
+      <label for="review-text">문구 · 코드번호<textarea id="review-text" required maxlength="16000" rows="8" placeholder="한 줄에 하나씩 입력하세요&#10;AT-1923&#10;AT-1923: 30초 이내에 인증해주세요."></textarea></label>
+      <label for="review-mode">검토 방식<select id="review-mode"><option value="catalog_rules">원문·규칙 검토 · AI 호출 없음</option><option value="semantic">의미 검색 후보와 규칙 검토 · 검색 준비 필요</option></select></label>
+      <button type="submit" class="btn btn-solid btn-block">검토</button>
+    </form>
+    <div id="review-results" class="inspection-results" aria-live="polite"></div>
   </div>
 </section>
 
 <section id="catalog" class="view" role="tabpanel" aria-labelledby="tab-catalog" hidden>
   <div class="section-title">
-    <div>
-      <h2>전체 코드</h2>
-      <p class="muted">번호와 문구는 원문 그대로 표시합니다.</p>
-    </div>
+    <div class="title-row"><h2>전체 코드</h2><details class="help"><summary aria-label="설명 보기">?</summary><div class="help-pop">번호와 문구는 원문 그대로 표시합니다. 코드번호를 누르면 상세를 볼 수 있습니다.</div></details></div>
   </div>
-  <form id="catalog-form" class="toolbar catalog-toolbar">
-    <input id="catalog-query" aria-label="목록 검색" placeholder="코드번호, 타이틀, 컨텐츠, 업무구분 검색" maxlength="4000">
+  <form id="catalog-form" class="catalog-toolbar" role="search">
+    <div class="search-field">
+      <svg class="icon" viewBox="0 0 24 24" aria-hidden="true"><circle cx="11" cy="11" r="6"/><path d="M20 20l-4.5-4.5"/></svg>
+      <input id="catalog-query" type="search" aria-label="목록 검색" placeholder="코드번호, 타이틀, 컨텐츠, 업무구분 검색" maxlength="4000">
+    </div>
     <select id="catalog-status" aria-label="사용 상태"><option value="all">모든 상태</option><option value="active">사용 중</option><option value="retired">폐기</option></select>
-    <button class="btn" type="submit">검색</button>
+    <button class="btn btn-solid" type="submit">검색</button>
     <button id="export" class="btn" type="button">JSON 내보내기</button>
   </form>
-  <p id="catalog-count" class="muted" role="status"></p>
+  <p id="catalog-count" class="count" role="status"></p>
   <div id="catalog-list"></div>
-  <div class="toolbar toolbar-end">
-    <div class="toolbar-nav">
-      <button id="previous" class="btn" type="button">이전</button>
-      <button id="next" class="btn" type="button">다음</button>
-    </div>
+  <div class="pager">
+    <button id="previous" class="btn" type="button">← 이전</button>
+    <span id="catalog-page" class="pager-status"></span>
+    <button id="next" class="btn" type="button">다음 →</button>
   </div>
 </section>
 
 <section id="drafts" class="view" role="tabpanel" aria-labelledby="tab-drafts" hidden>
   <div class="section-title">
-    <div>
-      <h2>신규 문구 초안</h2>
-      <p class="muted">검색과 작성은 대화에서, 최종 등록은 관리자 확인 후 진행합니다.</p>
-    </div>
+    <div class="title-row"><h2>신규 문구 초안</h2><details class="help"><summary aria-label="설명 보기">?</summary><div class="help-pop">검색과 작성은 대화에서, 최종 등록은 관리자 확인 후 진행합니다.</div></details></div>
     <button id="refresh-drafts" class="btn" type="button">새로고침</button>
   </div>
   <div id="draft-list" class="cards stagger"></div>
 </section>
 
 <section id="audit" class="view" role="tabpanel" aria-labelledby="tab-audit" hidden>
-  <div class="section-title"><h2>변경 기록</h2><button id="audit-refresh" class="btn" type="button">새로고침</button></div>
-  <p class="muted">작업한 사용자, 사유, 변경 전후를 기록합니다.</p>
+  <div class="section-title">
+    <div class="title-row"><h2>변경 기록</h2><details class="help"><summary aria-label="설명 보기">?</summary><div class="help-pop">작업한 사용자, 사유, 변경 전후를 기록합니다.</div></details></div>
+    <button id="audit-refresh" class="btn" type="button">새로고침</button>
+  </div>
   <div id="audit-list"></div>
+</section>
+
+<section id="ai-settings" class="view settings" role="tabpanel" aria-labelledby="tab-ai-settings" hidden>
+  <div class="section-title">
+    <div class="title-row"><h2>AI와 검색 방식</h2><details class="help"><summary aria-label="설명 보기">?</summary><div class="help-pop">대화·문구 작성에 사용할 AI를 선택하세요. API 키는 서버에만 보관합니다.</div></details></div>
+    </div>
+  <fieldset class="card settings-scope">
+    <legend>조회할 목록</legend>
+    <div id="catalog-scope" class="catalog-scope">
+      <label for="catalog-namespace">목록</label>
+      <select id="catalog-namespace"><option value="production">실제 목록</option><option value="demo" selected>DB 샘플 · 300건</option></select>
+      <span id="catalog-scope-live" class="sr-only" role="status"></span>
+    </div>
+    <p id="catalog-scope-note" class="field-status">현재 등록된 실제 목록을 사용합니다.</p>
+    <p class="field-status">검색 상태 <span id="index-state" class="status-pill" role="status"></span></p>
+  </fieldset>
+  <form id="ai-settings-form" class="settings">
+    <fieldset class="card">
+      <legend>대화 AI</legend>
+      <label for="ai-provider">AI 공급자</label>
+      <select id="ai-provider"><option value="deepseek">DeepSeek</option><option value="anthropic">Claude</option><option value="openai">OpenAI</option></select>
+      <div id="deepseek-connection"><label for="ai-deepseek-connection">DeepSeek 연결</label><select id="ai-deepseek-connection"><option value="deepseek">DeepSeek API 키</option><option value="commandcode">기존 Command Code 연결</option></select></div>
+      <label for="ai-model">모델</label><input id="ai-model" type="text" required maxlength="160" autocomplete="off">
+      <label for="ai-key">API 키</label><input id="ai-key" type="password" autocomplete="new-password" placeholder="변경할 때만 입력" maxlength="4096">
+      <p id="ai-key-status" class="field-status" role="status"></p>
+    </fieldset>
+    <fieldset class="card">
+      <legend>검색 <details class="help"><summary aria-label="설명 보기">?</summary><div class="help-pop">키워드 검색은 코드번호와 단어를 기준으로 찾습니다. 의미 검색은 표현이 달라도 뜻이 비슷한 알림을 찾으며, 로컬 임베딩은 별도 API 키가 필요 없습니다. 검색 방식을 바꾸면 인덱스를 다시 준비해야 하고, 일반 문서도 다시 인덱싱해야 합니다.</div></details></legend>
+      <label for="ai-embedding">검색 방식</label>
+      <select id="ai-embedding"><option value="none">임베딩 없이 · 키워드 검색</option><option value="local">이 Mac의 로컬 임베딩 · 의미 + 키워드 검색</option><option value="openai">OpenAI 임베딩 · 의미 + 키워드 검색</option></select>
+      <div id="ai-embedding-key-field" hidden><label for="ai-embedding-key">검색용 OpenAI API 키</label><input id="ai-embedding-key" type="password" autocomplete="new-password" maxlength="4096" placeholder="변경할 때만 입력"><p id="ai-embedding-key-status" class="field-status" role="status"></p></div>
+      <p id="ai-local-status" class="field-status" role="status"></p>
+    </fieldset>
+    <div class="settings-actions">
+      <p id="ai-settings-result" class="field-status" role="status"></p>
+      <button id="ai-save" type="submit" class="btn btn-solid">설정 저장</button>
+    </div>
+  </form>
 </section>
 
 </main>
 
-<footer>등록 문구와 AI 검토 의견을 구분합니다. 검색 결과가 재사용 확정을 의미하지는 않습니다.</footer>
 </div>
 
 <dialog id="catalog-detail" aria-labelledby="catalog-detail-title">
-  <form method="dialog"><div class="section-title"><h2 id="catalog-detail-title">코드 상세</h2><button class="btn" type="submit">닫기</button></div></form>
+  <form method="dialog" class="dialog-head"><h2 id="catalog-detail-title">코드 상세</h2><button class="btn btn-quiet" type="submit">닫기</button></form>
   <div id="catalog-detail-content"></div>
 </dialog>
-<dialog id="approval">
+<dialog id="approval" aria-labelledby="approval-title">
   <form method="dialog">
-    <h2>승인된 번호로 등록</h2>
+    <h2 id="approval-title">승인된 번호로 등록</h2>
+    <p class="dialog-lead">아래 초안 문구를 확정된 코드번호로 정식 등록합니다. 등록 후에는 초안을 수정할 수 없습니다.</p>
     <p id="approve-message"></p>
-    <label for="approve-code">확정된 코드번호<input id="approve-code" placeholder="예: AT-2001" required></label>
+    <label for="approve-code">확정된 코드번호<input id="approve-code" placeholder="예: AT-2001" required autocomplete="off"></label>
     <label for="approve-reason">등록 사유<input id="approve-reason" required maxlength="1000"></label>
     <label class="check" for="duplicate-ack"><input id="duplicate-ack" type="checkbox"><span>유사·중복 후보와 노출 조건을 검토했습니다.</span></label>
     <label class="check" for="external-ack"><input id="external-ack" type="checkbox"><span>기존 엑셀 관리 절차에서 번호를 확정했습니다.</span></label>
-    <div class="toolbar">
+    <p id="approve-error" class="dialog-error" role="alert" hidden></p>
+    <div class="dialog-actions">
       <button value="cancel" class="btn" type="submit" formnovalidate>취소</button>
       <button id="approve-submit" type="button" class="btn btn-solid">등록 확정</button>
     </div>
   </form>
 </dialog>
 
-<script src="vendor/gsap.min.js" defer></script>
-<script src="vendor/ScrollTrigger.min.js" defer></script>
-<script src="vendor/experience.js" defer></script>
 <script src="app.js" defer></script>
-<script src="motion.js" defer></script>
+<script src="interactions.js" defer></script>
 </body>
 </html>

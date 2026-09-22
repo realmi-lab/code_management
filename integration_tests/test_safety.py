@@ -227,3 +227,26 @@ async def test_explanation_format_repair_shares_one_retry_and_keeps_guards(safet
     assert 'response_schema' in caplog.text and 'json_invalid' in caplog.text
     assert 'PRIVATE ANSWER' not in caplog.text and 'PRIVATE ANSWER' not in calls[1].kwargs['system_prompt']
     llm.client.close.assert_awaited_once()
+
+@pytest.mark.asyncio
+@pytest.mark.parametrize('configured',[True,False])
+async def test_env_judge_model_replaces_only_the_judge_stages(safety,monkeypatch,configured):
+    from code_agent.operations import TrackedLLM
+    from code_agent import routing
+    answers={'faithfulness':'faithfulness_score: 1\nverdict: FAITHFUL','grounding':'grounded_ratio: 1\nverdict: PASS'}
+    def answer(prompt,system_prompt=None):return answers['grounding' if 'grounded_ratio' in prompt else 'faithfulness']
+    generation=SimpleNamespace(generate=AsyncMock(side_effect=answer),model='generation-model')
+    judge_prompts=[]
+    class FakeJudge:
+        model='synthetic/judge-model'
+        def __init__(self):self.last_usage=None
+        async def generate(self,prompt,system_prompt=None):
+            judge_prompts.append(prompt);return answer(prompt)
+    monkeypatch.setattr(routing,'JudgeLLM',FakeJudge)
+    if configured:monkeypatch.setenv('CODE_LLM_JUDGE_MODEL','synthetic/judge-model')
+    else:monkeypatch.delenv('CODE_LLM_JUDGE_MODEL',raising=False);monkeypatch.delenv('CODE_LLM_JUDGE_REASONING_EFFORT',raising=False)
+    await safety.validate(Explanation(text='인증 안내입니다.',references=['AT-1923']),{'catalog':[{'code':'AT-1923','message':'인증 안내입니다.'}]},TrackedLLM(generation,'Explanation'))
+    if configured:
+        assert len(judge_prompts)==2 and generation.generate.await_count==0
+    else:
+        assert not judge_prompts and generation.generate.await_count==2

@@ -55,18 +55,20 @@ async def rebuild(namespace="production"):
                     if exists.status_code==404:
                         created=await es.put('/'+index_name,json=MAPPING);created.raise_for_status()
                     else: exists.raise_for_status()
+                    safety=CatalogSafety()
                     for start in range(0,len(rows),32):
-                        group=rows[start:start+32]; safety=CatalogSafety(); contents=[safety.redact(text_for(v)) for v in group]
+                        group=rows[start:start+32]; contents=[safety.redact(text_for(v)) for v in group]
                         if keyword_only():vectors=[None]*len(group)
                         else:
                             vectors=await embedder.embed_documents(contents);validate_vectors(vectors,len(group))
-                        bulk=[]
+                        bulk=[];params=[]
+                        for offset,(rec,content,vector) in enumerate(zip(group,contents,vectors)):
+                            ident=str(uuid.uuid4()); meta={'code':rec['code'],'revision':rec['revision'],'catalog_version':s['version']}
+                            params.append({'id':ident,'snapshot':snapshot,'content':content,'idx':start+offset,'meta':json.dumps(meta,ensure_ascii=False),'embedding':str(vector) if vector is not None else None})
+                            bulk.extend([json.dumps({'index':{'_index':index_name,'_id':ident}}),json.dumps({'chunk_id':ident,'document_id':snapshot,'content':content,'metadata':meta},ensure_ascii=False)])
+                        # One executemany per batch instead of one round-trip per row.
                         with store.engine.begin() as c:
-                            for offset,(rec,content,vector) in enumerate(zip(group,contents,vectors)):
-                                ident=str(uuid.uuid4()); meta={'code':rec['code'],'revision':rec['revision'],'catalog_version':s['version']}
-                                c.execute(text('INSERT INTO cm_search_chunks (id,document_id,content,chunk_index,metadata,embedding) VALUES (:id,:snapshot,:content,:idx,CAST(:meta AS json),CAST(:embedding AS vector))'),
-                                    {'id':ident,'snapshot':snapshot,'content':content,'idx':start+offset,'meta':json.dumps(meta,ensure_ascii=False),'embedding':str(vector) if vector is not None else None})
-                                bulk.extend([json.dumps({'index':{'_index':index_name,'_id':ident}}),json.dumps({'chunk_id':ident,'document_id':snapshot,'content':content,'metadata':meta},ensure_ascii=False)])
+                            c.execute(text('INSERT INTO cm_search_chunks (id,document_id,content,chunk_index,metadata,embedding) VALUES (:id,:snapshot,:content,:idx,CAST(:meta AS json),CAST(:embedding AS vector))'),params)
                         response=await es.post('/_bulk',content='\n'.join(bulk)+'\n',headers={'Content-Type':'application/x-ndjson'})
                         response.raise_for_status()
                         if response.json().get('errors'): raise RuntimeError('Elasticsearch rejected a batch; active index unchanged.')

@@ -8,7 +8,7 @@ ROOT=Path(__file__).resolve().parents[1]
 sys.path[:0]=[str(ROOT/'extensions'),str(ROOT/'integration_tests')]
 from code_agent.store import Store
 from test_api import app_for
-from conftest import seed
+from conftest import seed,use_list
 from fastapi.testclient import TestClient
 from playwright.sync_api import sync_playwright,expect
 BRIDGE=r'''
@@ -25,6 +25,8 @@ window.fetch=async(url,options={})=>{
 };
 '''
 def main():
+ # The approval step checks the Excel confirmation box, which only renders in excel authority.
+ os.environ['CODE_CATALOG_AUTHORITY']='excel'
  out=Path(os.getenv('VERIFICATION_DIR',str(ROOT/'docs/verification')));out.mkdir(parents=True,exist_ok=True)
  checks=[];errors=[]
  report={'passed':False,'browser':'Chromium','transport':'offline assets + real FastAPI TestClient bridge','auth':'synthetic dependency + synthetic postMessage; NOT original JWT/Next','model':'ScriptedGateway','clipboard':'test double','checks':checks,'javascript_errors':errors}
@@ -44,7 +46,7 @@ def main():
      r=client.request(v['method'],v['path'],**kwargs)
      if r.status_code>=400:print('TEST_API_ERROR',v['path'],r.status_code,r.text[:500])
      return {'status':r.status_code,'headers':dict(r.headers),'body':base64.b64encode(r.content).decode()}
-    b=p.chromium.launch(executable_path=os.getenv('CHROMIUM_PATH','/usr/bin/chromium'),headless=True,args=['--no-sandbox'])
+    b=p.chromium.launch(executable_path=os.getenv('CHROMIUM_PATH') or ('/usr/bin/chromium' if os.path.exists('/usr/bin/chromium') else None),headless=True,args=['--no-sandbox'])
     ctx=b.new_context(viewport={'width':1320,'height':960});ctx.expose_binding('__api',bridge)
     page=ctx.new_page();page.on('pageerror',lambda e:errors.append(str(e)))
     html=(ROOT/'extensions/code_agent/static/index.html').read_text()
@@ -53,20 +55,19 @@ def main():
     page.add_script_tag(content=BRIDGE);page.add_script_tag(path=str(ROOT/'extensions/code_agent/static/app.js'))
     page.evaluate("window.dispatchEvent(new MessageEvent('message',{data:{type:'catalog-auth',token:'test-admin'},origin:location.origin,source:window}));")
     ui=page;expect(ui.locator('#app')).to_be_visible();checked('workspace_render_and_test_identity')
-    ui.locator('#catalog-namespace').select_option('production')
+    use_list(ui,'production')
     ui.locator('#question').fill('AT-1923 문구 알려줘');ui.locator('#send').click()
     expect(ui.locator('.message').first).to_have_text('메뉴확인 30초 이후에 인증해주세요.');checked('exact_original_message')
     ui.get_by_role('button',name='기획서에 복사').first.click()
     page.wait_for_function("window.__copied.includes('메뉴확인 30초 이후에 인증해주세요.')");checked('copy_payload_original_preserved')
     ui.locator('#question').fill('인증 대기 알림 찾아줘');ui.locator('#send').click()
     expect(ui.locator('.result-group')).to_have_count(2);expect(ui.locator('#send')).to_have_text('보내기 ↑');checked('conversational_search')
-    ui.locator('#ask-form details').evaluate('(e)=>e.open=true')
-    ui.locator('#proposed').fill('30초 이내에 인증해주세요.');ui.locator('#action').select_option('compare')
-    ui.locator('#question').fill('두 번째 후보와 비교해줘');ui.locator('#send').click()
+    expect(ui.locator('#proposed, #ask-form details')).to_have_count(0)  # options menu removed
+    ui.locator('#action').select_option('compare')
+    ui.locator('#question').fill('두 번째 후보와 "30초 이내에 인증해주세요." 비교해줘');ui.locator('#send').click()
     expect(ui.locator('.difference').last).to_contain_text('조건');checked('ordinal_selection_and_condition_comparison')
-    ui.locator('#proposed').fill('메뉴를 확인하고 다시 진행해주세요.');ui.locator('#action').select_option('draft');ui.locator('#question').fill('이 문구로 새 초안 작성해줘');ui.locator('#send').click()
+    ui.locator('#action').select_option('draft');ui.locator('#question').fill('"메뉴를 확인하고 다시 진행해주세요." 이 문구로 새 초안 작성해줘');ui.locator('#send').click()
     expect(ui.locator('.draft-card .message')).to_have_text('메뉴를 확인하고 다시 진행해주세요.');checked('draft_not_registered_automatically')
-    ui.locator('#ask-form details').evaluate('(e)=>e.open=false')
     ui.locator('#messages').evaluate("e=>e.scrollTo({top:e.scrollHeight,behavior:'instant'})")
     # Capture the resting frame: entry motion is still running right after the turn.
     page.wait_for_timeout(600)
@@ -74,7 +75,7 @@ def main():
     ui.locator('[data-view=drafts]').click();expect(ui.locator('#draft-list .card')).to_have_count(1)
     ui.get_by_role('button',name='등록 검토',exact=True).click();ui.locator('#approve-code').fill('AT-2000');ui.locator('#approve-reason').fill('합성 브라우저 테스트 승인');ui.locator('#duplicate-ack').check();ui.locator('#external-ack').check();ui.locator('#approve-submit').click()
     expect(ui.locator('#draft-list')).to_contain_text('등록됨 AT-2000');checked('explicit_admin_registration')
-    ui.locator('[data-view=catalog]').click();ui.locator('#catalog-namespace').select_option('production');expect(ui.locator('#catalog-list')).to_contain_text('AT-2000');checked('registered_item_in_catalogue')
+    ui.locator('[data-view=catalog]').click();use_list(ui,'production');expect(ui.locator('#catalog-list')).to_contain_text('AT-2000');checked('registered_item_in_catalogue')
     expect(ui.locator('[data-view=imports], #imports, input[type=file]')).to_have_count(0);checked('file_import_controls_removed')
     seed(store,'코드번호,등록문구\nAT-2001,<img src=x onerror=window.__injected=1>테스트 추가 알림\n')
     ui.locator('[data-view=catalog]').click();expect(ui.locator('#catalog-list')).to_contain_text('<img src=x onerror=window.__injected=1>')

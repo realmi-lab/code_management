@@ -39,11 +39,11 @@
       "passed": true
     },
     {
-      "name": "file_input_preview_commit",
+      "name": "file_import_controls_removed",
       "passed": true
     },
     {
-      "name": "uploaded_html_rendered_as_text_not_code",
+      "name": "stored_html_rendered_as_text_not_code",
       "passed": true
     },
     {

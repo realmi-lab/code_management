@@ -140,7 +140,7 @@ async def test_full_orchestrator_and_snapshot_scoped_engines(monkeypatch,seeded)
     llm=NS(client=NS(close=AsyncMock()));g._llm=AsyncMock(return_value=llm)
     found,trace=await g.search('인증')
     assert found[0]['message']=='메뉴확인 30초 이후에 인증해주세요.' and len(found)==1
-    assert constructed['engine']['reranker'] is reranker and constructed['engine']['langfuse_monitor'] is monitor
+    assert constructed['engine']['reranker'].base is reranker and constructed['engine']['langfuse_monitor'] is monitor
     assert constructed['keyword']['index_name']==INDEX
     assert [x[-1] for x in calls]==[snapshot,snapshot]
     assert 'cm_search_chunks' in str(constructed['engine']['vector_engine']._FILTERED_SQL)

@@ -15,7 +15,8 @@ def main():
     sys.dont_write_bytecode = True
     verify_source(ROOT / 'upstream', lock_spec())
     values = load_env(ROOT / '.env')
-    for key in ('CODE_LLM_PROVIDER', 'COMMANDCODE_API_KEY', 'CODE_LLM_MODEL', 'CODE_LLM_REASONING_EFFORT'):
+    for key in ('CODE_LLM_PROVIDER', 'COMMANDCODE_API_KEY', 'CODE_LLM_MODEL', 'CODE_LLM_REASONING_EFFORT',
+                'CODE_LLM_JUDGE_MODEL', 'CODE_LLM_JUDGE_REASONING_EFFORT'):
         if key in values:
             os.environ[key] = values[key]
     if os.environ.get('CODE_LLM_PROVIDER') != 'commandcode':

@@ -111,3 +111,37 @@ def test_changed_source_rejected(patched_source):
     patch = load('provider_patch_second', ROOT / 'deploy/patch_provider.py')
     with pytest.raises(RuntimeError, match='contract changed'):
         patch.apply(patched_source)
+
+
+def test_judge_defaults_to_generation_model(commandcode, monkeypatch):
+    monkeypatch.delenv('CODE_LLM_JUDGE_MODEL', raising=False)
+    monkeypatch.delenv('CODE_LLM_JUDGE_REASONING_EFFORT', raising=False)
+    assert provider.judge_options() == {} and not provider.judge_configured()
+    with provider.judge_stage():
+        assert provider.reasoning_options() == {'reasoning_effort': 'high'}
+    assert provider.public_settings()['judge_model'] == provider.COMMANDCODE_MODEL
+
+
+def test_judge_overrides_apply_only_inside_judge_stage(commandcode, monkeypatch):
+    monkeypatch.setenv('CODE_LLM_JUDGE_MODEL', 'synthetic/judge-model')
+    monkeypatch.setenv('CODE_LLM_JUDGE_REASONING_EFFORT', 'low')
+    assert provider.judge_configured() and provider.judge_model_name() == 'synthetic/judge-model'
+    assert provider.reasoning_options() == {'reasoning_effort': 'high'}
+    with provider.judge_stage():
+        assert provider.reasoning_options() == {'reasoning_effort': 'low'}
+    assert provider.reasoning_options() == {'reasoning_effort': 'high'}
+    # Generation, HyDE and RAGAS evaluation keep the administrator model.
+    assert provider.model_name(None) == provider.COMMANDCODE_MODEL
+    assert provider.evaluation_options()['model'] == provider.COMMANDCODE_MODEL
+    assert provider.public_settings()['judge_model'] == 'synthetic/judge-model'
+    monkeypatch.setenv('CODE_LLM_JUDGE_REASONING_EFFORT', 'none')
+    with provider.judge_stage():
+        assert provider.reasoning_options() == {}
+
+
+@pytest.mark.parametrize('name,value', [('CODE_LLM_JUDGE_MODEL', 'bad model name!'),
+                                        ('CODE_LLM_JUDGE_REASONING_EFFORT', 'minimal')])
+def test_invalid_judge_settings_fail_closed(commandcode, monkeypatch, name, value):
+    monkeypatch.setenv(name, value)
+    with pytest.raises(ValueError, match=name):
+        provider.judge_options()

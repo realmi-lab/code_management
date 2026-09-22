@@ -1,5 +1,6 @@
 """Explicit text-generation provider selection; embeddings stay independent."""
 import os
+import re
 from contextlib import contextmanager
 from contextvars import ContextVar
 from . import ai_config
@@ -46,12 +47,55 @@ def model_name(fallback):
     return fallback if fallback is not None else c['model']
 
 
+_judge_stage = ContextVar('code_agent_judge_stage', default=False)
+JUDGE_MODEL_PATTERN = r'[A-Za-z0-9_./:-]{1,160}'
+
+
+@contextmanager
+def judge_stage():
+    """Mark faithfulness/grounding judge calls so CODE_LLM_JUDGE_* applies to them only."""
+    token = _judge_stage.set(True)
+    try:
+        yield
+    finally:
+        _judge_stage.reset(token)
+
+
+def judge_options():
+    """Env-only judge overrides; empty means the judge shares the generation model and effort."""
+    options = {}
+    model = os.getenv('CODE_LLM_JUDGE_MODEL', '').strip()
+    if model:
+        if not re.fullmatch(JUDGE_MODEL_PATTERN, model):
+            raise ValueError('Unsupported CODE_LLM_JUDGE_MODEL')
+        options['model'] = model
+    effort = os.getenv('CODE_LLM_JUDGE_REASONING_EFFORT', '').strip()
+    if effort:
+        if effort not in ('low', 'medium', 'high', 'none'):
+            raise ValueError('Unsupported CODE_LLM_JUDGE_REASONING_EFFORT')
+        options['reasoning_effort'] = effort
+    return options
+
+
+def judge_model_name():
+    return judge_options().get('model')
+
+
+def judge_configured():
+    return bool(judge_options())
+
+
 def reasoning_options():
     if not commandcode_enabled():
         return {}
     effort = os.getenv('CODE_LLM_REASONING_EFFORT', 'high')
     if effort not in ('low', 'medium', 'high'):
         raise ValueError('Unsupported CODE_LLM_REASONING_EFFORT')
+    if _judge_stage.get():
+        judge = judge_options().get('reasoning_effort')
+        if judge == 'none':
+            return {}
+        effort = judge or effort
     return {'reasoning_effort': effort}
 
 
@@ -99,7 +143,8 @@ def apply_model_settings(settings):
 
 def public_settings():
     return {'provider': selected_provider(),
-            'model': model_name(None), **reasoning_options()}
+            'model': model_name(None), **reasoning_options(),
+            'judge_model': judge_model_name() or model_name(None)}
 
 
 def evaluation_llm():

@@ -76,15 +76,16 @@ class Agent:
         return None
     async def turn(self,actor,thread_id,request:Turn):
         fingerprint=digest(request.model_dump(mode='json',exclude={'expected_version'}))
-        replay=self.store.replay(actor,thread_id,str(request.request_id),fingerprint)
-        if replay is not None: return replay
+        # Read (and ownership-check) the thread once; replay reuses that check.
         t=self.store.get_thread(actor,thread_id)
+        replay=self.store.replay(actor,thread_id,str(request.request_id),fingerprint,checked=True)
+        if replay is not None: return replay
         if request.expected_version!=t['version']: raise DomainError('대화가 변경되었습니다. 새로 불러온 뒤 다시 보내주세요.')
         version=self.store.status()['version']; selected=self._resolve(t,request)
         explicit=list(dict.fromkeys(c.upper() for c in CODE_IN_TEXT.findall(request.text)))
         if len(explicit)>20: raise DomainError('한 번에 코드 20개 이하로 조회해주세요.',422)
         plan=Plan(action='search',query=request.text,proposed_message=request.proposed_message,menu=request.menu,trigger=request.trigger)
-        trace=[]; candidates=[]; missing=[]; comparison=[]; new_draft=None
+        trace=[]; candidates=[]; missing=[]; comparison=[]; new_draft=None; dropped=0
         if request.action!='auto': plan.action=request.action
         elif not (explicit and re.fullmatch(r'[\s\w가-힣?.,!\-]+',request.text) and not requests_authoring(request.text) and not any(x in request.text for x in ('비교','차이'))):
             plan=await self.gateway.json(Plan,PLANNER,{'user':request.text,'history':t['history'][-10:], 'candidates':t['candidates'], 'previous_draft':t.get('draft')})
@@ -101,14 +102,17 @@ class Agent:
                 raise DomainError('AI가 사용자가 작성하지 않은 비교 문구를 넣어 차단했습니다. 문구를 직접 입력해주세요.',502)
         if selected and plan.action=='search' and request.action=='auto': plan.action='explain'
         if selected or explicit:
-            for code in list(dict.fromkeys(([selected] if selected else [])+explicit)):
-                rec=self.store.get_code(code)
+            wanted=list(dict.fromkeys(([selected] if selected else [])+explicit))
+            found=self.store.get_codes(wanted)
+            for code in wanted:
+                rec=found.get(code)
                 if rec: candidates.append(rec)
                 else: missing.append(code)
             trace.append({'name':'exact_lookup','count':len(candidates)})
         elif plan.action=='explain' and t['candidates']:
+            found=self.store.get_codes([item['code'] for item in t['candidates']])
             for item in t['candidates']:
-                rec=self.store.get_code(item['code'])
+                rec=found.get(item['code'])
                 if rec and rec['revision']==item['revision']: candidates.append(rec)
             if not candidates: raise DomainError('이전 후보가 변경되었습니다. 다시 검색해주세요.')
         else:
@@ -121,14 +125,15 @@ class Agent:
                 answer='비교할 새 문구를 입력해주세요. 기존 후보는 아래에 표시했습니다.'
             else:
                 comparison=[dict(code=c['code'],**compare_message(proposal,c,menu=plan.menu,trigger=plan.trigger)) for c in candidates]
-                answer=await self.explain(request.text,candidates,comparison)
+                answer,_=await self.explain(request.text,candidates,comparison)
         elif plan.action=='draft':
             if plan.proposed_message:
                 wording=Wording(message=plan.proposed_message,menu=plan.menu,trigger=plan.trigger,explanation='기획자가 입력한 원문을 보존한 미등록 초안입니다.')
             else:
                 wording=await self.gateway.json(Wording,WRITER,{'request':request.text,'history':t['history'][-8:],'previous_draft':t.get('draft'),'candidates':candidates})
                 constraints=request.text
-                if not signature(constraints)['quantities'] and not signature(constraints)['placeholders'] and t.get('draft'):
+                requested=signature(constraints)
+                if not requested['quantities'] and not requested['placeholders'] and t.get('draft'):
                     constraints=t['draft']['payload']['message']
                 self.validate_wording(constraints,wording.message)
             candidates,search_trace=await self.gateway.search(wording.message)
@@ -138,26 +143,32 @@ class Agent:
             answer='미등록 초안을 작성했습니다. 아래 유사 후보와 사용 조건을 검토한 뒤 등록을 요청하세요.'
             if wording.explanation: answer+='\n'+wording.explanation
         elif candidates and (plan.action=='explain' or not explicit):
-            answer=await self.explain(request.text,candidates,[])
+            answer,cited=await self.explain(request.text,candidates,[])
+            if plan.action=='search' and not cited:
+                # The grounded explanation cited none of the hits: the reranker gate
+                # passed unrelated wording (e.g. a weather question). Do not carry
+                # those hits forward as conversation candidates.
+                dropped=len(candidates); trace.append({'name':'no_relevant_candidate','count':dropped}); candidates=[]
         elif candidates:
             answer='등록된 코드의 원문을 찾았습니다. 아래 문구는 DB에 저장된 그대로입니다.'
         else:
-            _, registered = self.store.snapshot(retired=True)
-            if not registered:
+            # Only emptiness matters here; do not load the whole catalogue.
+            if not self.store.has_codes():
                 answer='연결된 DB에 알림 코드가 없습니다. DB 데이터 연동 상태를 확인해주세요.' if self.store.namespace!='demo' else '샘플 목록이 비어 있습니다. 실제 목록과 샘플 목록의 상태를 확인해주세요.'
             else:
                 answer='일치하는 알림 코드를 찾지 못했습니다. 코드번호나 핵심 단어로 다시 검색하거나 코드 목록에서 확인해주세요.'
         if missing: answer+='\n미등록 코드: '+', '.join(missing)
         result={'action':plan.action,'answer':answer,'candidates':candidates,'comparisons':comparison,'missing_codes':missing,
-                'selected_code':selected,'catalog_version':version,'trace':trace,'draft':None,'ai_used':bool(new_draft) or (bool(candidates) and (plan.action in ('compare','explain') or not explicit))}
+                'selected_code':selected,'catalog_version':version,'trace':trace,'draft':None,'ai_used':bool(new_draft) or bool(dropped) or (bool(candidates) and (plan.action in ('compare','explain') or not explicit))}
         return self.store.finish_turn(actor,t,str(request.request_id),fingerprint,request.text,result,new_draft)
     async def explain(self,query,candidates,comparison):
-        if not candidates: return '관련 후보를 확인하지 못했습니다. 다른 표현으로 검색해주세요.'
+        """Return (text, codes the explanation actually cited). Cited codes are always a subset of candidates."""
+        if not candidates: return '관련 후보를 확인하지 못했습니다. 다른 표현으로 검색해주세요.',set()
         result=await self.gateway.json(Explanation,EXPLAINER,{'question':query,'catalog':candidates,'rule_comparison':comparison})
         allowed={c['code'] for c in candidates}
-        mentioned={v.upper() for v in CODE_IN_TEXT.findall(result.text)}|set(result.references)
+        mentioned={v.upper() for v in CODE_IN_TEXT.findall(result.text)}|{v.upper() for v in result.references}
         if not mentioned<=allowed: raise DomainError('AI 설명에 조회되지 않은 코드가 포함되어 결과를 차단했습니다. 다시 시도해주세요.',502)
-        return result.text
+        return result.text,mentioned
     @staticmethod
     def validate_wording(request,message):
         if CODE_IN_TEXT.search(message): raise DomainError('AI가 초안에 임의 코드번호를 넣어 차단했습니다.',502)

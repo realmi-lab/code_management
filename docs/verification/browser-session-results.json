@@ -1,0 +1,50 @@
+{
+  "browser": "Chromium",
+  "transport": "real-loopback-HTTP",
+  "authentication": "test dependency; NOT upstream JWT",
+  "retrieval_and_LLM": "ScriptedGateway test double",
+  "checks": [
+    {
+      "name": "remount_restores_list_and_open_conversation",
+      "passed": true
+    },
+    {
+      "name": "in_flight_turn_resumed_without_resend",
+      "passed": true
+    },
+    {
+      "name": "expired_in_flight_turn_discarded",
+      "passed": true
+    },
+    {
+      "name": "remount_restores_tab_and_comparison",
+      "passed": true
+    },
+    {
+      "name": "help_popover_hover_click_escape",
+      "passed": true
+    },
+    {
+      "name": "thread_title_tooltip_on_hover",
+      "passed": true
+    },
+    {
+      "name": "apple_style_indicator_reveal_headline_tilt",
+      "passed": true
+    },
+    {
+      "name": "reduced_motion_disables_decorative_motion",
+      "passed": true
+    },
+    {
+      "name": "mobile_popover_inside_viewport",
+      "passed": true
+    },
+    {
+      "name": "no_browser_javascript_errors",
+      "passed": true
+    }
+  ],
+  "passed": true,
+  "javascript_errors": []
+}

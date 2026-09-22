@@ -3,8 +3,64 @@
   "transport": "real-loopback-HTTP",
   "authentication": "test dependency; NOT upstream JWT",
   "retrieval_and_LLM": "ScriptedGateway test double",
-  "checks": [],
-  "passed": false,
-  "error": "Error: Page.goto: net::ERR_BLOCKED_BY_ADMINISTRATOR at http://127.0.0.1:48983/test-host\nCall log:\n  - navigating to \"http://127.0.0.1:48983/test-host\", waiting until \"networkidle\"\n",
-  "traceback": "Traceback (most recent call last):\n  File \"/mnt/data/final_work/code_management/integration_tests/browser_check.py\", line 41, in main\n    page.goto(f'http://127.0.0.1:{port}/test-host',wait_until='networkidle')\n    ~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n  File \"/opt/pyvenv/lib/python3.13/site-packages/playwright/sync_api/_generated.py\", line 9050, in goto\n    self._sync(\n    ~~~~~~~~~~^\n        self._impl_obj.goto(\n        ^^^^^^^^^^^^^^^^^^^^\n            url=url, timeout=timeout, waitUntil=wait_until, referer=referer\n            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n        )\n        ^\n    )\n    ^\n  File \"/opt/pyvenv/lib/python3.13/site-packages/playwright/_impl/_sync_base.py\", line 115, in _sync\n    return task.result()\n           ~~~~~~~~~~~^^\n  File \"/opt/pyvenv/lib/python3.13/site-packages/playwright/_impl/_page.py\", line 552, in goto\n    return await self._main_frame.goto(**locals_to_params(locals()))\n           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n  File \"/opt/pyvenv/lib/python3.13/site-packages/playwright/_impl/_frame.py\", line 153, in goto\n    await self._channel.send(\n        \"goto\", self._navigation_timeout, locals_to_params(locals())\n    )\n  File \"/opt/pyvenv/lib/python3.13/site-packages/playwright/_impl/_connection.py\", line 69, in send\n    return await self._connection.wrap_api_call(\n           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n    ...<3 lines>...\n    )\n    ^\n  File \"/opt/pyvenv/lib/python3.13/site-packages/playwright/_impl/_connection.py\", line 559, in wrap_api_call\n    raise rewrite_error(error, f\"{parsed_st['apiName']}: {error}\") from None\nplaywright._impl._errors.Error: Page.goto: net::ERR_BLOCKED_BY_ADMINISTRATOR at http://127.0.0.1:48983/test-host\nCall log:\n  - navigating to \"http://127.0.0.1:48983/test-host\", waiting until \"networkidle\"\n\n"
+  "checks": [
+    {
+      "name": "same_origin_auth_handoff",
+      "passed": true
+    },
+    {
+      "name": "exact_original_message",
+      "passed": true
+    },
+    {
+      "name": "conversational_search",
+      "passed": true
+    },
+    {
+      "name": "followup_ordinal_and_condition_comparison",
+      "passed": true
+    },
+    {
+      "name": "new_draft_not_automatically_registered",
+      "passed": true
+    },
+    {
+      "name": "explicit_admin_registration",
+      "passed": true
+    },
+    {
+      "name": "registered_catalogue_updated",
+      "passed": true
+    },
+    {
+      "name": "restored_catalog_compare_review_and_isolated_github_samples",
+      "passed": true
+    },
+    {
+      "name": "file_import_controls_removed",
+      "passed": true
+    },
+    {
+      "name": "approval_audit_user_and_reason",
+      "passed": true
+    },
+    {
+      "name": "audit_table_actor_and_before_after_detail",
+      "passed": true
+    },
+    {
+      "name": "conversation_persisted_and_restored",
+      "passed": true
+    },
+    {
+      "name": "mobile_390px_no_horizontal_overflow",
+      "passed": true
+    },
+    {
+      "name": "no_browser_javascript_errors",
+      "passed": true
+    }
+  ],
+  "passed": true,
+  "javascript_errors": []
 }

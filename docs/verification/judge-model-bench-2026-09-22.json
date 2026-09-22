@@ -1,0 +1,1024 @@
+{
+ "date": "2026-09-22",
+ "scope": "synthetic answer/evidence pair, real Command Code calls from a throwaway container of the api image with the working tree mounted; not the production evidence format",
+ "runs": {
+  "bench1_baseline_and_out_of_plan": {
+   "note": "summarized from terminal output; answer had one extra interpretive sentence",
+   "deepseek/deepseek-v4.1-flash effort=low": {
+    "turn_judge_s": [
+     20.5,
+     44.1,
+     29.9
+    ],
+    "faith": [
+     [
+      "blocked",
+      20.5,
+      4373
+     ],
+     [
+      "blocked",
+      44.1,
+      9460
+     ],
+     [
+      "passed",
+      29.9,
+      6284
+     ]
+    ],
+    "ground": [
+     [
+      "passed",
+      4.0,
+      368
+     ],
+     [
+      "passed",
+      4.3,
+      634
+     ],
+     [
+      "passed",
+      4.4,
+      616
+     ]
+    ]
+   },
+   "deepseek/deepseek-v4.1-flash effort=none": {
+    "turn_judge_s": [
+     23.5,
+     17.3,
+     19.0
+    ],
+    "faith": [
+     [
+      "passed",
+      23.5,
+      4923
+     ],
+     [
+      "passed",
+      17.3,
+      3275
+     ],
+     [
+      "blocked",
+      19.0,
+      3415
+     ]
+    ],
+    "ground": [
+     [
+      "passed",
+      4.0,
+      476
+     ],
+     [
+      "passed",
+      3.6,
+      406
+     ],
+     [
+      "passed",
+      4.4,
+      424
+     ]
+    ]
+   },
+   "claude-haiku-4-5-20251001": "400: must be called via /provider/v1/messages (Anthropic Messages API)",
+   "gpt-5.4-mini": "403 MODEL_NOT_IN_PLAN",
+   "google/gemini-3.5-flash-lite": "403 MODEL_NOT_IN_PLAN",
+   "google/gemini-3.1-flash-lite": "403 MODEL_NOT_IN_PLAN",
+   "MiniMaxAI/MiniMax-M2.7": "400 no available providers"
+  },
+  "bench2_good_answer_13_models": [
+   {
+    "model": "deepseek/deepseek-v4-flash",
+    "turn_judge_s": [
+     5.4,
+     15.4,
+     12.6
+    ],
+    "faith": [
+     [
+      "blocked",
+      5.4,
+      695
+     ],
+     [
+      "blocked",
+      15.4,
+      2780
+     ],
+     [
+      "blocked",
+      12.6,
+      2432
+     ]
+    ],
+    "ground": [
+     [
+      "passed",
+      3.9,
+      349
+     ],
+     [
+      "passed",
+      2.7,
+      161
+     ],
+     [
+      "passed",
+      2.7,
+      222
+     ]
+    ],
+    "errors": []
+   },
+   {
+    "model": "deepseek/deepseek-v4-flash-fast",
+    "turn_judge_s": [
+     46.1,
+     10.2,
+     10.9
+    ],
+    "faith": [
+     [
+      "passed",
+      46.0,
+      3989
+     ],
+     [
+      "blocked",
+      10.2,
+      796
+     ],
+     [
+      "blocked",
+      10.9,
+      1011
+     ]
+    ],
+    "ground": [
+     [
+      "passed",
+      2.3,
+      65
+     ],
+     [
+      "passed",
+      2.8,
+      363
+     ],
+     [
+      "passed",
+      2.4,
+      281
+     ]
+    ],
+    "errors": []
+   },
+   {
+    "model": "Qwen/Qwen3.7-Flash",
+    "turn_judge_s": [
+     29.5,
+     17.0,
+     23.1
+    ],
+    "faith": [
+     [
+      "passed",
+      29.4,
+      1838
+     ],
+     [
+      "passed",
+      17.0,
+      1105
+     ],
+     [
+      "passed",
+      23.1,
+      1493
+     ]
+    ],
+    "ground": [
+     [
+      "passed",
+      20.7,
+      1132
+     ],
+     [
+      "passed",
+      11.1,
+      634
+     ],
+     [
+      "passed",
+      18.6,
+      1101
+     ]
+    ],
+    "errors": []
+   },
+   {
+    "model": "Qwen/Qwen3.8-Flash",
+    "turn_judge_s": [
+     120.0,
+     31.2,
+     43.0
+    ],
+    "faith": [
+     [
+      "error",
+      120.0,
+      null
+     ],
+     [
+      "passed",
+      31.2,
+      1556
+     ],
+     [
+      "passed",
+      43.0,
+      1677
+     ]
+    ],
+    "ground": [
+     [
+      "passed",
+      7.9,
+      151
+     ],
+     [
+      "passed",
+      8.3,
+      208
+     ],
+     [
+      "passed",
+      8.6,
+      127
+     ]
+    ],
+    "errors": [
+     "TimeoutError: "
+    ]
+   },
+   {
+    "model": "z-ai/glm-5.3-flash",
+    "turn_judge_s": [
+     40.3,
+     23.6,
+     54.5
+    ],
+    "faith": [
+     [
+      "passed",
+      40.3,
+      1306
+     ],
+     [
+      "passed",
+      23.6,
+      590
+     ],
+     [
+      "passed",
+      54.5,
+      1763
+     ]
+    ],
+    "ground": [
+     [
+      "passed",
+      5.6,
+      327
+     ],
+     [
+      "passed",
+      12.8,
+      257
+     ],
+     [
+      "passed",
+      14.9,
+      288
+     ]
+    ],
+    "errors": []
+   },
+   {
+    "model": "z-ai/glm-5.3-flashx",
+    "turn_judge_s": [
+     9.4,
+     9.5,
+     7.2
+    ],
+    "faith": [
+     [
+      "passed",
+      9.4,
+      684
+     ],
+     [
+      "passed",
+      9.5,
+      535
+     ],
+     [
+      "passed",
+      7.2,
+      401
+     ]
+    ],
+    "ground": [
+     [
+      "passed",
+      5.6,
+      333
+     ],
+     [
+      "passed",
+      7.3,
+      280
+     ],
+     [
+      "passed",
+      4.7,
+      231
+     ]
+    ],
+    "errors": []
+   },
+   {
+    "model": "xiaomi/mimo-v2.6-flash",
+    "turn_judge_s": [
+     8.9,
+     3.1,
+     6.0
+    ],
+    "faith": [
+     [
+      "passed",
+      4.5,
+      46
+     ],
+     [
+      "passed",
+      3.1,
+      15
+     ],
+     [
+      "blocked",
+      6.0,
+      86
+     ]
+    ],
+    "ground": [
+     [
+      "passed",
+      8.9,
+      45
+     ],
+     [
+      "passed",
+      2.8,
+      35
+     ],
+     [
+      "passed",
+      3.0,
+      47
+     ]
+    ],
+    "errors": []
+   },
+   {
+    "model": "stepfun/Step-3.7-Flash",
+    "turn_judge_s": [
+     11.8,
+     7.5,
+     10.2
+    ],
+    "faith": [
+     [
+      "blocked",
+      11.8,
+      422
+     ],
+     [
+      "blocked",
+      7.5,
+      421
+     ],
+     [
+      "blocked",
+      9.2,
+      566
+     ]
+    ],
+    "ground": [
+     [
+      "passed",
+      9.7,
+      265
+     ],
+     [
+      "passed",
+      4.7,
+      168
+     ],
+     [
+      "passed",
+      10.2,
+      203
+     ]
+    ],
+    "errors": []
+   },
+   {
+    "model": "inclusionai/ling-3.0-flash-sante:free",
+    "turn_judge_s": [
+     5.8,
+     3.7,
+     5.8
+    ],
+    "faith": [
+     [
+      "passed",
+      5.8,
+      620
+     ],
+     [
+      "passed",
+      3.7,
+      500
+     ],
+     [
+      "passed",
+      5.8,
+      695
+     ]
+    ],
+    "ground": [
+     [
+      "passed",
+      3.0,
+      291
+     ],
+     [
+      "passed",
+      3.2,
+      291
+     ],
+     [
+      "passed",
+      4.0,
+      291
+     ]
+    ],
+    "errors": []
+   },
+   {
+    "model": "poolside/laguna-s-2.1-free",
+    "turn_judge_s": [
+     4.3,
+     2.8,
+     6.7
+    ],
+    "faith": [
+     [
+      "passed",
+      4.3,
+      0
+     ],
+     [
+      "passed",
+      1.5,
+      0
+     ],
+     [
+      "passed",
+      6.7,
+      0
+     ]
+    ],
+    "ground": [
+     [
+      "passed",
+      3.7,
+      0
+     ],
+     [
+      "passed",
+      2.8,
+      0
+     ],
+     [
+      "passed",
+      6.0,
+      0
+     ]
+    ],
+    "errors": []
+   },
+   {
+    "model": "moonshotai/Kimi-K2.6",
+    "turn_judge_s": [
+     18.0,
+     25.1,
+     15.5
+    ],
+    "faith": [
+     [
+      "passed",
+      18.0,
+      1038
+     ],
+     [
+      "passed",
+      25.1,
+      1248
+     ],
+     [
+      "passed",
+      15.5,
+      761
+     ]
+    ],
+    "ground": [
+     [
+      "passed",
+      4.0,
+      429
+     ],
+     [
+      "passed",
+      8.2,
+      415
+     ],
+     [
+      "passed",
+      6.1,
+      404
+     ]
+    ],
+    "errors": []
+   },
+   {
+    "model": "zai-org/GLM-5.2-Fast",
+    "turn_judge_s": [
+     42.4,
+     36.7,
+     65.9
+    ],
+    "faith": [
+     [
+      "blocked",
+      42.4,
+      4670
+     ],
+     [
+      "passed",
+      36.7,
+      3352
+     ],
+     [
+      "blocked",
+      65.9,
+      6694
+     ]
+    ],
+    "ground": [
+     [
+      "passed",
+      4.4,
+      522
+     ],
+     [
+      "passed",
+      5.6,
+      632
+     ],
+     [
+      "passed",
+      6.1,
+      613
+     ]
+    ],
+    "errors": []
+   },
+   {
+    "model": "thinkingmachines/inkling-small",
+    "turn_judge_s": [
+     8.7,
+     12.0,
+     8.6
+    ],
+    "faith": [
+     [
+      "passed",
+      8.7,
+      1321
+     ],
+     [
+      "passed",
+      12.0,
+      1981
+     ],
+     [
+      "passed",
+      8.6,
+      1600
+     ]
+    ],
+    "ground": [
+     [
+      "passed",
+      1.9,
+      301
+     ],
+     [
+      "passed",
+      6.2,
+      298
+     ],
+     [
+      "passed",
+      2.4,
+      239
+     ]
+    ],
+    "errors": []
+   }
+  ],
+  "bench3_baseline_clean_and_bad_answer": [
+   {
+    "model": "deepseek/deepseek-v4.1-flash",
+    "effort": "",
+    "variant": "good",
+    "runs": 3,
+    "expected": "passed",
+    "rows": [
+     {
+      "turn_s": 22.0,
+      "faith": [
+       "blocked",
+       22.0,
+       4343,
+       "AI 결과의 근거 검증을 통과하지 못했습니다. 원문과 조건을 확인해주세요"
+      ],
+      "ground": [
+       "passed",
+       3.1,
+       266,
+       null
+      ]
+     },
+     {
+      "turn_s": 13.0,
+      "faith": [
+       "blocked",
+       13.0,
+       2354,
+       "AI 결과의 근거 검증을 통과하지 못했습니다. 원문과 조건을 확인해주세요"
+      ],
+      "ground": [
+       "passed",
+       2.8,
+       238,
+       null
+      ]
+     },
+     {
+      "turn_s": 20.4,
+      "faith": [
+       "blocked",
+       20.4,
+       3816,
+       "AI 결과의 근거 검증을 통과하지 못했습니다. 원문과 조건을 확인해주세요"
+      ],
+      "ground": [
+       "passed",
+       2.7,
+       167,
+       null
+      ]
+     }
+    ]
+   },
+   {
+    "model": "deepseek/deepseek-v4.1-flash",
+    "effort": "",
+    "variant": "bad",
+    "runs": 2,
+    "expected": "blocked",
+    "rows": [
+     {
+      "turn_s": 11.3,
+      "faith": [
+       "blocked",
+       11.2,
+       2090,
+       "AI 결과의 근거 검증을 통과하지 못했습니다. 원문과 조건을 확인해주세요"
+      ],
+      "ground": [
+       "blocked",
+       5.8,
+       845,
+       "AI 결과의 근거 검증을 통과하지 못했습니다. 원문과 조건을 확인해주세요"
+      ]
+     },
+     {
+      "turn_s": 10.2,
+      "faith": [
+       "blocked",
+       10.2,
+       1961,
+       "AI 결과의 근거 검증을 통과하지 못했습니다. 원문과 조건을 확인해주세요"
+      ],
+      "ground": [
+       "blocked",
+       3.9,
+       470,
+       "AI 결과의 근거 검증을 통과하지 못했습니다. 원문과 조건을 확인해주세요"
+      ]
+     }
+    ]
+   },
+   {
+    "model": "poolside/laguna-s-2.1-free",
+    "effort": "none",
+    "variant": "bad",
+    "runs": 3,
+    "expected": "blocked",
+    "rows": [
+     {
+      "turn_s": 28.6,
+      "faith": [
+       "blocked",
+       28.6,
+       0,
+       "AI 결과의 근거 검증을 통과하지 못했습니다. 원문과 조건을 확인해주세요"
+      ],
+      "ground": [
+       "blocked",
+       27.1,
+       0,
+       "AI 결과의 근거 검증을 통과하지 못했습니다. 원문과 조건을 확인해주세요"
+      ]
+     },
+     {
+      "turn_s": 9.2,
+      "faith": [
+       "blocked",
+       8.0,
+       0,
+       "AI 결과의 근거 검증을 통과하지 못했습니다. 원문과 조건을 확인해주세요"
+      ],
+      "ground": [
+       "blocked",
+       9.2,
+       0,
+       "AI 결과의 근거 검증을 통과하지 못했습니다. 원문과 조건을 확인해주세요"
+      ]
+     },
+     {
+      "turn_s": 3.9,
+      "faith": [
+       "blocked",
+       3.9,
+       0,
+       "AI 결과의 근거 검증을 통과하지 못했습니다. 원문과 조건을 확인해주세요"
+      ],
+      "ground": [
+       "blocked",
+       1.9,
+       0,
+       "AI 결과의 근거 검증을 통과하지 못했습니다. 원문과 조건을 확인해주세요"
+      ]
+     }
+    ]
+   },
+   {
+    "model": "inclusionai/ling-3.0-flash-sante:free",
+    "effort": "none",
+    "variant": "bad",
+    "runs": 3,
+    "expected": "blocked",
+    "rows": [
+     {
+      "turn_s": 3.9,
+      "faith": [
+       "blocked",
+       3.4,
+       324,
+       "AI 결과의 근거 검증을 통과하지 못했습니다. 원문과 조건을 확인해주세요"
+      ],
+      "ground": [
+       "blocked",
+       3.9,
+       424,
+       "AI 결과의 근거 검증을 통과하지 못했습니다. 원문과 조건을 확인해주세요"
+      ]
+     },
+     {
+      "turn_s": 3.9,
+      "faith": [
+       "blocked",
+       3.9,
+       547,
+       "AI 결과의 근거 검증을 통과하지 못했습니다. 원문과 조건을 확인해주세요"
+      ],
+      "ground": [
+       "blocked",
+       3.5,
+       435,
+       "AI 결과의 근거 검증을 통과하지 못했습니다. 원문과 조건을 확인해주세요"
+      ]
+     },
+     {
+      "turn_s": 5.2,
+      "faith": [
+       "blocked",
+       4.9,
+       544,
+       "AI 결과의 근거 검증을 통과하지 못했습니다. 원문과 조건을 확인해주세요"
+      ],
+      "ground": [
+       "blocked",
+       5.2,
+       480,
+       "AI 결과의 근거 검증을 통과하지 못했습니다. 원문과 조건을 확인해주세요"
+      ]
+     }
+    ]
+   },
+   {
+    "model": "z-ai/glm-5.3-flashx",
+    "effort": "none",
+    "variant": "bad",
+    "runs": 3,
+    "expected": "blocked",
+    "rows": [
+     {
+      "turn_s": 9.5,
+      "faith": [
+       "blocked",
+       9.5,
+       692,
+       "AI 결과의 근거 검증을 통과하지 못했습니다. 원문과 조건을 확인해주세요"
+      ],
+      "ground": [
+       "blocked",
+       8.8,
+       524,
+       "AI 결과의 근거 검증을 통과하지 못했습니다. 원문과 조건을 확인해주세요"
+      ]
+     },
+     {
+      "turn_s": 8.3,
+      "faith": [
+       "blocked",
+       8.3,
+       521,
+       "AI 결과의 근거 검증을 통과하지 못했습니다. 원문과 조건을 확인해주세요"
+      ],
+      "ground": [
+       "blocked",
+       5.7,
+       465,
+       "AI 결과의 근거 검증을 통과하지 못했습니다. 원문과 조건을 확인해주세요"
+      ]
+     },
+     {
+      "turn_s": 10.6,
+      "faith": [
+       "blocked",
+       10.6,
+       726,
+       "AI 결과의 근거 검증을 통과하지 못했습니다. 원문과 조건을 확인해주세요"
+      ],
+      "ground": [
+       "blocked",
+       7.3,
+       435,
+       "AI 결과의 근거 검증을 통과하지 못했습니다. 원문과 조건을 확인해주세요"
+      ]
+     }
+    ]
+   },
+   {
+    "model": "thinkingmachines/inkling-small",
+    "effort": "none",
+    "variant": "bad",
+    "runs": 3,
+    "expected": "blocked",
+    "rows": [
+     {
+      "turn_s": 4.5,
+      "faith": [
+       "blocked",
+       4.5,
+       1075,
+       "AI 결과의 근거 검증을 통과하지 못했습니다. 원문과 조건을 확인해주세요"
+      ],
+      "ground": [
+       "blocked",
+       2.8,
+       400,
+       "AI 결과의 근거 검증을 통과하지 못했습니다. 원문과 조건을 확인해주세요"
+      ]
+     },
+     {
+      "turn_s": 4.0,
+      "faith": [
+       "blocked",
+       4.0,
+       720,
+       "AI 결과의 근거 검증을 통과하지 못했습니다. 원문과 조건을 확인해주세요"
+      ],
+      "ground": [
+       "blocked",
+       2.1,
+       296,
+       "AI 결과의 근거 검증을 통과하지 못했습니다. 원문과 조건을 확인해주세요"
+      ]
+     },
+     {
+      "turn_s": 4.0,
+      "faith": [
+       "blocked",
+       4.0,
+       823,
+       "AI 결과의 근거 검증을 통과하지 못했습니다. 원문과 조건을 확인해주세요"
+      ],
+      "ground": [
+       "blocked",
+       3.1,
+       328,
+       "AI 결과의 근거 검증을 통과하지 못했습니다. 원문과 조건을 확인해주세요"
+      ]
+     }
+    ]
+   },
+   {
+    "model": "xiaomi/mimo-v2.6-flash",
+    "effort": "none",
+    "variant": "bad",
+    "runs": 3,
+    "expected": "blocked",
+    "rows": [
+     {
+      "turn_s": 3.9,
+      "faith": [
+       "blocked",
+       2.9,
+       53,
+       "AI 결과의 근거 검증을 통과하지 못했습니다. 원문과 조건을 확인해주세요"
+      ],
+      "ground": [
+       "blocked",
+       3.9,
+       161,
+       "AI 결과의 근거 검증을 통과하지 못했습니다. 원문과 조건을 확인해주세요"
+      ]
+     },
+     {
+      "turn_s": 5.2,
+      "faith": [
+       "blocked",
+       5.2,
+       84,
+       "AI 결과의 근거 검증을 통과하지 못했습니다. 원문과 조건을 확인해주세요"
+      ],
+      "ground": [
+       "blocked",
+       3.6,
+       139,
+       "AI 결과의 근거 검증을 통과하지 못했습니다. 원문과 조건을 확인해주세요"
+      ]
+     },
+     {
+      "turn_s": 5.3,
+      "faith": [
+       "blocked",
+       3.8,
+       76,
+       "AI 결과의 근거 검증을 통과하지 못했습니다. 원문과 조건을 확인해주세요"
+      ],
+      "ground": [
+       "malformed",
+       5.3,
+       291,
+       "AI 검증 응답이 불완전하여 결과를 저장하지 않았습니다."
+      ]
+     }
+    ]
+   }
+  ]
+ }
+}

@@ -19,6 +19,6 @@ def response_text(response):
     return text
 
 
-def make_llm():
+def make_llm(model=None):
     from app.services.generation.claude import ClaudeLLM
-    return ClaudeLLM(api_key=anthropic_options()['api_key'],model=model_name(None),max_tokens=16384)
+    return ClaudeLLM(api_key=anthropic_options()['api_key'],model=model or model_name(None),max_tokens=16384)

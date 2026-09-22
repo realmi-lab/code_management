@@ -152,3 +152,33 @@ async def test_telemetry_failures_do_not_fail_successful_provider_response():
 def test_startup_openai_without_explicit_model_has_real_default(config_path):
     assert RoutingLLM().model==ai_config.MODELS['openai']
     assert provider.public_settings()['model']==ai_config.MODELS['openai']
+
+
+@pytest.mark.asyncio
+async def test_judge_llm_pins_env_model_and_effort_without_changing_generation(config_path,patched_source,monkeypatch):
+    from openai import AsyncOpenAI
+    from code_agent.routing import JudgeLLM
+    original,_=native_modules(monkeypatch,patched_source)
+    monkeypatch.setenv('CODE_LLM_JUDGE_MODEL','synthetic/judge-model')
+    monkeypatch.setenv('CODE_LLM_JUDGE_REASONING_EFFORT','none')
+    payloads=[]
+    def response(request):
+        payloads.append(json.loads(request.content))
+        return httpx.Response(200,json={'id':'test','object':'chat.completion','created':0,'model':'synthetic',
+            'choices':[{'index':0,'message':{'role':'assistant','content':'faithfulness_score: 1.0\nverdict: FAITHFUL'},'finish_reason':'stop'}],
+            'usage':{'prompt_tokens':7,'completion_tokens':5,'total_tokens':12}})
+    monkeypatch.setattr(original,'AsyncOpenAI',lambda **kw:AsyncOpenAI(**kw,http_client=httpx.AsyncClient(transport=httpx.MockTransport(response))))
+    ai_config.save(body('commandcode',version=0,key='synthetic-commandcode'),1)
+    judge=JudgeLLM()
+    assert await judge.generate('판정 질문',system_prompt=None)=='faithfulness_score: 1.0\nverdict: FAITHFUL'
+    assert payloads[-1]['model']=='synthetic/judge-model' and 'reasoning_effort' not in payloads[-1]
+    assert payloads[-1]['temperature']==0 and judge.last_usage
+    monkeypatch.setenv('CODE_LLM_JUDGE_REASONING_EFFORT','low')
+    await JudgeLLM().generate('판정 질문')
+    assert payloads[-1]['model']=='synthetic/judge-model' and payloads[-1]['reasoning_effort']=='low'
+    # The generation transport in the same process is untouched by judge settings.
+    await RoutingLLM().generate('생성 질문')
+    assert payloads[-1]['model']==ai_config.MODELS['commandcode'] and payloads[-1]['reasoning_effort']=='high'
+    monkeypatch.delenv('CODE_LLM_JUDGE_MODEL');monkeypatch.delenv('CODE_LLM_JUDGE_REASONING_EFFORT')
+    await JudgeLLM().generate('판정 질문')
+    assert payloads[-1]['model']==ai_config.MODELS['commandcode'] and payloads[-1]['reasoning_effort']=='high'

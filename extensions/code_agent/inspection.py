@@ -6,7 +6,7 @@ Bundled GitHub examples are separate from the production database and index.
 from pathlib import Path
 import hashlib,json,re
 from .models import CODE_IN_TEXT
-from .compare import compare_message,normalized
+from .compare import compare_message,normalized,similarity
 from .store import DomainError
 
 
@@ -31,8 +31,10 @@ def snapshot(store,namespace,retired=True):
     return store.snapshot(retired)
 
 
-async def inspect_message(store,gateway,body):
-    state,records=snapshot(store,body.namespace,True)
+async def inspect_message(store,gateway,body,catalog=None):
+    # catalog=(state,records) lets a multi-line review reuse ONE snapshot
+    # instead of reloading the whole table per line.
+    state,records=catalog if catalog is not None else snapshot(store,body.namespace,True)
     by_code={r['code']:r for r in records}
     explicit=list(dict.fromkeys(c.upper() for c in CODE_IN_TEXT.findall(body.message)))
     if len(explicit)>20: raise DomainError('한 줄에 코드 20개 이하로 입력해주세요.',422)
@@ -47,13 +49,14 @@ async def inspect_message(store,gateway,body):
         mode='semantic'
     else:
         ranked=[]
+        terms=re.findall(r'[가-힣A-Za-z0-9]+',body.message.casefold())
+        # Ranking needs only the similarity ratio; full rule comparison runs on the top 8 below.
+        wanted=normalized(body.message)
         for rec in records:
             if rec['status']=='retired' and not body.include_retired:continue
-            comparison=compare_message(body.message,rec,menu=body.menu,trigger=body.trigger)
-            terms=re.findall(r'[가-힣A-Za-z0-9]+',body.message.casefold())
             target=' '.join([rec['message'],rec.get('menu',''),rec.get('trigger','')]).casefold()
             overlap=sum(term in target for term in terms)/max(1,len(terms))
-            score=max(comparison['similarity'],overlap)
+            score=max(similarity(wanted,normalized(rec['message'])),overlap)
             if score>=.2:ranked.append((score,rec))
         candidates=[rec for _,rec in sorted(ranked,key=lambda pair:(-pair[0],pair[1]['code']))[:8]]
         mode='catalog_rules'

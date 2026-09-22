@@ -91,7 +91,7 @@ cm_codes는 코드번호 유일 제약, 원문, 메뉴, 조건, 상태, 개정 �
 
 ## 8. 알려진 검증 경계
 
-SQLite/대역 기반 도메인·API·어댑터 검증, 실제 loopback HTTP 및 Chromium UI 검사, 전체 Docker 서비스 기동, 실제 Command Code 호출, 실제 로컬 E5 임베딩을 각각 구분한다. 현재 결과는 [검증 보고서](TEST_REPORT.md)에 기록한다. 전체 카탈로그를 실제 PGVector/Nori/LLM으로 검색·비교·초안·승인하는 종단간 검증, 모든 공급자의 실제 키 호출, 검색 품질 평가, PostgreSQL 동시 부하·장기 인덱스 정리·백업/복원은 별도 검증 대상이다.
+SQLite/대역 기반 도메인·API·어댑터 검증, 실제 loopback HTTP 및 Chromium UI 검사, 전체 Docker 서비스 기동, 실제 Command Code 호출, 실제 로컬 E5 임베딩, 일회성 pgvector PostgreSQL만 붙인 원본 pytest 스위트(`scripts/test_upstream.py`, Redis·Elasticsearch·외부 모델 없음)를 각각 구분한다. 현재 결과는 [검증 보고서](TEST_REPORT.md)에 기록한다. 전체 카탈로그를 실제 PGVector/Nori/LLM으로 검색·비교·초안·승인하는 종단간 검증, 모든 공급자의 실제 키 호출, 검색 품질 평가, PostgreSQL 동시 부하·장기 인덱스 정리·백업/복원은 별도 검증 대상이다.
 
 ## GitHub 메뉴 복원과 읽기 전용 검토
 

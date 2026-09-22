@@ -4,35 +4,50 @@ import re
 import unicodedata
 from decimal import Decimal
 from difflib import SequenceMatcher
+from functools import lru_cache
 
 PLACEHOLDER = re.compile(r'\$\{[^{}]+\}|\{\{[^{}]+\}\}|\{[^{}]+\}|%(?:\d+\$)?[sdif]')
 QUANTITY = re.compile(r'(\d+(?:\.\d+)?)\s*(초|분|시간|일|회|자|원|%)')
 OPERATORS = [('after',r'이후|뒤|후'),('within',r'이내|안에'),('lt',r'미만'),('lte',r'이하'),('gt',r'초과'),('gte',r'이상')]
+# Precompiled once: signature() runs for every candidate in every comparison.
+_OPERATOR_AFTER = [(name,re.compile(r'\s*(?:'+pat+r')')) for name,pat in OPERATORS]
+_OPERATOR_ANY = [(name,re.compile(pat)) for name,pat in OPERATORS]
+_NON_WORD = re.compile(r'[^a-z0-9가-힣{}%$]+')
+_NEGATION = re.compile(r'불가|불가능|할 수 없|사용할 수 없|안 됩니다|안됩니다|금지|허용되지|차단|취소할 수 없')
+_UNITS = {'초':('time',1),'분':('time',60),'시간':('time',3600),'일':('time',86400)}
 
+@lru_cache(maxsize=8192)
 def normalized(text):
     text = unicodedata.normalize('NFKC',text).lower()
-    return re.sub(r'[^a-z0-9가-힣{}%$]+','',text)
+    return _NON_WORD.sub('',text)
 
 def signature(text):
-    units = {'초':('time',1),'분':('time',60),'시간':('time',3600),'일':('time',86400)}
+    # Pure function of the text; cached, returned as a fresh dict so callers may mutate it.
+    quantities,operators,placeholders,negation = _signature(text)
+    return {'quantities':list(quantities),'operators':list(operators),
+            'placeholders':list(placeholders),'negation':negation}
+
+@lru_cache(maxsize=8192)
+def _signature(text):
+    units = _UNITS
     quantities = []
     operators = set()
     # Keep number-to-operator relationship, so swapping two time conditions is not a match.
     for m in QUANTITY.finditer(text):
         unit,factor = units.get(m.group(2),(m.group(2),1))
         tail = text[m.end():m.end()+8]
-        op = next((name for name,pat in OPERATORS if re.match(r'\s*(?:'+pat+r')',tail)), '')
+        op = next((name for name,pat in _OPERATOR_AFTER if pat.match(tail)), '')
         value = str((Decimal(m.group(1))*factor).normalize())
         quantities.append((unit,value,op))
         if op:
             operators.add(op)
     if not quantities:
-        for name,pat in OPERATORS:
-            if re.search(pat,text):
+        for name,pat in _OPERATOR_ANY:
+            if pat.search(text):
                 operators.add(name)
-    negation = bool(re.search(r'불가|불가능|할 수 없|사용할 수 없|안 됩니다|안됩니다|금지|허용되지|차단|취소할 수 없',text))
-    return {'quantities':sorted(quantities),'operators':sorted(operators),
-            'placeholders':sorted(PLACEHOLDER.findall(text)), 'negation':negation}
+    negation = bool(_NEGATION.search(text))
+    return (tuple(sorted(quantities)),tuple(sorted(operators)),
+            tuple(sorted(PLACEHOLDER.findall(text))),negation)
 
 def compare_message(message, existing, *, menu='', trigger=''):
     a,b = signature(message),signature(existing['message'])
@@ -57,8 +72,9 @@ def compare_message(message, existing, *, menu='', trigger=''):
         if ta['quantities'] and tb['quantities'] and ta['quantities'] != tb['quantities']:
             warnings.append('입력한 노출 조건의 수치와 기존 노출 조건이 다릅니다.')
     literal_equal = message == existing['message']
-    wording_equal = normalized(message) == normalized(existing['message'])
-    similarity=SequenceMatcher(None,normalized(message),normalized(existing['message']),autojunk=False).ratio()
+    norm_a,norm_b = normalized(message),normalized(existing['message'])
+    wording_equal = norm_a == norm_b
+    ratio=similarity(norm_a,norm_b)
     context_equal = bool(menu and trigger and existing.get('menu') and existing.get('trigger')) and (
        normalized(menu)==normalized(existing['menu']) and normalized(trigger)==normalized(existing['trigger']))
     if existing['status']=='retired':
@@ -75,7 +91,13 @@ def compare_message(message, existing, *, menu='', trigger=''):
         warnings.append('문구 유사성만으로 재사용을 확정하지 않습니다. 메뉴와 노출 조건을 확인해주세요.')
     return {'verdict':verdict,'label':label,'differences':warnings,
             'literal_equal':literal_equal,'wording_equal':wording_equal,
-            'similarity':round(similarity,4),'input_signature':a,'existing_signature':b}
+            'similarity':ratio,'input_signature':a,'existing_signature':b}
+
+
+@lru_cache(maxsize=16384)
+def similarity(a,b):
+    """Rounded ratio of two normalized() strings; the rounding is part of ranking ties."""
+    return round(SequenceMatcher(None,a,b,autojunk=False).ratio(),4)
 
 
 def prioritize_waiting(query,records):

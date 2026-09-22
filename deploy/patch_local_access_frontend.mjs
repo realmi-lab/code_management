@@ -35,7 +35,9 @@ patch(layout,'router.replace("/");','router.replace(localMode ? "/codes" : "/");
 patch(layout,'[isAuthenticated, isLoading, isPublicPath, router]','[isAuthenticated, isLoading, isPublicPath, router, localMode]');
 const header='src/components/layout/header.tsx';
 patch(header,'const { user, logout }','const { user, logout, localMode }');
-patch(header,'{user && (','{user && !localMode && (');
+// Local workspace: no system-status badge and no account menu in the shell header.
+patch(header,'        <div\n          className="flex items-center gap-2"\n          role="status"','        {!localMode && <div\n          className="flex items-center gap-2"\n          role="status"');
+patch(header,'        </div>\n        {user && (','        </div>}\n        {user && !localMode && (');
 const profile='src/app/settings/profile/page.tsx';
 patch(profile,'const { user, refreshUser }','const { user, refreshUser, localMode }');
 patch(profile,'  if (!user) return null;','  if (!user) return null;\n  if (localMode) return <p>로그인 없이 사용하는 공용 작업실입니다.</p>;');

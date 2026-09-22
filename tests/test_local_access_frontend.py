@@ -36,6 +36,7 @@ class LocalAccessFrontendPatch(unittest.TestCase):
             self.assertIn('headers: token ? { Authorization:', auth)
             self.assertIn('router.replace(localMode ? "/codes" : "/")', (root/FILES[1]).read_text())
             self.assertIn('user && !localMode', (root/FILES[2]).read_text())
+            self.assertIn('{!localMode && <div', (root/FILES[2]).read_text())
 
 if __name__ == '__main__':
     unittest.main()

@@ -86,7 +86,7 @@ def turn_trace(monitor,actor_id,thread_id,request_id):
 
 class TrackedLLM:
     def __init__(self,llm,stage):self.llm=llm;self.stage=stage
-    def for_stage(self,suffix):return TrackedLLM(self.llm,self.stage+"/"+suffix)
+    def for_stage(self,suffix,llm=None):return TrackedLLM(llm or self.llm,self.stage+"/"+suffix)
     @property
     def client(self):return self.llm.client
     async def generate(self,prompt,system_prompt=None):

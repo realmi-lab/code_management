@@ -38,6 +38,13 @@ class ScriptedGateway:
         _,items=self.store.snapshot()
         return items[:8],[{'name':'TEST_DOUBLE_RETRIEVAL','count':len(items)}]
 
+def use_list(ui,value):
+    """Browser checks: the list picker lives in the AI 설정 tab; switch there and come back."""
+    current=ui.locator('[role=tab][aria-selected=true]').get_attribute('data-view')
+    ui.locator('[data-view=ai-settings]').click()
+    ui.locator('#catalog-namespace').select_option(value)
+    ui.locator(f'[data-view={current}]').click()
+
 @pytest.fixture
 def store(tmp_path):
     s=Store('sqlite:///'+str(tmp_path/'test.db'));s.initialize();yield s;s.engine.dispose()
