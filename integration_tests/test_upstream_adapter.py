@@ -39,7 +39,7 @@ async def test_structured_original_llm_call_and_cleanup(seeded):
     assert r.text=='설명'
     llm.generate.assert_awaited_once()
     args,kwargs=llm.generate.await_args
-    assert args==('{"question": "테스트"}',)
+    assert len(args)==1 and json.loads(args[0])=={'question':'테스트'}
     assert kwargs['system_prompt'].startswith('system policy')
     # Decode the embedded schema rather than depend on whitespace or its label.
     prompt=kwargs['system_prompt']

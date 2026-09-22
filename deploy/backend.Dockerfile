@@ -26,6 +26,8 @@ COPY deploy/patch_backend.py /tmp/patch_backend.py
 RUN python /tmp/patch_backend.py /app
 COPY deploy/patch_provider.py /tmp/patch_provider.py
 RUN python /tmp/patch_provider.py /app
+COPY deploy/patch_reranker.py /tmp/patch_reranker.py
+RUN python /tmp/patch_reranker.py /app
 COPY deploy/patch_local_access.py /tmp/patch_local_access.py
 RUN python /tmp/patch_local_access.py /app
 COPY deploy/patch_chunking.py /tmp/patch_chunking.py

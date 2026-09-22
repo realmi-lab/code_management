@@ -1,0 +1,11 @@
+{
+  "embedding_provider": "local",
+  "embedding_model": "local:intfloat/multilingual-e5-base@d128750597153bb5987e10b1c3493a34e5a4502a:pad1536:v1",
+  "search_mode": "hybrid",
+  "reranking_enabled": true,
+  "reranker_model": "dragonkue/bge-reranker-v2-m3-ko",
+  "reranker_top_k": 50,
+  "retriever_top_k": 20,
+  "hyde_enabled": false,
+  "hyde_model": "deepseek/deepseek-v4.1-flash"
+}

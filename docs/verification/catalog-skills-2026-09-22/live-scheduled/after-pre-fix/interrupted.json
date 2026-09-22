@@ -1,0 +1,4 @@
+{
+  "status": "interrupted",
+  "reason": "Two requests reached DB retrieval but failed before model generation with a format boundary error; paused additional benchmark work to diagnose."
+}

@@ -1,0 +1,192 @@
+{
+  "pairs": [
+    {
+      "case_id": "core-direct",
+      "repeat": 1,
+      "candidate_set_equal": true,
+      "candidate_order_equal": true,
+      "objective_regression": false,
+      "ai_regression": false,
+      "total_token_delta": 0
+    },
+    {
+      "case_id": "core-sent",
+      "repeat": 1,
+      "candidate_set_equal": true,
+      "candidate_order_equal": false,
+      "objective_regression": false,
+      "ai_regression": false,
+      "total_token_delta": -8220
+    },
+    {
+      "case_id": "core-wait",
+      "repeat": 1,
+      "candidate_set_equal": true,
+      "candidate_order_equal": false,
+      "objective_regression": false,
+      "ai_regression": false,
+      "total_token_delta": -9572
+    },
+    {
+      "case_id": "core-invalid",
+      "repeat": 1,
+      "candidate_set_equal": true,
+      "candidate_order_equal": false,
+      "objective_regression": false,
+      "ai_regression": false,
+      "total_token_delta": -7722
+    },
+    {
+      "case_id": "core-expired",
+      "repeat": 1,
+      "candidate_set_equal": true,
+      "candidate_order_equal": false,
+      "objective_regression": false,
+      "ai_regression": false,
+      "total_token_delta": -7474
+    },
+    {
+      "case_id": "core-within",
+      "repeat": 1,
+      "candidate_set_equal": true,
+      "candidate_order_equal": false,
+      "objective_regression": false,
+      "ai_regression": false,
+      "total_token_delta": -5027
+    },
+    {
+      "case_id": "core-phone",
+      "repeat": 1,
+      "candidate_set_equal": true,
+      "candidate_order_equal": false,
+      "objective_regression": false,
+      "ai_regression": false,
+      "total_token_delta": -8293
+    },
+    {
+      "case_id": "core-direction",
+      "repeat": 1,
+      "candidate_set_equal": true,
+      "candidate_order_equal": true,
+      "objective_regression": false,
+      "ai_regression": false,
+      "total_token_delta": 2890
+    },
+    {
+      "case_id": "core-broad",
+      "repeat": 1,
+      "candidate_set_equal": true,
+      "candidate_order_equal": false,
+      "objective_regression": false,
+      "ai_regression": false,
+      "total_token_delta": -4140
+    },
+    {
+      "case_id": "core-missing",
+      "repeat": 1,
+      "candidate_set_equal": true,
+      "candidate_order_equal": true,
+      "objective_regression": false,
+      "ai_regression": false,
+      "total_token_delta": 0
+    },
+    {
+      "case_id": "core-false-premise",
+      "repeat": 1,
+      "candidate_set_equal": false,
+      "candidate_order_equal": false,
+      "objective_regression": false,
+      "ai_regression": false,
+      "total_token_delta": -364
+    },
+    {
+      "case_id": "core-unrelated",
+      "repeat": 1,
+      "candidate_set_equal": true,
+      "candidate_order_equal": true,
+      "objective_regression": false,
+      "ai_regression": false,
+      "total_token_delta": -8556
+    },
+    {
+      "case_id": "holdout-email-free",
+      "repeat": 1,
+      "candidate_set_equal": true,
+      "candidate_order_equal": false,
+      "objective_regression": false,
+      "ai_regression": false,
+      "total_token_delta": -7975
+    },
+    {
+      "case_id": "holdout-password",
+      "repeat": 1,
+      "candidate_set_equal": true,
+      "candidate_order_equal": false,
+      "objective_regression": false,
+      "ai_regression": false,
+      "total_token_delta": -6164
+    },
+    {
+      "case_id": "holdout-signup-success",
+      "repeat": 1,
+      "candidate_set_equal": true,
+      "candidate_order_equal": false,
+      "objective_regression": false,
+      "ai_regression": false,
+      "total_token_delta": -7720
+    },
+    {
+      "case_id": "holdout-signup-required",
+      "repeat": 1,
+      "candidate_set_equal": true,
+      "candidate_order_equal": false,
+      "objective_regression": false,
+      "ai_regression": false,
+      "total_token_delta": -7832
+    },
+    {
+      "case_id": "holdout-signup-wait",
+      "repeat": 1,
+      "candidate_set_equal": true,
+      "candidate_order_equal": false,
+      "objective_regression": false,
+      "ai_regression": false,
+      "total_token_delta": -7348
+    },
+    {
+      "case_id": "holdout-signup-variable",
+      "repeat": 1,
+      "candidate_set_equal": true,
+      "candidate_order_equal": false,
+      "objective_regression": false,
+      "ai_regression": false,
+      "total_token_delta": -8907
+    },
+    {
+      "case_id": "holdout-auth-failed",
+      "repeat": 1,
+      "candidate_set_equal": true,
+      "candidate_order_equal": false,
+      "objective_regression": false,
+      "ai_regression": false,
+      "total_token_delta": -6656
+    },
+    {
+      "case_id": "holdout-auth-required",
+      "repeat": 1,
+      "candidate_set_equal": true,
+      "candidate_order_equal": false,
+      "objective_regression": false,
+      "ai_regression": false,
+      "total_token_delta": -8348
+    }
+  ],
+  "candidate_and_objective_nonregression": false,
+  "all_usage_pairs_complete": true,
+  "total_token_delta": -117428,
+  "successful_response_pairs": 19,
+  "successful_response_token_delta": -117064,
+  "token_saving_verified": false,
+  "semantic_accuracy_verified": false,
+  "environment_unchanged": true
+}

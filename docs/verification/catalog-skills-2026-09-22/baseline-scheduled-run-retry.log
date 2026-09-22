@@ -1,0 +1,21 @@
+{"case_id": "core-direct", "repeat": 1, "status": 200, "seconds": 0.241, "objective_pass": true}
+{"case_id": "core-sent", "repeat": 1, "status": 200, "seconds": 14.988, "objective_pass": true}
+{"case_id": "core-wait", "repeat": 1, "status": 200, "seconds": 31.786, "objective_pass": true}
+{"case_id": "core-invalid", "repeat": 1, "status": 200, "seconds": 19.444, "objective_pass": true}
+{"case_id": "core-expired", "repeat": 1, "status": 200, "seconds": 22.889, "objective_pass": true}
+{"case_id": "core-within", "repeat": 1, "status": 200, "seconds": 32.033, "objective_pass": true}
+{"case_id": "core-phone", "repeat": 1, "status": 200, "seconds": 33.096, "objective_pass": true}
+{"case_id": "core-broad", "repeat": 1, "status": 200, "seconds": 33.349, "objective_pass": true}
+{"case_id": "core-direction", "repeat": 1, "status": 200, "seconds": 16.186, "objective_pass": true}
+{"case_id": "core-missing", "repeat": 1, "status": 200, "seconds": 0.102, "objective_pass": true}
+{"case_id": "core-false-premise", "repeat": 1, "status": 502, "seconds": 7.489, "objective_pass": false}
+{"case_id": "core-unrelated", "repeat": 1, "status": 200, "seconds": 45.728, "objective_pass": true}
+{"case_id": "holdout-email-free", "repeat": 1, "status": 200, "seconds": 35.622, "objective_pass": true}
+{"case_id": "holdout-password", "repeat": 1, "status": 200, "seconds": 16.341, "objective_pass": true}
+{"case_id": "holdout-signup-success", "repeat": 1, "status": 200, "seconds": 34.591, "objective_pass": true}
+{"case_id": "holdout-signup-required", "repeat": 1, "status": 200, "seconds": 27.71, "objective_pass": true}
+{"case_id": "holdout-signup-wait", "repeat": 1, "status": 200, "seconds": 36.467, "objective_pass": true}
+{"case_id": "holdout-signup-variable", "repeat": 1, "status": 200, "seconds": 34.999, "objective_pass": true}
+{"case_id": "holdout-auth-failed", "repeat": 1, "status": 200, "seconds": 15.801, "objective_pass": true}
+{"case_id": "holdout-auth-required", "repeat": 1, "status": 200, "seconds": 17.622, "objective_pass": true}
+{"attempts": 20, "http_success": 19, "api_errors": 1, "ai_errors": 0, "actual_model_called": 18, "ai_success": 17, "objective_pass": 19, "manual_review_cases": 18, "usage_complete_attempts": 20, "total_tokens_all_attempts": 556465, "observed_total_tokens": 556465, "mean_tokens_all_attempts": 27823.25, "mean_expected_set_recall": 0.9411764705882353, "mean_reciprocal_rank": 0.8725490196078431, "median_seconds": 25.299500000000002, "accuracy_claim": "Objective contract checks only; semantic accuracy requires the recorded manual review.", "production_unchanged": true, "corpus_unchanged": true, "settings_unchanged": true, "metrics_collection_success": true}

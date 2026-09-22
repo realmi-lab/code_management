@@ -1,0 +1,70 @@
+{
+  "model_loaded": false,
+  "provider_calls": 0,
+  "versions": {
+    "sentence_transformers": "4.1.0",
+    "transformers": "4.57.6"
+  },
+  "installed_source": [
+    {
+      "path": "/usr/local/lib/python3.12/site-packages/sentence_transformers/cross_encoder/CrossEncoder.py",
+      "line": 463,
+      "source": "\n    def get_default_activation_fn(self) -> Callable:\n        activation_fn_path = None\n        if hasattr(self.config, \"sentence_transformers\") and \"activation_fn\" in self.config.sentence_transformers:\n            activation_fn_path = self.config.sentence_transformers[\"activation_fn\"]"
+    },
+    {
+      "path": "/usr/local/lib/python3.12/site-packages/sentence_transformers/cross_encoder/CrossEncoder.py",
+      "line": 485,
+      "source": "\n        if self.config.num_labels == 1:\n            return nn.Sigmoid()\n        return nn.Identity()\n"
+    },
+    {
+      "path": "/usr/local/lib/python3.12/site-packages/sentence_transformers/cross_encoder/CrossEncoder.py",
+      "line": 658,
+      "source": "\n        if self.config.num_labels == 1:\n            pred_scores = [score[0] for score in pred_scores]\n\n        if convert_to_tensor:"
+    },
+    {
+      "path": "/usr/local/lib/python3.12/site-packages/sentence_transformers/cross_encoder/CrossEncoder.py",
+      "line": 652,
+      "source": "            logits = self.activation_fn(model_predictions.logits)\n\n            if apply_softmax and logits.ndim > 1:\n                logits = torch.nn.functional.softmax(logits, dim=1)\n            pred_scores.extend(logits)\n"
+    },
+    {
+      "path": "/usr/local/lib/python3.12/site-packages/transformers/configuration_utils.py",
+      "line": 393,
+      "source": "    def num_labels(self) -> int:\n        \"\"\"\n        `int`: The number of labels for classification models.\n        \"\"\"\n        return len(self.id2label)\n"
+    }
+  ],
+  "cached_model_configs": [
+    {
+      "snapshot": "2aca5884ecac490192af9ebd86836d9073d826cd",
+      "parameters": {
+        "num_labels": null,
+        "id2label": {
+          "0": "LABEL_0"
+        },
+        "label2id": {
+          "LABEL_0": 0
+        },
+        "sbert_ce_default_activation_function": null,
+        "sentence_transformers": null,
+        "max_position_embeddings": 8194
+      }
+    }
+  ],
+  "upstream_source": [
+    {
+      "path": "/app/app/services/reranking/korean.py",
+      "line": 68,
+      "source": "raw_scores = self.model.predict(pairs)"
+    },
+    {
+      "path": "/app/app/services/reranking/korean.py",
+      "line": 88,
+      "source": "ce_prob = _sigmoid(float(logit))"
+    },
+    {
+      "path": "/app/app/services/reranking/korean.py",
+      "line": 90,
+      "source": "combined = alpha * ce_prob + (1.0 - alpha) * rank_score"
+    }
+  ],
+  "conclusion": "The current default predict call applies Sigmoid; upstream calibrated mode applies another Sigmoid to that result. This compresses probability range and affects gate meaning, while preserving within-candidate ranking."
+}

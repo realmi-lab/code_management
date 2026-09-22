@@ -1,0 +1,1310 @@
+{
+  "scope": "demo synthetic only",
+  "llm_calls": 0,
+  "imports_seconds": 0.51,
+  "setup_seconds": 1.363,
+  "reranker_executed": true,
+  "cache": "Raw audit bypasses cache; API search uses existing service cache (inspect each trace)",
+  "catalog_version": 3,
+  "snapshot": "85ce8180-b5e4-480f-a154-2f1d26cce236",
+  "production_count": 0,
+  "sample_count": 300,
+  "active_count": 279,
+  "pg_chunks": 279,
+  "es_chunks": 279,
+  "index_checks": {
+    "active_codes_equal_indexed_codes": true,
+    "exactly_one_chunk_per_active_row": true,
+    "pg_es_chunk_ids_equal": true,
+    "pg_es_content_metadata_equal": true,
+    "index_content_equals_redacted_row": true,
+    "indexed_revision_matches_db": true
+  },
+  "nori_analysis": {
+    "analyzer": {
+      "ko_catalog": {
+        "filter": [
+          "lowercase"
+        ],
+        "type": "custom",
+        "tokenizer": "nori_tokenizer"
+      }
+    }
+  },
+  "settings": {
+    "search_mode": "hybrid",
+    "retriever_top_k": 20,
+    "reranker_top_k": 50,
+    "reranker_score_mode": "calibrated",
+    "reranker_alpha": 0.7,
+    "rrf_constant": 60,
+    "vector_weight": 0.5,
+    "keyword_weight": 0.5,
+    "document_scope_enabled": true,
+    "chunk_size": 1024,
+    "chunk_overlap": 200,
+    "chunking_strategy": "auto"
+  },
+  "rerank_input_policy": "original indexed chunks; upstream candidate cap is reranker_top_k * 4",
+  "index_characters": {
+    "count": 279,
+    "min": 212,
+    "median": 330,
+    "max": 434,
+    "over_512_characters": 0
+  },
+  "rerank_characters": {
+    "count": 279,
+    "min": 212,
+    "median": 330,
+    "max": 434,
+    "over_512_characters": 0
+  },
+  "truncated_rerank_codes": [],
+  "cases": [
+    {
+      "id": "metadata-english-leave",
+      "suite": "retrieval-metadata-challenge",
+      "expected_codes": [
+        "EX-0401"
+      ],
+      "stages": {
+        "vector": [
+          "EX-0401",
+          "SM-1218",
+          "SM-1274",
+          "SM-1213",
+          "SM-1269",
+          "SM-1214",
+          "SM-1050",
+          "SM-1283",
+          "SM-1219",
+          "SM-1036",
+          "SM-1272",
+          "SM-1284",
+          "SM-1270",
+          "SM-1212",
+          "SM-1215",
+          "SM-1216",
+          "SM-1048",
+          "SM-1204",
+          "SM-1008",
+          "SM-1271"
+        ],
+        "keyword": [
+          "EX-0401",
+          "SM-1214",
+          "SM-1212",
+          "SM-1217",
+          "SM-1213",
+          "SM-1215",
+          "SM-1220",
+          "SM-1216",
+          "SM-1219",
+          "SM-1211",
+          "SM-1218",
+          "SM-1221",
+          "SM-1222",
+          "SM-1223",
+          "EX-0301",
+          "EX-0402",
+          "SM-1032",
+          "SM-1004",
+          "SM-1018",
+          "SM-1046"
+        ],
+        "rrf": [
+          "EX-0401",
+          "SM-1214",
+          "SM-1213",
+          "SM-1218",
+          "SM-1212",
+          "SM-1219",
+          "SM-1215",
+          "SM-1216",
+          "SM-1274",
+          "SM-1217",
+          "SM-1269",
+          "SM-1050",
+          "SM-1220",
+          "SM-1283",
+          "SM-1036",
+          "SM-1211",
+          "SM-1272",
+          "SM-1284",
+          "SM-1221",
+          "SM-1270",
+          "SM-1222",
+          "SM-1223",
+          "EX-0301",
+          "EX-0402",
+          "SM-1048",
+          "SM-1032",
+          "SM-1204",
+          "SM-1004",
+          "SM-1008",
+          "SM-1018",
+          "SM-1271",
+          "SM-1046"
+        ],
+        "reranker_input": [
+          "EX-0401",
+          "SM-1214",
+          "SM-1213",
+          "SM-1218",
+          "SM-1212",
+          "SM-1219",
+          "SM-1215",
+          "SM-1216",
+          "SM-1274",
+          "SM-1217",
+          "SM-1269",
+          "SM-1050",
+          "SM-1220",
+          "SM-1283",
+          "SM-1036",
+          "SM-1211",
+          "SM-1272",
+          "SM-1284",
+          "SM-1221",
+          "SM-1270",
+          "SM-1222",
+          "SM-1223",
+          "EX-0301",
+          "EX-0402",
+          "SM-1048",
+          "SM-1032",
+          "SM-1204",
+          "SM-1004",
+          "SM-1008",
+          "SM-1018",
+          "SM-1271",
+          "SM-1046"
+        ],
+        "api_search": [
+          "EX-0401",
+          "SM-1222",
+          "SM-1216",
+          "SM-1217",
+          "SM-1221",
+          "SM-1215",
+          "SM-1214",
+          "SM-1220",
+          "SM-1218",
+          "SM-1213",
+          "SM-1223",
+          "SM-1211",
+          "SM-1212",
+          "SM-1284",
+          "SM-1283",
+          "SM-1219",
+          "SM-1050",
+          "SM-1048",
+          "SM-1272",
+          "SM-1274",
+          "SM-1270",
+          "SM-1046",
+          "SM-1204",
+          "SM-1269",
+          "SM-1008",
+          "EX-0301",
+          "EX-0402",
+          "SM-1036",
+          "SM-1018",
+          "SM-1004",
+          "SM-1032",
+          "SM-1271"
+        ]
+      },
+      "expected_ranks": {
+        "vector": {
+          "EX-0401": 1
+        },
+        "keyword": {
+          "EX-0401": 1
+        },
+        "rrf": {
+          "EX-0401": 1
+        },
+        "reranker_input": {
+          "EX-0401": 1
+        },
+        "api_search": {
+          "EX-0401": 1
+        }
+      },
+      "first_loss": {
+        "EX-0401": null
+      },
+      "embedding_seconds": 0.506,
+      "pg_es_seconds": 0.031,
+      "seconds": 0.537,
+      "api_seconds": 40.608,
+      "api_trace": [
+        {
+          "name": "guardrail_input",
+          "passed": true,
+          "duration_ms": 0.15,
+          "results_count": null,
+          "detail": null
+        },
+        {
+          "name": "question_classification",
+          "passed": true,
+          "duration_ms": 0.0,
+          "results_count": null,
+          "detail": {
+            "category": "explanatory",
+            "indicators": []
+          }
+        },
+        {
+          "name": "vector_search",
+          "passed": true,
+          "duration_ms": 465.3,
+          "results_count": 20,
+          "detail": null
+        },
+        {
+          "name": "keyword_search",
+          "passed": true,
+          "duration_ms": 465.3,
+          "results_count": 20,
+          "detail": null
+        },
+        {
+          "name": "rrf_fusion",
+          "passed": true,
+          "duration_ms": 0.18,
+          "results_count": 32,
+          "detail": null
+        },
+        {
+          "name": "reranking",
+          "passed": true,
+          "duration_ms": 39928.36,
+          "results_count": 32,
+          "detail": null
+        },
+        {
+          "name": "retrieval_gate",
+          "passed": true,
+          "duration_ms": 0.05,
+          "results_count": 1,
+          "detail": {
+            "top_score": 0.999894740006781
+          }
+        },
+        {
+          "name": "guardrail_pii",
+          "passed": true,
+          "duration_ms": 3.61,
+          "results_count": null,
+          "detail": {
+            "pii_found": false
+          }
+        }
+      ]
+    },
+    {
+      "id": "metadata-english-available",
+      "suite": "retrieval-metadata-challenge",
+      "expected_codes": [
+        "EX-0203"
+      ],
+      "stages": {
+        "vector": [
+          "EX-0204",
+          "EX-0201",
+          "SM-1219",
+          "SM-1218",
+          "SM-1215",
+          "SM-1213",
+          "SM-1212",
+          "EX-0203",
+          "SM-1223",
+          "SM-1222",
+          "SM-1214",
+          "SM-1008",
+          "SM-1009",
+          "SM-1216",
+          "SM-1220",
+          "SM-1036",
+          "SM-1221",
+          "SM-1211",
+          "SM-1006",
+          "SM-1217"
+        ],
+        "keyword": [
+          "EX-0203",
+          "EX-0204",
+          "EX-0201",
+          "SM-1212",
+          "SM-1211",
+          "SM-1214",
+          "SM-1213",
+          "SM-1217",
+          "SM-1220",
+          "SM-1216",
+          "SM-1215",
+          "SM-1219",
+          "SM-1218",
+          "SM-1221",
+          "SM-1222",
+          "SM-1223",
+          "SM-1254",
+          "SM-1128",
+          "EX-0403",
+          "SM-1253"
+        ],
+        "rrf": [
+          "EX-0204",
+          "EX-0201",
+          "EX-0203",
+          "SM-1212",
+          "SM-1213",
+          "SM-1219",
+          "SM-1215",
+          "SM-1218",
+          "SM-1214",
+          "SM-1211",
+          "SM-1220",
+          "SM-1216",
+          "SM-1223",
+          "SM-1222",
+          "SM-1217",
+          "SM-1221",
+          "SM-1008",
+          "SM-1009",
+          "SM-1036",
+          "SM-1254",
+          "SM-1128",
+          "SM-1006",
+          "EX-0403",
+          "SM-1253"
+        ],
+        "reranker_input": [
+          "EX-0204",
+          "EX-0201",
+          "EX-0203",
+          "SM-1212",
+          "SM-1213",
+          "SM-1219",
+          "SM-1215",
+          "SM-1218",
+          "SM-1214",
+          "SM-1211",
+          "SM-1220",
+          "SM-1216",
+          "SM-1223",
+          "SM-1222",
+          "SM-1217",
+          "SM-1221",
+          "SM-1008",
+          "SM-1009",
+          "SM-1036",
+          "SM-1254",
+          "SM-1128",
+          "SM-1006",
+          "EX-0403",
+          "SM-1253"
+        ],
+        "api_search": [
+          "EX-0203",
+          "EX-0204",
+          "SM-1211",
+          "SM-1215",
+          "SM-1219",
+          "SM-1221",
+          "EX-0201",
+          "SM-1213",
+          "SM-1220",
+          "SM-1216",
+          "EX-0403",
+          "SM-1218",
+          "SM-1222",
+          "SM-1214",
+          "SM-1212",
+          "SM-1223",
+          "SM-1008",
+          "SM-1217",
+          "SM-1006",
+          "SM-1036",
+          "SM-1253",
+          "SM-1009",
+          "SM-1254",
+          "SM-1128"
+        ]
+      },
+      "expected_ranks": {
+        "vector": {
+          "EX-0203": 8
+        },
+        "keyword": {
+          "EX-0203": 1
+        },
+        "rrf": {
+          "EX-0203": 3
+        },
+        "reranker_input": {
+          "EX-0203": 3
+        },
+        "api_search": {
+          "EX-0203": 1
+        }
+      },
+      "first_loss": {
+        "EX-0203": null
+      },
+      "embedding_seconds": 0.138,
+      "pg_es_seconds": 0.016,
+      "seconds": 0.154,
+      "api_seconds": 27.812,
+      "api_trace": [
+        {
+          "name": "guardrail_input",
+          "passed": true,
+          "duration_ms": 0.08,
+          "results_count": null,
+          "detail": null
+        },
+        {
+          "name": "question_classification",
+          "passed": true,
+          "duration_ms": 0.0,
+          "results_count": null,
+          "detail": {
+            "category": "explanatory",
+            "indicators": []
+          }
+        },
+        {
+          "name": "vector_search",
+          "passed": true,
+          "duration_ms": 392.32,
+          "results_count": 20,
+          "detail": null
+        },
+        {
+          "name": "keyword_search",
+          "passed": true,
+          "duration_ms": 392.32,
+          "results_count": 20,
+          "detail": null
+        },
+        {
+          "name": "rrf_fusion",
+          "passed": true,
+          "duration_ms": 0.1,
+          "results_count": 24,
+          "detail": null
+        },
+        {
+          "name": "reranking",
+          "passed": true,
+          "duration_ms": 27329.31,
+          "results_count": 24,
+          "detail": null
+        },
+        {
+          "name": "retrieval_gate",
+          "passed": true,
+          "duration_ms": 0.02,
+          "results_count": 2,
+          "detail": {
+            "top_score": 0.992553391411507
+          }
+        },
+        {
+          "name": "guardrail_pii",
+          "passed": true,
+          "duration_ms": 2.35,
+          "results_count": null,
+          "detail": {
+            "pii_found": false
+          }
+        }
+      ]
+    },
+    {
+      "id": "metadata-note-variable",
+      "suite": "retrieval-metadata-challenge",
+      "expected_codes": [
+        "EX-0105"
+      ],
+      "stages": {
+        "vector": [
+          "SM-1283",
+          "SM-1282",
+          "SM-1284",
+          "SM-1281",
+          "SM-1218",
+          "EX-0401",
+          "SM-1078",
+          "SM-1217",
+          "SM-1050",
+          "SM-1008",
+          "SM-1215",
+          "EX-0102",
+          "SM-1077",
+          "EX-0302",
+          "EX-0301",
+          "SM-1092",
+          "SM-1049",
+          "EX-0402",
+          "EX-0202",
+          "SM-1214"
+        ],
+        "keyword": [
+          "EX-0105",
+          "SM-1216",
+          "SM-1223",
+          "SM-1220",
+          "SM-1215",
+          "SM-1214",
+          "SM-1212",
+          "SM-1213",
+          "SM-1217",
+          "SM-1219",
+          "SM-1211",
+          "SM-1218",
+          "SM-1221",
+          "SM-1222",
+          "EX-0302",
+          "EX-0401",
+          "SM-1048",
+          "SM-1076",
+          "SM-1283",
+          "SM-1284"
+        ],
+        "rrf": [
+          "SM-1215",
+          "SM-1218",
+          "SM-1217",
+          "SM-1283",
+          "SM-1284",
+          "EX-0401",
+          "SM-1214",
+          "EX-0302",
+          "EX-0105",
+          "SM-1282",
+          "SM-1216",
+          "SM-1223",
+          "SM-1281",
+          "SM-1220",
+          "SM-1078",
+          "SM-1212",
+          "SM-1213",
+          "SM-1050",
+          "SM-1008",
+          "SM-1219",
+          "SM-1211",
+          "EX-0102",
+          "SM-1077",
+          "SM-1221",
+          "SM-1222",
+          "EX-0301",
+          "SM-1092",
+          "SM-1049",
+          "SM-1048",
+          "EX-0402",
+          "SM-1076",
+          "EX-0202"
+        ],
+        "reranker_input": [
+          "SM-1215",
+          "SM-1218",
+          "SM-1217",
+          "SM-1283",
+          "SM-1284",
+          "EX-0401",
+          "SM-1214",
+          "EX-0302",
+          "EX-0105",
+          "SM-1282",
+          "SM-1216",
+          "SM-1223",
+          "SM-1281",
+          "SM-1220",
+          "SM-1078",
+          "SM-1212",
+          "SM-1213",
+          "SM-1050",
+          "SM-1008",
+          "SM-1219",
+          "SM-1211",
+          "EX-0102",
+          "SM-1077",
+          "SM-1221",
+          "SM-1222",
+          "EX-0301",
+          "SM-1092",
+          "SM-1049",
+          "SM-1048",
+          "EX-0402",
+          "SM-1076",
+          "EX-0202"
+        ],
+        "api_search": [
+          "EX-0105",
+          "EX-0302",
+          "EX-0202",
+          "EX-0301",
+          "EX-0402",
+          "EX-0401",
+          "EX-0102",
+          "SM-1282",
+          "SM-1281",
+          "SM-1217",
+          "SM-1284",
+          "SM-1283",
+          "SM-1218",
+          "SM-1223",
+          "SM-1220",
+          "SM-1212",
+          "SM-1214",
+          "SM-1216",
+          "SM-1215",
+          "SM-1211",
+          "SM-1221",
+          "SM-1078",
+          "SM-1008",
+          "SM-1213",
+          "SM-1077",
+          "SM-1219",
+          "SM-1076",
+          "SM-1092",
+          "SM-1050",
+          "SM-1222",
+          "SM-1049",
+          "SM-1048"
+        ]
+      },
+      "expected_ranks": {
+        "vector": {
+          "EX-0105": null
+        },
+        "keyword": {
+          "EX-0105": 1
+        },
+        "rrf": {
+          "EX-0105": 9
+        },
+        "reranker_input": {
+          "EX-0105": 9
+        },
+        "api_search": {
+          "EX-0105": 1
+        }
+      },
+      "first_loss": {
+        "EX-0105": null
+      },
+      "embedding_seconds": 0.187,
+      "pg_es_seconds": 0.015,
+      "seconds": 0.202,
+      "api_seconds": 38.941,
+      "api_trace": [
+        {
+          "name": "guardrail_input",
+          "passed": true,
+          "duration_ms": 0.05,
+          "results_count": null,
+          "detail": null
+        },
+        {
+          "name": "question_classification",
+          "passed": true,
+          "duration_ms": 0.0,
+          "results_count": null,
+          "detail": {
+            "category": "explanatory",
+            "indicators": []
+          }
+        },
+        {
+          "name": "vector_search",
+          "passed": true,
+          "duration_ms": 461.48,
+          "results_count": 20,
+          "detail": null
+        },
+        {
+          "name": "keyword_search",
+          "passed": true,
+          "duration_ms": 461.48,
+          "results_count": 20,
+          "detail": null
+        },
+        {
+          "name": "rrf_fusion",
+          "passed": true,
+          "duration_ms": 0.13,
+          "results_count": 32,
+          "detail": null
+        },
+        {
+          "name": "reranking",
+          "passed": true,
+          "duration_ms": 38405.51,
+          "results_count": 32,
+          "detail": null
+        },
+        {
+          "name": "retrieval_gate",
+          "passed": true,
+          "duration_ms": 0.02,
+          "results_count": 1,
+          "detail": {
+            "top_score": 0.9999185648503155
+          }
+        },
+        {
+          "name": "guardrail_pii",
+          "passed": true,
+          "duration_ms": 3.85,
+          "results_count": null,
+          "detail": {
+            "pii_found": false
+          }
+        }
+      ]
+    },
+    {
+      "id": "metadata-note-provided",
+      "suite": "retrieval-metadata-challenge",
+      "expected_codes": [
+        "AT-1923"
+      ],
+      "stages": {
+        "vector": [
+          "AT-1923",
+          "SM-1281",
+          "EX-0202",
+          "SM-1282",
+          "SM-1242",
+          "SM-1018",
+          "SM-1060",
+          "SM-1214",
+          "SM-1248",
+          "SM-1215",
+          "SM-1283",
+          "SM-1284",
+          "SM-1220",
+          "SM-1080",
+          "SM-1218",
+          "EX-0403",
+          "EX-0302",
+          "EX-0101",
+          "SM-1004",
+          "EX-0402"
+        ],
+        "keyword": [
+          "AT-1923",
+          "SM-1221",
+          "SM-1214",
+          "SM-1216",
+          "SM-1212",
+          "SM-1215",
+          "SM-1223",
+          "SM-1220",
+          "SM-1213",
+          "SM-1217",
+          "SM-1219",
+          "SM-1218",
+          "SM-1222",
+          "SM-1211",
+          "EX-0203",
+          "EX-0204",
+          "EX-0301",
+          "EX-0202",
+          "EX-0102",
+          "EX-0302"
+        ],
+        "rrf": [
+          "AT-1923",
+          "SM-1214",
+          "SM-1215",
+          "EX-0202",
+          "SM-1220",
+          "SM-1218",
+          "EX-0302",
+          "SM-1281",
+          "SM-1221",
+          "SM-1282",
+          "SM-1216",
+          "SM-1242",
+          "SM-1212",
+          "SM-1018",
+          "SM-1060",
+          "SM-1223",
+          "SM-1248",
+          "SM-1213",
+          "SM-1217",
+          "SM-1283",
+          "SM-1219",
+          "SM-1284",
+          "SM-1222",
+          "SM-1080",
+          "SM-1211",
+          "EX-0203",
+          "EX-0403",
+          "EX-0204",
+          "EX-0301",
+          "EX-0101",
+          "SM-1004",
+          "EX-0102",
+          "EX-0402"
+        ],
+        "reranker_input": [
+          "AT-1923",
+          "SM-1214",
+          "SM-1215",
+          "EX-0202",
+          "SM-1220",
+          "SM-1218",
+          "EX-0302",
+          "SM-1281",
+          "SM-1221",
+          "SM-1282",
+          "SM-1216",
+          "SM-1242",
+          "SM-1212",
+          "SM-1018",
+          "SM-1060",
+          "SM-1223",
+          "SM-1248",
+          "SM-1213",
+          "SM-1217",
+          "SM-1283",
+          "SM-1219",
+          "SM-1284",
+          "SM-1222",
+          "SM-1080",
+          "SM-1211",
+          "EX-0203",
+          "EX-0403",
+          "EX-0204",
+          "EX-0301",
+          "EX-0101",
+          "SM-1004",
+          "EX-0102",
+          "EX-0402"
+        ],
+        "api_search": [
+          "AT-1923",
+          "EX-0402",
+          "EX-0403",
+          "EX-0302",
+          "EX-0202",
+          "EX-0301",
+          "SM-1221",
+          "SM-1213",
+          "SM-1220",
+          "SM-1218",
+          "SM-1217",
+          "SM-1215",
+          "EX-0204",
+          "EX-0203",
+          "EX-0101",
+          "SM-1216",
+          "EX-0102",
+          "SM-1219",
+          "SM-1283",
+          "SM-1211",
+          "SM-1212",
+          "SM-1281",
+          "SM-1284",
+          "SM-1222",
+          "SM-1080",
+          "SM-1214",
+          "SM-1282",
+          "SM-1223",
+          "SM-1248",
+          "SM-1242",
+          "SM-1018",
+          "SM-1060",
+          "SM-1004"
+        ]
+      },
+      "expected_ranks": {
+        "vector": {
+          "AT-1923": 1
+        },
+        "keyword": {
+          "AT-1923": 1
+        },
+        "rrf": {
+          "AT-1923": 1
+        },
+        "reranker_input": {
+          "AT-1923": 1
+        },
+        "api_search": {
+          "AT-1923": 1
+        }
+      },
+      "first_loss": {
+        "AT-1923": null
+      },
+      "embedding_seconds": 0.166,
+      "pg_es_seconds": 0.012,
+      "seconds": 0.178,
+      "api_seconds": 37.639,
+      "api_trace": [
+        {
+          "name": "guardrail_input",
+          "passed": true,
+          "duration_ms": 0.04,
+          "results_count": null,
+          "detail": null
+        },
+        {
+          "name": "question_classification",
+          "passed": true,
+          "duration_ms": 0.0,
+          "results_count": null,
+          "detail": {
+            "category": "regulatory",
+            "indicators": [
+              "기준/조건"
+            ]
+          }
+        },
+        {
+          "name": "vector_search",
+          "passed": true,
+          "duration_ms": 530.48,
+          "results_count": 20,
+          "detail": null
+        },
+        {
+          "name": "keyword_search",
+          "passed": true,
+          "duration_ms": 530.48,
+          "results_count": 20,
+          "detail": null
+        },
+        {
+          "name": "rrf_fusion",
+          "passed": true,
+          "duration_ms": 0.14,
+          "results_count": 33,
+          "detail": null
+        },
+        {
+          "name": "reranking",
+          "passed": true,
+          "duration_ms": 37034.49,
+          "results_count": 33,
+          "detail": null
+        },
+        {
+          "name": "retrieval_gate",
+          "passed": true,
+          "duration_ms": 0.05,
+          "results_count": 1,
+          "detail": {
+            "top_score": 0.9999960520377601
+          }
+        },
+        {
+          "name": "guardrail_pii",
+          "passed": true,
+          "duration_ms": 3.35,
+          "results_count": null,
+          "detail": {
+            "pii_found": false
+          }
+        }
+      ]
+    },
+    {
+      "id": "metadata-purpose-dynamic",
+      "suite": "retrieval-metadata-challenge",
+      "expected_codes": [
+        "SM-1013"
+      ],
+      "stages": {
+        "vector": [
+          "SM-1223",
+          "SM-1013",
+          "SM-1041",
+          "SM-1069",
+          "SM-1055",
+          "SM-1027",
+          "SM-1097",
+          "SM-1265",
+          "SM-1216",
+          "SM-1220",
+          "SM-1006",
+          "SM-1020",
+          "SM-1083",
+          "SM-1209",
+          "EX-0105",
+          "SM-1217",
+          "EX-0201",
+          "SM-1218",
+          "EX-0204",
+          "SM-1237"
+        ],
+        "keyword": [
+          "SM-1223",
+          "SM-1212",
+          "SM-1013",
+          "SM-1002",
+          "SM-1214",
+          "SM-1217",
+          "SM-1216",
+          "SM-1220",
+          "SM-1004",
+          "SM-1215",
+          "SM-1007",
+          "SM-1279",
+          "SM-1213",
+          "SM-1219",
+          "SM-1211",
+          "SM-1006",
+          "SM-1218",
+          "SM-1010",
+          "SM-1268",
+          "EX-0201"
+        ],
+        "rrf": [
+          "SM-1223",
+          "SM-1013",
+          "SM-1216",
+          "SM-1220",
+          "SM-1217",
+          "SM-1006",
+          "SM-1218",
+          "EX-0201",
+          "SM-1212",
+          "SM-1041",
+          "SM-1069",
+          "SM-1002",
+          "SM-1055",
+          "SM-1214",
+          "SM-1027",
+          "SM-1097",
+          "SM-1265",
+          "SM-1004",
+          "SM-1215",
+          "SM-1007",
+          "SM-1020",
+          "SM-1279",
+          "SM-1083",
+          "SM-1213",
+          "SM-1209",
+          "SM-1219",
+          "EX-0105",
+          "SM-1211",
+          "SM-1010",
+          "EX-0204",
+          "SM-1268",
+          "SM-1237"
+        ],
+        "reranker_input": [
+          "SM-1223",
+          "SM-1013",
+          "SM-1216",
+          "SM-1220",
+          "SM-1217",
+          "SM-1006",
+          "SM-1218",
+          "EX-0201",
+          "SM-1212",
+          "SM-1041",
+          "SM-1069",
+          "SM-1002",
+          "SM-1055",
+          "SM-1214",
+          "SM-1027",
+          "SM-1097",
+          "SM-1265",
+          "SM-1004",
+          "SM-1215",
+          "SM-1007",
+          "SM-1020",
+          "SM-1279",
+          "SM-1083",
+          "SM-1213",
+          "SM-1209",
+          "SM-1219",
+          "EX-0105",
+          "SM-1211",
+          "SM-1010",
+          "EX-0204",
+          "SM-1268",
+          "SM-1237"
+        ],
+        "api_search": [
+          "SM-1013",
+          "SM-1041",
+          "SM-1223",
+          "SM-1279",
+          "SM-1055",
+          "SM-1097",
+          "SM-1027",
+          "SM-1209",
+          "SM-1265",
+          "SM-1006",
+          "SM-1007",
+          "SM-1069",
+          "SM-1083",
+          "SM-1237",
+          "SM-1010",
+          "EX-0204",
+          "EX-0201",
+          "SM-1004",
+          "SM-1002",
+          "SM-1217",
+          "SM-1220",
+          "SM-1216",
+          "SM-1218",
+          "SM-1214",
+          "SM-1212",
+          "SM-1213",
+          "SM-1211",
+          "SM-1020",
+          "SM-1215",
+          "SM-1219",
+          "EX-0105",
+          "SM-1268"
+        ]
+      },
+      "expected_ranks": {
+        "vector": {
+          "SM-1013": 2
+        },
+        "keyword": {
+          "SM-1013": 3
+        },
+        "rrf": {
+          "SM-1013": 2
+        },
+        "reranker_input": {
+          "SM-1013": 2
+        },
+        "api_search": {
+          "SM-1013": 1
+        }
+      },
+      "first_loss": {
+        "SM-1013": null
+      },
+      "embedding_seconds": 0.198,
+      "pg_es_seconds": 0.018,
+      "seconds": 0.216,
+      "api_seconds": 34.691,
+      "api_trace": [
+        {
+          "name": "guardrail_input",
+          "passed": true,
+          "duration_ms": 0.05,
+          "results_count": null,
+          "detail": null
+        },
+        {
+          "name": "question_classification",
+          "passed": true,
+          "duration_ms": 0.0,
+          "results_count": null,
+          "detail": {
+            "category": "regulatory",
+            "indicators": [
+              "금액"
+            ]
+          }
+        },
+        {
+          "name": "vector_search",
+          "passed": true,
+          "duration_ms": 561.99,
+          "results_count": 20,
+          "detail": null
+        },
+        {
+          "name": "keyword_search",
+          "passed": true,
+          "duration_ms": 561.99,
+          "results_count": 20,
+          "detail": null
+        },
+        {
+          "name": "rrf_fusion",
+          "passed": true,
+          "duration_ms": 0.17,
+          "results_count": 32,
+          "detail": null
+        },
+        {
+          "name": "reranking",
+          "passed": true,
+          "duration_ms": 34054.57,
+          "results_count": 32,
+          "detail": null
+        },
+        {
+          "name": "retrieval_gate",
+          "passed": true,
+          "duration_ms": 0.01,
+          "results_count": 9,
+          "detail": {
+            "top_score": 0.99971895255155
+          }
+        },
+        {
+          "name": "guardrail_pii",
+          "passed": true,
+          "duration_ms": 3.22,
+          "results_count": null,
+          "detail": {
+            "pii_found": false
+          }
+        }
+      ]
+    }
+  ],
+  "summary": {
+    "api_search": {
+      "labeled_cases": 5,
+      "expected_count": 5,
+      "recall": 1.0,
+      "recall_at_1": 1.0,
+      "recall_at_5": 1.0
+    },
+    "keyword": {
+      "labeled_cases": 5,
+      "expected_count": 5,
+      "recall": 1.0,
+      "recall_at_1": 0.8,
+      "recall_at_5": 1.0
+    },
+    "reranker_input": {
+      "labeled_cases": 5,
+      "expected_count": 5,
+      "recall": 1.0,
+      "recall_at_1": 0.4,
+      "recall_at_5": 0.8
+    },
+    "rrf": {
+      "labeled_cases": 5,
+      "expected_count": 5,
+      "recall": 1.0,
+      "recall_at_1": 0.4,
+      "recall_at_5": 0.8
+    },
+    "vector": {
+      "labeled_cases": 5,
+      "expected_count": 5,
+      "recall": 0.8,
+      "recall_at_1": 0.4,
+      "recall_at_5": 0.6
+    }
+  },
+  "raw_reranker_executed": false,
+  "latency_boundary": "Uncontrolled live load; not an isolated latency benchmark",
+  "api_search_stage": "gateway output after reranking and waiting-condition ordering; inspect trace for cache or reranker failure",
+  "api_reranker_executed_cases": 5
+}

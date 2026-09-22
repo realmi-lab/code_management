@@ -1,0 +1,15 @@
+{
+  "settings": {
+    "version": 15,
+    "provider": "commandcode",
+    "model": "deepseek/deepseek-v4.1-flash",
+    "embedding": "local"
+  },
+  "llm": {
+    "provider": "commandcode",
+    "model": "deepseek/deepseek-v4.1-flash",
+    "reasoning_effort": "low",
+    "judge_model": "deepseek/deepseek-v4.1-flash",
+    "judge_provider": "commandcode"
+  }
+}

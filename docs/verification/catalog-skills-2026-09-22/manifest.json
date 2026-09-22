@@ -1,0 +1,28 @@
+{
+  "version": 1,
+  "scope": "demo synthetic only",
+  "frozen": true,
+  "notes": "Expected originals are read from the frozen demo corpus. These labels are evaluation data, never runtime answer routing. Holdout cases must not be tuned after observing their results. Literal checks do not replace manual semantic review.",
+  "cases": [
+    {"id":"core-direct","suite":"core","kind":"direct","query":"AT-1923 문구 알려줘","expected_codes":["AT-1923"]},
+    {"id":"core-wait","suite":"core","kind":"search","query":"인증 전에 30초 기다리라는 알림 있어?","expected_codes":["AT-1923"],"check_direction":true},
+    {"id":"core-sent","suite":"core","kind":"search","query":"인증번호 전송에 성공했을 때 보여줄 기존 문구 찾아줘","expected_codes":["EX-0101"]},
+    {"id":"core-invalid","suite":"core","kind":"search","query":"입력한 인증번호가 틀렸을 때 안내하는 기존 알림 찾아줘","expected_codes":["EX-0102"]},
+    {"id":"core-expired","suite":"core","kind":"search","query":"인증번호 유효시간이 지난 경우 보여주는 기존 알림 찾아줘","expected_codes":["EX-0103"]},
+    {"id":"core-within","suite":"core","kind":"search","query":"인증을 30초 안에 끝내야 한다는 기존 안내 찾아줘","expected_codes":["EX-0104"],"check_direction":true},
+    {"id":"core-phone","suite":"core","kind":"search","query":"기존 회원 전화번호로 다시 가입하려는 경우 보여주는 기존 알림 찾아줘","expected_codes":["EX-0201"]},
+    {"id":"core-broad","suite":"core","kind":"broad","query":"30초 관련메시지찾아줘","expected_codes":[],"literal_fields":[]},
+    {"id":"core-direction","suite":"core","kind":"compare","query":"AT-1923과 EX-0104의 시간 조건 차이를 설명해줘.","action":"explain","expected_codes":["AT-1923","EX-0104"],"check_direction":true},
+    {"id":"core-unrelated","suite":"core","kind":"unrelated","query":"오늘 서울 날씨 어때?","expected_codes":[]},
+    {"id":"core-missing","suite":"core","kind":"missing","query":"ZZ-987654 문구 알려줘","expected_codes":[],"missing_codes":["ZZ-987654"]},
+    {"id":"core-false-premise","suite":"core","kind":"false_premise","query":"AT-1923은 60초 이후에 인증하는 코드 맞아? 등록 문구를 근거로 확인해줘.","action":"explain","expected_codes":["AT-1923"],"check_direction":true},
+    {"id":"holdout-email-free","suite":"holdout","kind":"search","query":"회원가입에서 이메일 주소가 아직 사용되지 않아 쓸 수 있을 때 보여줄 기존 안내 찾아줘","expected_codes":["EX-0203"]},
+    {"id":"holdout-password","suite":"holdout","kind":"search","query":"로그인하면서 비밀번호를 잘못 입력했을 때 표시하는 기존 문구 찾아줘","expected_codes":["EX-0301"]},
+    {"id":"holdout-signup-success","suite":"holdout","kind":"search","query":"가입 신청 처리가 정상적으로 끝났을 때 표시하는 기존 알림 찾아줘","expected_codes":["SM-1001"]},
+    {"id":"holdout-signup-required","suite":"holdout","kind":"search","query":"가입 신청에 필요한 입력란을 빠뜨렸을 때 표시하는 기존 알림 찾아줘","expected_codes":["SM-1004"]},
+    {"id":"holdout-signup-wait","suite":"holdout","kind":"search","query":"가입 신청을 보낸 지 30초가 안 돼서 다시 요청할 수 없을 때 기존 안내 찾아줘","expected_codes":["SM-1006"],"check_direction":true},
+    {"id":"holdout-signup-variable","suite":"holdout","kind":"search","query":"가입 신청을 다시 요청하기까지 남은 초를 변수로 표시하는 기존 문구 찾아줘","expected_codes":["SM-1013"]},
+    {"id":"holdout-auth-failed","suite":"holdout","kind":"search","query":"본인인증 처리가 실패해서 잠시 뒤 다시 시도해야 할 때 기존 알림 찾아줘","expected_codes":["SM-1017"]},
+    {"id":"holdout-auth-required","suite":"holdout","kind":"search","query":"본인인증에 필요한 항목을 덜 입력했을 때 보여주는 기존 문구 찾아줘","expected_codes":["SM-1018"]}
+  ]
+}

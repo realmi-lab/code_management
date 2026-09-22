@@ -1,0 +1,10 @@
+{
+  "apple.py": true,
+  "gateway.py": true,
+  "routing.py": true,
+  "provider.py": true,
+  "ai_config.py": true,
+  "apple_judge.py": true,
+  "static/app.js": true,
+  "static/index.html": true
+}

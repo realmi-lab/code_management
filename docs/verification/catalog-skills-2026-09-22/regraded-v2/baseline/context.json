@@ -1,0 +1,31 @@
+{
+  "manifest_hash": "55ea3043ef268f420fffad412e858d3b087952400cc68eee94456fe26ad1d5a9",
+  "corpus_hash": "03f51e3d5a8e47fd82f6aada43250bae5ee5e2201f755e99117e6c6f6c5bade1",
+  "settings_hash": "dc92db84a3ed1e5bbcddb4c0fe24dd8f375b3ce5cd2dc4fe8034aaa5a60d36eb",
+  "selected_cases": [
+    "core-direct",
+    "core-wait",
+    "core-sent",
+    "core-invalid",
+    "core-expired",
+    "core-within",
+    "core-phone",
+    "core-broad",
+    "core-direction",
+    "core-unrelated",
+    "core-missing",
+    "core-false-premise",
+    "holdout-email-free",
+    "holdout-password",
+    "holdout-signup-success",
+    "holdout-signup-required",
+    "holdout-signup-wait",
+    "holdout-signup-variable",
+    "holdout-auth-failed",
+    "holdout-auth-required"
+  ],
+  "runs": 1,
+  "concurrency": 2,
+  "scope": "demo synthetic only",
+  "cache_policy": "existing service cache; no invalidation"
+}

@@ -70,11 +70,20 @@ async def test_missing_comparison_requests_wording(seeded,gateway):
     a=Agent(seeded,gateway);r=await a.turn(USER,seeded.create_thread(USER)['id'],req('AT-1923 비교',action='compare'))
     assert '비교할 새 문구' in r['answer']
 @pytest.mark.asyncio
-async def test_llm_cannot_invent_existing_code(seeded,gateway):
+@pytest.mark.parametrize('action',['explain','compare'])
+async def test_llm_cannot_invent_existing_code(seeded,gateway,action):
     gateway.responses=[{'text':'AT-9999를 쓰세요','references':['AT-9999']}]
     t=seeded.create_thread(USER)
-    with pytest.raises(DomainError): await Agent(seeded,gateway).turn(USER,t['id'],req('AT-1923 설명',action='explain'))
-    assert seeded.get_thread(USER,t['id'])['version']==0
+    result=await Agent(seeded,gateway).turn(USER,t['id'],req('AT-1923 설명',action=action,
+        proposed_message='30초 이내에 인증해주세요.' if action=='compare' else ''))
+    saved=seeded.get_thread(USER,t['id'])
+    assert result['candidates']==[seeded.get_code('AT-1923')]
+    assert result['ai_error']['status']==502 and result['ai_used'] is False
+    assert 'AT-9999' not in json.dumps(result,ensure_ascii=False)
+    assert 'AT-9999' not in json.dumps(saved,ensure_ascii=False)
+    assert saved['version']==1 and saved['history'][-1]['ai_used'] is False
+    if action=='compare':
+        assert result['comparisons']==[dict(code='AT-1923',**compare_message('30초 이내에 인증해주세요.',seeded.get_code('AT-1923')))]
 @pytest.mark.asyncio
 async def test_generated_draft_does_not_register(seeded,gateway):
     a=Agent(seeded,gateway);t=seeded.create_thread(USER);q=req('30초 이후에 인증하도록 새로 작성',action='draft')

@@ -56,6 +56,14 @@ async def test_ungrounded_numbers_stop_before_paid_judge(safety):
     llm.generate.assert_not_awaited()
 
 @pytest.mark.asyncio
+async def test_user_question_does_not_make_a_quantity_registered_evidence(safety):
+    llm=SimpleNamespace(generate=AsyncMock())
+    evidence={'question':'60초 기다리는 것 맞지?', 'catalog':[{'code':'AT-1923','message':'30초 이후에 인증해주세요.'}]}
+    with pytest.raises(DomainError,match='수치'):
+        await safety.validate(Explanation(text='60초 이후에 인증해주세요.',references=['AT-1923']),evidence,llm)
+    llm.generate.assert_not_awaited()
+
+@pytest.mark.asyncio
 async def test_independent_judges_run_together_and_both_must_pass(safety):
     import asyncio
     calls=[];both_started=asyncio.Event()
@@ -120,7 +128,7 @@ async def test_numeric_repair_revalidates_same_evidence_and_is_bounded(safety,fi
             with pytest.raises(NumericGroundingError):await gateway.json(Explanation,'등록 문구 설명',payload)
     calls=llm.generate.call_args_list
     assert len(calls)==(4 if fixed else 2)
-    assert calls[0].args[0]==calls[1].args[0]==json.dumps(payload,ensure_ascii=False)
+    assert calls[0].args[0]==calls[1].args[0]==json.dumps(payload,ensure_ascii=False,separators=(',',':'))
     assert '차단됐습니다' in calls[1].kwargs['system_prompt']
     assert '"stage": "numeric"' in caplog.text and '"status": "blocked"' in caplog.text
     assert '대기 60초입니다' not in caplog.text
@@ -163,7 +171,7 @@ async def test_grounding_repair_changes_content_and_rechecks_both_judges(safety,
     calls=llm.generate.call_args_list
     assert len(calls)==(4 if outcome=='unchanged' else 6)
     # Evidence is unchanged; neither rejected answer nor judge prose becomes fact.
-    assert calls[0].args[0]==calls[3].args[0]==json.dumps(payload,ensure_ascii=False)
+    assert calls[0].args[0]==calls[3].args[0]==json.dumps(payload,ensure_ascii=False,separators=(',',':'))
     assert '완료되었습니다' not in calls[3].kwargs['system_prompt']
     assert '차단됐습니다' in calls[3].kwargs['system_prompt']
     llm.client.close.assert_awaited_once()
@@ -223,7 +231,7 @@ async def test_explanation_format_repair_shares_one_retry_and_keeps_guards(safet
             with pytest.raises(DomainError):await gateway.json(Explanation,'설명',payload)
     calls=llm.generate.call_args_list
     assert len(calls)==(4 if outcome=='fixed' else 2)
-    assert calls[0].args[0]==calls[1].args[0]==json.dumps(payload,ensure_ascii=False)
+    assert calls[0].args[0]==calls[1].args[0]==json.dumps(payload,ensure_ascii=False,separators=(',',':'))
     assert 'response_schema' in caplog.text and 'json_invalid' in caplog.text
     assert 'PRIVATE ANSWER' not in caplog.text and 'PRIVATE ANSWER' not in calls[1].kwargs['system_prompt']
     llm.client.close.assert_awaited_once()

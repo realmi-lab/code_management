@@ -1,0 +1,5 @@
+{
+  "code_review": "Found thousands separator parsing bug; fixed and independently rechecked. No Apple candidate cap.",
+  "evidence_review": "All recorded metrics match evidence; DeepSeek live result is one turn, not a reliability benchmark.",
+  "final_numeric_tests": "5 passed"
+}

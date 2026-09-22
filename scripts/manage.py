@@ -325,7 +325,8 @@ def configure(root: Path = ROOT, interactive: bool = True) -> dict[str, str]:
         values.setdefault(key, value)
     for key in ('POSTGRES_PASSWORD', 'REDIS_PASSWORD', 'JWT_SECRET_KEY', 'NEXTAUTH_SECRET',
                 'LANGFUSE_SALT', 'LANGFUSE_ENCRYPTION_KEY', 'CLICKHOUSE_PASSWORD',
-                'LANGFUSE_REDIS_PASSWORD', 'MINIO_ROOT_PASSWORD', 'CATALOG_ACCESS_TOKEN'):
+                'LANGFUSE_REDIS_PASSWORD', 'MINIO_ROOT_PASSWORD', 'CATALOG_ACCESS_TOKEN',
+                'CODE_APPLE_BRIDGE_TOKEN'):
         if not values.get(key):
             values[key] = secrets.token_hex(32)
     if not values.get('LOCAL_EMBEDDING_TOKEN'):values['LOCAL_EMBEDDING_TOKEN']=secrets.token_hex(32)
@@ -418,11 +419,22 @@ def start(root: Path = ROOT, *, legacy: bool = False, source: Path | None = None
           archive: Path | None = None, interactive: bool = True, open_browser: bool = True) -> None:
     docker_preflight(root)
     values = configure(root, interactive=interactive)
-    if values.get('CODE_LLM_PROVIDER') not in (None,'openai','commandcode','anthropic','deepseek'):raise SetupError('지원하지 않는 LLM 공급자입니다.')
+    if values.get('CODE_LLM_PROVIDER') not in (None,'openai','commandcode','anthropic','deepseek','apple'):raise SetupError('지원하지 않는 LLM 공급자입니다.')
     if values.get('CODE_EMBEDDING_PROVIDER','none') not in ('openai','local','none'):
         raise SetupError('지원하지 않는 임베딩 공급자입니다.')
     if not environment_ready(values):
         print('AI 키가 없는 공급자의 호출은 차단됩니다. 로그인 후 알림 코드 → AI 설정에서 키를 입력하세요.')
+    if judge_bridge_required(values) or sys.platform == 'darwin':
+        # The admin screen offers the Apple judge only while the bridge answers, so start it whenever this Mac can serve it.
+        # When the env forces the Apple judge, fail before the long build instead of judging every turn into an error.
+        try:
+            apple_bridge('stop', root)
+            bridge = apple_bridge('start', root)
+            print(f"Apple 온디바이스 판정 브리지 실행 중: http://127.0.0.1:{bridge.get('port', 8787)} (pid {bridge.get('pid')})")
+        except SetupError as exc:
+            if judge_bridge_required(values):
+                raise
+            print(f'Apple 온디바이스 판정 브리지는 준비하지 않았습니다(선택 불가): {exc}')
     args = compose_args(root, legacy)
     # Configuration check does not print interpolated secrets.
     run(args + ['config', '--quiet'], cwd=root)
@@ -447,19 +459,40 @@ def start(root: Path = ROOT, *, legacy: bool = False, source: Path | None = None
 
 
 def environment_ready(values):
-    keys={'commandcode':'COMMANDCODE_API_KEY','anthropic':'ANTHROPIC_API_KEY','deepseek':'DEEPSEEK_API_KEY','openai':'OPENAI_API_KEY'}
+    keys={'commandcode':'COMMANDCODE_API_KEY','anthropic':'ANTHROPIC_API_KEY','deepseek':'DEEPSEEK_API_KEY','openai':'OPENAI_API_KEY','apple':'CODE_APPLE_BRIDGE_TOKEN'}
     llm=bool(values.get(keys.get(values.get('CODE_LLM_PROVIDER','openai'),'')))
     mode=values.get('CODE_EMBEDDING_PROVIDER','none')
     embedding=True if mode=='none' else bool(values.get('LOCAL_EMBEDDING_TOKEN')) if mode=='local' else bool(values.get('OPENAI_API_KEY')) if mode=='openai' else False
     return llm and embedding
 
 
+def judge_bridge_required(values: dict[str, str]) -> bool:
+    """CODE_LLM_JUDGE_PROVIDER=apple sends the two judge stages to the Mac-side Apple bridge."""
+    return values.get('CODE_LLM_JUDGE_PROVIDER', '').strip() == 'apple' or values.get('CODE_LLM_PROVIDER') == 'apple'
+
+
+def apple_bridge(command: str, root: Path = ROOT) -> dict:
+    """Run extensions/apple_bridge/bridge.py <command>; surface its JSON error instead of a generic failure."""
+    script = root / 'extensions' / 'apple_bridge' / 'bridge.py'
+    env = {**os.environ, **{k: v for k, v in load_env(root / '.env').items() if k == 'CODE_APPLE_BRIDGE_TOKEN'}}
+    result = subprocess.run([sys.executable, str(script), command], cwd=root, text=True, capture_output=True, env=env)
+    if result.returncode != 0:
+        detail = result.stderr.strip().splitlines()[-1] if result.stderr.strip() else result.stdout.strip()[-300:]
+        raise SetupError(f'Apple 판정 브리지 {command} 실패: {detail}')
+    try:
+        return json.loads(result.stdout.strip().splitlines()[-1]) if result.stdout.strip() else {}
+    except ValueError:
+        return {'output': result.stdout.strip()[-300:]}
+
+
 def doctor(root: Path = ROOT) -> dict:
     checks = []
+    values = load_env(root / '.env')
     for name, callback in (
         ('source_tree', lambda: verify_source(root / 'upstream', lock_spec(root))),
         ('docker', lambda: docker_preflight(root)),
-        ('environment', lambda: environment_ready(load_env(root / '.env'))),
+        ('environment', lambda: environment_ready(values)),
+        *([('apple_bridge', lambda: apple_bridge('check', root).get('available', False))] if judge_bridge_required(values) else []),
     ):
         try:
             result = callback()
@@ -521,6 +554,15 @@ def main(argv: list[str] | None = None) -> int:
             docker_preflight()
             # stop is intentionally not down -v. Data and unrelated projects remain.
             run(compose_args(legacy=True) + (['ps', '--all'] if args.command == 'status' else ['stop']))
+            values = load_env(ROOT / '.env')
+            if args.command == 'stop':
+                if (ROOT / '.local' / 'apple-bridge' / 'bridge.pid').exists():
+                    print('Apple 판정 브리지:', apple_bridge('stop'))
+            elif judge_bridge_required(values):
+                try:
+                    print('Apple 판정 브리지:', apple_bridge('status'))
+                except SetupError as exc:
+                    print(f'Apple 판정 브리지: 실행 중 아님 ({exc})')
         return 0
     except (SetupError, OSError) as exc:
         print(f'중단: {exc}', file=sys.stderr)

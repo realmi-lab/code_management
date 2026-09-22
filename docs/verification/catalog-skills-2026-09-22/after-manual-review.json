@@ -1,0 +1,725 @@
+{
+  "review_type": "post_hoc_agent_semantic_source_review",
+  "phase": "after",
+  "created_at": "2026-09-22T09:00:41.370929+00:00",
+  "reviewer": {
+    "type": "agent",
+    "human_review": false,
+    "blinded": false,
+    "independent_of_implementation": false,
+    "note": "같은 구현 작업에 참여한 에이전트의 사후 질문·답변·원문 대조다. 독립 사람 블라인드 평가나 별도 모델 판정이 아니다. 자동 표현 체크를 의미 정확도로 재명명하지 않았다."
+  },
+  "inputs": {
+    "results.json": {
+      "path": "docs/verification/catalog-skills-2026-09-22/live-scheduled/after/results.json",
+      "sha256": "d5955bc2297cc8015de426dacd145a02d56bf85308c2fc486e21f56d5cdfe1cd"
+    },
+    "corpus.json": {
+      "path": "docs/verification/catalog-skills-2026-09-22/live-scheduled/after/corpus.json",
+      "sha256": "daa1d2935f93095add0aea48e7507fef24b363286202afd261e89f1b067da018"
+    },
+    "manifest.json": {
+      "path": "docs/verification/catalog-skills-2026-09-22/live-scheduled/after/manifest.json",
+      "sha256": "e5433760514237042c5773f0995f1afc6bdb439c8270a57f54c58cbd2f6442c8"
+    },
+    "summary.json": {
+      "path": "docs/verification/catalog-skills-2026-09-22/live-scheduled/after/summary.json",
+      "sha256": "924f3c8421d2be7cfb62a1d3e34d6bc28e7a0fec551460a60fd6250a27a18ff9"
+    }
+  },
+  "data_scope": {
+    "namespace": "demo",
+    "synthetic": true,
+    "corpus_version": 3,
+    "corpus_rows": 300,
+    "attempts": 20,
+    "repeat_count_per_case": 1
+  },
+  "rubric": {
+    "pass": "사용자 요청에 의미적으로 부합하고 답변의 주요 주장·조건·인용이 스냅샷 원문으로 뒷받침된다. 원문 후보를 함께 반환하는 직접 조회도 응답 전체로 평가한다.",
+    "fail": "오류로 답변을 제공하지 못하거나 요청·원문과 모순되는 결과를 제공한다. 안전 차단이라도 필요한 정정 답변을 못한 경우 성공으로 세지 않는다.",
+    "needs_review": "중요한 서술의 범위나 근거를 반환된 기록만으로 확정할 수 없어 통과를 유보한다."
+  },
+  "summary": {
+    "counts": {
+      "pass": 19,
+      "fail": 1,
+      "needs_review": 0
+    },
+    "automatic_objective_pass": 19,
+    "not_a_statistical_accuracy_estimate": true,
+    "interpretation": "19건 통과, 1건 AI 설명 실패. baseline의 날씨 응답 범위 모호성 1건이 해소됐고 잘못된 60초 전제 정정 실패는 남았다. HTTP 200이나 자동 계약 검사를 의미 정확도로 바꾸어 세지 않았다."
+  },
+  "comparison_to_baseline": {
+    "baseline_review_path": "docs/verification/catalog-skills-2026-09-22/baseline-manual-review.json",
+    "baseline_counts": {
+      "pass": 18,
+      "fail": 1,
+      "needs_review": 1
+    },
+    "after_counts": {
+      "pass": 19,
+      "fail": 1,
+      "needs_review": 0
+    },
+    "changed_verdicts": [
+      {
+        "case_id": "core-unrelated",
+        "from": "needs_review",
+        "to": "pass"
+      }
+    ],
+    "unresolved_failure": [
+      "core-false-premise"
+    ],
+    "corpus_equal": true,
+    "manifest_equal": true,
+    "scope_note": "원본 baseline 20건과 완료된 after 20건만 비교한다. 중단된 after-pre-fix 및 이후 prompt 1.0.1 후속 실측은 포함하지 않는다."
+  },
+  "programmatic_source_preservation": {
+    "candidate_occurrences_checked": 466,
+    "full_record_mismatches": 0,
+    "quantity_30_seconds_expected": 42,
+    "quantity_30_seconds_returned": 42,
+    "quantity_code_set_exact": true,
+    "quantity_full_record_mismatches": 0,
+    "note": "최종 반환 후보의 모든 필드와 중첩 source를 원문 스냅샷과 값 동등성으로 대조했다. 내부 검색 후보 전체 보존이나 검색 정밀도 판정과는 별개다."
+  },
+  "important_findings": [
+    "30초 이후 대기와 30초 이내 완료 제한을 비교 응답에서 올바르게 구별했고 {seconds} 동적 변수도 보존했다.",
+    "잘못된 60초 전제는 AI 설명 생성에 실패했다. 원문 후보 보존으로 사용자가 직접 확인할 수는 있지만 요청한 정정 답변의 성공은 아니다.",
+    "날씨 응답은 제공 자료의 부재만 알렸으며 baseline의 근거 범위가 불확실한 전체 업무 목록 단정을 반복하지 않았다.",
+    "이메일 사용 가능 질문의 정확한 후보는 2위였으나 최종 답변은 반대 의미의 1위 후보와 혼동하지 않았다. 가입 완료 후보는 이번 1위였다.",
+    "검토한 전달 답변에서 원문과 다른 수치 주장은 찾지 못했다. 오류 응답은 수치 가드 차단을 기록하지만 거절된 문장이 없어 올바른 정정의 오탐인지 확인할 수 없다."
+  ],
+  "limitations": [
+    "합성 자료 300건의 질의 20개 각 1회이며 실제 회사 데이터 정확도나 통계적 개선을 뜻하지 않는다.",
+    "같은 구현 작업에 참여한 에이전트의 사후 검토로 사람 블라인드 검토나 구현과 독립적인 평가가 아니다.",
+    "검색된 모든 하위 후보의 정밀도를 채점하지 않았고 내부에서 버린 후보는 공개 응답으로 복원할 수 없다. 최종 답변의 의미와 반환 원문을 검토했다.",
+    "시간 조건 비교는 이번 질의의 코드 순서 한 방향으로 검토했다. 순서를 뒤집은 별도 질의나 모든 비교 동작에 대한 증거는 아니다.",
+    "거절된 생성 문장이 없어 잘못된 전제 수치를 부정형으로 재인용한 것이 차단 원인이라는 설명은 가설이다. 의도적으로 생성한 수치 오답 전반의 차단 성능도 이 20건만으로 입증하지 않는다.",
+    "검색·리랭크·근거 포장·검증 변경이 함께 적용돼 개별 변경의 효과를 분리할 수 없다.",
+    "검토 중 외부 모델·API·Elasticsearch·리랭커 추가 호출, 운영 코드 수정 또는 배포를 하지 않았다."
+  ],
+  "cases": [
+    {
+      "case_id": "core-direct",
+      "repeat": 1,
+      "query": "AT-1923 문구 알려줘",
+      "http_status": 200,
+      "verdict": "pass",
+      "reason": "코드 직접 조회 요청에 정확히 AT-1923 한 건의 DB 원문·메뉴·노출 조건을 반환했다. 안내 문장과 함께 반환된 원문 후보 전체를 대조했다. 모델 생성 없이 조회한 방식도 요청에 적합하다.",
+      "failure_type": null,
+      "answer_reviewed": "등록된 코드의 원문을 찾았습니다. 아래 문구는 DB에 저장된 그대로입니다.",
+      "source_codes_reviewed": [
+        "AT-1923"
+      ],
+      "source_facts": [
+        {
+          "code": "AT-1923",
+          "message": "메뉴확인 30초 이후에 인증해주세요.",
+          "menu": "메뉴 인증",
+          "trigger": "메뉴 확인 후 30초가 지나기 전에 인증 버튼을 누른 경우",
+          "notes": "사용자가 제공한 예시를 바탕으로 한 데모. 조건은 예시용입니다.",
+          "status": "active",
+          "revision": 1
+        }
+      ],
+      "returned_candidate_count": 1,
+      "automatic_objective_pass_recorded_separately": true,
+      "ai_used": false,
+      "ai_error": null,
+      "baseline_verdict": "pass",
+      "verdict_change": "pass -> pass",
+      "returned_candidates_match_full_source_records": true
+    },
+    {
+      "case_id": "core-sent",
+      "repeat": 1,
+      "query": "인증번호 전송에 성공했을 때 보여줄 기존 문구 찾아줘",
+      "http_status": 200,
+      "verdict": "pass",
+      "reason": "인증번호 전송 성공을 전송 실패·번호 불일치와 구분하고 EX-0101의 원문·메뉴·노출 조건을 정확히 인용했다.",
+      "failure_type": null,
+      "answer_reviewed": "메시지코드: EX-0101\n문구: 인증번호를 발송했습니다.\n메뉴: 휴대폰 인증\n노출 조건: 인증번호 전송 성공",
+      "source_codes_reviewed": [
+        "EX-0101"
+      ],
+      "source_facts": [
+        {
+          "code": "EX-0101",
+          "message": "인증번호를 발송했습니다.",
+          "menu": "휴대폰 인증",
+          "trigger": "인증번호 전송 성공",
+          "notes": "합성 예시",
+          "status": "active",
+          "revision": 1
+        }
+      ],
+      "returned_candidate_count": 33,
+      "automatic_objective_pass_recorded_separately": true,
+      "ai_used": true,
+      "ai_error": null,
+      "baseline_verdict": "pass",
+      "verdict_change": "pass -> pass",
+      "returned_candidates_match_full_source_records": true
+    },
+    {
+      "case_id": "core-wait",
+      "repeat": 1,
+      "query": "인증 전에 30초 기다리라는 알림 있어?",
+      "http_status": 200,
+      "verdict": "pass",
+      "reason": "AT-1923의 30초 이후 인증 안내를 선택했다. 30초가 지나기 전 버튼 클릭이라는 노출 조건과 30초 이후 인증하라는 안내를 혼동하지 않았다.",
+      "failure_type": null,
+      "answer_reviewed": "메시지코드: AT-1923\n문구: 메뉴확인 30초 이후에 인증해주세요.\n메뉴: 메뉴 인증\n노출 조건: 메뉴 확인 후 30초가 지나기 전에 인증 버튼을 누른 경우",
+      "source_codes_reviewed": [
+        "AT-1923"
+      ],
+      "source_facts": [
+        {
+          "code": "AT-1923",
+          "message": "메뉴확인 30초 이후에 인증해주세요.",
+          "menu": "메뉴 인증",
+          "trigger": "메뉴 확인 후 30초가 지나기 전에 인증 버튼을 누른 경우",
+          "notes": "사용자가 제공한 예시를 바탕으로 한 데모. 조건은 예시용입니다.",
+          "status": "active",
+          "revision": 1
+        }
+      ],
+      "returned_candidate_count": 33,
+      "automatic_objective_pass_recorded_separately": true,
+      "ai_used": true,
+      "ai_error": null,
+      "baseline_verdict": "pass",
+      "verdict_change": "pass -> pass",
+      "returned_candidates_match_full_source_records": true
+    },
+    {
+      "case_id": "core-invalid",
+      "repeat": 1,
+      "query": "입력한 인증번호가 틀렸을 때 안내하는 기존 알림 찾아줘",
+      "http_status": 200,
+      "verdict": "pass",
+      "reason": "입력 인증번호 불일치 상황에 EX-0102를 연결했고 원문·메뉴·노출 조건이 모두 일치한다.",
+      "failure_type": null,
+      "answer_reviewed": "메시지코드: EX-0102\n문구: 인증번호를 다시 확인해주세요.\n메뉴: 휴대폰 인증\n노출 조건: 입력한 인증번호 불일치",
+      "source_codes_reviewed": [
+        "EX-0102"
+      ],
+      "source_facts": [
+        {
+          "code": "EX-0102",
+          "message": "인증번호를 다시 확인해주세요.",
+          "menu": "휴대폰 인증",
+          "trigger": "입력한 인증번호 불일치",
+          "notes": "합성 예시",
+          "status": "active",
+          "revision": 1
+        }
+      ],
+      "returned_candidate_count": 28,
+      "automatic_objective_pass_recorded_separately": true,
+      "ai_used": true,
+      "ai_error": null,
+      "baseline_verdict": "pass",
+      "verdict_change": "pass -> pass",
+      "returned_candidates_match_full_source_records": true
+    },
+    {
+      "case_id": "core-expired",
+      "repeat": 1,
+      "query": "인증번호 유효시간이 지난 경우 보여주는 기존 알림 찾아줘",
+      "http_status": 200,
+      "verdict": "pass",
+      "reason": "인증번호 유효시간 경과에 EX-0103을 연결했고 만료 후 다시 요청하라는 원문을 보존했다.",
+      "failure_type": null,
+      "answer_reviewed": "메시지코드: EX-0103\n문구: 인증번호가 만료되었습니다. 다시 요청해주세요.\n메뉴: 휴대폰 인증\n노출 조건: 유효시간이 지난 인증번호 입력",
+      "source_codes_reviewed": [
+        "EX-0103"
+      ],
+      "source_facts": [
+        {
+          "code": "EX-0103",
+          "message": "인증번호가 만료되었습니다. 다시 요청해주세요.",
+          "menu": "휴대폰 인증",
+          "trigger": "유효시간이 지난 인증번호 입력",
+          "notes": "합성 예시",
+          "status": "active",
+          "revision": 1
+        }
+      ],
+      "returned_candidate_count": 31,
+      "automatic_objective_pass_recorded_separately": true,
+      "ai_used": true,
+      "ai_error": null,
+      "baseline_verdict": "pass",
+      "verdict_change": "pass -> pass",
+      "returned_candidates_match_full_source_records": true
+    },
+    {
+      "case_id": "core-within",
+      "repeat": 1,
+      "query": "인증을 30초 안에 끝내야 한다는 기존 안내 찾아줘",
+      "http_status": 200,
+      "verdict": "pass",
+      "reason": "EX-0104의 30초 이내 완료 제한을 제시했다. 30초 이후 재시도라는 반대 방향의 시간 조건으로 바꾸지 않았다.",
+      "failure_type": null,
+      "answer_reviewed": "메시지코드: EX-0104\n문구: 30초 이내에 인증을 완료해주세요.\n메뉴: 기기 인증\n노출 조건: 인증 시작 후 완료 제한시간 안내",
+      "source_codes_reviewed": [
+        "EX-0104"
+      ],
+      "source_facts": [
+        {
+          "code": "EX-0104",
+          "message": "30초 이내에 인증을 완료해주세요.",
+          "menu": "기기 인증",
+          "trigger": "인증 시작 후 완료 제한시간 안내",
+          "notes": "AT-1923과 시간의 방향이 다른 합성 예시",
+          "status": "active",
+          "revision": 1
+        }
+      ],
+      "returned_candidate_count": 27,
+      "automatic_objective_pass_recorded_separately": true,
+      "ai_used": true,
+      "ai_error": null,
+      "baseline_verdict": "pass",
+      "verdict_change": "pass -> pass",
+      "returned_candidates_match_full_source_records": true
+    },
+    {
+      "case_id": "core-phone",
+      "repeat": 1,
+      "query": "기존 회원 전화번호로 다시 가입하려는 경우 보여주는 기존 알림 찾아줘",
+      "http_status": 200,
+      "verdict": "pass",
+      "reason": "기존 회원 전화번호로 신규 가입한 상황에 EX-0201을 연결하고 로그인하라는 원문과 회원가입 메뉴·중복 번호 조건을 보존했다.",
+      "failure_type": null,
+      "answer_reviewed": "메시지코드: EX-0201\n문구: 이미 가입된 휴대폰 번호입니다. 로그인해주세요.\n메뉴: 회원가입\n노출 조건: 기존 회원의 번호로 신규 가입 요청",
+      "source_codes_reviewed": [
+        "EX-0201"
+      ],
+      "source_facts": [
+        {
+          "code": "EX-0201",
+          "message": "이미 가입된 휴대폰 번호입니다. 로그인해주세요.",
+          "menu": "회원가입",
+          "trigger": "기존 회원의 번호로 신규 가입 요청",
+          "notes": "합성 예시",
+          "status": "active",
+          "revision": 1
+        }
+      ],
+      "returned_candidate_count": 36,
+      "automatic_objective_pass_recorded_separately": true,
+      "ai_used": true,
+      "ai_error": null,
+      "baseline_verdict": "pass",
+      "verdict_change": "pass -> pass",
+      "returned_candidates_match_full_source_records": true
+    },
+    {
+      "case_id": "core-direction",
+      "repeat": 1,
+      "query": "AT-1923과 EX-0104의 시간 조건 차이를 설명해줘.",
+      "http_status": 200,
+      "verdict": "pass",
+      "reason": "두 코드 원문을 정확히 인용하고 AT-1923의 30초 이후 인증과 EX-0104의 30초 이내 완료 제한을 구분했다. AT-1923의 이른 버튼 클릭 조건과 예시 자료라는 한계도 원문에 근거한다. 문장이 길지만 시간 방향을 뒤집지 않았다.",
+      "failure_type": null,
+      "answer_reviewed": "메시지코드: AT-1923\n문구: 메뉴확인 30초 이후에 인증해주세요.\n메뉴: 메뉴 인증\n노출 조건: 메뉴 확인 후 30초가 지나기 전에 인증 버튼을 누른 경우\n다른 코드: EX-0104는 문구 30초 이내에 인증을 완료해주세요., 메뉴 기기 인증, 노출 조건 인증 시작 후 완료 제한시간 안내로, AT-1923은 메뉴 확인 후 30초가 지나기 전에 인증 버튼을 누른 경우 30초 이후 인증을 안내하고 EX-0104는 인증 시작 후 완료 제한시간을 안내하는 점이 시간 방향에서 다름.\n확인할 점: AT-1923은 사용자가 제공한 예시를 바탕으로 한 데모이며 조건은 예시용임.",
+      "source_codes_reviewed": [
+        "AT-1923",
+        "EX-0104"
+      ],
+      "source_facts": [
+        {
+          "code": "AT-1923",
+          "message": "메뉴확인 30초 이후에 인증해주세요.",
+          "menu": "메뉴 인증",
+          "trigger": "메뉴 확인 후 30초가 지나기 전에 인증 버튼을 누른 경우",
+          "notes": "사용자가 제공한 예시를 바탕으로 한 데모. 조건은 예시용입니다.",
+          "status": "active",
+          "revision": 1
+        },
+        {
+          "code": "EX-0104",
+          "message": "30초 이내에 인증을 완료해주세요.",
+          "menu": "기기 인증",
+          "trigger": "인증 시작 후 완료 제한시간 안내",
+          "notes": "AT-1923과 시간의 방향이 다른 합성 예시",
+          "status": "active",
+          "revision": 1
+        }
+      ],
+      "returned_candidate_count": 2,
+      "automatic_objective_pass_recorded_separately": true,
+      "ai_used": true,
+      "ai_error": null,
+      "baseline_verdict": "pass",
+      "verdict_change": "pass -> pass",
+      "returned_candidates_match_full_source_records": true
+    },
+    {
+      "case_id": "core-broad",
+      "repeat": 1,
+      "query": "30초 관련메시지찾아줘",
+      "http_status": 200,
+      "verdict": "pass",
+      "reason": "업무를 한정하지 않은 30초 관련 질의에 기기 등록 30초 이후 재시도 원문 SM-1062를 제시했다. 별도의 수량 조회 결과도 활성 원문의 30초 일치 코드 42건과 정확히 일치한다. 설명이 이 한 건을 전체 결과라고 단정하지 않는다.",
+      "failure_type": null,
+      "answer_reviewed": "메시지코드: SM-1062\n문구: 기기 등록은 30초 이후에 다시 시도해주세요.\n메뉴: 기기관리\n노출 조건: 직전 요청 후 30초가 지나지 않은 경우",
+      "source_codes_reviewed": [
+        "SM-1062"
+      ],
+      "source_facts": [
+        {
+          "code": "SM-1062",
+          "message": "기기 등록은 30초 이후에 다시 시도해주세요.",
+          "menu": "기기관리",
+          "trigger": "직전 요청 후 30초가 지나지 않은 경우",
+          "notes": "AI가 만든 합성 테스트 자료입니다. 실제 회사 정책·한도·등록 코드가 아닙니다.",
+          "status": "active",
+          "revision": 1
+        }
+      ],
+      "returned_candidate_count": 25,
+      "automatic_objective_pass_recorded_separately": true,
+      "ai_used": true,
+      "ai_error": null,
+      "baseline_verdict": "pass",
+      "verdict_change": "pass -> pass",
+      "returned_candidates_match_full_source_records": true
+    },
+    {
+      "case_id": "core-missing",
+      "repeat": 1,
+      "query": "ZZ-987654 문구 알려줘",
+      "http_status": 200,
+      "verdict": "pass",
+      "reason": "전체 원문 스냅샷에 없는 ZZ-987654를 미등록으로 알리고 후보나 문구를 만들어내지 않았다.",
+      "failure_type": null,
+      "answer_reviewed": "일치하는 알림 코드를 찾지 못했습니다. 코드번호나 핵심 단어로 다시 검색하거나 코드 목록에서 확인해주세요.\n미등록 코드: ZZ-987654",
+      "source_codes_reviewed": [],
+      "source_facts": [],
+      "returned_candidate_count": 0,
+      "automatic_objective_pass_recorded_separately": true,
+      "ai_used": false,
+      "ai_error": null,
+      "baseline_verdict": "pass",
+      "verdict_change": "pass -> pass",
+      "returned_candidates_match_full_source_records": true
+    },
+    {
+      "case_id": "core-false-premise",
+      "repeat": 1,
+      "query": "AT-1923은 60초 이후에 인증하는 코드 맞아? 등록 문구를 근거로 확인해줘.",
+      "http_status": 200,
+      "verdict": "fail",
+      "reason": "HTTP 200 응답과 AT-1923 원문 후보는 보존됐지만 AI 설명은 근거 없는 수치 오류로 실패했다. 등록 원문은 30초 이후인데 질문의 60초 전제를 명시적으로 정정하는 답변을 제공하지 못했으므로 실패다. 거절된 생성 문장이 저장되지 않아 부정 문장에서 60초를 재인용한 탓인지 실제 잘못된 수치를 주장했는지는 확정할 수 없다.",
+      "failure_type": "ai_explanation_failed_numeric_guard",
+      "answer_reviewed": "검색은 완료했지만 AI 설명을 만들지 못했습니다. 아래 DB 원문 후보를 확인해주세요.",
+      "source_codes_reviewed": [
+        "AT-1923"
+      ],
+      "source_facts": [
+        {
+          "code": "AT-1923",
+          "message": "메뉴확인 30초 이후에 인증해주세요.",
+          "menu": "메뉴 인증",
+          "trigger": "메뉴 확인 후 30초가 지나기 전에 인증 버튼을 누른 경우",
+          "notes": "사용자가 제공한 예시를 바탕으로 한 데모. 조건은 예시용입니다.",
+          "status": "active",
+          "revision": 1
+        }
+      ],
+      "returned_candidate_count": 1,
+      "automatic_objective_pass_recorded_separately": false,
+      "ai_used": false,
+      "ai_error": {
+        "status": 502,
+        "message": "AI 결과에 근거 없는 수치가 포함되어 저장하지 않았습니다."
+      },
+      "baseline_verdict": "fail",
+      "verdict_change": "fail -> fail",
+      "returned_candidates_match_full_source_records": true
+    },
+    {
+      "case_id": "core-unrelated",
+      "repeat": 1,
+      "query": "오늘 서울 날씨 어때?",
+      "http_status": 200,
+      "verdict": "pass",
+      "reason": "자료에 오늘 서울 날씨 정보나 대응 등록 코드가 없다는 범위의 답변으로, 실제 날씨를 지어내지 않았다. 300건 원문에 날씨 자료가 없음을 대조했다. baseline의 불확실했던 전체 업무 범위 단정이 없어 통과로 판단한다.",
+      "failure_type": null,
+      "answer_reviewed": "제공된 자료에는 오늘 서울 날씨 정보가 없습니다.\n날씨에 대응하는 등록 코드도 확인되지 않습니다.",
+      "source_codes_reviewed": [],
+      "source_facts": [],
+      "returned_candidate_count": 0,
+      "automatic_objective_pass_recorded_separately": true,
+      "ai_used": true,
+      "ai_error": null,
+      "baseline_verdict": "needs_review",
+      "verdict_change": "needs_review -> pass",
+      "returned_candidates_match_full_source_records": true
+    },
+    {
+      "case_id": "holdout-email-free",
+      "repeat": 1,
+      "query": "회원가입에서 이메일 주소가 아직 사용되지 않아 쓸 수 있을 때 보여줄 기존 안내 찾아줘",
+      "http_status": 200,
+      "verdict": "pass",
+      "reason": "사용 가능한 이메일이라는 EX-0203의 긍정 조건을 정확히 답했다. 해당 후보 순위는 2위이고 1위 EX-0204는 이미 가입된 이메일로 반대 의미지만 최종 답변은 그 반대 조건을 혼동하지 않았다.",
+      "failure_type": null,
+      "answer_reviewed": "메시지코드: EX-0203\n문구: 사용 가능한 이메일입니다.\n메뉴: 회원가입\n노출 조건: 이메일 중복 확인 통과",
+      "source_codes_reviewed": [
+        "EX-0203",
+        "EX-0204"
+      ],
+      "source_facts": [
+        {
+          "code": "EX-0203",
+          "message": "사용 가능한 이메일입니다.",
+          "menu": "회원가입",
+          "trigger": "이메일 중복 확인 통과",
+          "notes": "합성 예시",
+          "status": "active",
+          "revision": 1
+        },
+        {
+          "code": "EX-0204",
+          "message": "이미 사용 중인 이메일입니다.",
+          "menu": "회원가입",
+          "trigger": "이메일 중복 확인 실패",
+          "notes": "합성 예시",
+          "status": "active",
+          "revision": 1
+        }
+      ],
+      "returned_candidate_count": 31,
+      "automatic_objective_pass_recorded_separately": true,
+      "ai_used": true,
+      "ai_error": null,
+      "baseline_verdict": "pass",
+      "verdict_change": "pass -> pass",
+      "returned_candidates_match_full_source_records": true
+    },
+    {
+      "case_id": "holdout-password",
+      "repeat": 1,
+      "query": "로그인하면서 비밀번호를 잘못 입력했을 때 표시하는 기존 문구 찾아줘",
+      "http_status": 200,
+      "verdict": "pass",
+      "reason": "로그인 비밀번호 불일치에 EX-0301을 정확히 연결하고 원문·메뉴·노출 조건을 보존했다.",
+      "failure_type": null,
+      "answer_reviewed": "메시지코드: EX-0301\n문구: 비밀번호를 다시 확인해주세요.\n메뉴: 로그인\n노출 조건: 비밀번호 불일치",
+      "source_codes_reviewed": [
+        "EX-0301"
+      ],
+      "source_facts": [
+        {
+          "code": "EX-0301",
+          "message": "비밀번호를 다시 확인해주세요.",
+          "menu": "로그인",
+          "trigger": "비밀번호 불일치",
+          "notes": "합성 예시",
+          "status": "active",
+          "revision": 1
+        }
+      ],
+      "returned_candidate_count": 27,
+      "automatic_objective_pass_recorded_separately": true,
+      "ai_used": true,
+      "ai_error": null,
+      "baseline_verdict": "pass",
+      "verdict_change": "pass -> pass",
+      "returned_candidates_match_full_source_records": true
+    },
+    {
+      "case_id": "holdout-signup-success",
+      "repeat": 1,
+      "query": "가입 신청 처리가 정상적으로 끝났을 때 표시하는 기존 알림 찾아줘",
+      "http_status": 200,
+      "verdict": "pass",
+      "reason": "가입 신청 정상 완료에 SM-1001을 정확히 연결했다. 원문·메뉴·노출 조건이 일치하며 올바른 후보가 baseline 2위에서 이번 1위로 바뀌었다.",
+      "failure_type": null,
+      "answer_reviewed": "메시지코드: SM-1001\n문구: 가입 신청이 완료되었습니다.\n메뉴: 회원가입\n노출 조건: 요청이 정상 처리된 경우",
+      "source_codes_reviewed": [
+        "SM-1001"
+      ],
+      "source_facts": [
+        {
+          "code": "SM-1001",
+          "message": "가입 신청이 완료되었습니다.",
+          "menu": "회원가입",
+          "trigger": "요청이 정상 처리된 경우",
+          "notes": "AI가 만든 합성 테스트 자료입니다. 실제 회사 정책·한도·등록 코드가 아닙니다.",
+          "status": "active",
+          "revision": 1
+        }
+      ],
+      "returned_candidate_count": 30,
+      "automatic_objective_pass_recorded_separately": true,
+      "ai_used": true,
+      "ai_error": null,
+      "baseline_verdict": "pass",
+      "verdict_change": "pass -> pass",
+      "returned_candidates_match_full_source_records": true
+    },
+    {
+      "case_id": "holdout-signup-required",
+      "repeat": 1,
+      "query": "가입 신청에 필요한 입력란을 빠뜨렸을 때 표시하는 기존 알림 찾아줘",
+      "http_status": 200,
+      "verdict": "pass",
+      "reason": "가입 신청 필수 항목 누락에 SM-1004를 연결했고 빠진 항목을 모두 입력하라는 원문과 조건을 정확히 인용했다.",
+      "failure_type": null,
+      "answer_reviewed": "메시지코드: SM-1004\n문구: 가입 신청에 필요한 항목을 모두 입력해주세요.\n메뉴: 회원가입\n노출 조건: 필수 입력 항목이 비어 있는 경우",
+      "source_codes_reviewed": [
+        "SM-1004"
+      ],
+      "source_facts": [
+        {
+          "code": "SM-1004",
+          "message": "가입 신청에 필요한 항목을 모두 입력해주세요.",
+          "menu": "회원가입",
+          "trigger": "필수 입력 항목이 비어 있는 경우",
+          "notes": "AI가 만든 합성 테스트 자료입니다. 실제 회사 정책·한도·등록 코드가 아닙니다.",
+          "status": "active",
+          "revision": 1
+        }
+      ],
+      "returned_candidate_count": 32,
+      "automatic_objective_pass_recorded_separately": true,
+      "ai_used": true,
+      "ai_error": null,
+      "baseline_verdict": "pass",
+      "verdict_change": "pass -> pass",
+      "returned_candidates_match_full_source_records": true
+    },
+    {
+      "case_id": "holdout-signup-wait",
+      "repeat": 1,
+      "query": "가입 신청을 보낸 지 30초가 안 돼서 다시 요청할 수 없을 때 기존 안내 찾아줘",
+      "http_status": 200,
+      "verdict": "pass",
+      "reason": "직전 가입 신청 후 30초가 지나지 않았을 때 SM-1006의 30초 이후 재시도 안내를 제시했다. 합성 자료이며 실제 회사 정책이 아니라는 추가 설명도 원문의 notes/source와 일치한다.",
+      "failure_type": null,
+      "answer_reviewed": "메시지코드: SM-1006\n문구: 가입 신청은 30초 이후에 다시 시도해주세요.\n메뉴: 회원가입\n노출 조건: 직전 요청 후 30초가 지나지 않은 경우\n확인할 점: 등록 자료가 AI가 만든 합성 테스트 자료이며 실제 회사 정책·한도·등록 코드가 아닙니다.",
+      "source_codes_reviewed": [
+        "SM-1006"
+      ],
+      "source_facts": [
+        {
+          "code": "SM-1006",
+          "message": "가입 신청은 30초 이후에 다시 시도해주세요.",
+          "menu": "회원가입",
+          "trigger": "직전 요청 후 30초가 지나지 않은 경우",
+          "notes": "AI가 만든 합성 테스트 자료입니다. 실제 회사 정책·한도·등록 코드가 아닙니다.",
+          "status": "active",
+          "revision": 1
+        }
+      ],
+      "returned_candidate_count": 33,
+      "automatic_objective_pass_recorded_separately": true,
+      "ai_used": true,
+      "ai_error": null,
+      "baseline_verdict": "pass",
+      "verdict_change": "pass -> pass",
+      "returned_candidates_match_full_source_records": true
+    },
+    {
+      "case_id": "holdout-signup-variable",
+      "repeat": 1,
+      "query": "가입 신청을 다시 요청하기까지 남은 초를 변수로 표시하는 기존 문구 찾아줘",
+      "http_status": 200,
+      "verdict": "pass",
+      "reason": "재요청 대기 시간을 변수로 표시하는 SM-1013을 선택하고 {seconds}를 특정 숫자로 임의 치환하지 않은 채 원문을 보존했다.",
+      "failure_type": null,
+      "answer_reviewed": "메시지코드: SM-1013\n문구: 가입 신청은 {seconds}초 후에 다시 요청할 수 있습니다.\n메뉴: 회원가입\n노출 조건: 재요청 대기시간을 변수로 표시하는 경우",
+      "source_codes_reviewed": [
+        "SM-1013"
+      ],
+      "source_facts": [
+        {
+          "code": "SM-1013",
+          "message": "가입 신청은 {seconds}초 후에 다시 요청할 수 있습니다.",
+          "menu": "회원가입",
+          "trigger": "재요청 대기시간을 변수로 표시하는 경우",
+          "notes": "AI가 만든 합성 테스트 자료입니다. 실제 회사 정책·한도·등록 코드가 아닙니다.",
+          "status": "active",
+          "revision": 1
+        }
+      ],
+      "returned_candidate_count": 33,
+      "automatic_objective_pass_recorded_separately": true,
+      "ai_used": true,
+      "ai_error": null,
+      "baseline_verdict": "pass",
+      "verdict_change": "pass -> pass",
+      "returned_candidates_match_full_source_records": true
+    },
+    {
+      "case_id": "holdout-auth-failed",
+      "repeat": 1,
+      "query": "본인인증 처리가 실패해서 잠시 뒤 다시 시도해야 할 때 기존 알림 찾아줘",
+      "http_status": 200,
+      "verdict": "pass",
+      "reason": "본인인증 일시 처리 실패에 SM-1017을 연결하고 잠시 후 다시 시도하라는 원문을 보존했다.",
+      "failure_type": null,
+      "answer_reviewed": "메시지코드: SM-1017\n문구: 본인인증에 실패했습니다. 잠시 후 다시 시도해주세요.\n메뉴: 본인인증\n노출 조건: 일시적인 처리 오류가 발생한 경우",
+      "source_codes_reviewed": [
+        "SM-1017"
+      ],
+      "source_facts": [
+        {
+          "code": "SM-1017",
+          "message": "본인인증에 실패했습니다. 잠시 후 다시 시도해주세요.",
+          "menu": "본인인증",
+          "trigger": "일시적인 처리 오류가 발생한 경우",
+          "notes": "AI가 만든 합성 테스트 자료입니다. 실제 회사 정책·한도·등록 코드가 아닙니다.",
+          "status": "active",
+          "revision": 1
+        }
+      ],
+      "returned_candidate_count": 29,
+      "automatic_objective_pass_recorded_separately": true,
+      "ai_used": true,
+      "ai_error": null,
+      "baseline_verdict": "pass",
+      "verdict_change": "pass -> pass",
+      "returned_candidates_match_full_source_records": true
+    },
+    {
+      "case_id": "holdout-auth-required",
+      "repeat": 1,
+      "query": "본인인증에 필요한 항목을 덜 입력했을 때 보여주는 기존 문구 찾아줘",
+      "http_status": 200,
+      "verdict": "pass",
+      "reason": "본인인증 필수 입력 항목 누락에 SM-1018을 연결하고 문구·메뉴·노출 조건을 정확히 인용했다.",
+      "failure_type": null,
+      "answer_reviewed": "메시지코드: SM-1018\n문구: 본인인증에 필요한 항목을 모두 입력해주세요.\n메뉴: 본인인증\n노출 조건: 필수 입력 항목이 비어 있는 경우",
+      "source_codes_reviewed": [
+        "SM-1018"
+      ],
+      "source_facts": [
+        {
+          "code": "SM-1018",
+          "message": "본인인증에 필요한 항목을 모두 입력해주세요.",
+          "menu": "본인인증",
+          "trigger": "필수 입력 항목이 비어 있는 경우",
+          "notes": "AI가 만든 합성 테스트 자료입니다. 실제 회사 정책·한도·등록 코드가 아닙니다.",
+          "status": "active",
+          "revision": 1
+        }
+      ],
+      "returned_candidate_count": 34,
+      "automatic_objective_pass_recorded_separately": true,
+      "ai_used": true,
+      "ai_error": null,
+      "baseline_verdict": "pass",
+      "verdict_change": "pass -> pass",
+      "returned_candidates_match_full_source_records": true
+    }
+  ]
+}

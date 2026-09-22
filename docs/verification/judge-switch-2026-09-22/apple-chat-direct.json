@@ -1,0 +1,19 @@
+[
+  {
+    "schema": "Plan",
+    "answer": {
+      "query": "인증 전에 30초 기다리라는 알림",
+      "trigger": "search",
+      "action": "search"
+    }
+  },
+  {
+    "schema": "Explanation",
+    "answer": {
+      "references": [
+        "AT-1923"
+      ],
+      "text": "메시지코드: AT-1923\n문구: 메뉴확인 30초 이후에 인증해주세요.\n메뉴: 메뉴 인증\n노출 조건: 메뉴 확인 후 30초가 지나기 전에 인증 버튼을 누른 경우"
+    }
+  }
+]

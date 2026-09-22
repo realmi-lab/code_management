@@ -1,0 +1,4 @@
+Deployed RoutingLLM: provider=apple, model=apple/on-device, judge_provider=apple, judge_model=apple/on-device
+Request: 연결 확인입니다. 안녕하세요 한 문장으로 답해주세요.
+Actual response: 안녕하세요! 어떻게 도와드릴까요?
+Connection smoke test only; not a catalog quality benchmark.

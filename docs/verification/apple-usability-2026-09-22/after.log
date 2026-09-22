@@ -1,0 +1,24 @@
+{"name": "1", "repeat": 0, "status": 200, "seconds": 9.98, "checks": {"expected_candidate": true, "expected_original_in_answer": false}, "useful": false}
+{"name": "2", "repeat": 0, "status": 200, "seconds": 6.31, "checks": {"expected_candidate": true, "expected_original_in_answer": false}, "useful": false}
+{"name": "3", "repeat": 0, "status": 200, "seconds": 7.2, "checks": {"expected_candidate": true, "expected_original_in_answer": false}, "useful": false}
+{"name": "5", "repeat": 0, "status": 200, "seconds": 5.08, "checks": {"expected_candidate": true, "expected_original_in_answer": false}, "useful": false}
+{"name": "7", "repeat": 0, "status": 200, "seconds": 5.0, "checks": {"expected_candidate": true, "expected_original_in_answer": false}, "useful": false}
+{"name": "9", "repeat": 0, "status": 200, "seconds": 7.75, "checks": {"expected_candidate": true, "expected_original_in_answer": false}, "useful": false}
+{"name": "12", "repeat": 0, "status": 200, "seconds": 9.19, "checks": {"expected_candidate": true, "expected_original_in_answer": false}, "useful": false}
+{"name": "27", "repeat": 0, "status": 200, "seconds": 7.7, "checks": {"expected_candidate": true, "expected_original_in_answer": false}, "useful": false}
+{"name": "67", "repeat": 0, "status": 200, "seconds": 5.57, "checks": {"expected_candidate": true, "expected_original_in_answer": false}, "useful": false}
+{"name": "broad", "repeat": 0, "status": 200, "seconds": 4.24, "checks": {"quantity_present": false}, "useful": false}
+{"name": "unrelated", "repeat": 0, "status": 200, "seconds": 4.16, "checks": {"no_unrelated_candidates": false}, "useful": false}
+{"name": "comparison", "repeat": 0, "status": 200, "seconds": 2.99, "checks": {"both_directions_explained": true}, "useful": true}
+{"name": "1", "repeat": 1, "status": 200, "seconds": 1.93, "checks": {"expected_candidate": true, "expected_original_in_answer": false}, "useful": false}
+{"name": "2", "repeat": 1, "status": 200, "seconds": 1.79, "checks": {"expected_candidate": true, "expected_original_in_answer": false}, "useful": false}
+{"name": "3", "repeat": 1, "status": 200, "seconds": 1.8, "checks": {"expected_candidate": true, "expected_original_in_answer": false}, "useful": false}
+{"name": "5", "repeat": 1, "status": 200, "seconds": 1.53, "checks": {"expected_candidate": true, "expected_original_in_answer": false}, "useful": false}
+{"name": "7", "repeat": 1, "status": 200, "seconds": 1.54, "checks": {"expected_candidate": true, "expected_original_in_answer": false}, "useful": false}
+{"name": "9", "repeat": 1, "status": 200, "seconds": 1.79, "checks": {"expected_candidate": true, "expected_original_in_answer": false}, "useful": false}
+{"name": "12", "repeat": 1, "status": 200, "seconds": 2.05, "checks": {"expected_candidate": true, "expected_original_in_answer": false}, "useful": false}
+{"name": "27", "repeat": 1, "status": 200, "seconds": 1.19, "checks": {"expected_candidate": true, "expected_original_in_answer": false}, "useful": false}
+{"name": "67", "repeat": 1, "status": 200, "seconds": 0.87, "checks": {"expected_candidate": true, "expected_original_in_answer": false}, "useful": false}
+{"name": "broad", "repeat": 1, "status": 200, "seconds": 0.8, "checks": {"quantity_present": false}, "useful": false}
+{"name": "unrelated", "repeat": 1, "status": 200, "seconds": 1.36, "checks": {"no_unrelated_candidates": false}, "useful": false}
+{"name": "comparison", "repeat": 1, "status": 200, "seconds": 2.81, "checks": {"both_directions_explained": true}, "useful": true}

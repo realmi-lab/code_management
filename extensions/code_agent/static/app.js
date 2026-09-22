@@ -302,8 +302,12 @@ function showAIProvider(resetModel=true){
  $('#deepseek-connection').hidden=$('#ai-provider').value!=='deepseek';
  const p=aiProvider();
  if(resetModel)$('#ai-model').value=aiSettings.models[p];
+ $('#ai-model').readOnly=p==='apple';
+ $('#ai-key').hidden=p==='apple';
+ $('label[for="ai-key"]').hidden=p==='apple';
+ $('#ai-provider option[value="apple"]').disabled=!aiSettings.apple_judge_available&&aiSettings.provider!=='apple';
  $('#ai-key').value='';
- $('#ai-key-status').textContent=aiSettings.configured[p]?'API 키가 설정되어 있습니다. 빈칸으로 저장하면 기존 키를 유지합니다.':'이 공급자의 API 키가 필요합니다.';
+ $('#ai-key-status').textContent=p==='apple'?'대화 생성과 검색 보조 AI를 이 Mac에서 실행합니다. 외부 AI로 자동 전환하지 않습니다. 완전한 로컬 검색에는 로컬 임베딩 또는 키워드 검색을 선택하세요.':aiSettings.configured[p]?'API 키가 설정되어 있습니다. 빈칸으로 저장하면 기존 키를 유지합니다.':'이 공급자의 API 키가 필요합니다.';
  showAIEmbedding();
 }
 function setAIFormDisabled(on){
@@ -426,18 +430,44 @@ async function loadThread(id){
  thread=loaded;clearSelection();remember('thread:'+namespace,loaded.id);
  const box=$('#messages');box.replaceChildren();
  for(const m of thread.history)addBubble(m.role,m.content,m.role==='assistant'&&m.ai_used!==false);
- if(candidates.length||thread.draft)showResults({candidates,comparisons:[],draft:thread.draft});
+ const last=thread.history.filter(m=>m.role==='assistant').at(-1)||{};
+ if(candidates.length||thread.draft||last.search_info)showResults({candidates,comparisons:[],draft:thread.draft,search_info:last.search_info,ai_error:last.ai_error});
  else if(!thread.history.length)box.append(emptyState('비어 있는 대화입니다','아래에 상황을 적으면 기존 코드를 찾아 드립니다.'));
  scrollMessages();markActiveThread();
 }
+function discoveryPanel(info,count){
+ const panel=h('section','card',el('strong',info?.complete?'코드번호로 조회한 '+count+'건':'상위 검색 후보 '+count+'건 · 전체 일치 건수가 아닙니다.'));
+ const match=info?.quantity;
+ if(!match)return panel;
+ const namespace=catalogNamespace;
+ panel.append(el('p','문구·메뉴·노출 조건에 '+match.label+'가 있는 사용 중 코드: 총 '+match.total+'건. 다른 조건은 별도로 확인하세요.','field-status'));
+ const list=h('div','cards');let offset=0;
+ const more=button('조건에 맞는 전체 코드 보기','btn',async b=>{
+  setBusy(b,true);
+  try{
+   const params=new URLSearchParams({q:match.query,offset:String(offset),limit:'20',version:String(match.catalog_version),namespace});
+   const page=await api('/quantity-matches?'+params);
+   if(namespace!==catalogNamespace||!panel.isConnected)return;
+   for(const c of page.items)list.append(candidateCard(c,null,[button('상세 보기','btn',()=>catalogDetail(c.code)),button('원문 복사','btn',b=>copyCatalog(c,b))]));
+   offset+=page.items.length;
+   more.textContent='더 보기 · '+offset+' / '+page.total+'건';more.hidden=!page.has_more;
+   summary.textContent='DB 조건 일치 '+offset+' / '+page.total+'건 표시 · 코드번호 순';
+  }catch(e){error(e);}finally{setBusy(b,false);}
+ });
+ const summary=el('p','','field-status');
+ if(match.total)panel.append(more,summary,list);
+ return panel;
+}
+
 function showResults(result){
  const comparisons=result.comparisons||[];
  const cards=h('div','cards stagger',(result.candidates||[]).map(c=>chatCard(c,comparisons.find(x=>x.code===c.code))));
  const draft=result.draft&&h('div','draft-slot',draftCard(result.draft,result.draft.status==='registered'
   ?'등록된 코드입니다. 추가 변경은 별도로 검토해주세요.'
   :'초안함에서 유사 항목 재검토 후 등록을 진행합니다.'));
- if(!cards.childElementCount&&!draft)return;
- $('#messages').append(h('div','result-group',cards.childElementCount&&cards,draft));
+ if(!cards.childElementCount&&!draft&&!result.search_info)return;
+ const warning=result.ai_error&&el('p','AI 설명 실패: '+result.ai_error.message,'field-status');
+ $('#messages').append(h('div','result-group',discoveryPanel(result.search_info,cards.childElementCount),warning,cards.childElementCount&&cards,draft));
 }
 
 function setSelection(code){

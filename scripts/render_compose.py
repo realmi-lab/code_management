@@ -34,6 +34,9 @@ def build_compose() -> dict:
         'CODE_LLM_REASONING_EFFORT': '${CODE_LLM_REASONING_EFFORT:-high}',
         'CODE_LLM_JUDGE_MODEL': '${CODE_LLM_JUDGE_MODEL:-}',
         'CODE_LLM_JUDGE_REASONING_EFFORT': '${CODE_LLM_JUDGE_REASONING_EFFORT:-}',
+        'CODE_LLM_JUDGE_PROVIDER': '${CODE_LLM_JUDGE_PROVIDER:-}',
+        'CODE_LLM_JUDGE_BASE_URL': '${CODE_LLM_JUDGE_BASE_URL:-}',
+        'CODE_APPLE_BRIDGE_TOKEN': '${CODE_APPLE_BRIDGE_TOKEN:-}',
         'JWT_SECRET_KEY': '${JWT_SECRET_KEY:?Run configure}',
         'ADMIN_USERNAME': '${ADMIN_USERNAME:-admin}',
         'ADMIN_PASSWORD': '${ADMIN_PASSWORD:-}',
@@ -55,6 +58,8 @@ def build_compose() -> dict:
         'volumes': ['uploads:/app/uploads', 'model-cache:/home/appuser/.cache', 'watch:/watch', 'ai-settings:/app/private-settings'],
         'restart': 'unless-stopped', 'init': True, 'stop_grace_period': '40s',
         'security_opt': ['no-new-privileges:true'],
+        # The optional Apple judge bridge listens on the Mac's loopback; containers reach it by this name.
+        'extra_hosts': ['host.docker.internal:host-gateway'],
     }
     db_health = {'postgres': {'condition': 'service_healthy'}, 'redis': {'condition': 'service_healthy'}, 'elasticsearch': {'condition': 'service_healthy'}}
     app_deps = {**db_health, 'db-migrate': {'condition': 'service_completed_successfully'}}

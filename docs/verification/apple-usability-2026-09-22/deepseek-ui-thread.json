@@ -1,0 +1,136 @@
+{
+  "id": "e40bee02-a82f-4133-a097-102c0d1a7b04",
+  "owner": 1,
+  "title": "30초 관련메시지찾아줘",
+  "version": 1,
+  "history": [
+    {
+      "role": "user",
+      "content": "30초 관련메시지찾아줘"
+    },
+    {
+      "role": "assistant",
+      "content": "메시지코드: SM-1203\n문구: 예약 주문을 30초 이내에 완료해주세요.\n메뉴: 예약주문\n노출 조건: 처리 유효시간이 30초인 합성 시나리오",
+      "selected_code": null,
+      "ai_used": true,
+      "search_info": {
+        "shown": 25,
+        "complete": false,
+        "quantity": {
+          "query": "30초",
+          "label": "30초",
+          "total": 42,
+          "catalog_version": 3,
+          "namespace": "demo",
+          "scope": "active_message_menu_trigger"
+        }
+      },
+      "ai_error": null
+    }
+  ],
+  "candidates": [
+    {
+      "code": "SM-1203",
+      "revision": 1
+    },
+    {
+      "code": "SM-1076",
+      "revision": 1
+    },
+    {
+      "code": "SM-1231",
+      "revision": 1
+    },
+    {
+      "code": "SM-1062",
+      "revision": 1
+    },
+    {
+      "code": "SM-1077",
+      "revision": 1
+    },
+    {
+      "code": "SM-1230",
+      "revision": 1
+    },
+    {
+      "code": "SM-1034",
+      "revision": 1
+    },
+    {
+      "code": "SM-1035",
+      "revision": 1
+    },
+    {
+      "code": "SM-1048",
+      "revision": 1
+    },
+    {
+      "code": "SM-1189",
+      "revision": 1
+    },
+    {
+      "code": "SM-1161",
+      "revision": 1
+    },
+    {
+      "code": "SM-1021",
+      "revision": 1
+    },
+    {
+      "code": "SM-1020",
+      "revision": 1
+    },
+    {
+      "code": "SM-1063",
+      "revision": 1
+    },
+    {
+      "code": "SM-1273",
+      "revision": 1
+    },
+    {
+      "code": "SM-1007",
+      "revision": 1
+    },
+    {
+      "code": "SM-1245",
+      "revision": 1
+    },
+    {
+      "code": "SM-1006",
+      "revision": 1
+    },
+    {
+      "code": "SM-1175",
+      "revision": 1
+    },
+    {
+      "code": "SM-1259",
+      "revision": 1
+    },
+    {
+      "code": "SM-1049",
+      "revision": 1
+    },
+    {
+      "code": "SM-1091",
+      "revision": 1
+    },
+    {
+      "code": "AT-1923",
+      "revision": 1
+    },
+    {
+      "code": "SM-1030",
+      "revision": 1
+    },
+    {
+      "code": "SM-1036",
+      "revision": 1
+    }
+  ],
+  "draft": null,
+  "updated_at": "2026-09-22T07:04:33.155237+00:00",
+  "namespace": "demo"
+}

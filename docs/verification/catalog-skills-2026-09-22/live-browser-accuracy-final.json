@@ -1,0 +1,18 @@
+{
+  "verified_at": "2026-09-22T09:06:30.920978+00:00",
+  "transport": "actual in-app browser DOM through cua_repl",
+  "url": "http://localhost:3500/codes",
+  "scope": "synthetic demo",
+  "thread_id": "2912d09b-5d2c-4c98-b9c1-9945d923856d",
+  "query": "30초 관련메시지찾아줘",
+  "displayed_answer_code": "SM-1062",
+  "displayed_answer_message": "기기 등록은 30초 이후에 다시 시도해주세요.",
+  "candidate_count": 25,
+  "complete_quantity_pages": [
+    20,
+    40,
+    42
+  ],
+  "complete_label": "DB 조건 일치 42 / 42건 표시 · 코드번호 순",
+  "boundary": "Restored a completed final follow-up turn; browser made no new provider call."
+}

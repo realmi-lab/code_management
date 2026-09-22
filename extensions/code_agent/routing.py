@@ -7,13 +7,23 @@ class Closing:
 class RoutingLLM:
     def __init__(self,api_key=None,model=None,temperature=0.3):
         self.client=Closing();self.temperature=temperature;self.fallback=model;self.last_usage=None
+    def fork(self):
+        # Concurrent validation calls must never share mutable usage/result state.
+        if type(self) is RoutingLLM:return RoutingLLM(model=self.fallback,temperature=self.temperature)
+        return type(self)(temperature=self.temperature)
     @property
     def model(self):
         from .provider import model_name
         return model_name(self.fallback)
     async def generate(self,prompt,system_prompt=None):
-        from .provider import anthropic_enabled
+        from .provider import anthropic_enabled,selected_provider
         self.last_usage=None
+        self.last_detail=None
+        if selected_provider()=='apple':
+            from .apple import AppleLLM
+            llm=AppleLLM(temperature=self.temperature)
+            try:return await llm.generate(prompt,system_prompt)
+            finally:self.last_detail=llm.last_detail
         if anthropic_enabled():
             from .claude import make_llm
             llm=make_llm(self.model)
@@ -30,14 +40,23 @@ class RoutingLLM:
         finally:await llm.client.close()
 
 class JudgeLLM(RoutingLLM):
-    """Faithfulness/grounding judge: same provider and key; CODE_LLM_JUDGE_* may pin its model/effort."""
+    """Faithfulness/grounding judge: same provider and key; CODE_LLM_JUDGE_* may pin its model/effort
+    or (CODE_LLM_JUDGE_PROVIDER=apple) send only these two stages to the Mac-side Apple bridge."""
     def __init__(self,temperature=0):super().__init__(temperature=temperature)
     @property
     def model(self):
         from .provider import judge_model_name
         return judge_model_name() or super().model
     async def generate(self,prompt,system_prompt=None):
-        from .provider import judge_stage
+        from .provider import judge_stage,judge_provider
+        self.last_detail=None
+        if judge_provider()=='apple':
+            from .apple_judge import AppleJudge
+            judge=AppleJudge();self.last_usage=None
+            try:return await judge.generate(prompt,system_prompt=system_prompt)
+            finally:
+                self.last_usage=judge.last_usage
+                self.last_detail=judge.last_detail
         with judge_stage():
             return await super().generate(prompt,system_prompt=system_prompt)
 

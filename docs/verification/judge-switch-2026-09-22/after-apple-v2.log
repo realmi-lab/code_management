@@ -1,0 +1,11 @@
+[after-apple-v2] id=1 http=200 total=12.0s rank=1 blocked=False judge_ms={'Explanation/grounding': 0, 'Explanation/faithfulness': 9} models={ apple/on-device, deepseek/deepseek-v4.1-flash }
+[after-apple-v2] id=2 http=200 total=15.2s rank=1 blocked=False judge_ms={'Explanation/grounding': 1, 'Explanation/faithfulness': 1} models={ apple/on-device, deepseek/deepseek-v4.1-flash }
+[after-apple-v2] id=5 http=200 total=10.2s rank=1 blocked=False judge_ms={'Explanation/grounding': 1, 'Explanation/faithfulness': 1} models={ apple/on-device, deepseek/deepseek-v4.1-flash }
+[after-apple-v2] id=7 http=200 total=16.3s rank=1 blocked=False judge_ms={'Explanation/grounding': 0, 'Explanation/faithfulness': 0} models={ apple/on-device, deepseek/deepseek-v4.1-flash }
+[after-apple-v2] id=27 http=200 total=8.1s rank=2 blocked=False judge_ms={'Explanation/grounding': 1, 'Explanation/faithfulness': 1} models={ apple/on-device, deepseek/deepseek-v4.1-flash }
+[after-apple-v2] id=67 http=200 total=10.0s rank=1 blocked=False judge_ms={'Explanation/grounding': 1, 'Explanation/faithfulness': 1} models={ apple/on-device, deepseek/deepseek-v4.1-flash }
+[after-apple-v2] id=3 http=200 total=9.8s rank=1 blocked=False judge_ms={'Explanation/grounding': 1, 'Explanation/faithfulness': 1} models={ apple/on-device, deepseek/deepseek-v4.1-flash }
+[after-apple-v2] id=9 http=200 total=13.3s rank=1 blocked=False judge_ms={'Explanation/grounding': 1, 'Explanation/faithfulness': 1} models={ apple/on-device, deepseek/deepseek-v4.1-flash }
+[after-apple-v2] id=12 http=200 total=10.1s rank=1 blocked=False judge_ms={'Explanation/grounding': 1, 'Explanation/faithfulness': 1} models={ apple/on-device, deepseek/deepseek-v4.1-flash }
+[after-apple-v2] id=weather http=422 total=25.3s rank=None blocked=True judge_ms={'Explanation/grounding-repair/grounding': 2302, 'Explanation/grounding-repair/faithfulness': 3890, 'Explanation/grounding-repair': 6533, 'Explanation/grounding': 4811, 'Explanation/faithfulness': 2949} models={ apple/on-device, deepseek/deepseek-v4.1-flash }
+saved docs/verification/judge-switch-2026-09-22/after-apple-v2.json

@@ -1,0 +1,1214 @@
+{
+ "label": "after-apple-v2",
+ "at": "2026-09-22T14:00:31+0900",
+ "status_llm": {
+  "provider": "commandcode",
+  "model": "deepseek/deepseek-v4.1-flash",
+  "reasoning_effort": "low",
+  "judge_model": "apple/on-device",
+  "judge_provider": "apple"
+ },
+ "namespace": "demo",
+ "results": [
+  {
+   "id": 1,
+   "kind": "manual_paraphrase",
+   "query": "인증 전에 30초 기다리라는 알림 있어?",
+   "expected_code": "AT-1923",
+   "thread_id": "015a8c5e-6c9a-47cd-bfdf-a425a9f1a6a3",
+   "request_id": "be192ebb-f28c-4fae-821c-9a58ebe3228c",
+   "http_status": 200,
+   "total_s": 12.0,
+   "action": "search",
+   "candidate_codes": [
+    "AT-1923",
+    "SM-1020",
+    "SM-1034",
+    "SM-1216",
+    "SM-1048",
+    "SM-1090",
+    "SM-1062",
+    "EX-0104"
+   ],
+   "rank": 1,
+   "answer_excerpt": "메시지코드: AT-1923\n문구: 메뉴확인 30초 이후에 인증해주세요.\n메뉴: 메뉴 인증\n노출 조건: 메뉴 확인 후 30초가 지나기 전에 인증 버튼을 누른 경우",
+   "answer_blocked": false,
+   "ai_used": true,
+   "trace_flags": [
+    {
+     "name": "guardrail_input",
+     "passed": true,
+     "duration_ms": 0.02,
+     "results_count": null,
+     "detail": null
+    },
+    {
+     "name": "question_classification",
+     "passed": true,
+     "duration_ms": 0.0,
+     "results_count": null,
+     "detail": {
+      "category": "explanatory",
+      "indicators": []
+     }
+    },
+    {
+     "name": "vector_search",
+     "passed": true,
+     "duration_ms": 558.61,
+     "results_count": 20,
+     "detail": null
+    },
+    {
+     "name": "keyword_search",
+     "passed": true,
+     "duration_ms": 558.61,
+     "results_count": 20,
+     "detail": null
+    },
+    {
+     "name": "rrf_fusion",
+     "passed": true,
+     "duration_ms": 0.07,
+     "results_count": 33,
+     "detail": null
+    },
+    {
+     "name": "reranking",
+     "passed": true,
+     "duration_ms": 1967.93,
+     "results_count": 8,
+     "detail": null
+    },
+    {
+     "name": "retrieval_gate",
+     "passed": true,
+     "duration_ms": 0.01,
+     "results_count": 8,
+     "detail": {
+      "top_score": 0.6885985034714484
+     }
+    },
+    {
+     "name": "guardrail_pii",
+     "passed": true,
+     "duration_ms": 0.09,
+     "results_count": null,
+     "detail": {
+      "pii_found": false
+     }
+    }
+   ],
+   "trace_id": "cf09ce750fcec9673c78d7ed9ea52ef8",
+   "trace_output": {
+    "status": "success",
+    "duration_ms": 11998
+   },
+   "spans": {
+    "Explanation/grounding": {
+     "duration_ms": 0,
+     "model": "apple/on-device",
+     "status": "success",
+     "completion_tokens": null,
+     "reasoning_tokens": null
+    },
+    "Explanation/faithfulness": {
+     "duration_ms": 9,
+     "model": "apple/on-device",
+     "status": "success",
+     "completion_tokens": null,
+     "reasoning_tokens": null
+    },
+    "Explanation": {
+     "duration_ms": 6409,
+     "model": "deepseek/deepseek-v4.1-flash",
+     "status": "success",
+     "completion_tokens": 1116,
+     "reasoning_tokens": 1032
+    },
+    "Plan": {
+     "duration_ms": 2989,
+     "model": "deepseek/deepseek-v4.1-flash",
+     "status": "success",
+     "completion_tokens": 157,
+     "reasoning_tokens": 126
+    }
+   }
+  },
+  {
+   "id": 2,
+   "kind": "manual_paraphrase",
+   "query": "인증번호 전송에 성공했을 때 보여줄 문구",
+   "expected_code": "EX-0101",
+   "thread_id": "d527c334-84db-4d95-891e-75f266e464d2",
+   "request_id": "638d854d-e4a2-42c8-b7f9-2415364b99e5",
+   "http_status": 200,
+   "total_s": 15.2,
+   "action": "search",
+   "candidate_codes": [
+    "EX-0101",
+    "EX-0105",
+    "EX-0102",
+    "EX-0103",
+    "SM-1043",
+    "SM-1015",
+    "EX-0402",
+    "SM-1016"
+   ],
+   "rank": 1,
+   "answer_excerpt": "메시지코드: EX-0101\n문구: 인증번호를 발송했습니다.\n메뉴: 휴대폰 인증\n노출 조건: 인증번호 전송 성공",
+   "answer_blocked": false,
+   "ai_used": true,
+   "trace_flags": [
+    {
+     "name": "guardrail_input",
+     "passed": true,
+     "duration_ms": 0.05,
+     "results_count": null,
+     "detail": null
+    },
+    {
+     "name": "question_classification",
+     "passed": true,
+     "duration_ms": 0.0,
+     "results_count": null,
+     "detail": {
+      "category": "explanatory",
+      "indicators": []
+     }
+    },
+    {
+     "name": "vector_search",
+     "passed": true,
+     "duration_ms": 345.22,
+     "results_count": 20,
+     "detail": null
+    },
+    {
+     "name": "keyword_search",
+     "passed": true,
+     "duration_ms": 345.22,
+     "results_count": 20,
+     "detail": null
+    },
+    {
+     "name": "rrf_fusion",
+     "passed": true,
+     "duration_ms": 0.13,
+     "results_count": 32,
+     "detail": null
+    },
+    {
+     "name": "reranking",
+     "passed": true,
+     "duration_ms": 2545.13,
+     "results_count": 8,
+     "detail": null
+    },
+    {
+     "name": "retrieval_gate",
+     "passed": true,
+     "duration_ms": 0.1,
+     "results_count": 8,
+     "detail": {
+      "top_score": 0.8112826634142377
+     }
+    },
+    {
+     "name": "guardrail_pii",
+     "passed": true,
+     "duration_ms": 0.16,
+     "results_count": null,
+     "detail": {
+      "pii_found": false
+     }
+    }
+   ],
+   "trace_id": "933fb50de37818b041cc852495874234",
+   "trace_output": {
+    "status": "success",
+    "duration_ms": 15178
+   },
+   "spans": {
+    "Explanation/grounding": {
+     "duration_ms": 1,
+     "model": "apple/on-device",
+     "status": "success",
+     "completion_tokens": null,
+     "reasoning_tokens": null
+    },
+    "Explanation/faithfulness": {
+     "duration_ms": 1,
+     "model": "apple/on-device",
+     "status": "success",
+     "completion_tokens": null,
+     "reasoning_tokens": null
+    },
+    "Explanation": {
+     "duration_ms": 8063,
+     "model": "deepseek/deepseek-v4.1-flash",
+     "status": "success",
+     "completion_tokens": 1606,
+     "reasoning_tokens": 1545
+    },
+    "Plan": {
+     "duration_ms": 4098,
+     "model": "deepseek/deepseek-v4.1-flash",
+     "status": "success",
+     "completion_tokens": 554,
+     "reasoning_tokens": 516
+    }
+   }
+  },
+  {
+   "id": 5,
+   "kind": "manual_paraphrase",
+   "query": "인증을 30초 안에 끝내야 한다는 안내",
+   "expected_code": "EX-0104",
+   "thread_id": "4b2b769d-0b6e-45ee-b131-452f67257758",
+   "request_id": "c16bf795-d0f1-44c3-aacb-cc41d6f79dff",
+   "http_status": 200,
+   "total_s": 10.2,
+   "action": "search",
+   "candidate_codes": [
+    "EX-0104",
+    "SM-1021",
+    "SM-1035",
+    "SM-1063",
+    "SM-1020",
+    "SM-1049",
+    "AT-1923",
+    "SM-1077"
+   ],
+   "rank": 1,
+   "answer_excerpt": "메시지코드: EX-0104\n문구: 30초 이내에 인증을 완료해주세요.\n메뉴: 기기 인증\n노출 조건: 인증 시작 후 완료 제한시간 안내",
+   "answer_blocked": false,
+   "ai_used": true,
+   "trace_flags": [
+    {
+     "name": "guardrail_input",
+     "passed": true,
+     "duration_ms": 0.03,
+     "results_count": null,
+     "detail": null
+    },
+    {
+     "name": "question_classification",
+     "passed": true,
+     "duration_ms": 0.0,
+     "results_count": null,
+     "detail": {
+      "category": "explanatory",
+      "indicators": []
+     }
+    },
+    {
+     "name": "vector_search",
+     "passed": true,
+     "duration_ms": 495.39,
+     "results_count": 20,
+     "detail": null
+    },
+    {
+     "name": "keyword_search",
+     "passed": true,
+     "duration_ms": 495.39,
+     "results_count": 20,
+     "detail": null
+    },
+    {
+     "name": "rrf_fusion",
+     "passed": true,
+     "duration_ms": 0.09,
+     "results_count": 25,
+     "detail": null
+    },
+    {
+     "name": "reranking",
+     "passed": true,
+     "duration_ms": 2537.85,
+     "results_count": 8,
+     "detail": null
+    },
+    {
+     "name": "retrieval_gate",
+     "passed": true,
+     "duration_ms": 0.01,
+     "results_count": 8,
+     "detail": {
+      "top_score": 0.8117332610354085
+     }
+    },
+    {
+     "name": "guardrail_pii",
+     "passed": true,
+     "duration_ms": 0.08,
+     "results_count": null,
+     "detail": {
+      "pii_found": false
+     }
+    }
+   ],
+   "trace_id": "b388ba910e289588a9211e1c4113ef41",
+   "trace_output": {
+    "status": "success",
+    "duration_ms": 10209
+   },
+   "spans": {
+    "Explanation/grounding": {
+     "duration_ms": 1,
+     "model": "apple/on-device",
+     "status": "success",
+     "completion_tokens": null,
+     "reasoning_tokens": null
+    },
+    "Explanation/faithfulness": {
+     "duration_ms": 1,
+     "model": "apple/on-device",
+     "status": "success",
+     "completion_tokens": null,
+     "reasoning_tokens": null
+    },
+    "Explanation": {
+     "duration_ms": 4524,
+     "model": "deepseek/deepseek-v4.1-flash",
+     "status": "success",
+     "completion_tokens": 620,
+     "reasoning_tokens": 550
+    },
+    "Plan": {
+     "duration_ms": 2567,
+     "model": "deepseek/deepseek-v4.1-flash",
+     "status": "success",
+     "completion_tokens": 174,
+     "reasoning_tokens": 138
+    }
+   }
+  },
+  {
+   "id": 7,
+   "kind": "manual_paraphrase",
+   "query": "기존 회원 전화번호로 다시 가입하려는 경우",
+   "expected_code": "EX-0201",
+   "thread_id": "d13eb273-72ee-4118-888a-4cce86c2d0fe",
+   "request_id": "64f25f36-42de-4b65-8c96-8e238b1b1dd7",
+   "http_status": 200,
+   "total_s": 16.3,
+   "action": "search",
+   "candidate_codes": [
+    "EX-0201",
+    "EX-0204",
+    "EX-0103",
+    "SM-1005",
+    "SM-1009",
+    "SM-1013",
+    "SM-1006",
+    "SM-1003"
+   ],
+   "rank": 1,
+   "answer_excerpt": "메시지코드: EX-0201\n문구: 이미 가입된 휴대폰 번호입니다. 로그인해주세요.\n메뉴: 회원가입\n노출 조건: 기존 회원의 번호로 신규 가입 요청",
+   "answer_blocked": false,
+   "ai_used": true,
+   "trace_flags": [
+    {
+     "name": "guardrail_input",
+     "passed": true,
+     "duration_ms": 0.04,
+     "results_count": null,
+     "detail": null
+    },
+    {
+     "name": "question_classification",
+     "passed": true,
+     "duration_ms": 0.0,
+     "results_count": null,
+     "detail": {
+      "category": "regulatory",
+      "indicators": [
+       "금액"
+      ]
+     }
+    },
+    {
+     "name": "vector_search",
+     "passed": true,
+     "duration_ms": 194.75,
+     "results_count": 20,
+     "detail": null
+    },
+    {
+     "name": "keyword_search",
+     "passed": true,
+     "duration_ms": 194.75,
+     "results_count": 20,
+     "detail": null
+    },
+    {
+     "name": "rrf_fusion",
+     "passed": true,
+     "duration_ms": 0.05,
+     "results_count": 32,
+     "detail": null
+    },
+    {
+     "name": "reranking",
+     "passed": true,
+     "duration_ms": 1660.31,
+     "results_count": 8,
+     "detail": null
+    },
+    {
+     "name": "retrieval_gate",
+     "passed": true,
+     "duration_ms": 0.01,
+     "results_count": 8,
+     "detail": {
+      "top_score": 0.8116569422813572
+     }
+    },
+    {
+     "name": "guardrail_pii",
+     "passed": true,
+     "duration_ms": 0.08,
+     "results_count": null,
+     "detail": {
+      "pii_found": false
+     }
+    }
+   ],
+   "trace_id": "460c55fdd438304f9c9652c8d3857742",
+   "trace_output": {
+    "status": "success",
+    "duration_ms": 16321
+   },
+   "spans": {
+    "Explanation/grounding": {
+     "duration_ms": 0,
+     "model": "apple/on-device",
+     "status": "success",
+     "completion_tokens": null,
+     "reasoning_tokens": null
+    },
+    "Explanation/faithfulness": {
+     "duration_ms": 0,
+     "model": "apple/on-device",
+     "status": "success",
+     "completion_tokens": null,
+     "reasoning_tokens": null
+    },
+    "Explanation": {
+     "duration_ms": 3249,
+     "model": "deepseek/deepseek-v4.1-flash",
+     "status": "success",
+     "completion_tokens": 242,
+     "reasoning_tokens": 163
+    },
+    "Plan": {
+     "duration_ms": 11146,
+     "model": "deepseek/deepseek-v4.1-flash",
+     "status": "success",
+     "completion_tokens": 2243,
+     "reasoning_tokens": 2211
+    }
+   }
+  },
+  {
+   "id": 27,
+   "kind": "menu_trigger_template",
+   "query": "회원가입 메뉴에서 입력 형식 또는 입력값이 유효하지 않은 경우 상황에 표시할 기존 알림을 찾아줘.",
+   "expected_code": "SM-1005",
+   "thread_id": "5230e125-321a-4893-9bcd-db694f3262fa",
+   "request_id": "7d4ad4dd-ca46-4916-902e-b0894c4c8e95",
+   "http_status": 200,
+   "total_s": 8.1,
+   "action": "search",
+   "candidate_codes": [
+    "SM-1215",
+    "SM-1005",
+    "SM-1033",
+    "SM-1271",
+    "SM-1019",
+    "SM-1214",
+    "SM-1004",
+    "SM-1003"
+   ],
+   "rank": 2,
+   "answer_excerpt": "메시지코드: SM-1005\n문구: 가입 신청 정보를 다시 확인해주세요.\n메뉴: 회원가입\n노출 조건: 입력 형식 또는 입력값이 유효하지 않은 경우",
+   "answer_blocked": false,
+   "ai_used": true,
+   "trace_flags": [
+    {
+     "name": "guardrail_input",
+     "passed": true,
+     "duration_ms": 0.04,
+     "results_count": null,
+     "detail": null
+    },
+    {
+     "name": "question_classification",
+     "passed": true,
+     "duration_ms": 0.0,
+     "results_count": null,
+     "detail": {
+      "category": "regulatory",
+      "indicators": [
+       "횟수/기간",
+       "금액"
+      ]
+     }
+    },
+    {
+     "name": "vector_search",
+     "passed": true,
+     "duration_ms": 247.69,
+     "results_count": 20,
+     "detail": null
+    },
+    {
+     "name": "keyword_search",
+     "passed": true,
+     "duration_ms": 247.69,
+     "results_count": 20,
+     "detail": null
+    },
+    {
+     "name": "rrf_fusion",
+     "passed": true,
+     "duration_ms": 0.06,
+     "results_count": 39,
+     "detail": null
+    },
+    {
+     "name": "reranking",
+     "passed": true,
+     "duration_ms": 1697.58,
+     "results_count": 8,
+     "detail": null
+    },
+    {
+     "name": "retrieval_gate",
+     "passed": true,
+     "duration_ms": 0.01,
+     "results_count": 8,
+     "detail": {
+      "top_score": 0.8115375186257326
+     }
+    },
+    {
+     "name": "guardrail_pii",
+     "passed": true,
+     "duration_ms": 0.07,
+     "results_count": null,
+     "detail": {
+      "pii_found": false
+     }
+    }
+   ],
+   "trace_id": "2fb0b59bcd65ceb4d83b5ceebb63fadc",
+   "trace_output": {
+    "status": "success",
+    "duration_ms": 8112
+   },
+   "spans": {
+    "Explanation/grounding": {
+     "duration_ms": 1,
+     "model": "apple/on-device",
+     "status": "success",
+     "completion_tokens": null,
+     "reasoning_tokens": null
+    },
+    "Explanation/faithfulness": {
+     "duration_ms": 1,
+     "model": "apple/on-device",
+     "status": "success",
+     "completion_tokens": null,
+     "reasoning_tokens": null
+    },
+    "Explanation": {
+     "duration_ms": 2965,
+     "model": "deepseek/deepseek-v4.1-flash",
+     "status": "success",
+     "completion_tokens": 205,
+     "reasoning_tokens": 137
+    },
+    "Plan": {
+     "duration_ms": 3129,
+     "model": "deepseek/deepseek-v4.1-flash",
+     "status": "success",
+     "completion_tokens": 306,
+     "reasoning_tokens": 253
+    }
+   }
+  },
+  {
+   "id": 67,
+   "kind": "menu_trigger_template",
+   "query": "계좌관리 메뉴에서 처리 유효시간이 30초인 합성 시나리오 상황에 표시할 기존 알림을 찾아줘.",
+   "expected_code": "SM-1091",
+   "thread_id": "4904e455-daa2-493f-b6bd-a7ae97c986fd",
+   "request_id": "295257e6-d7db-4f26-a47f-60dc91bd7f28",
+   "http_status": 200,
+   "total_s": 10.0,
+   "action": "search",
+   "candidate_codes": [
+    "SM-1091",
+    "SM-1217",
+    "SM-1245",
+    "SM-1090",
+    "SM-1063",
+    "SM-1231",
+    "SM-1273",
+    "SM-1007"
+   ],
+   "rank": 1,
+   "answer_excerpt": "메시지코드: SM-1091\n문구: 계좌 등록을 30초 이내에 완료해주세요.\n메뉴: 계좌관리\n노출 조건: 처리 유효시간이 30초인 합성 시나리오",
+   "answer_blocked": false,
+   "ai_used": true,
+   "trace_flags": [
+    {
+     "name": "guardrail_input",
+     "passed": true,
+     "duration_ms": 0.03,
+     "results_count": null,
+     "detail": null
+    },
+    {
+     "name": "question_classification",
+     "passed": true,
+     "duration_ms": 0.0,
+     "results_count": null,
+     "detail": {
+      "category": "regulatory",
+      "indicators": [
+       "횟수/기간"
+      ]
+     }
+    },
+    {
+     "name": "vector_search",
+     "passed": true,
+     "duration_ms": 218.0,
+     "results_count": 20,
+     "detail": null
+    },
+    {
+     "name": "keyword_search",
+     "passed": true,
+     "duration_ms": 218.0,
+     "results_count": 20,
+     "detail": null
+    },
+    {
+     "name": "rrf_fusion",
+     "passed": true,
+     "duration_ms": 0.05,
+     "results_count": 31,
+     "detail": null
+    },
+    {
+     "name": "reranking",
+     "passed": true,
+     "duration_ms": 1679.09,
+     "results_count": 8,
+     "detail": null
+    },
+    {
+     "name": "retrieval_gate",
+     "passed": true,
+     "duration_ms": 0.01,
+     "results_count": 8,
+     "detail": {
+      "top_score": 0.8117349509521101
+     }
+    },
+    {
+     "name": "guardrail_pii",
+     "passed": true,
+     "duration_ms": 0.1,
+     "results_count": null,
+     "detail": {
+      "pii_found": false
+     }
+    }
+   ],
+   "trace_id": "de7dc576d92cc8afc4b7e0991de60f9a",
+   "trace_output": {
+    "status": "success",
+    "duration_ms": 9957
+   },
+   "spans": {
+    "Explanation/grounding": {
+     "duration_ms": 1,
+     "model": "apple/on-device",
+     "status": "success",
+     "completion_tokens": null,
+     "reasoning_tokens": null
+    },
+    "Explanation/faithfulness": {
+     "duration_ms": 1,
+     "model": "apple/on-device",
+     "status": "success",
+     "completion_tokens": null,
+     "reasoning_tokens": null
+    },
+    "Explanation": {
+     "duration_ms": 5043,
+     "model": "deepseek/deepseek-v4.1-flash",
+     "status": "success",
+     "completion_tokens": 726,
+     "reasoning_tokens": 650
+    },
+    "Plan": {
+     "duration_ms": 2960,
+     "model": "deepseek/deepseek-v4.1-flash",
+     "status": "success",
+     "completion_tokens": 242,
+     "reasoning_tokens": 192
+    }
+   }
+  },
+  {
+   "id": 3,
+   "kind": "manual_paraphrase",
+   "query": "입력한 인증번호가 틀렸을 때 안내",
+   "expected_code": "EX-0102",
+   "thread_id": "603b474d-2665-4892-8588-3d1dba2ff244",
+   "request_id": "01c5c33c-2813-4790-bf93-4c1925169e36",
+   "http_status": 200,
+   "total_s": 9.8,
+   "action": "search",
+   "candidate_codes": [
+    "EX-0102",
+    "EX-0105",
+    "EX-0103",
+    "EX-0101",
+    "EX-0301",
+    "SM-1271",
+    "SM-1031",
+    "SM-1003"
+   ],
+   "rank": 1,
+   "answer_excerpt": "메시지코드: EX-0102\n문구: 인증번호를 다시 확인해주세요.\n메뉴: 휴대폰 인증\n노출 조건: 입력한 인증번호 불일치",
+   "answer_blocked": false,
+   "ai_used": true,
+   "trace_flags": [
+    {
+     "name": "guardrail_input",
+     "passed": true,
+     "duration_ms": 0.05,
+     "results_count": null,
+     "detail": null
+    },
+    {
+     "name": "question_classification",
+     "passed": true,
+     "duration_ms": 0.0,
+     "results_count": null,
+     "detail": {
+      "category": "explanatory",
+      "indicators": []
+     }
+    },
+    {
+     "name": "vector_search",
+     "passed": true,
+     "duration_ms": 241.55,
+     "results_count": 20,
+     "detail": null
+    },
+    {
+     "name": "keyword_search",
+     "passed": true,
+     "duration_ms": 241.55,
+     "results_count": 20,
+     "detail": null
+    },
+    {
+     "name": "rrf_fusion",
+     "passed": true,
+     "duration_ms": 0.06,
+     "results_count": 35,
+     "detail": null
+    },
+    {
+     "name": "reranking",
+     "passed": true,
+     "duration_ms": 1719.9,
+     "results_count": 8,
+     "detail": null
+    },
+    {
+     "name": "retrieval_gate",
+     "passed": true,
+     "duration_ms": 0.0,
+     "results_count": 8,
+     "detail": {
+      "top_score": 0.8002327554535477
+     }
+    },
+    {
+     "name": "guardrail_pii",
+     "passed": true,
+     "duration_ms": 0.07,
+     "results_count": null,
+     "detail": {
+      "pii_found": false
+     }
+    }
+   ],
+   "trace_id": "f65c5df1fa0459c391086d8aebe1dd2b",
+   "trace_output": {
+    "status": "success",
+    "duration_ms": 9781
+   },
+   "spans": {
+    "Explanation/grounding": {
+     "duration_ms": 1,
+     "model": "apple/on-device",
+     "status": "success",
+     "completion_tokens": null,
+     "reasoning_tokens": null
+    },
+    "Explanation/faithfulness": {
+     "duration_ms": 1,
+     "model": "apple/on-device",
+     "status": "success",
+     "completion_tokens": null,
+     "reasoning_tokens": null
+    },
+    "Explanation": {
+     "duration_ms": 3388,
+     "model": "deepseek/deepseek-v4.1-flash",
+     "status": "success",
+     "completion_tokens": 338,
+     "reasoning_tokens": 274
+    },
+    "Plan": {
+     "duration_ms": 4375,
+     "model": "deepseek/deepseek-v4.1-flash",
+     "status": "success",
+     "completion_tokens": 597,
+     "reasoning_tokens": 549
+    }
+   }
+  },
+  {
+   "id": 9,
+   "kind": "manual_paraphrase",
+   "query": "이메일 중복 검사 결과 이미 쓰고 있는 주소인 경우",
+   "expected_code": "EX-0204",
+   "thread_id": "fc196a57-f9ac-420c-a486-b20c75cb03d8",
+   "request_id": "491234e2-d28c-4820-8795-b9750216cc9a",
+   "http_status": 200,
+   "total_s": 13.3,
+   "action": "search",
+   "candidate_codes": [
+    "EX-0204",
+    "EX-0203",
+    "SM-1261",
+    "SM-1135",
+    "SM-1037",
+    "SM-1051",
+    "SM-1009",
+    "SM-1023"
+   ],
+   "rank": 1,
+   "answer_excerpt": "메시지코드: EX-0204\n문구: 이미 사용 중인 이메일입니다.\n메뉴: 회원가입\n노출 조건: 이메일 중복 확인 실패",
+   "answer_blocked": false,
+   "ai_used": true,
+   "trace_flags": [
+    {
+     "name": "guardrail_input",
+     "passed": true,
+     "duration_ms": 0.04,
+     "results_count": null,
+     "detail": null
+    },
+    {
+     "name": "question_classification",
+     "passed": true,
+     "duration_ms": 0.0,
+     "results_count": null,
+     "detail": {
+      "category": "explanatory",
+      "indicators": []
+     }
+    },
+    {
+     "name": "vector_search",
+     "passed": true,
+     "duration_ms": 198.37,
+     "results_count": 20,
+     "detail": null
+    },
+    {
+     "name": "keyword_search",
+     "passed": true,
+     "duration_ms": 198.37,
+     "results_count": 20,
+     "detail": null
+    },
+    {
+     "name": "rrf_fusion",
+     "passed": true,
+     "duration_ms": 0.06,
+     "results_count": 32,
+     "detail": null
+    },
+    {
+     "name": "reranking",
+     "passed": true,
+     "duration_ms": 1771.79,
+     "results_count": 8,
+     "detail": null
+    },
+    {
+     "name": "retrieval_gate",
+     "passed": true,
+     "duration_ms": 0.01,
+     "results_count": 8,
+     "detail": {
+      "top_score": 0.7992548138503528
+     }
+    },
+    {
+     "name": "guardrail_pii",
+     "passed": true,
+     "duration_ms": 0.07,
+     "results_count": null,
+     "detail": {
+      "pii_found": false
+     }
+    }
+   ],
+   "trace_id": "904aba1106dd62d901b06e1ab1808fb6",
+   "trace_output": {
+    "status": "success",
+    "duration_ms": 13294
+   },
+   "spans": {
+    "Explanation/grounding": {
+     "duration_ms": 1,
+     "model": "apple/on-device",
+     "status": "success",
+     "completion_tokens": null,
+     "reasoning_tokens": null
+    },
+    "Explanation/faithfulness": {
+     "duration_ms": 1,
+     "model": "apple/on-device",
+     "status": "success",
+     "completion_tokens": null,
+     "reasoning_tokens": null
+    },
+    "Explanation": {
+     "duration_ms": 4542,
+     "model": "deepseek/deepseek-v4.1-flash",
+     "status": "success",
+     "completion_tokens": 658,
+     "reasoning_tokens": 599
+    },
+    "Plan": {
+     "duration_ms": 6708,
+     "model": "deepseek/deepseek-v4.1-flash",
+     "status": "success",
+     "completion_tokens": 1138,
+     "reasoning_tokens": 1088
+    }
+   }
+  },
+  {
+   "id": 12,
+   "kind": "manual_paraphrase",
+   "query": "권한이 없는 메뉴에 들어가려고 할 때",
+   "expected_code": "EX-0403",
+   "thread_id": "34321423-0dd5-4114-b22c-8986bc6610d5",
+   "request_id": "82b56976-b72d-4219-b256-6db24f885c03",
+   "http_status": 200,
+   "total_s": 10.1,
+   "action": "search",
+   "candidate_codes": [
+    "EX-0403",
+    "EX-0302",
+    "SM-1220",
+    "SM-1038",
+    "SM-1010",
+    "AT-1923",
+    "SM-1216",
+    "SM-1212"
+   ],
+   "rank": 1,
+   "answer_excerpt": "메시지코드: EX-0403\n문구: 접근 권한이 없습니다.\n메뉴: 공통\n노출 조건: 권한 없는 메뉴 접근",
+   "answer_blocked": false,
+   "ai_used": true,
+   "trace_flags": [
+    {
+     "name": "guardrail_input",
+     "passed": true,
+     "duration_ms": 0.02,
+     "results_count": null,
+     "detail": null
+    },
+    {
+     "name": "question_classification",
+     "passed": true,
+     "duration_ms": 0.0,
+     "results_count": null,
+     "detail": {
+      "category": "explanatory",
+      "indicators": []
+     }
+    },
+    {
+     "name": "vector_search",
+     "passed": true,
+     "duration_ms": 275.96,
+     "results_count": 20,
+     "detail": null
+    },
+    {
+     "name": "keyword_search",
+     "passed": true,
+     "duration_ms": 275.96,
+     "results_count": 20,
+     "detail": null
+    },
+    {
+     "name": "rrf_fusion",
+     "passed": true,
+     "duration_ms": 0.07,
+     "results_count": 32,
+     "detail": null
+    },
+    {
+     "name": "reranking",
+     "passed": true,
+     "duration_ms": 2181.64,
+     "results_count": 8,
+     "detail": null
+    },
+    {
+     "name": "retrieval_gate",
+     "passed": true,
+     "duration_ms": 0.01,
+     "results_count": 8,
+     "detail": {
+      "top_score": 0.8117307179388059
+     }
+    },
+    {
+     "name": "guardrail_pii",
+     "passed": true,
+     "duration_ms": 0.1,
+     "results_count": null,
+     "detail": {
+      "pii_found": false
+     }
+    }
+   ],
+   "trace_id": "41bd12bdb264f30ea498f4ca7d7d4446",
+   "trace_output": {
+    "status": "success",
+    "duration_ms": 10044
+   },
+   "spans": {
+    "Explanation/grounding": {
+     "duration_ms": 1,
+     "model": "apple/on-device",
+     "status": "success",
+     "completion_tokens": null,
+     "reasoning_tokens": null
+    },
+    "Explanation/faithfulness": {
+     "duration_ms": 1,
+     "model": "apple/on-device",
+     "status": "success",
+     "completion_tokens": null,
+     "reasoning_tokens": null
+    },
+    "Explanation": {
+     "duration_ms": 2982,
+     "model": "deepseek/deepseek-v4.1-flash",
+     "status": "success",
+     "completion_tokens": 252,
+     "reasoning_tokens": 194
+    },
+    "Plan": {
+     "duration_ms": 4538,
+     "model": "deepseek/deepseek-v4.1-flash",
+     "status": "success",
+     "completion_tokens": 537,
+     "reasoning_tokens": 493
+    }
+   }
+  },
+  {
+   "id": "weather",
+   "kind": "unrelated",
+   "query": "오늘 서울 날씨 어때?",
+   "expected_code": null,
+   "thread_id": "c1d59dcf-96ee-4031-8009-e30706fe3e77",
+   "request_id": "9cbc9879-c72f-42e6-813a-f30fc2753b5a",
+   "http_status": 422,
+   "total_s": 25.3,
+   "detail": "AI 결과의 근거 검증을 통과하지 못했습니다. 원문과 조건을 확인해주세요.",
+   "answer_blocked": true,
+   "trace_id": "0f9f8c55b581ea6cde7c68e9814a71b6",
+   "trace_output": {
+    "status": "failed",
+    "error_type": "GroundingError"
+   },
+   "spans": {
+    "Explanation/grounding-repair/grounding": {
+     "duration_ms": 2302,
+     "model": "apple/on-device",
+     "status": "success",
+     "completion_tokens": null,
+     "reasoning_tokens": null
+    },
+    "Explanation/grounding-repair/faithfulness": {
+     "duration_ms": 3890,
+     "model": "apple/on-device",
+     "status": "success",
+     "completion_tokens": null,
+     "reasoning_tokens": null
+    },
+    "Explanation/grounding-repair": {
+     "duration_ms": 6533,
+     "model": "deepseek/deepseek-v4.1-flash",
+     "status": "success",
+     "completion_tokens": 1001,
+     "reasoning_tokens": 896
+    },
+    "Explanation/grounding": {
+     "duration_ms": 4811,
+     "model": "apple/on-device",
+     "status": "success",
+     "completion_tokens": null,
+     "reasoning_tokens": null
+    },
+    "Explanation/faithfulness": {
+     "duration_ms": 2949,
+     "model": "apple/on-device",
+     "status": "success",
+     "completion_tokens": null,
+     "reasoning_tokens": null
+    },
+    "Explanation": {
+     "duration_ms": 4473,
+     "model": "deepseek/deepseek-v4.1-flash",
+     "status": "success",
+     "completion_tokens": 554,
+     "reasoning_tokens": 472
+    },
+    "Plan": {
+     "duration_ms": 3544,
+     "model": "deepseek/deepseek-v4.1-flash",
+     "status": "success",
+     "completion_tokens": 301,
+     "reasoning_tokens": 275
+    }
+   }
+  }
+ ]
+}

@@ -1,0 +1,1110 @@
+{
+ "label": "after-glm-judge",
+ "at": "2026-09-22T12:26:24+0900",
+ "status_llm": {
+  "provider": "commandcode",
+  "model": "deepseek/deepseek-v4.1-flash",
+  "reasoning_effort": "low",
+  "judge_model": "z-ai/glm-5.3-flashx",
+  "judge_provider": "commandcode"
+ },
+ "namespace": "demo",
+ "results": [
+  {
+   "id": 1,
+   "kind": "manual_paraphrase",
+   "query": "인증 전에 30초 기다리라는 알림 있어?",
+   "expected_code": "AT-1923",
+   "thread_id": "9fda5a0c-86fb-4191-8b81-6a235c928ed7",
+   "request_id": "8a7308fe-3e28-4828-b302-ac0aab674d14",
+   "http_status": 200,
+   "total_s": 45.0,
+   "action": "search",
+   "candidate_codes": [
+    "AT-1923",
+    "SM-1020",
+    "SM-1034",
+    "SM-1216",
+    "SM-1048",
+    "SM-1090",
+    "SM-1062",
+    "EX-0104"
+   ],
+   "rank": 1,
+   "answer_excerpt": "메시지코드: AT-1923\n문구: 메뉴확인 30초 이후에 인증해주세요.\n메뉴: 메뉴 인증\n노출 조건: 메뉴 확인 후 30초가 지나기 전에 인증 버튼을 누른 경우\n확인할 점: 예시를 바탕으로 한 데모 자료로 조건이 예시용이라고 표시되어 있음",
+   "answer_blocked": false,
+   "ai_used": true,
+   "trace_flags": [
+    {
+     "name": "guardrail_input",
+     "passed": true,
+     "duration_ms": 0.03,
+     "results_count": null,
+     "detail": null
+    },
+    {
+     "name": "question_classification",
+     "passed": true,
+     "duration_ms": 0.0,
+     "results_count": null,
+     "detail": {
+      "category": "explanatory",
+      "indicators": []
+     }
+    },
+    {
+     "name": "vector_search",
+     "passed": true,
+     "duration_ms": 251.15,
+     "results_count": 20,
+     "detail": null
+    },
+    {
+     "name": "keyword_search",
+     "passed": true,
+     "duration_ms": 251.15,
+     "results_count": 20,
+     "detail": null
+    },
+    {
+     "name": "rrf_fusion",
+     "passed": true,
+     "duration_ms": 0.06,
+     "results_count": 33,
+     "detail": null
+    },
+    {
+     "name": "reranking",
+     "passed": true,
+     "duration_ms": 1594.41,
+     "results_count": 8,
+     "detail": null
+    },
+    {
+     "name": "retrieval_gate",
+     "passed": true,
+     "duration_ms": 0.01,
+     "results_count": 8,
+     "detail": {
+      "top_score": 0.6885985034714484
+     }
+    },
+    {
+     "name": "guardrail_pii",
+     "passed": true,
+     "duration_ms": 0.1,
+     "results_count": null,
+     "detail": {
+      "pii_found": false
+     }
+    }
+   ],
+   "trace_id": "728a4f353df76793de3da6b698efb5fb",
+   "trace_output": {
+    "status": "success",
+    "duration_ms": 44965
+   },
+   "spans": {
+    "Explanation/grounding": {
+     "duration_ms": 10068,
+     "model": "z-ai/glm-5.3-flashx",
+     "status": "success",
+     "completion_tokens": 1328,
+     "reasoning_tokens": 832
+    },
+    "Explanation/faithfulness": {
+     "duration_ms": 32383,
+     "model": "z-ai/glm-5.3-flashx",
+     "status": "success",
+     "completion_tokens": 3264,
+     "reasoning_tokens": 2667
+    },
+    "Explanation": {
+     "duration_ms": 7816,
+     "model": "deepseek/deepseek-v4.1-flash",
+     "status": "success",
+     "completion_tokens": 1560,
+     "reasoning_tokens": 1447
+    },
+    "Plan": {
+     "duration_ms": 2845,
+     "model": "deepseek/deepseek-v4.1-flash",
+     "status": "success",
+     "completion_tokens": 161,
+     "reasoning_tokens": 130
+    }
+   }
+  },
+  {
+   "id": 2,
+   "kind": "manual_paraphrase",
+   "query": "인증번호 전송에 성공했을 때 보여줄 문구",
+   "expected_code": "EX-0101",
+   "thread_id": "bc541704-2886-4109-bfec-d9959f47d7ad",
+   "request_id": "4465e66d-4764-44a7-9c9a-09adf8bf74e7",
+   "http_status": 200,
+   "total_s": 15.5,
+   "action": "search",
+   "candidate_codes": [
+    "EX-0101",
+    "EX-0105",
+    "EX-0102",
+    "EX-0103",
+    "SM-1016",
+    "SM-1044",
+    "EX-0402",
+    "EX-0104"
+   ],
+   "rank": 1,
+   "answer_excerpt": "메시지코드: EX-0101\n문구: 인증번호를 발송했습니다.\n메뉴: 휴대폰 인증\n노출 조건: 인증번호 전송 성공",
+   "answer_blocked": false,
+   "ai_used": true,
+   "trace_flags": [
+    {
+     "name": "guardrail_input",
+     "passed": true,
+     "duration_ms": 0.06,
+     "results_count": null,
+     "detail": null
+    },
+    {
+     "name": "question_classification",
+     "passed": true,
+     "duration_ms": 0.0,
+     "results_count": null,
+     "detail": {
+      "category": "explanatory",
+      "indicators": []
+     }
+    },
+    {
+     "name": "vector_search",
+     "passed": true,
+     "duration_ms": 214.94,
+     "results_count": 20,
+     "detail": null
+    },
+    {
+     "name": "keyword_search",
+     "passed": true,
+     "duration_ms": 214.94,
+     "results_count": 20,
+     "detail": null
+    },
+    {
+     "name": "rrf_fusion",
+     "passed": true,
+     "duration_ms": 0.05,
+     "results_count": 31,
+     "detail": null
+    },
+    {
+     "name": "reranking",
+     "passed": true,
+     "duration_ms": 1498.89,
+     "results_count": 8,
+     "detail": null
+    },
+    {
+     "name": "retrieval_gate",
+     "passed": true,
+     "duration_ms": 0.01,
+     "results_count": 8,
+     "detail": {
+      "top_score": 0.8115032609595882
+     }
+    },
+    {
+     "name": "guardrail_pii",
+     "passed": true,
+     "duration_ms": 0.08,
+     "results_count": null,
+     "detail": {
+      "pii_found": false
+     }
+    }
+   ],
+   "trace_id": "7665d0fa8d9e1369542257051234b74b",
+   "trace_output": {
+    "status": "success",
+    "duration_ms": 15499
+   },
+   "spans": {
+    "Explanation/grounding": {
+     "duration_ms": 6934,
+     "model": "z-ai/glm-5.3-flashx",
+     "status": "success",
+     "completion_tokens": 739,
+     "reasoning_tokens": 334
+    },
+    "Explanation/faithfulness": {
+     "duration_ms": 8146,
+     "model": "z-ai/glm-5.3-flashx",
+     "status": "success",
+     "completion_tokens": 869,
+     "reasoning_tokens": 391
+    },
+    "Explanation": {
+     "duration_ms": 2952,
+     "model": "deepseek/deepseek-v4.1-flash",
+     "status": "success",
+     "completion_tokens": 204,
+     "reasoning_tokens": 141
+    },
+    "Plan": {
+     "duration_ms": 2626,
+     "model": "deepseek/deepseek-v4.1-flash",
+     "status": "success",
+     "completion_tokens": 116,
+     "reasoning_tokens": 68
+    }
+   }
+  },
+  {
+   "id": 5,
+   "kind": "manual_paraphrase",
+   "query": "인증을 30초 안에 끝내야 한다는 안내",
+   "expected_code": "EX-0104",
+   "thread_id": "79b8da62-a665-48c4-ae6a-c183540277de",
+   "request_id": "2be37ed7-ae25-4d81-8477-56219b9d3d6b",
+   "http_status": 200,
+   "total_s": 26.3,
+   "action": "search",
+   "candidate_codes": [
+    "EX-0104",
+    "SM-1021",
+    "AT-1923",
+    "SM-1007",
+    "SM-1035",
+    "SM-1063",
+    "SM-1049",
+    "SM-1020"
+   ],
+   "rank": 1,
+   "answer_excerpt": "메시지코드: EX-0104\n문구: 30초 이내에 인증을 완료해주세요.\n메뉴: 기기 인증\n노출 조건: 인증 시작 후 완료 제한시간 안내",
+   "answer_blocked": false,
+   "ai_used": true,
+   "trace_flags": [
+    {
+     "name": "guardrail_input",
+     "passed": true,
+     "duration_ms": 0.02,
+     "results_count": null,
+     "detail": null
+    },
+    {
+     "name": "question_classification",
+     "passed": true,
+     "duration_ms": 0.0,
+     "results_count": null,
+     "detail": {
+      "category": "explanatory",
+      "indicators": []
+     }
+    },
+    {
+     "name": "vector_search",
+     "passed": true,
+     "duration_ms": 172.2,
+     "results_count": 20,
+     "detail": null
+    },
+    {
+     "name": "keyword_search",
+     "passed": true,
+     "duration_ms": 172.2,
+     "results_count": 20,
+     "detail": null
+    },
+    {
+     "name": "rrf_fusion",
+     "passed": true,
+     "duration_ms": 0.06,
+     "results_count": 27,
+     "detail": null
+    },
+    {
+     "name": "reranking",
+     "passed": true,
+     "duration_ms": 1258.34,
+     "results_count": 8,
+     "detail": null
+    },
+    {
+     "name": "retrieval_gate",
+     "passed": true,
+     "duration_ms": 0.01,
+     "results_count": 8,
+     "detail": {
+      "top_score": 0.8109447584334104
+     }
+    },
+    {
+     "name": "guardrail_pii",
+     "passed": true,
+     "duration_ms": 0.08,
+     "results_count": null,
+     "detail": {
+      "pii_found": false
+     }
+    }
+   ],
+   "trace_id": "f848f8d4f3e11f2b39fd4a369db63c53",
+   "trace_output": {
+    "status": "success",
+    "duration_ms": 26244
+   },
+   "spans": {
+    "Explanation/grounding": {
+     "duration_ms": 5257,
+     "model": "z-ai/glm-5.3-flashx",
+     "status": "success",
+     "completion_tokens": 541,
+     "reasoning_tokens": 354
+    },
+    "Explanation/faithfulness": {
+     "duration_ms": 16510,
+     "model": "z-ai/glm-5.3-flashx",
+     "status": "success",
+     "completion_tokens": 1991,
+     "reasoning_tokens": 1449
+    },
+    "Explanation": {
+     "duration_ms": 5161,
+     "model": "deepseek/deepseek-v4.1-flash",
+     "status": "success",
+     "completion_tokens": 700,
+     "reasoning_tokens": 632
+    },
+    "Plan": {
+     "duration_ms": 3080,
+     "model": "deepseek/deepseek-v4.1-flash",
+     "status": "success",
+     "completion_tokens": 263,
+     "reasoning_tokens": 235
+    }
+   }
+  },
+  {
+   "id": 7,
+   "kind": "manual_paraphrase",
+   "query": "기존 회원 전화번호로 다시 가입하려는 경우",
+   "expected_code": "EX-0201",
+   "thread_id": "44ae7452-69a7-476c-873a-7117a87fb30d",
+   "request_id": "29f7af47-2bc4-4569-a536-9758069fc2ca",
+   "http_status": 200,
+   "total_s": 15.6,
+   "action": "search",
+   "candidate_codes": [
+    "EX-0201",
+    "EX-0204",
+    "EX-0103",
+    "SM-1005",
+    "SM-1009",
+    "SM-1013",
+    "SM-1006",
+    "SM-1003"
+   ],
+   "rank": 1,
+   "answer_excerpt": "메시지코드: EX-0201\n문구: 이미 가입된 휴대폰 번호입니다. 로그인해주세요.\n메뉴: 회원가입\n노출 조건: 기존 회원의 번호로 신규 가입 요청",
+   "answer_blocked": false,
+   "ai_used": true,
+   "trace_flags": [
+    {
+     "name": "guardrail_input",
+     "passed": true,
+     "duration_ms": 0.05,
+     "results_count": null,
+     "detail": null
+    },
+    {
+     "name": "question_classification",
+     "passed": true,
+     "duration_ms": 0.0,
+     "results_count": null,
+     "detail": {
+      "category": "regulatory",
+      "indicators": [
+       "금액"
+      ]
+     }
+    },
+    {
+     "name": "vector_search",
+     "passed": true,
+     "duration_ms": 192.15,
+     "results_count": 20,
+     "detail": null
+    },
+    {
+     "name": "keyword_search",
+     "passed": true,
+     "duration_ms": 192.15,
+     "results_count": 20,
+     "detail": null
+    },
+    {
+     "name": "rrf_fusion",
+     "passed": true,
+     "duration_ms": 0.04,
+     "results_count": 32,
+     "detail": null
+    },
+    {
+     "name": "reranking",
+     "passed": true,
+     "duration_ms": 1525.95,
+     "results_count": 8,
+     "detail": null
+    },
+    {
+     "name": "retrieval_gate",
+     "passed": true,
+     "duration_ms": 0.01,
+     "results_count": 8,
+     "detail": {
+      "top_score": 0.8116569422813572
+     }
+    },
+    {
+     "name": "guardrail_pii",
+     "passed": true,
+     "duration_ms": 0.08,
+     "results_count": null,
+     "detail": {
+      "pii_found": false
+     }
+    }
+   ],
+   "trace_id": "7e91d535000a61bc574c582b83030682",
+   "trace_output": {
+    "status": "success",
+    "duration_ms": 15578
+   },
+   "spans": {
+    "Explanation/grounding": {
+     "duration_ms": 6159,
+     "model": "z-ai/glm-5.3-flashx",
+     "status": "success",
+     "completion_tokens": 637,
+     "reasoning_tokens": 335
+    },
+    "Explanation/faithfulness": {
+     "duration_ms": 7221,
+     "model": "z-ai/glm-5.3-flashx",
+     "status": "success",
+     "completion_tokens": 723,
+     "reasoning_tokens": 264
+    },
+    "Explanation": {
+     "duration_ms": 3845,
+     "model": "deepseek/deepseek-v4.1-flash",
+     "status": "success",
+     "completion_tokens": 538,
+     "reasoning_tokens": 461
+    },
+    "Plan": {
+     "duration_ms": 2735,
+     "model": "deepseek/deepseek-v4.1-flash",
+     "status": "success",
+     "completion_tokens": 141,
+     "reasoning_tokens": 109
+    }
+   }
+  },
+  {
+   "id": 27,
+   "kind": "menu_trigger_template",
+   "query": "회원가입 메뉴에서 입력 형식 또는 입력값이 유효하지 않은 경우 상황에 표시할 기존 알림을 찾아줘.",
+   "expected_code": "SM-1005",
+   "thread_id": "fb5a9370-5779-4f9e-a603-eb5221a51885",
+   "request_id": "d44d7d39-76e4-401d-9b58-fb253f8cd38c",
+   "http_status": 200,
+   "total_s": 22.4,
+   "action": "search",
+   "candidate_codes": [
+    "SM-1005",
+    "SM-1215",
+    "SM-1271",
+    "SM-1003",
+    "SM-1214",
+    "SM-1008",
+    "SM-1031",
+    "SM-1220"
+   ],
+   "rank": 1,
+   "answer_excerpt": "메시지코드: SM-1005\n문구: 가입 신청 정보를 다시 확인해주세요.\n메뉴: 회원가입\n노출 조건: 입력 형식 또는 입력값이 유효하지 않은 경우",
+   "answer_blocked": false,
+   "ai_used": true,
+   "trace_flags": [
+    {
+     "name": "guardrail_input",
+     "passed": true,
+     "duration_ms": 0.02,
+     "results_count": null,
+     "detail": null
+    },
+    {
+     "name": "question_classification",
+     "passed": true,
+     "duration_ms": 0.0,
+     "results_count": null,
+     "detail": {
+      "category": "regulatory",
+      "indicators": [
+       "횟수/기간",
+       "금액"
+      ]
+     }
+    },
+    {
+     "name": "vector_search",
+     "passed": true,
+     "duration_ms": 226.84,
+     "results_count": 20,
+     "detail": null
+    },
+    {
+     "name": "keyword_search",
+     "passed": true,
+     "duration_ms": 226.84,
+     "results_count": 20,
+     "detail": null
+    },
+    {
+     "name": "rrf_fusion",
+     "passed": true,
+     "duration_ms": 0.05,
+     "results_count": 39,
+     "detail": null
+    },
+    {
+     "name": "reranking",
+     "passed": true,
+     "duration_ms": 1578.68,
+     "results_count": 8,
+     "detail": null
+    },
+    {
+     "name": "retrieval_gate",
+     "passed": true,
+     "duration_ms": 0.01,
+     "results_count": 8,
+     "detail": {
+      "top_score": 0.8103811519585885
+     }
+    },
+    {
+     "name": "guardrail_pii",
+     "passed": true,
+     "duration_ms": 0.1,
+     "results_count": null,
+     "detail": {
+      "pii_found": false
+     }
+    }
+   ],
+   "trace_id": "b2302589e9c0fd9eef6c8cc3f89e3a1a",
+   "trace_output": {
+    "status": "success",
+    "duration_ms": 22437
+   },
+   "spans": {
+    "Explanation/grounding": {
+     "duration_ms": 7561,
+     "model": "z-ai/glm-5.3-flashx",
+     "status": "success",
+     "completion_tokens": 764,
+     "reasoning_tokens": 415
+    },
+    "Explanation/faithfulness": {
+     "duration_ms": 10876,
+     "model": "z-ai/glm-5.3-flashx",
+     "status": "success",
+     "completion_tokens": 1118,
+     "reasoning_tokens": 588
+    },
+    "Explanation": {
+     "duration_ms": 7372,
+     "model": "deepseek/deepseek-v4.1-flash",
+     "status": "success",
+     "completion_tokens": 1217,
+     "reasoning_tokens": 1151
+    },
+    "Plan": {
+     "duration_ms": 2336,
+     "model": "deepseek/deepseek-v4.1-flash",
+     "status": "success",
+     "completion_tokens": 161,
+     "reasoning_tokens": 102
+    }
+   }
+  },
+  {
+   "id": 67,
+   "kind": "menu_trigger_template",
+   "query": "계좌관리 메뉴에서 처리 유효시간이 30초인 합성 시나리오 상황에 표시할 기존 알림을 찾아줘.",
+   "expected_code": "SM-1091",
+   "thread_id": "51987369-503f-4115-a37a-41fed1953e76",
+   "request_id": "cb477c2b-ebb9-45d4-ba99-c9fd220e5d7c",
+   "http_status": 200,
+   "total_s": 20.4,
+   "action": "search",
+   "candidate_codes": [
+    "SM-1091",
+    "SM-1217",
+    "SM-1245",
+    "SM-1049",
+    "SM-1007",
+    "SM-1035",
+    "SM-1231",
+    "SM-1063"
+   ],
+   "rank": 1,
+   "answer_excerpt": "메시지코드: SM-1091\n문구: 계좌 등록을 30초 이내에 완료해주세요.\n메뉴: 계좌관리\n노출 조건: 처리 유효시간이 30초인 합성 시나리오\n확인할 점: 이 자료는 AI가 만든 합성 테스트 자료이며 실제 회사 정책·한도·등록 코드가 아닙니다.",
+   "answer_blocked": false,
+   "ai_used": true,
+   "trace_flags": [
+    {
+     "name": "guardrail_input",
+     "passed": true,
+     "duration_ms": 0.02,
+     "results_count": null,
+     "detail": null
+    },
+    {
+     "name": "question_classification",
+     "passed": true,
+     "duration_ms": 0.0,
+     "results_count": null,
+     "detail": {
+      "category": "regulatory",
+      "indicators": [
+       "횟수/기간"
+      ]
+     }
+    },
+    {
+     "name": "vector_search",
+     "passed": true,
+     "duration_ms": 185.85,
+     "results_count": 20,
+     "detail": null
+    },
+    {
+     "name": "keyword_search",
+     "passed": true,
+     "duration_ms": 185.85,
+     "results_count": 20,
+     "detail": null
+    },
+    {
+     "name": "rrf_fusion",
+     "passed": true,
+     "duration_ms": 0.04,
+     "results_count": 26,
+     "detail": null
+    },
+    {
+     "name": "reranking",
+     "passed": true,
+     "duration_ms": 1627.08,
+     "results_count": 8,
+     "detail": null
+    },
+    {
+     "name": "retrieval_gate",
+     "passed": true,
+     "duration_ms": 0.01,
+     "results_count": 8,
+     "detail": {
+      "top_score": 0.8117398237650293
+     }
+    },
+    {
+     "name": "guardrail_pii",
+     "passed": true,
+     "duration_ms": 0.08,
+     "results_count": null,
+     "detail": {
+      "pii_found": false
+     }
+    }
+   ],
+   "trace_id": "8fe5e5b12392d7ca8b95a43a11bf1c60",
+   "trace_output": {
+    "status": "success",
+    "duration_ms": 20342
+   },
+   "spans": {
+    "Explanation/grounding": {
+     "duration_ms": 8094,
+     "model": "z-ai/glm-5.3-flashx",
+     "status": "success",
+     "completion_tokens": 991,
+     "reasoning_tokens": 567
+    },
+    "Explanation/faithfulness": {
+     "duration_ms": 9128,
+     "model": "z-ai/glm-5.3-flashx",
+     "status": "success",
+     "completion_tokens": 1135,
+     "reasoning_tokens": 619
+    },
+    "Explanation": {
+     "duration_ms": 6211,
+     "model": "deepseek/deepseek-v4.1-flash",
+     "status": "success",
+     "completion_tokens": 864,
+     "reasoning_tokens": 752
+    },
+    "Plan": {
+     "duration_ms": 3147,
+     "model": "deepseek/deepseek-v4.1-flash",
+     "status": "success",
+     "completion_tokens": 383,
+     "reasoning_tokens": 327
+    }
+   }
+  },
+  {
+   "id": 3,
+   "kind": "manual_paraphrase",
+   "query": "입력한 인증번호가 틀렸을 때 안내",
+   "expected_code": "EX-0102",
+   "thread_id": "f8390346-b606-48ac-a508-a1674d0f0998",
+   "request_id": "dc724974-d53a-40b2-94ee-a6e099f5c7ff",
+   "http_status": 502,
+   "total_s": 16.2,
+   "detail": "AI 검증 응답이 불완전하여 결과를 저장하지 않았습니다.",
+   "answer_blocked": false,
+   "trace_id": "265645defd398c6dfeaca22bac235ee0",
+   "trace_output": {
+    "status": "failed",
+    "error_type": "DomainError"
+   },
+   "spans": {
+    "Explanation/grounding": {
+     "duration_ms": 6364,
+     "model": "z-ai/glm-5.3-flashx",
+     "status": "success",
+     "completion_tokens": 679,
+     "reasoning_tokens": 343
+    },
+    "Explanation/faithfulness": {
+     "duration_ms": 9351,
+     "model": "z-ai/glm-5.3-flashx",
+     "status": "success",
+     "completion_tokens": 986,
+     "reasoning_tokens": 465
+    },
+    "Explanation": {
+     "duration_ms": 3124,
+     "model": "deepseek/deepseek-v4.1-flash",
+     "status": "success",
+     "completion_tokens": 283,
+     "reasoning_tokens": 219
+    },
+    "Plan": {
+     "duration_ms": 2219,
+     "model": "deepseek/deepseek-v4.1-flash",
+     "status": "success",
+     "completion_tokens": 136,
+     "reasoning_tokens": 79
+    }
+   }
+  },
+  {
+   "id": 9,
+   "kind": "manual_paraphrase",
+   "query": "이메일 중복 검사 결과 이미 쓰고 있는 주소인 경우",
+   "expected_code": "EX-0204",
+   "thread_id": "0663bac8-569c-432f-bc6c-a724e2513ead",
+   "request_id": "9309a792-1868-4d91-83bb-12d70898a6e5",
+   "http_status": 502,
+   "total_s": 15.9,
+   "detail": "AI 검증 응답이 불완전하여 결과를 저장하지 않았습니다.",
+   "answer_blocked": false,
+   "trace_id": "4420518d1516172ac5ae3156ee1ebad4",
+   "trace_output": {
+    "status": "failed",
+    "error_type": "DomainError"
+   },
+   "spans": {
+    "Explanation/grounding": {
+     "duration_ms": 6532,
+     "model": "z-ai/glm-5.3-flashx",
+     "status": "success",
+     "completion_tokens": 613,
+     "reasoning_tokens": 301
+    },
+    "Explanation/faithfulness": {
+     "duration_ms": 7609,
+     "model": "z-ai/glm-5.3-flashx",
+     "status": "success",
+     "completion_tokens": 830,
+     "reasoning_tokens": 382
+    },
+    "Explanation": {
+     "duration_ms": 3444,
+     "model": "deepseek/deepseek-v4.1-flash",
+     "status": "success",
+     "completion_tokens": 273,
+     "reasoning_tokens": 212
+    },
+    "Plan": {
+     "duration_ms": 3164,
+     "model": "deepseek/deepseek-v4.1-flash",
+     "status": "success",
+     "completion_tokens": 298,
+     "reasoning_tokens": 257
+    }
+   }
+  },
+  {
+   "id": 12,
+   "kind": "manual_paraphrase",
+   "query": "권한이 없는 메뉴에 들어가려고 할 때",
+   "expected_code": "EX-0403",
+   "thread_id": "03d4c51c-0b82-494f-8b71-029483d96763",
+   "request_id": "8a4586c1-98ed-4341-9e0f-196ccd07270b",
+   "http_status": 200,
+   "total_s": 60.0,
+   "action": "search",
+   "candidate_codes": [
+    "EX-0403",
+    "EX-0302",
+    "SM-1220",
+    "SM-1038",
+    "SM-1216",
+    "SM-1214",
+    "SM-1213",
+    "SM-1212"
+   ],
+   "rank": 1,
+   "answer_excerpt": "메시지코드: EX-0403\n문구: 접근 권한이 없습니다.\n메뉴: 공통\n노출 조건: 권한 없는 메뉴 접근",
+   "answer_blocked": false,
+   "ai_used": true,
+   "trace_flags": [
+    {
+     "name": "guardrail_input",
+     "passed": true,
+     "duration_ms": 0.02,
+     "results_count": null,
+     "detail": null
+    },
+    {
+     "name": "question_classification",
+     "passed": true,
+     "duration_ms": 0.0,
+     "results_count": null,
+     "detail": {
+      "category": "explanatory",
+      "indicators": []
+     }
+    },
+    {
+     "name": "vector_search",
+     "passed": true,
+     "duration_ms": 169.16,
+     "results_count": 20,
+     "detail": null
+    },
+    {
+     "name": "keyword_search",
+     "passed": true,
+     "duration_ms": 169.16,
+     "results_count": 20,
+     "detail": null
+    },
+    {
+     "name": "rrf_fusion",
+     "passed": true,
+     "duration_ms": 0.04,
+     "results_count": 32,
+     "detail": null
+    },
+    {
+     "name": "reranking",
+     "passed": true,
+     "duration_ms": 1575.48,
+     "results_count": 8,
+     "detail": null
+    },
+    {
+     "name": "retrieval_gate",
+     "passed": true,
+     "duration_ms": 0.0,
+     "results_count": 8,
+     "detail": {
+      "top_score": 0.8117129566749273
+     }
+    },
+    {
+     "name": "guardrail_pii",
+     "passed": true,
+     "duration_ms": 0.08,
+     "results_count": null,
+     "detail": {
+      "pii_found": false
+     }
+    }
+   ],
+   "trace_id": "5eeaf0775ea7fadf42c0a6bbc5f63e4f",
+   "trace_output": {
+    "status": "success",
+    "duration_ms": 60020
+   },
+   "spans": {
+    "Explanation/grounding": {
+     "duration_ms": 49121,
+     "model": "z-ai/glm-5.3-flashx",
+     "status": "success",
+     "completion_tokens": 911,
+     "reasoning_tokens": 480
+    },
+    "Explanation/faithfulness": {
+     "duration_ms": 10584,
+     "model": "z-ai/glm-5.3-flashx",
+     "status": "success",
+     "completion_tokens": 1314,
+     "reasoning_tokens": 826
+    },
+    "Explanation": {
+     "duration_ms": 4385,
+     "model": "deepseek/deepseek-v4.1-flash",
+     "status": "success",
+     "completion_tokens": 654,
+     "reasoning_tokens": 598
+    },
+    "Plan": {
+     "duration_ms": 4710,
+     "model": "deepseek/deepseek-v4.1-flash",
+     "status": "success",
+     "completion_tokens": 598,
+     "reasoning_tokens": 552
+    }
+   }
+  },
+  {
+   "id": "weather",
+   "kind": "unrelated",
+   "query": "오늘 서울 날씨 어때?",
+   "expected_code": null,
+   "thread_id": "2c1368a3-3cc7-4ea8-96e4-57731bd87a0e",
+   "request_id": "d067abfd-71c3-4ac1-9038-f71e663d9a30",
+   "http_status": 200,
+   "total_s": 21.4,
+   "action": "search",
+   "candidate_codes": [],
+   "rank": null,
+   "answer_excerpt": "날씨 관련 등록 코드를 찾지 못했습니다.\n등록 자료의 문구는 알림설정·회원가입·로그인·고객문의 안내에 한정되어 있습니다.\n날씨 조회에 맞는 등록 문구와 노출 조건이 확인되지 않습니다.",
+   "answer_blocked": false,
+   "ai_used": true,
+   "trace_flags": [
+    {
+     "name": "guardrail_input",
+     "passed": true,
+     "duration_ms": 0.01,
+     "results_count": null,
+     "detail": null
+    },
+    {
+     "name": "question_classification",
+     "passed": true,
+     "duration_ms": 0.0,
+     "results_count": null,
+     "detail": {
+      "category": "explanatory",
+      "indicators": []
+     }
+    },
+    {
+     "name": "vector_search",
+     "passed": true,
+     "duration_ms": 190.78,
+     "results_count": 20,
+     "detail": null
+    },
+    {
+     "name": "keyword_search",
+     "passed": true,
+     "duration_ms": 190.78,
+     "results_count": 0,
+     "detail": null
+    },
+    {
+     "name": "rrf_fusion",
+     "passed": true,
+     "duration_ms": 0.04,
+     "results_count": 20,
+     "detail": null
+    },
+    {
+     "name": "reranking",
+     "passed": true,
+     "duration_ms": 1379.53,
+     "results_count": 8,
+     "detail": null
+    },
+    {
+     "name": "retrieval_gate",
+     "passed": true,
+     "duration_ms": 0.0,
+     "results_count": 8,
+     "detail": {
+      "top_score": 0.6500000916812638
+     }
+    },
+    {
+     "name": "guardrail_pii",
+     "passed": true,
+     "duration_ms": 0.09,
+     "results_count": null,
+     "detail": {
+      "pii_found": false
+     }
+    },
+    {
+     "name": "no_relevant_candidate",
+     "count": 8
+    }
+   ],
+   "trace_id": "1eaabba0285858affc0f203d3c483729",
+   "trace_output": {
+    "status": "success",
+    "duration_ms": 21420
+   },
+   "spans": {
+    "Explanation/grounding": {
+     "duration_ms": 13424,
+     "model": "z-ai/glm-5.3-flashx",
+     "status": "success",
+     "completion_tokens": 1601,
+     "reasoning_tokens": 1087
+    },
+    "Explanation/faithfulness": {
+     "duration_ms": 12678,
+     "model": "z-ai/glm-5.3-flashx",
+     "status": "success",
+     "completion_tokens": 1524,
+     "reasoning_tokens": 955
+    },
+    "Explanation": {
+     "duration_ms": 3304,
+     "model": "deepseek/deepseek-v4.1-flash",
+     "status": "success",
+     "completion_tokens": 346,
+     "reasoning_tokens": 268
+    },
+    "Plan": {
+     "duration_ms": 3063,
+     "model": "deepseek/deepseek-v4.1-flash",
+     "status": "success",
+     "completion_tokens": 224,
+     "reasoning_tokens": 198
+    }
+   }
+  }
+ ]
+}

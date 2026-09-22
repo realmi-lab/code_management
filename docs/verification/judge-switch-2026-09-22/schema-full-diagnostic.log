@@ -1,0 +1,9 @@
+{"variant": "good", "expected": "passed", "outcomes": ["passed"], "seconds": [0.0]}
+{"variant": "good_two_codes", "expected": "passed", "outcomes": ["passed"], "seconds": [0.0]}
+{"variant": "bad_numeric_60s", "expected": "blocked", "outcomes": ["blocked_numeric"], "seconds": [0.0]}
+SYNTHETIC_DIAGNOSTIC '{"judgements": [{"supported": false, "index": 1}, {"supported": false, "index": 2}, {"supported": false, "index": 3}]}'
+SYNTHETIC_DIAGNOSTIC '{"judgements": [{"index": 1, "supported": false}, {"supported": false, "index": 2}, {"index": 3, "supported": false}]}'
+{"variant": "bad_added_claim", "expected": "blocked", "outcomes": ["error_502"], "seconds": [2.4]}
+{"variant": "bad_menu_swap", "expected": "blocked", "outcomes": ["blocked"], "seconds": [0.0]}
+{"variant": "bad_wrong_code", "expected": "blocked", "outcomes": ["blocked"], "seconds": [0.0]}
+REPORT {"label": "apple-v2-diagnostic", "judge_provider": "apple", "judge_model": "apple/on-device", "runs": 1, "variants": {"good": {"expected": "passed", "outcomes": ["passed"], "seconds": [0.0], "details": [], "as_expected": true}, "good_two_codes": {"expected": "passed", "outcomes": ["passed"], "seconds": [0.0], "details": [], "as_expected": true}, "bad_numeric_60s": {"expected": "blocked", "outcomes": ["blocked_numeric"], "seconds": [0.0], "details": ["AI 결과에 근거 없는 수치가 포함되어 저장하지 않았습니다."], "as_expected": true}, "bad_added_claim": {"expected": "blocked", "outcomes": ["error_502"], "seconds": [2.4], "details": ["AI 검증 응답이 불완전하여 결과를 저장하지 않았습니다."], "as_expected": false}, "bad_menu_swap": {"expected": "blocked", "outcomes": ["blocked"], "seconds": [0.0], "details": ["AI 결과의 근거 검증을 통과하지 못했습니다. 원문과 조건을 확인해주세요."], "as_expected": true}, "bad_wrong_code": {"expected": "blocked", "outcomes": ["blocked"], "seconds": [0.0], "details": ["AI 결과의 근거 검증을 통과하지 못했습니다. 원문과 조건을 확인해주세요."], "as_expected": true}}}

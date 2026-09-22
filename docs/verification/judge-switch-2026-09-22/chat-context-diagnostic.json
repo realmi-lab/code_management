@@ -1,0 +1,11 @@
+{
+  "prompt_chars": 2313,
+  "system_chars": 1176,
+  "result": {
+    "error": {
+      "message": "온디바이스 모델 오류(generation_error): unsupportedLanguageOrLocale(FoundationModels.LanguageModelSession.GenerationError.Context(debugDescription: \"Unsupported language.\", underlyingErrors: [], errorDescriptionOverride: nil))",
+      "type": "server_error",
+      "code": "model_error"
+    }
+  }
+}

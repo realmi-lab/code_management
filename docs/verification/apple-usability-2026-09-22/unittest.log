@@ -1,0 +1,94 @@
+test_missing_or_wrong_token_is_rejected_before_the_worker_runs (test_apple_bridge.BridgeServerTest.test_missing_or_wrong_token_is_rejected_before_the_worker_runs) ... /Library/Frameworks/Python.framework/Versions/3.14/lib/python3.14/tempfile.py:484: ResourceWarning: Implicitly cleaning up <HTTPError 401: 'Unauthorized'>
+  _warnings.warn(self.warn_message, ResourceWarning)
+ok
+test_multi_turn_messages_are_rendered_with_roles_and_text_parts (test_apple_bridge.BridgeServerTest.test_multi_turn_messages_are_rendered_with_roles_and_text_parts) ... ok
+test_other_models_streaming_and_json_object_are_refused_not_substituted (test_apple_bridge.BridgeServerTest.test_other_models_streaming_and_json_object_are_refused_not_substituted) ... /Library/Frameworks/Python.framework/Versions/3.14/lib/python3.14/tempfile.py:484: ResourceWarning: Implicitly cleaning up <HTTPError 404: 'Not Found'>
+  _warnings.warn(self.warn_message, ResourceWarning)
+/Library/Frameworks/Python.framework/Versions/3.14/lib/python3.14/tempfile.py:484: ResourceWarning: Implicitly cleaning up <HTTPError 400: 'Bad Request'>
+  _warnings.warn(self.warn_message, ResourceWarning)
+ok
+test_schema_request_reaches_worker_and_returns_openai_shape (test_apple_bridge.BridgeServerTest.test_schema_request_reaches_worker_and_returns_openai_shape) ... ok
+test_worker_errors_and_timeouts_surface_as_gateway_errors (test_apple_bridge.BridgeServerTest.test_worker_errors_and_timeouts_surface_as_gateway_errors) ... /Library/Frameworks/Python.framework/Versions/3.14/lib/python3.14/tempfile.py:484: ResourceWarning: Implicitly cleaning up <HTTPError 504: 'Gateway Timeout'>
+  _warnings.warn(self.warn_message, ResourceWarning)
+ok
+test_fixed_contract_and_duplicate_rejection (test_catalog_surfaces_patch.CatalogSurfacesPatch.test_fixed_contract_and_duplicate_rejection) ... ok
+test_configured_values_reach_selected_strategy_and_splitter (test_chunking_patch.ChunkingPatch.test_configured_values_reach_selected_strategy_and_splitter) ... /Library/Frameworks/Python.framework/Versions/3.14/lib/python3.14/ast.py:46: ResourceWarning: unclosed file <_io.FileIO name='/dev/null' mode='wb' closefd=True>
+  return compile(source, filename, mode, flags,
+ResourceWarning: Enable tracemalloc to get the object allocation traceback
+ok
+test_frontend_legacy_options_are_not_offered_as_implemented (test_chunking_patch.ChunkingPatch.test_frontend_legacy_options_are_not_offered_as_implemented) ... ok
+test_unavailable_is_not_zero_and_contract_is_atomic (test_evaluation_frontend.EvaluationFrontendPatch.test_unavailable_is_not_zero_and_contract_is_atomic) ... ok
+test_absolute_path_rejected (test_installation.ArchiveTests.test_absolute_path_rejected) ... ok
+test_archive_import_matches_source (test_installation.ArchiveTests.test_archive_import_matches_source) ... ok
+test_duplicate_path_rejected (test_installation.ArchiveTests.test_duplicate_path_rejected) ... ok
+test_hardlink_rejected (test_installation.ArchiveTests.test_hardlink_rejected) ... ok
+test_link_escape_rejected (test_installation.ArchiveTests.test_link_escape_rejected) ... ok
+test_normal_archive (test_installation.ArchiveTests.test_normal_archive) ... ok
+test_parent_traversal_rejected (test_installation.ArchiveTests.test_parent_traversal_rejected) ... ok
+test_size_limit (test_installation.ArchiveTests.test_size_limit) ... ok
+test_two_archive_roots_rejected (test_installation.ArchiveTests.test_two_archive_roots_rejected) ... ok
+test_write_through_symlink_rejected (test_installation.ArchiveTests.test_write_through_symlink_rejected) ... ok
+test_all_dependencies_exist (test_installation.ComposeTests.test_all_dependencies_exist) ... ok
+test_all_volume_references_declared (test_installation.ComposeTests.test_all_volume_references_declared) ... ok
+test_frontend_build_time_api_rewrite (test_installation.ComposeTests.test_frontend_build_time_api_rewrite) ... ok
+test_full_stack_not_legacy_default (test_installation.ComposeTests.test_full_stack_not_legacy_default) ... ok
+test_full_upstream_backend_copied (test_installation.ComposeTests.test_full_upstream_backend_copied) ... ok
+test_generated_compose_in_sync (test_installation.ComposeTests.test_generated_compose_in_sync) ... ok
+test_infrastructure_not_exposed (test_installation.ComposeTests.test_infrastructure_not_exposed) ... ok
+test_lf_project_keys_match_app (test_installation.ComposeTests.test_lf_project_keys_match_app) ... ok
+test_migration_gates_api_and_worker (test_installation.ComposeTests.test_migration_gates_api_and_worker) ... ok
+test_no_external_network_or_fixed_container_names (test_installation.ComposeTests.test_no_external_network_or_fixed_container_names) ... ok
+test_nori_installed (test_installation.ComposeTests.test_nori_installed) ... ok
+test_public_ports_loopback_only (test_installation.ComposeTests.test_public_ports_loopback_only) ... ok
+test_required_secrets_have_no_weak_fallback (test_installation.ComposeTests.test_required_secrets_have_no_weak_fallback) ... ok
+test_upload_volume_shared (test_installation.ComposeTests.test_upload_volume_shared) ... ok
+test_worker_uses_verified_upstream_module (test_installation.ComposeTests.test_worker_uses_verified_upstream_module) ... ok
+test_duplicate_key_rejected (test_installation.ConfigTests.test_duplicate_key_rejected) ... ok
+test_existing_secrets_preserved (test_installation.ConfigTests.test_existing_secrets_preserved) ... ok
+test_invalid_port_rejected (test_installation.ConfigTests.test_invalid_port_rejected) ... ok
+test_key_with_dollar_is_quoted_not_interpolated (test_installation.ConfigTests.test_key_with_dollar_is_quoted_not_interpolated) ... ok
+test_keyless_setup_allows_configuration_screen_but_reports_not_ready (test_installation.ConfigTests.test_keyless_setup_allows_configuration_screen_but_reports_not_ready) ... ok
+test_newline_value_rejected (test_installation.ConfigTests.test_newline_value_rejected) ... ok
+test_postgres_password_url_safety (test_installation.ConfigTests.test_postgres_password_url_safety) ... ok
+test_same_ports_rejected (test_installation.ConfigTests.test_same_ports_rejected) ... ok
+test_secrets_random_no_known_defaults (test_installation.ConfigTests.test_secrets_random_no_known_defaults) ... ok
+test_setup_logs_do_not_print_passwords (test_installation.ConfigTests.test_setup_logs_do_not_print_passwords) ... ok
+test_bad_repo_lock_rejected (test_installation.GitTreeTests.test_bad_repo_lock_rejected) ... ok
+test_changed_executable_bit_rejected (test_installation.GitTreeTests.test_changed_executable_bit_rejected) ... ok
+test_changed_file_rejected (test_installation.GitTreeTests.test_changed_file_rejected) ... ok
+test_empty_directories_are_not_tracked_by_git (test_installation.GitTreeTests.test_empty_directories_are_not_tracked_by_git) ... ok
+test_existing_modified_tree_not_overwritten (test_installation.GitTreeTests.test_existing_modified_tree_not_overwritten) ... ok
+test_extra_file_rejected (test_installation.GitTreeTests.test_extra_file_rejected) ... ok
+test_failed_download_never_creates_upstream (test_installation.GitTreeTests.test_failed_download_never_creates_upstream) ... ok
+test_hash_matches_real_git_tree_including_modes_unicode_and_binary (test_installation.GitTreeTests.test_hash_matches_real_git_tree_including_modes_unicode_and_binary) ... ok
+test_install_lock_prevents_concurrent_mutation (test_installation.GitTreeTests.test_install_lock_prevents_concurrent_mutation) ... ok
+test_local_import_is_full_and_idempotent (test_installation.GitTreeTests.test_local_import_is_full_and_idempotent) ... ok
+test_missing_file_rejected (test_installation.GitTreeTests.test_missing_file_rejected) ... ok
+test_no_source_not_success (test_installation.GitTreeTests.test_no_source_not_success) ... ok
+test_pinned_patch_and_atomic_contract_failure (test_local_access_frontend.LocalAccessFrontendPatch.test_pinned_patch_and_atomic_contract_failure) ... ok
+test_backend_contract (test_monitoring_patch.MonitoringPatch.test_backend_contract) ... ok
+test_frontend_contract (test_monitoring_patch.MonitoringPatch.test_frontend_contract) ... ok
+test_pinned_config_and_changed_contract (test_proxy_timeout_patch.ProxyTimeoutPatch.test_pinned_config_and_changed_contract) ... ok
+test_B02_validated_environment_passed_to_child (test_regressions.Regressions.test_B02_validated_environment_passed_to_child) ... ok
+test_B03_weak_password_rejected_without_overwrite (test_regressions.Regressions.test_B03_weak_password_rejected_without_overwrite) ... ok
+test_B04_reserved_redis_password_is_encoded (test_regressions.Regressions.test_B04_reserved_redis_password_is_encoded) ... ok
+test_B05_failed_latest_attempt_replaces_success (test_regressions.Regressions.test_B05_failed_latest_attempt_replaces_success) ... ok
+test_B06_equal_numeric_ports_rejected (test_regressions.Regressions.test_B06_equal_numeric_ports_rejected) ... ok
+test_integrated_migration_and_source_build (test_regressions.Regressions.test_integrated_migration_and_source_build) ... ok
+test_wrapper_preserves_original_login_and_worker (test_regressions.Regressions.test_wrapper_preserves_original_login_and_worker) ... ok
+test_pinned_search_contract (test_search_persistence_patch.SearchPersistencePatch.test_pinned_search_contract) ... ok
+test_late_contract_failure_leaves_all_files_untouched (test_settings_availability_frontend.SettingsAvailabilityFrontendPatch.test_late_contract_failure_leaves_all_files_untouched) ... ok
+test_notices_preserve_controls_and_record_exact_changes (test_settings_availability_frontend.SettingsAvailabilityFrontendPatch.test_notices_preserve_controls_and_record_exact_changes) ... ok
+test_contract_failure_does_not_partially_write_files (test_settings_selection_frontend.SettingsSelectionFrontendPatch.test_contract_failure_does_not_partially_write_files) ... ok
+test_selection_handlers_ignore_empty_events_and_accept_valid_choices (test_settings_selection_frontend.SettingsSelectionFrontendPatch.test_selection_handlers_ignore_empty_events_and_accept_valid_choices) ... ok
+test_bad_login_does_not_continue (test_smoke.SmokeTests.test_bad_login_does_not_continue) ... ok
+test_default_smoke_never_calls_search_or_writes_documents (test_smoke.SmokeTests.test_default_smoke_never_calls_search_or_writes_documents) ... ok
+test_explicit_query_sent_with_real_endpoint_contract (test_smoke.SmokeTests.test_explicit_query_sent_with_real_endpoint_contract) ... ok
+test_no_settings_means_failure (test_smoke.SmokeTests.test_no_settings_means_failure) ... ok
+test_patch_and_serialized_paths (test_watcher_frontend.WatcherFrontendPatch.test_patch_and_serialized_paths) ... ok
+
+----------------------------------------------------------------------
+Ran 77 tests in 3.299s
+
+OK
+로컬 설정 준비 완료: .env (기존 비밀번호와 키는 유지)

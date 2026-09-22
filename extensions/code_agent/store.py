@@ -228,7 +228,7 @@ class Store:
             state_table=self.state_table
             current=row(c.execute(select(state_table).where(state_table.c.id==1).with_for_update()).mappings().one())
             if current['version']!=result['catalog_version']: raise DomainError('답변 도중 목록이 변경되었습니다. 다시 질문해주세요.')
-            history=(t['history']+[{'role':'user','content':user_text},{'role':'assistant','content':result['answer'],'selected_code':result.get('selected_code'),'ai_used':result.get('ai_used',True)}])[-24:]
+            history=(t['history']+[{'role':'user','content':user_text},{'role':'assistant','content':result['answer'],'selected_code':result.get('selected_code'),'ai_used':result.get('ai_used',True),'search_info':result.get('search_info'),'ai_error':result.get('ai_error')}])[-24:]
             created=None
             if draft:
                 if self.namespace!='production':raise DomainError('샘플 대화에서는 정식 등록용 초안을 저장하지 않습니다.',422)

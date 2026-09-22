@@ -1,0 +1,49 @@
+{
+  "request_id": "ff1dfeda-436d-4469-996e-d4b11250bb3d",
+  "case_id": "core-false-premise",
+  "validation": [
+    {
+      "thread_id": "8d8058a1-6a34-40c4-8ba2-70ceeddb8a67",
+      "request_id": "ff1dfeda-436d-4469-996e-d4b11250bb3d",
+      "stage": "registered_fields",
+      "status": "passed",
+      "checked_fields": 3,
+      "violations": []
+    },
+    {
+      "thread_id": "8d8058a1-6a34-40c4-8ba2-70ceeddb8a67",
+      "request_id": "ff1dfeda-436d-4469-996e-d4b11250bb3d",
+      "stage": "numeric",
+      "status": "blocked",
+      "missing_quantities": [
+        [
+          "time",
+          "6E+1"
+        ]
+      ],
+      "ungrounded_numbers": []
+    },
+    {
+      "thread_id": "8d8058a1-6a34-40c4-8ba2-70ceeddb8a67",
+      "request_id": "ff1dfeda-436d-4469-996e-d4b11250bb3d",
+      "stage": "registered_fields",
+      "status": "passed",
+      "checked_fields": 3,
+      "violations": []
+    },
+    {
+      "thread_id": "8d8058a1-6a34-40c4-8ba2-70ceeddb8a67",
+      "request_id": "ff1dfeda-436d-4469-996e-d4b11250bb3d",
+      "stage": "numeric",
+      "status": "blocked",
+      "missing_quantities": [
+        [
+          "time",
+          "6E+1"
+        ]
+      ],
+      "ungrounded_numbers": []
+    }
+  ],
+  "boundary": "Missing quantity observed in both attempts. Rejected prose is not recorded; whether that quantity appeared in a negation is unknown."
+}

@@ -39,5 +39,5 @@ async def embedding_connected():
 
 
 def descriptions():
-    return ('Anthropic / Claude' if anthropic_enabled() else 'Command Code / DeepSeek' if commandcode_enabled() else 'OpenAI LLM',
+    return ('Apple 온디바이스' if ai_config.read()['provider']=='apple' else 'Anthropic / Claude' if anthropic_enabled() else 'Command Code / DeepSeek' if commandcode_enabled() else 'OpenAI LLM',
             '사용 안 함 · 키워드 검색' if keyword_only() else '로컬 multilingual-e5-base (CPU)' if local_enabled() else 'OpenAI 임베딩')

@@ -1,0 +1,126 @@
+{
+  "settings_equal": true,
+  "snapshot_equal": true,
+  "after_index_checks": {
+    "active_codes_equal_indexed_codes": true,
+    "exactly_one_chunk_per_active_row": true,
+    "pg_es_chunk_ids_equal": true,
+    "pg_es_content_metadata_equal": true,
+    "index_content_equals_redacted_row": true,
+    "indexed_revision_matches_db": true
+  },
+  "after_api_reranker_executed_cases": 3,
+  "before_summary": {
+    "labeled_cases": 5,
+    "expected_count": 5,
+    "recall": 1.0,
+    "recall_at_1": 0.2,
+    "recall_at_5": 0.4
+  },
+  "after_completed_case_summary": {
+    "labeled_cases": 3,
+    "expected_count": 3,
+    "recall": 1.0,
+    "recall_at_1": 1.0,
+    "recall_at_5": 1.0
+  },
+  "comparison": [
+    {
+      "id": "metadata-english-leave",
+      "expected_codes": [
+        "EX-0401"
+      ],
+      "before": {
+        "EX-0401": 1
+      },
+      "after": {
+        "EX-0401": 1
+      },
+      "api_error": null,
+      "api_seconds": 39.794,
+      "candidates_preserved": true,
+      "reranker_trace": {
+        "name": "reranking",
+        "passed": true,
+        "duration_ms": 39359.63,
+        "results_count": 32,
+        "detail": null
+      }
+    },
+    {
+      "id": "metadata-english-available",
+      "expected_codes": [
+        "EX-0203"
+      ],
+      "before": {
+        "EX-0203": 3
+      },
+      "after": {
+        "EX-0203": 1
+      },
+      "api_error": null,
+      "api_seconds": 133.148,
+      "candidates_preserved": true,
+      "reranker_trace": {
+        "name": "reranking",
+        "passed": true,
+        "duration_ms": 130644.34,
+        "results_count": 24,
+        "detail": null
+      }
+    },
+    {
+      "id": "metadata-note-variable",
+      "expected_codes": [
+        "EX-0105"
+      ],
+      "before": {
+        "EX-0105": 28
+      },
+      "after": {
+        "EX-0105": 1
+      },
+      "api_error": null,
+      "api_seconds": 105.26,
+      "candidates_preserved": true,
+      "reranker_trace": {
+        "name": "reranking",
+        "passed": true,
+        "duration_ms": 95486.97,
+        "results_count": 32,
+        "detail": null
+      }
+    },
+    {
+      "id": "metadata-note-provided",
+      "expected_codes": [
+        "AT-1923"
+      ],
+      "before": {
+        "AT-1923": 23
+      },
+      "after": null,
+      "api_error": {
+        "type": "HTTPError",
+        "status": 504
+      },
+      "api_seconds": null,
+      "candidates_preserved": null,
+      "reranker_trace": null
+    },
+    {
+      "id": "metadata-purpose-dynamic",
+      "expected_codes": [
+        "SM-1013"
+      ],
+      "before": {
+        "SM-1013": 12
+      },
+      "after": null,
+      "api_error": null,
+      "api_seconds": null,
+      "candidates_preserved": null,
+      "reranker_trace": null
+    }
+  ]
+}

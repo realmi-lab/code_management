@@ -1,0 +1,11 @@
+[apple-chat-v1] id=1 http=502 total=4.7s rank=None blocked=False judge_ms={} models={ None, apple/on-device }
+[apple-chat-v1] id=2 http=502 total=4.0s rank=None blocked=False judge_ms={} models={ None, apple/on-device }
+[apple-chat-v1] id=5 http=502 total=4.6s rank=None blocked=False judge_ms={} models={ None, apple/on-device }
+[apple-chat-v1] id=7 http=502 total=5.0s rank=None blocked=False judge_ms={} models={ None, apple/on-device }
+[apple-chat-v1] id=27 http=502 total=16.5s rank=None blocked=False judge_ms={} models={ None, apple/on-device }
+[apple-chat-v1] id=67 http=502 total=13.9s rank=None blocked=False judge_ms={} models={ None, apple/on-device }
+[apple-chat-v1] id=3 http=502 total=19.1s rank=None blocked=False judge_ms={} models={ None, apple/on-device }
+[apple-chat-v1] id=9 http=502 total=4.0s rank=None blocked=False judge_ms={} models={ None, apple/on-device }
+[apple-chat-v1] id=12 http=502 total=4.8s rank=None blocked=False judge_ms={} models={ None, apple/on-device }
+[apple-chat-v1] id=weather http=502 total=12.8s rank=None blocked=False judge_ms={} models={ None, apple/on-device }
+saved docs/verification/judge-switch-2026-09-22/apple-chat-v1.json

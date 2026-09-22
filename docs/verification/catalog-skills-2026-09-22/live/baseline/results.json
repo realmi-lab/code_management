@@ -1,0 +1,177 @@
+[
+  {
+    "case_id": "core-direct",
+    "suite": "core",
+    "repeat": 1,
+    "query": "AT-1923 문구 알려줘",
+    "request_id": "d2603c01-b81d-4b26-9320-1c48aaa2e055",
+    "thread_id": "c862c9fe-c019-4610-bc26-7a700918c28e",
+    "api_error": null,
+    "status": 200,
+    "result": {
+      "action": "search",
+      "answer": "등록된 코드의 원문을 찾았습니다. 아래 문구는 DB에 저장된 그대로입니다.",
+      "candidates": [
+        {
+          "id": "be13eec6-1ae9-49dd-9a34-836bb4862f94",
+          "code": "AT-1923",
+          "message": "메뉴확인 30초 이후에 인증해주세요.",
+          "menu": "메뉴 인증",
+          "trigger": "메뉴 확인 후 30초가 지나기 전에 인증 버튼을 누른 경우",
+          "notes": "사용자가 제공한 예시를 바탕으로 한 데모. 조건은 예시용입니다.",
+          "status": "active",
+          "revision": 1,
+          "source": {
+            "kind": "demo",
+            "synthetic": true,
+            "filename": "GitHub 합성 예시 · 실제 회사 목록 아님",
+            "catalog_fields": {}
+          },
+          "updated_at": "2026-09-21T02:45:36.554821+00:00",
+          "business": "메뉴 인증",
+          "message_type": "alert",
+          "purpose": "메뉴 확인 후 30초가 지나기 전에 인증 버튼을 누른 경우",
+          "title": "메뉴확인 30초 이후에 인증해주세요.",
+          "spelling_check": "미검사",
+          "title_en": "Please authenticate at least 30 seconds after checking the menu.",
+          "contents_en": "Please authenticate at least 30 seconds after checking the menu.",
+          "added_date": "2026-09-21",
+          "message_code": "AT-1923"
+        }
+      ],
+      "comparisons": [],
+      "missing_codes": [],
+      "search_info": {
+        "shown": 1,
+        "complete": true,
+        "quantity": null
+      },
+      "ai_error": null,
+      "selected_code": null,
+      "catalog_version": 3,
+      "trace": [
+        {
+          "name": "exact_lookup",
+          "count": 1
+        }
+      ],
+      "draft": null,
+      "ai_used": false,
+      "namespace": "demo",
+      "thread_id": "c862c9fe-c019-4610-bc26-7a700918c28e",
+      "version": 1
+    },
+    "quantity_result": null,
+    "ai_error": null,
+    "ai_used": false,
+    "seconds": 2.183,
+    "objective_checks": {
+      "http_success": true,
+      "no_ai_error": true,
+      "no_draft": true,
+      "candidates_unique": true,
+      "candidate_original_fields_preserved": true,
+      "expected_candidates_present": true,
+      "direct_lookup_no_ai_used": true,
+      "direct_candidate_set_exact": true
+    },
+    "objective_pass": true,
+    "manual_review": [],
+    "structured_references": "unavailable_in_public_api",
+    "visible_reference_codes": [],
+    "expected_ranks": {
+      "AT-1923": 1
+    },
+    "expected_set_recall": 1.0,
+    "reciprocal_rank": 1.0
+  },
+  {
+    "case_id": "core-sent",
+    "suite": "core",
+    "repeat": 1,
+    "query": "인증번호 전송에 성공했을 때 보여줄 기존 문구 찾아줘",
+    "request_id": "eedae9f8-8245-417c-ab81-a7d7d718e00e",
+    "thread_id": "b3f49a1a-3cb8-4931-8e9f-cb77597964ba",
+    "api_error": {
+      "status": 504,
+      "detail": {
+        "detail": "원본 검색 엔진 응답 시간이 초과되었습니다."
+      }
+    },
+    "status": 504,
+    "result": {
+      "detail": "원본 검색 엔진 응답 시간이 초과되었습니다."
+    },
+    "quantity_result": null,
+    "ai_error": null,
+    "ai_used": null,
+    "seconds": 161.898,
+    "objective_checks": {
+      "http_success": false,
+      "no_ai_error": true,
+      "no_draft": true,
+      "candidates_unique": true,
+      "candidate_original_fields_preserved": true,
+      "expected_candidates_present": false,
+      "visible_references_from_candidates": true,
+      "EX-0101:visible_reference": false,
+      "EX-0101:message_bound_literal": false
+    },
+    "objective_pass": false,
+    "manual_review": [
+      "Check explanation entailment and relevance; literal/source checks alone do not prove semantic accuracy."
+    ],
+    "structured_references": "unavailable_in_public_api",
+    "visible_reference_codes": [],
+    "expected_ranks": {
+      "EX-0101": null
+    },
+    "expected_set_recall": 0.0,
+    "reciprocal_rank": 0
+  },
+  {
+    "case_id": "core-wait",
+    "suite": "core",
+    "repeat": 1,
+    "query": "인증 전에 30초 기다리라는 알림 있어?",
+    "request_id": "c1ae2046-8442-4fc0-97db-88cd213e3a45",
+    "thread_id": "3fc04ece-fd75-4bad-aefd-6b309fb6f713",
+    "api_error": {
+      "status": 504,
+      "detail": {
+        "detail": "원본 검색 엔진 응답 시간이 초과되었습니다."
+      }
+    },
+    "status": 504,
+    "result": {
+      "detail": "원본 검색 엔진 응답 시간이 초과되었습니다."
+    },
+    "quantity_result": null,
+    "ai_error": null,
+    "ai_used": null,
+    "seconds": 169.413,
+    "objective_checks": {
+      "http_success": false,
+      "no_ai_error": true,
+      "no_draft": true,
+      "candidates_unique": true,
+      "candidate_original_fields_preserved": true,
+      "expected_candidates_present": false,
+      "visible_references_from_candidates": true,
+      "AT-1923:visible_reference": false,
+      "AT-1923:message_bound_literal": false,
+      "AT-1923:direction_bound": false
+    },
+    "objective_pass": false,
+    "manual_review": [
+      "Check explanation entailment and relevance; literal/source checks alone do not prove semantic accuracy."
+    ],
+    "structured_references": "unavailable_in_public_api",
+    "visible_reference_codes": [],
+    "expected_ranks": {
+      "AT-1923": null
+    },
+    "expected_set_recall": 0.0,
+    "reciprocal_rank": 0
+  }
+]

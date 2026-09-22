@@ -1,0 +1,13 @@
+{
+  "version": 1,
+  "scope": "demo synthetic only",
+  "frozen": true,
+  "notes": "Exploratory metadata challenge, defined before running its searches. This is separate from the original frozen answer benchmark and is not a held-out accuracy estimate. Labels are evaluation-only and never runtime answer routing. Each expected record is selected by the exact indicated DB field or field pair; retired records are excluded.",
+  "cases": [
+    {"id":"metadata-english-leave","suite":"retrieval-metadata-challenge","kind":"search","query":"영문 title이 Leave without saving your changes?인 알림 찾아줘","expected_codes":["EX-0401"],"evidence_fields":{"title_en":"Leave without saving your changes?"}},
+    {"id":"metadata-english-available","suite":"retrieval-metadata-challenge","kind":"search","query":"영문 contents가 This email address is available.인 기존 알림 찾아줘","expected_codes":["EX-0203"],"evidence_fields":{"contents_en":"This email address is available."}},
+    {"id":"metadata-note-variable","suite":"retrieval-metadata-challenge","kind":"search","query":"비고에 변수명은 변경하지 않습니다. 합성 예시라고 적힌 알림 찾아줘","expected_codes":["EX-0105"],"evidence_fields":{"notes":"변수명은 변경하지 않습니다. 합성 예시"}},
+    {"id":"metadata-note-provided","suite":"retrieval-metadata-challenge","kind":"search","query":"비고에 사용자가 제공한 예시를 바탕으로 한 데모. 조건은 예시용입니다.라고 적힌 알림 찾아줘","expected_codes":["AT-1923"],"evidence_fields":{"notes":"사용자가 제공한 예시를 바탕으로 한 데모. 조건은 예시용입니다."}},
+    {"id":"metadata-purpose-dynamic","suite":"retrieval-metadata-challenge","kind":"search","query":"업무구분은 회원가입이고 용도는 동적 시간 안내인 알림 찾아줘","expected_codes":["SM-1013"],"evidence_fields":{"business":"회원가입","purpose":"동적 시간 안내"}}
+  ]
+}

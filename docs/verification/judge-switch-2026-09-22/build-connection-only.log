@@ -1,0 +1,110 @@
+ Image code-management-full-api:75661c6 Building 
+#1 [internal] load local bake definitions
+#1 reading from stdin 1.75kB done
+#1 DONE 0.0s
+
+#2 [internal] load build definition from backend.Dockerfile
+#2 transferring dockerfile: 2.54kB done
+#2 DONE 0.0s
+
+#3 [internal] load metadata for docker.io/library/python:3.12-slim
+#3 DONE 1.4s
+
+#4 [internal] load .dockerignore
+#4 transferring context: 289B done
+#4 DONE 0.0s
+
+#5 [runtime  5/19] ADD --checksum=sha256:e57f64187974277726a3417ca6f181ec5403676c717672eef6a748a7b20e0106 https://raw.githubusercontent.com/nltk/nltk_data/550b6625bcef1f2abff2ff770a5a0d272c9c6b2a/packages/tokenizers/punkt_tab.zip /tmp/punkt_tab.zip
+#5 DONE 0.0s
+
+#6 [builder 1/6] FROM docker.io/library/python:3.12-slim@sha256:2f17fc044b579bab302c2e8054d3a686e2cb9a83de48e70534b94cd8ebbe06a9
+#6 resolve docker.io/library/python:3.12-slim@sha256:2f17fc044b579bab302c2e8054d3a686e2cb9a83de48e70534b94cd8ebbe06a9 done
+#6 DONE 0.0s
+
+#7 [internal] load build context
+#7 transferring context: 32.99kB 0.0s done
+#7 DONE 0.0s
+
+#8 [runtime  5/19] ADD --checksum=sha256:e57f64187974277726a3417ca6f181ec5403676c717672eef6a748a7b20e0106 https://raw.githubusercontent.com/nltk/nltk_data/550b6625bcef1f2abff2ff770a5a0d272c9c6b2a/packages/tokenizers/punkt_tab.zip /tmp/punkt_tab.zip
+#8 CACHED
+
+#9 [builder 4/6] COPY upstream/backend /build/backend
+#9 CACHED
+
+#10 [builder 3/6] RUN apt-get update && apt-get install -y --no-install-recommends build-essential git     && rm -rf /var/lib/apt/lists/*
+#10 CACHED
+
+#11 [builder 2/6] WORKDIR /build
+#11 CACHED
+
+#12 [runtime  2/19] RUN apt-get update && apt-get install -y --no-install-recommends libglib2.0-0 libgl1     && rm -rf /var/lib/apt/lists/*     && groupadd --gid 10001 appuser     && useradd --uid 10001 --gid 10001 --create-home appuser
+#12 CACHED
+
+#13 [builder 6/6] RUN pip install --no-cache-dir --prefix=/install /build/backend -r /build/catalog-requirements.txt
+#13 CACHED
+
+#14 [runtime  6/19] RUN python -m zipfile -e /tmp/punkt_tab.zip /usr/local/share/nltk_data/tokenizers && rm /tmp/punkt_tab.zip
+#14 CACHED
+
+#15 [runtime  3/19] WORKDIR /app
+#15 CACHED
+
+#16 [runtime  4/19] COPY --from=builder /install /usr/local
+#16 CACHED
+
+#17 [builder 5/6] COPY extensions/requirements.txt /build/catalog-requirements.txt
+#17 CACHED
+
+#18 [runtime  7/19] COPY --chown=10001:10001 upstream/backend /app
+#18 CACHED
+
+#19 [runtime  8/19] COPY --chown=10001:10001 extensions/code_agent /app/code_agent
+#19 DONE 0.1s
+
+#20 [runtime  9/19] COPY deploy/patch_backend.py /tmp/patch_backend.py
+#20 DONE 0.0s
+
+#21 [runtime 10/19] RUN python /tmp/patch_backend.py /app
+#21 DONE 0.2s
+
+#22 [runtime 11/19] COPY deploy/patch_provider.py /tmp/patch_provider.py
+#22 DONE 0.0s
+
+#23 [runtime 12/19] RUN python /tmp/patch_provider.py /app
+#23 DONE 0.2s
+
+#24 [runtime 13/19] COPY deploy/patch_local_access.py /tmp/patch_local_access.py
+#24 DONE 0.0s
+
+#25 [runtime 14/19] RUN python /tmp/patch_local_access.py /app
+#25 DONE 0.2s
+
+#26 [runtime 15/19] COPY deploy/patch_chunking.py /tmp/patch_chunking.py
+#26 DONE 0.0s
+
+#27 [runtime 16/19] RUN python /tmp/patch_chunking.py /app
+#27 DONE 0.2s
+
+#28 [runtime 17/19] COPY deploy/patch_monitoring.py /tmp/patch_monitoring.py
+#28 DONE 0.0s
+
+#29 [runtime 18/19] RUN python /tmp/patch_monitoring.py /app
+#29 DONE 0.1s
+
+#30 [runtime 19/19] RUN mkdir -p /app/uploads /app/run /watch /home/appuser/.cache /app/private-settings     && chown -R 10001:10001 /app/uploads /app/run /watch /home/appuser/.cache /app/private-settings
+#30 DONE 0.1s
+
+#31 exporting to image
+#31 exporting layers
+#31 exporting layers 0.2s done
+#31 exporting manifest sha256:cfe3e2a26153cf164443402eebaf074eb82fd6f747b4dde4819b34dd68580cbb done
+#31 exporting config sha256:844be85713692e05c81eeb84f6f14517229e2e862069826cb03425e702326e48 done
+#31 exporting attestation manifest sha256:23ab72506b4d64e96cb28321da4b94571ba6ed8e8c01a4602eb23d677478640d done
+#31 exporting manifest list sha256:a2103b2cb15807ca92b234f0a32ce73340b4a8da093596b4701c8a10eb99464f done
+#31 naming to docker.io/library/code-management-full-api:75661c6 done
+#31 unpacking to docker.io/library/code-management-full-api:75661c6 0.1s done
+#31 DONE 0.4s
+
+#32 resolving provenance for metadata file
+#32 DONE 0.0s
+ Image code-management-full-api:75661c6 Built 

@@ -1,0 +1,11 @@
+[apple-chat-v2] id=1 http=502 total=2.2s rank=None blocked=False judge_ms={} models={ apple/on-device }
+[apple-chat-v2] id=2 http=502 total=1.5s rank=None blocked=False judge_ms={} models={ apple/on-device }
+[apple-chat-v2] id=5 http=200 total=7.5s rank=1 blocked=False judge_ms={'Explanation/grounding': 3444, 'Explanation/faithfulness': 2032} models={ apple/on-device }
+[apple-chat-v2] id=7 http=502 total=1.5s rank=None blocked=False judge_ms={} models={ apple/on-device }
+[apple-chat-v2] id=27 http=200 total=7.6s rank=1 blocked=False judge_ms={'Explanation/grounding': 1, 'Explanation/faithfulness': 2} models={ apple/on-device }
+[apple-chat-v2] id=67 http=502 total=1.6s rank=None blocked=False judge_ms={} models={ apple/on-device }
+[apple-chat-v2] id=3 http=502 total=1.9s rank=None blocked=False judge_ms={} models={ apple/on-device }
+[apple-chat-v2] id=9 http=502 total=1.5s rank=None blocked=False judge_ms={} models={ apple/on-device }
+[apple-chat-v2] id=12 http=200 total=3.3s rank=1 blocked=False judge_ms={'Explanation/grounding': 1, 'Explanation/faithfulness': 1} models={ apple/on-device }
+[apple-chat-v2] id=weather http=200 total=3.3s rank=None blocked=False judge_ms={'Explanation/grounding': 0, 'Explanation/faithfulness': 1} models={ apple/on-device }
+saved docs/verification/judge-switch-2026-09-22/apple-chat-v2.json

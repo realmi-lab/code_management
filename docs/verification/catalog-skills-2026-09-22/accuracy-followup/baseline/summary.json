@@ -1,0 +1,23 @@
+{
+  "evaluator_version": "catalog-skills-objective-v2",
+  "attempts": 8,
+  "http_success": 8,
+  "api_errors": 0,
+  "ai_errors": 1,
+  "actual_model_called": 8,
+  "ai_success": 7,
+  "objective_pass": 7,
+  "manual_review_cases": 8,
+  "usage_complete_attempts": 8,
+  "total_tokens_all_attempts": 123904,
+  "observed_total_tokens": 123904,
+  "mean_tokens_all_attempts": 15488,
+  "mean_expected_set_recall": 1.0,
+  "mean_reciprocal_rank": 1.0,
+  "median_seconds": 45.793,
+  "accuracy_claim": "Objective contract checks only; semantic accuracy requires the recorded manual review.",
+  "production_unchanged": true,
+  "corpus_unchanged": true,
+  "settings_unchanged": true,
+  "metrics_collection_success": true
+}

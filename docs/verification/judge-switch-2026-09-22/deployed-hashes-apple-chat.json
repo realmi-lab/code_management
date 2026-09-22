@@ -1,0 +1,62 @@
+[
+  {
+    "path": "extensions/code_agent/apple.py",
+    "host": "ab59a380d2d15b3deee8c9f27ffd2405f342a22c624ebe02f9441003c63a3a2a",
+    "container": "ab59a380d2d15b3deee8c9f27ffd2405f342a22c624ebe02f9441003c63a3a2a",
+    "match": true
+  },
+  {
+    "path": "extensions/code_agent/apple_judge.py",
+    "host": "3de21038ea4be83ffd2af9f136433943b1663c5a28c9bef0f0a71b76f7b2b9b8",
+    "container": "3de21038ea4be83ffd2af9f136433943b1663c5a28c9bef0f0a71b76f7b2b9b8",
+    "match": true
+  },
+  {
+    "path": "extensions/code_agent/ai_config.py",
+    "host": "8a2e8ffd9dcbfdf7518554d065dafdf5f68138794fedafef539dd3bb6a7ce45a",
+    "container": "8a2e8ffd9dcbfdf7518554d065dafdf5f68138794fedafef539dd3bb6a7ce45a",
+    "match": true
+  },
+  {
+    "path": "extensions/code_agent/provider.py",
+    "host": "4d9f46c9f3d51a14f0d7fd7e73379be49b0a8a2008f686399c8fbefa96a4eace",
+    "container": "4d9f46c9f3d51a14f0d7fd7e73379be49b0a8a2008f686399c8fbefa96a4eace",
+    "match": true
+  },
+  {
+    "path": "extensions/code_agent/routing.py",
+    "host": "44f3eeb07f71809c5cc442fc82d3dbbebc5f762dc64d3ee2851d4d2874d3f7d8",
+    "container": "44f3eeb07f71809c5cc442fc82d3dbbebc5f762dc64d3ee2851d4d2874d3f7d8",
+    "match": true
+  },
+  {
+    "path": "extensions/code_agent/gateway.py",
+    "host": "71a5ca156dea295d79e4a48b98656daf972f5e45f55e8372a6553524050ae6c8",
+    "container": "71a5ca156dea295d79e4a48b98656daf972f5e45f55e8372a6553524050ae6c8",
+    "match": true
+  },
+  {
+    "path": "extensions/code_agent/operations.py",
+    "host": "b3f80b56b889373b09ce54e219ad7f05454b602912af089c8796f52b62e86d02",
+    "container": "b3f80b56b889373b09ce54e219ad7f05454b602912af089c8796f52b62e86d02",
+    "match": true
+  },
+  {
+    "path": "extensions/code_agent/health.py",
+    "host": "a19f83b17d8b831f4f15e683f0b8153ef65a73cc8d6f58d3aede526e1cce2e5c",
+    "container": "a19f83b17d8b831f4f15e683f0b8153ef65a73cc8d6f58d3aede526e1cce2e5c",
+    "match": true
+  },
+  {
+    "path": "extensions/code_agent/static/app.js",
+    "host": "1cc2687e8b01a06c216a66fdf090211b1c1860fa55c84caee7dbdf3223f6be07",
+    "container": "1cc2687e8b01a06c216a66fdf090211b1c1860fa55c84caee7dbdf3223f6be07",
+    "match": true
+  },
+  {
+    "path": "extensions/code_agent/static/index.html",
+    "host": "a078c19f1246eb7304540304eb8e3138b8da66291ccf3ca1471541d58d2da46b",
+    "container": "a078c19f1246eb7304540304eb8e3138b8da66291ccf3ca1471541d58d2da46b",
+    "match": true
+  }
+]

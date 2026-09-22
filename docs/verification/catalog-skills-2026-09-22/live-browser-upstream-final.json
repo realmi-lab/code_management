@@ -1,0 +1,21 @@
+{
+  "verified_at": "2026-09-22T08:48:23.110539+00:00",
+  "transport": "actual Codex in-app browser DOM via cua_repl",
+  "url": "http://localhost:3500/codes",
+  "scope": "demo synthetic only",
+  "thread_id": "abd92bc1-04dc-48ca-bd22-ccfab3b64125",
+  "question": "인증 전에 30초 기다리라는 알림 있어?",
+  "checks": {
+    "new_deployed_answer_restored": true,
+    "answer_code": "AT-1923",
+    "answer_message": "메뉴확인 30초 이후에 인증해주세요.",
+    "retrieved_candidates_label": "상위 검색 후보 33건 · 전체 일치 건수가 아닙니다.",
+    "quantity_result_pages": [
+      20,
+      40,
+      42
+    ],
+    "quantity_complete_label": "DB 조건 일치 42 / 42건 표시 · 코드번호 순"
+  },
+  "boundary": "Browser restores the completed final after benchmark turn; no additional provider call was issued from the browser. No fresh registration or real company data used."
+}

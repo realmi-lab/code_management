@@ -121,11 +121,22 @@ class CatalogSafety:
         from .models import Explanation, Wording
         if not isinstance(result, (Explanation, Wording)):
             return
+        from .skillbook import load_skill
+        verification=load_skill('verification')
         payload = result.model_dump()
         if self.redact(payload) != payload:
             raise DomainError('AI가 개인정보를 포함한 결과를 생성하여 저장하지 않았습니다.', 502)
         answer = json.dumps(payload, ensure_ascii=False)
-        documents = [json.dumps(evidence, ensure_ascii=False)]
+        # A user's question/history is not evidence that a registered fact is true.
+        grounded = {k:evidence[k] for k in ('catalog','rule_comparison') if k in evidence} if isinstance(result,Explanation) and 'catalog' in evidence else evidence
+        if isinstance(result,Explanation) and 'catalog' in grounded:
+            from .record_guard import check_registered_fields
+            from .operations import _validation_context
+            record_check=check_registered_fields(result.text,result.references,grounded['catalog'])
+            log.info('catalog_validation %s',json.dumps({**(_validation_context.get() or {}),'stage':'registered_fields',
+                'status':'blocked' if record_check['violations'] else 'passed' if record_check['checked_fields'] else 'not_applicable',**record_check}))
+            if record_check['violations']:raise GroundingError()
+        documents = [json.dumps(grounded, ensure_ascii=False)]
         from .compare import signature
         output_quantities={(u,v) for u,v,_ in signature(answer)['quantities']}
         evidence_quantities={(u,v) for u,v,_ in signature(documents[0])['quantities']}
@@ -142,6 +153,16 @@ class CatalogSafety:
             raise NumericGroundingError()
         faith_llm=self.judge_llm(llm,'faithfulness')
         hall_llm=self.judge_llm(llm,'grounding')
+        from .provider import judge_provider,selected_provider
+        if judge_provider()!='apple' and selected_provider()!='apple':
+            from .evidence import encode_evidence
+            compact=json.dumps(grounded,ensure_ascii=False,separators=(',',':'))
+            encoded=encode_evidence(grounded)
+            documents=[min((compact,encoded),key=lambda value:len(value.encode('utf-8')))]
+        # Use the same strict contract for both independent judges. The version
+        # is content-free telemetry; original evidence above drives local checks.
+        for judge in (faith_llm,hall_llm):
+            if hasattr(judge,'skill'):judge.skill=verification.identity
         # Independent checks inspect the same immutable answer/evidence; both must pass.
         checks=await asyncio.gather(
             FaithfulnessChecker(StrictJudge(faith_llm, 'faithfulness_score', {'FAITHFUL','UNFAITHFUL'},self.diagnostic_redact)).verify(answer, documents),

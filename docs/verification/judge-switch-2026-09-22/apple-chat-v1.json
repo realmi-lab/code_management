@@ -1,0 +1,363 @@
+{
+ "label": "apple-chat-v1",
+ "at": "2026-09-22T14:09:25+0900",
+ "status_llm": {
+  "provider": "apple",
+  "model": "apple/on-device",
+  "judge_model": "apple/on-device",
+  "judge_provider": "apple"
+ },
+ "namespace": "demo",
+ "results": [
+  {
+   "id": 1,
+   "kind": "manual_paraphrase",
+   "query": "인증 전에 30초 기다리라는 알림 있어?",
+   "expected_code": "AT-1923",
+   "thread_id": "a62da972-fee8-4fdf-8c3d-fe653dccd08a",
+   "request_id": "5b50a12a-df6b-487a-9e66-69b879f81dad",
+   "http_status": 502,
+   "total_s": 4.7,
+   "detail": "Apple 온디바이스 모델이 요청을 처리하지 못했습니다. 입력 길이와 모델 상태를 확인해주세요.",
+   "answer_blocked": false,
+   "trace_id": "aeacd86567c008e9548cc0d61a3c0cf2",
+   "trace_output": {
+    "status": "failed",
+    "error_type": "DomainError"
+   },
+   "spans": {
+    "Explanation": {
+     "duration_ms": null,
+     "model": null,
+     "status": "failed",
+     "judge_detail": null,
+     "completion_tokens": null,
+     "reasoning_tokens": null
+    },
+    "Plan": {
+     "duration_ms": 2036,
+     "model": "apple/on-device",
+     "status": "success",
+     "judge_detail": null,
+     "completion_tokens": null,
+     "reasoning_tokens": null
+    }
+   }
+  },
+  {
+   "id": 2,
+   "kind": "manual_paraphrase",
+   "query": "인증번호 전송에 성공했을 때 보여줄 문구",
+   "expected_code": "EX-0101",
+   "thread_id": "70beeddd-9e17-4521-bb74-f462f2859000",
+   "request_id": "d9881a70-ab4e-4b89-843e-e1dd4e13485f",
+   "http_status": 502,
+   "total_s": 4.0,
+   "detail": "Apple 온디바이스 모델이 요청을 처리하지 못했습니다. 입력 길이와 모델 상태를 확인해주세요.",
+   "answer_blocked": false,
+   "trace_id": "4a624fad7810ed2ba62ba39df7b624f0",
+   "trace_output": {
+    "status": "failed",
+    "error_type": "DomainError"
+   },
+   "spans": {
+    "Explanation": {
+     "duration_ms": null,
+     "model": null,
+     "status": "failed",
+     "judge_detail": null,
+     "completion_tokens": null,
+     "reasoning_tokens": null
+    },
+    "Plan": {
+     "duration_ms": 1492,
+     "model": "apple/on-device",
+     "status": "success",
+     "judge_detail": null,
+     "completion_tokens": null,
+     "reasoning_tokens": null
+    }
+   }
+  },
+  {
+   "id": 5,
+   "kind": "manual_paraphrase",
+   "query": "인증을 30초 안에 끝내야 한다는 안내",
+   "expected_code": "EX-0104",
+   "thread_id": "448e3698-0e17-449c-9733-fe6fb5b15a6b",
+   "request_id": "047a2559-5007-45c6-bf47-bd4700ed3e1f",
+   "http_status": 502,
+   "total_s": 4.6,
+   "detail": "Apple 온디바이스 모델이 요청을 처리하지 못했습니다. 입력 길이와 모델 상태를 확인해주세요.",
+   "answer_blocked": false,
+   "trace_id": "07983fcec78f81bfed1021afc03200ff",
+   "trace_output": {
+    "status": "failed",
+    "error_type": "DomainError"
+   },
+   "spans": {
+    "Explanation": {
+     "duration_ms": null,
+     "model": null,
+     "status": "failed",
+     "judge_detail": null,
+     "completion_tokens": null,
+     "reasoning_tokens": null
+    },
+    "Plan": {
+     "duration_ms": 1652,
+     "model": "apple/on-device",
+     "status": "success",
+     "judge_detail": null,
+     "completion_tokens": null,
+     "reasoning_tokens": null
+    }
+   }
+  },
+  {
+   "id": 7,
+   "kind": "manual_paraphrase",
+   "query": "기존 회원 전화번호로 다시 가입하려는 경우",
+   "expected_code": "EX-0201",
+   "thread_id": "f98793e5-f826-4b71-aa22-86a6dc6e1462",
+   "request_id": "76a2773e-a5c9-409f-9160-7f363c3cf95b",
+   "http_status": 502,
+   "total_s": 5.0,
+   "detail": "Apple 온디바이스 모델이 요청을 처리하지 못했습니다. 입력 길이와 모델 상태를 확인해주세요.",
+   "answer_blocked": false,
+   "trace_id": "46ed812db4008cf237122282d981d446",
+   "trace_output": {
+    "status": "failed",
+    "error_type": "DomainError"
+   },
+   "spans": {
+    "Explanation": {
+     "duration_ms": null,
+     "model": null,
+     "status": "failed",
+     "judge_detail": null,
+     "completion_tokens": null,
+     "reasoning_tokens": null
+    },
+    "Plan": {
+     "duration_ms": 1857,
+     "model": "apple/on-device",
+     "status": "success",
+     "judge_detail": null,
+     "completion_tokens": null,
+     "reasoning_tokens": null
+    }
+   }
+  },
+  {
+   "id": 27,
+   "kind": "menu_trigger_template",
+   "query": "회원가입 메뉴에서 입력 형식 또는 입력값이 유효하지 않은 경우 상황에 표시할 기존 알림을 찾아줘.",
+   "expected_code": "SM-1005",
+   "thread_id": "7f99ed59-64c0-4582-b063-1d5b590d833a",
+   "request_id": "ca1d4dc2-4bc0-4104-8438-001326664ccf",
+   "http_status": 502,
+   "total_s": 16.5,
+   "detail": "Apple 온디바이스 모델이 요청을 처리하지 못했습니다. 입력 길이와 모델 상태를 확인해주세요.",
+   "answer_blocked": false,
+   "trace_id": "f360216954f905390d4ea720728ce7e3",
+   "trace_output": {
+    "status": "failed",
+    "error_type": "DomainError"
+   },
+   "spans": {
+    "Explanation": {
+     "duration_ms": null,
+     "model": null,
+     "status": "failed",
+     "judge_detail": null,
+     "completion_tokens": null,
+     "reasoning_tokens": null
+    },
+    "Plan": {
+     "duration_ms": 2125,
+     "model": "apple/on-device",
+     "status": "success",
+     "judge_detail": null,
+     "completion_tokens": null,
+     "reasoning_tokens": null
+    }
+   }
+  },
+  {
+   "id": 67,
+   "kind": "menu_trigger_template",
+   "query": "계좌관리 메뉴에서 처리 유효시간이 30초인 합성 시나리오 상황에 표시할 기존 알림을 찾아줘.",
+   "expected_code": "SM-1091",
+   "thread_id": "56394378-d715-4cfe-826e-5145d7d28302",
+   "request_id": "93404651-006e-4b98-9a24-0ddda49dbf0b",
+   "http_status": 502,
+   "total_s": 13.9,
+   "detail": "Apple 온디바이스 모델이 요청을 처리하지 못했습니다. 입력 길이와 모델 상태를 확인해주세요.",
+   "answer_blocked": false,
+   "trace_id": "5d6cf8f203a4e1b759aee7f09503d4f3",
+   "trace_output": {
+    "status": "failed",
+    "error_type": "DomainError"
+   },
+   "spans": {
+    "Explanation": {
+     "duration_ms": null,
+     "model": null,
+     "status": "failed",
+     "judge_detail": null,
+     "completion_tokens": null,
+     "reasoning_tokens": null
+    },
+    "Plan": {
+     "duration_ms": 1678,
+     "model": "apple/on-device",
+     "status": "success",
+     "judge_detail": null,
+     "completion_tokens": null,
+     "reasoning_tokens": null
+    }
+   }
+  },
+  {
+   "id": 3,
+   "kind": "manual_paraphrase",
+   "query": "입력한 인증번호가 틀렸을 때 안내",
+   "expected_code": "EX-0102",
+   "thread_id": "e13e4494-738f-437c-adaf-edfcf001e962",
+   "request_id": "9b8a6be6-273b-4174-8082-f846ec9d8de1",
+   "http_status": 502,
+   "total_s": 19.1,
+   "detail": "Apple 온디바이스 모델이 요청을 처리하지 못했습니다. 입력 길이와 모델 상태를 확인해주세요.",
+   "answer_blocked": false,
+   "trace_id": "cc439df9ebcb05b1b3e48079b93f3b83",
+   "trace_output": {
+    "status": "failed",
+    "error_type": "DomainError"
+   },
+   "spans": {
+    "Explanation": {
+     "duration_ms": null,
+     "model": null,
+     "status": "failed",
+     "judge_detail": null,
+     "completion_tokens": null,
+     "reasoning_tokens": null
+    },
+    "Plan": {
+     "duration_ms": 1620,
+     "model": "apple/on-device",
+     "status": "success",
+     "judge_detail": null,
+     "completion_tokens": null,
+     "reasoning_tokens": null
+    }
+   }
+  },
+  {
+   "id": 9,
+   "kind": "manual_paraphrase",
+   "query": "이메일 중복 검사 결과 이미 쓰고 있는 주소인 경우",
+   "expected_code": "EX-0204",
+   "thread_id": "f5ee91f7-59d3-4482-b6bc-92e729044f24",
+   "request_id": "953db4a6-9362-4db4-b14a-61c052213f5d",
+   "http_status": 502,
+   "total_s": 4.0,
+   "detail": "Apple 온디바이스 모델이 요청을 처리하지 못했습니다. 입력 길이와 모델 상태를 확인해주세요.",
+   "answer_blocked": false,
+   "trace_id": "a808b159a87cd3bd9f544951e7080e39",
+   "trace_output": {
+    "status": "failed",
+    "error_type": "DomainError"
+   },
+   "spans": {
+    "Explanation": {
+     "duration_ms": null,
+     "model": null,
+     "status": "failed",
+     "judge_detail": null,
+     "completion_tokens": null,
+     "reasoning_tokens": null
+    },
+    "Plan": {
+     "duration_ms": 1187,
+     "model": "apple/on-device",
+     "status": "success",
+     "judge_detail": null,
+     "completion_tokens": null,
+     "reasoning_tokens": null
+    }
+   }
+  },
+  {
+   "id": 12,
+   "kind": "manual_paraphrase",
+   "query": "권한이 없는 메뉴에 들어가려고 할 때",
+   "expected_code": "EX-0403",
+   "thread_id": "04c857d2-a176-4683-939b-bf31e608daeb",
+   "request_id": "811fea93-e2c9-49a9-aeda-fa5f20366a87",
+   "http_status": 502,
+   "total_s": 4.8,
+   "detail": "Apple 온디바이스 모델이 요청을 처리하지 못했습니다. 입력 길이와 모델 상태를 확인해주세요.",
+   "answer_blocked": false,
+   "trace_id": "172909243399d7ed0721ddca879d2a56",
+   "trace_output": {
+    "status": "failed",
+    "error_type": "DomainError"
+   },
+   "spans": {
+    "Explanation": {
+     "duration_ms": null,
+     "model": null,
+     "status": "failed",
+     "judge_detail": null,
+     "completion_tokens": null,
+     "reasoning_tokens": null
+    },
+    "Plan": {
+     "duration_ms": 1408,
+     "model": "apple/on-device",
+     "status": "success",
+     "judge_detail": null,
+     "completion_tokens": null,
+     "reasoning_tokens": null
+    }
+   }
+  },
+  {
+   "id": "weather",
+   "kind": "unrelated",
+   "query": "오늘 서울 날씨 어때?",
+   "expected_code": null,
+   "thread_id": "d47d9210-2fac-4140-bfa6-63400d3a98df",
+   "request_id": "6be30080-3f20-403f-bb70-fefb9f1b8bef",
+   "http_status": 502,
+   "total_s": 12.8,
+   "detail": "Apple 온디바이스 모델이 요청을 처리하지 못했습니다. 입력 길이와 모델 상태를 확인해주세요.",
+   "answer_blocked": false,
+   "trace_id": "9ef63f5767a54429922a1617f9b5d80f",
+   "trace_output": {
+    "status": "failed",
+    "error_type": "DomainError"
+   },
+   "spans": {
+    "Explanation": {
+     "duration_ms": null,
+     "model": null,
+     "status": "failed",
+     "judge_detail": null,
+     "completion_tokens": null,
+     "reasoning_tokens": null
+    },
+    "Plan": {
+     "duration_ms": 1659,
+     "model": "apple/on-device",
+     "status": "success",
+     "judge_detail": null,
+     "completion_tokens": null,
+     "reasoning_tokens": null
+    }
+   }
+  }
+ ]
+}

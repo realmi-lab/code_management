@@ -1,0 +1,5 @@
+{"name": "1", "repeat": 0, "status": 502, "seconds": 6.4, "checks": {"expected_candidate": false, "expected_original_in_answer": false}, "useful": false}
+{"name": "2", "repeat": 0, "status": 502, "seconds": 4.76, "checks": {"expected_candidate": false, "expected_original_in_answer": false}, "useful": false}
+{"name": "3", "repeat": 0, "status": 502, "seconds": 5.38, "checks": {"expected_candidate": false, "expected_original_in_answer": false}, "useful": false}
+{"name": "5", "repeat": 0, "status": 502, "seconds": 3.76, "checks": {"expected_candidate": false, "expected_original_in_answer": false}, "useful": false}
+{"name": "7", "repeat": 0, "status": 502, "seconds": 3.93, "checks": {"expected_candidate": false, "expected_original_in_answer": false}, "useful": false}

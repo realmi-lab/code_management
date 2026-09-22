@@ -1,0 +1,11 @@
+[before-deepseek-judge] id=1 http=200 total=26.1s rank=1 blocked=False judge_ms={'Explanation/grounding': 3376, 'Explanation/faithfulness': 12201} models={ deepseek/deepseek-v4.1-flash }
+[before-deepseek-judge] id=2 http=200 total=12.4s rank=1 blocked=False judge_ms={'Explanation/grounding': 3136, 'Explanation/faithfulness': 3581} models={ deepseek/deepseek-v4.1-flash }
+[before-deepseek-judge] id=5 http=200 total=31.9s rank=1 blocked=False judge_ms={'Explanation/grounding': 4181, 'Explanation/faithfulness': 21395} models={ deepseek/deepseek-v4.1-flash }
+[before-deepseek-judge] id=7 http=200 total=21.4s rank=1 blocked=False judge_ms={'Explanation/grounding': 2901, 'Explanation/faithfulness': 8682} models={ deepseek/deepseek-v4.1-flash }
+[before-deepseek-judge] id=27 http=200 total=12.6s rank=2 blocked=False judge_ms={'Explanation/grounding': 3402, 'Explanation/faithfulness': 3774} models={ deepseek/deepseek-v4.1-flash }
+[before-deepseek-judge] id=67 http=200 total=17.4s rank=1 blocked=False judge_ms={'Explanation/grounding': 4013, 'Explanation/faithfulness': 5807} models={ deepseek/deepseek-v4.1-flash }
+[before-deepseek-judge] id=3 http=200 total=14.5s rank=1 blocked=False judge_ms={'Explanation/grounding': 3323, 'Explanation/faithfulness': 2755} models={ deepseek/deepseek-v4.1-flash }
+[before-deepseek-judge] id=9 http=200 total=15.7s rank=1 blocked=False judge_ms={'Explanation/grounding': 3590, 'Explanation/faithfulness': 3451} models={ deepseek/deepseek-v4.1-flash }
+[before-deepseek-judge] id=12 http=200 total=19.0s rank=1 blocked=False judge_ms={'Explanation/grounding': 3026, 'Explanation/faithfulness': 7098} models={ deepseek/deepseek-v4.1-flash }
+[before-deepseek-judge] id=weather http=200 total=26.2s rank=None blocked=False judge_ms={'Explanation/grounding': 14228, 'Explanation/faithfulness': 3182} models={ deepseek/deepseek-v4.1-flash }
+saved docs/verification/judge-switch-2026-09-22/before.json

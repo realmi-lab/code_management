@@ -36,6 +36,8 @@ async def lifespan(application):
         sample_gateway.monitor=gateway.monitor
         # Schema creation is performed by the migration service, not by request workers.
         store.status()
+        from .search_index import ensure_empty_document_index
+        await ensure_empty_document_index(store, get_settings().elasticsearch_url)
         yield
         store.engine.dispose()
 app.router.lifespan_context=lifespan

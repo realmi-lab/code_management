@@ -1,0 +1,11 @@
+[after-glm-judge] id=1 http=200 total=45.0s rank=1 blocked=False judge_ms={'Explanation/grounding': 10068, 'Explanation/faithfulness': 32383} models={ deepseek/deepseek-v4.1-flash, z-ai/glm-5.3-flashx }
+[after-glm-judge] id=2 http=200 total=15.5s rank=1 blocked=False judge_ms={'Explanation/grounding': 6934, 'Explanation/faithfulness': 8146} models={ deepseek/deepseek-v4.1-flash, z-ai/glm-5.3-flashx }
+[after-glm-judge] id=5 http=200 total=26.3s rank=1 blocked=False judge_ms={'Explanation/grounding': 5257, 'Explanation/faithfulness': 16510} models={ deepseek/deepseek-v4.1-flash, z-ai/glm-5.3-flashx }
+[after-glm-judge] id=7 http=200 total=15.6s rank=1 blocked=False judge_ms={'Explanation/grounding': 6159, 'Explanation/faithfulness': 7221} models={ deepseek/deepseek-v4.1-flash, z-ai/glm-5.3-flashx }
+[after-glm-judge] id=27 http=200 total=22.4s rank=1 blocked=False judge_ms={'Explanation/grounding': 7561, 'Explanation/faithfulness': 10876} models={ deepseek/deepseek-v4.1-flash, z-ai/glm-5.3-flashx }
+[after-glm-judge] id=67 http=200 total=20.4s rank=1 blocked=False judge_ms={'Explanation/grounding': 8094, 'Explanation/faithfulness': 9128} models={ deepseek/deepseek-v4.1-flash, z-ai/glm-5.3-flashx }
+[after-glm-judge] id=3 http=502 total=16.2s rank=None blocked=False judge_ms={'Explanation/grounding': 6364, 'Explanation/faithfulness': 9351} models={ deepseek/deepseek-v4.1-flash, z-ai/glm-5.3-flashx }
+[after-glm-judge] id=9 http=502 total=15.9s rank=None blocked=False judge_ms={'Explanation/grounding': 6532, 'Explanation/faithfulness': 7609} models={ deepseek/deepseek-v4.1-flash, z-ai/glm-5.3-flashx }
+[after-glm-judge] id=12 http=200 total=60.0s rank=1 blocked=False judge_ms={'Explanation/grounding': 49121, 'Explanation/faithfulness': 10584} models={ deepseek/deepseek-v4.1-flash, z-ai/glm-5.3-flashx }
+[after-glm-judge] id=weather http=200 total=21.4s rank=None blocked=False judge_ms={'Explanation/grounding': 13424, 'Explanation/faithfulness': 12678} models={ deepseek/deepseek-v4.1-flash, z-ai/glm-5.3-flashx }
+saved docs/verification/judge-switch-2026-09-22/after-glm.json

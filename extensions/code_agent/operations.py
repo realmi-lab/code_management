@@ -11,6 +11,20 @@ _validation_context=ContextVar('catalog_validation_context',default=None)
 _active_trace=ContextVar('catalog_trace',default=None)
 _active_timings=ContextVar('catalog_timings',default=None)
 log=logging.getLogger(__name__)
+SEARCH_POLICY=4  # Original indexed chunks replace catalogue-only text/window ranking.
+
+
+def token_usage(value):
+    """Provider-reported counts only. Missing usage is unknown, never zero or an estimate."""
+    if not isinstance(value,dict):return None
+    result={k:value[k] for k in ('prompt_tokens','completion_tokens','total_tokens','input_tokens','output_tokens','cache_read_input_tokens','cache_creation_input_tokens')
+            if type(value.get(k)) is int and value[k]>=0}
+    for field,keys in (('prompt_tokens_details',('cached_tokens',)),('completion_tokens_details',('reasoning_tokens',))):
+        detail=value.get(field)
+        if isinstance(detail,dict):
+            counts={k:detail[k] for k in keys if type(detail.get(k)) is int and detail[k]>=0}
+            if counts:result[field]=counts
+    return result or None
 
 
 def observe(target,method,*args,**kwargs):
@@ -39,7 +53,7 @@ class RedisQuota:
 class SearchCache:
     def key(self, query, state, settings):
         raw=json.dumps({'query':query,'snapshot':state['snapshot'],'version':state['version'],
-                        'model':state.get('indexed_model'),'settings':settings,'policy':2},sort_keys=True,ensure_ascii=False)
+                        'model':state.get('indexed_model'),'settings':settings,'policy':SEARCH_POLICY},sort_keys=True,ensure_ascii=False)
         return 'cm:search:'+hashlib.sha256(raw.encode()).hexdigest()
 
     async def get(self,key):
@@ -77,7 +91,7 @@ def turn_trace(monitor,actor_id,thread_id,request_id):
         observe(trace,'update',output={'status':'failed','error_type':type(exc).__name__})
         raise
     finally:
-        log.info('catalog_turn_metrics %s',json.dumps({'duration_ms':round((time.monotonic()-start)*1000),'calls':timings}))
+        log.info('catalog_turn_metrics %s',json.dumps({**(_validation_context.get() or {}),'duration_ms':round((time.monotonic()-start)*1000),'calls':timings}))
         _active_timings.reset(timing_token)
         _active_trace.reset(token)
         _validation_context.reset(context_token)
@@ -85,22 +99,33 @@ def turn_trace(monitor,actor_id,thread_id,request_id):
 
 
 class TrackedLLM:
-    def __init__(self,llm,stage):self.llm=llm;self.stage=stage
-    def for_stage(self,suffix,llm=None):return TrackedLLM(llm or self.llm,self.stage+"/"+suffix)
+    def __init__(self,llm,stage,skill=None):self.llm=llm;self.stage=stage;self.skill=skill
+    def for_stage(self,suffix,llm=None):return TrackedLLM(llm or self.llm,self.stage+"/"+suffix,self.skill)
     @property
     def client(self):return self.llm.client
     async def generate(self,prompt,system_prompt=None):
         trace=_active_trace.get();span=observe(trace,'start_span',name='catalog-'+self.stage)
-        start=time.monotonic()
+        llm=self.llm.fork() if callable(getattr(self.llm,'fork',None)) else self.llm
+        start=time.monotonic();status='failed';usage=None;judge_detail=None
         try:
-            result=await self.llm.generate(prompt,system_prompt=system_prompt)
-            observe(span,'update',output={'status':'success','model':getattr(self.llm,'model',None),
-                'duration_ms':round((time.monotonic()-start)*1000),'usage':getattr(self.llm,'last_usage',None)})
+            result=await llm.generate(prompt,system_prompt=system_prompt)
+            status='success';usage=token_usage(getattr(llm,'last_usage',None))
+            detail=getattr(llm,'last_detail',None)
+            # Counts distinguish deterministic comparison from actual Apple model calls. No claim text is logged.
+            judge_detail={k:detail[k] for k in ('claims','supported','model_checked','model_calls')
+                          if type(detail.get(k)) is int} if isinstance(detail,dict) else None
+            observe(span,'update',output={'status':'success','model':getattr(llm,'model',None),
+                'duration_ms':round((time.monotonic()-start)*1000),'usage':usage,
+                **({'judge_detail':judge_detail} if judge_detail is not None else {})})
             return result
         except BaseException as exc:
             observe(span,'update',output={'status':'failed','error_type':type(exc).__name__})
             raise
         finally:
             timings=_active_timings.get()
-            if timings is not None:timings.append({'stage':self.stage,'duration_ms':round((time.monotonic()-start)*1000)})
+            if timings is not None:timings.append({'stage':self.stage,'status':status,'model':getattr(llm,'model',None),
+                **({'skill':self.skill} if self.skill else {}),
+                'duration_ms':round((time.monotonic()-start)*1000),'usage':usage,
+                'prompt_chars':len(prompt),'system_chars':len(system_prompt or ''),
+                **({'judge_detail':judge_detail} if judge_detail is not None else {})})
             observe(span,'end')

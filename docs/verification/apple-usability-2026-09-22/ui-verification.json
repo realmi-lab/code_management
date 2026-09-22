@@ -1,0 +1,21 @@
+{
+  "browser": "Codex in-app localhost:3500/codes",
+  "namespace": "demo",
+  "query": "30초 관련메시지찾아줘",
+  "search_candidates": 25,
+  "quantity_matches": 42,
+  "displayed_pages": [
+    20,
+    40,
+    42
+  ],
+  "detail_buttons": 42,
+  "detail_code": "AT-1923",
+  "detail_original": "메뉴확인 30초 이후에 인증해주세요.",
+  "settings": {
+    "provider": "deepseek",
+    "connection": "commandcode",
+    "model": "deepseek/deepseek-v4.1-flash",
+    "embedding": "local"
+  }
+}

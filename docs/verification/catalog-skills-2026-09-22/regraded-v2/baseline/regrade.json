@@ -1,0 +1,24 @@
+{
+  "mode": "offline_regrade",
+  "evaluator_version": "catalog-skills-objective-v2",
+  "reasons": [
+    "Compare every JSON field and nested value of candidates and quantity rows with the frozen DB snapshot.",
+    "Use the service code grammar, including underscores and ASCII numeric suffixes.",
+    "Unrelated questions may retain original retrieval candidates; visible references and unsupported claims are assessed separately.",
+    "Candidate nonregression requires retaining all previous candidates; additions and exact set/order equality are reported separately."
+  ],
+  "source_phase": "/Users/apple/Documents/ChatGPT/code_management/docs/verification/catalog-skills-2026-09-22/live-scheduled/baseline",
+  "source_evaluator_version": "legacy-unversioned",
+  "source_sha256": {
+    "context.json": "984f3c37415e108753f4099867e821eefa269b4ac8c32d4ca96f1921b6a49399",
+    "manifest.json": "e5433760514237042c5773f0995f1afc6bdb439c8270a57f54c58cbd2f6442c8",
+    "corpus.json": "daa1d2935f93095add0aea48e7507fef24b363286202afd261e89f1b067da018",
+    "results.json": "0ad0543da283771b11a12a70f6fb72e65826302c292afba9f65d2b8d17e01f7f",
+    "summary.json": "c340dd82209603fffda16b006af06a40bdc8ea5a160b75a3a4b48a69a4583501",
+    "settings.json": "3e46f49dce4b408c2777f7b98f529865db6981f5594889e26616f5a5d0463b2b",
+    "production.json": "4bbdd3e066fed0faa0790ed80ad3a320d733f6bdeee397ac0a8f0ce8a2d97b58"
+  },
+  "raw_model_outputs_reused": true,
+  "model_calls_made": 0,
+  "semantic_accuracy_verified": false
+}

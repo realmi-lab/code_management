@@ -1,0 +1,96 @@
+{
+  "provider": {
+    "provider": "apple",
+    "model": "apple/on-device",
+    "judge_model": "apple/on-device",
+    "judge_provider": "apple"
+  },
+  "scope": "demo synthetic only",
+  "cases": [
+    {
+      "name": "1",
+      "text": "인증 전에 30초 기다리라는 알림 있어?",
+      "expected_code": "AT-1923",
+      "repeat": 0,
+      "status": 502,
+      "seconds": 6.4,
+      "thread_id": "3beb13c1-1e19-4b57-8c0e-186ec32f0b25",
+      "result": {
+        "detail": "Apple 대화 오류: 모델이 입력 언어를 지원하지 않는 것으로 판단했습니다. (unsupportedLanguageOrLocale)"
+      },
+      "checks": {
+        "expected_candidate": false,
+        "expected_original_in_answer": false
+      },
+      "useful": false
+    },
+    {
+      "name": "2",
+      "text": "인증번호 전송에 성공했을 때 보여줄 문구",
+      "expected_code": "EX-0101",
+      "repeat": 0,
+      "status": 502,
+      "seconds": 4.76,
+      "thread_id": "cf79c99f-aeec-4079-8fdd-525a304933c7",
+      "result": {
+        "detail": "Apple 대화 오류: 모델이 입력 언어를 지원하지 않는 것으로 판단했습니다. (unsupportedLanguageOrLocale)"
+      },
+      "checks": {
+        "expected_candidate": false,
+        "expected_original_in_answer": false
+      },
+      "useful": false
+    },
+    {
+      "name": "3",
+      "text": "입력한 인증번호가 틀렸을 때 안내",
+      "expected_code": "EX-0102",
+      "repeat": 0,
+      "status": 502,
+      "seconds": 5.38,
+      "thread_id": "3e97f519-5597-468f-9ac8-9dcdf8bba79b",
+      "result": {
+        "detail": "Apple 대화 오류: 모델이 입력 언어를 지원하지 않는 것으로 판단했습니다. (unsupportedLanguageOrLocale)"
+      },
+      "checks": {
+        "expected_candidate": false,
+        "expected_original_in_answer": false
+      },
+      "useful": false
+    },
+    {
+      "name": "5",
+      "text": "인증을 30초 안에 끝내야 한다는 안내",
+      "expected_code": "EX-0104",
+      "repeat": 0,
+      "status": 502,
+      "seconds": 3.76,
+      "thread_id": "c044e3ac-4d2c-4eab-aaf7-506b8ed1bea8",
+      "result": {
+        "detail": "Apple 대화 오류: 모델이 입력 언어를 지원하지 않는 것으로 판단했습니다. (unsupportedLanguageOrLocale)"
+      },
+      "checks": {
+        "expected_candidate": false,
+        "expected_original_in_answer": false
+      },
+      "useful": false
+    },
+    {
+      "name": "7",
+      "text": "기존 회원 전화번호로 다시 가입하려는 경우",
+      "expected_code": "EX-0201",
+      "repeat": 0,
+      "status": 502,
+      "seconds": 3.93,
+      "thread_id": "c4f7e20e-cf9e-4e72-b5f0-b67e8b67870b",
+      "result": {
+        "detail": "Apple 대화 오류: 모델이 입력 언어를 지원하지 않는 것으로 판단했습니다. (unsupportedLanguageOrLocale)"
+      },
+      "checks": {
+        "expected_candidate": false,
+        "expected_original_in_answer": false
+      },
+      "useful": false
+    }
+  ]
+}

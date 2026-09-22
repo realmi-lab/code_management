@@ -1,0 +1,44 @@
+[
+  {
+    "mode": "guided",
+    "result": {
+      "id": "chatcmpl-c6e1c13f06c147b9b1bd7838",
+      "object": "chat.completion",
+      "created": 1790053708,
+      "model": "apple/on-device",
+      "system_fingerprint": "apple-foundation-models",
+      "choices": [
+        {
+          "index": 0,
+          "message": {
+            "role": "assistant",
+            "content": "{\"text\": \"메시지코드: AT-1923\\n문구: 메뉴확인 30초 이후에 인증해주세요.\\n메뉴: 메뉴 인증\\n노출 조건: 메뉴 확인 후 30초가 지나기 전에 인증 버튼을 누른 경우\\n비고: 사용자가 제공한 예시를 바탕으로 한 데모. 조건은 예시용입니다. \\n상태: active\\n리비전: 1\\n업무: 메뉴 인증\\n유형: alert\\n목적: 메뉴 확인 후 30초가 지나기 전에 인증 버튼을 누른 경우\\n제목: 메뉴확인 30초 이후에 인증해주세요.\\n맞춤법: 미검사\\n영문 제목: Please authenticate at least 30 seconds after checking the menu.\\n영문 문구: Please authenticate at least 30 seconds after checking the menu.\\n등록일: 2026-09-21\"}"
+          },
+          "finish_reason": "stop",
+          "logprobs": null
+        }
+      ]
+    }
+  },
+  {
+    "mode": "plain",
+    "result": {
+      "id": "chatcmpl-1c959e3020d14ad9b8a02f5a",
+      "object": "chat.completion",
+      "created": 1790053722,
+      "model": "apple/on-device",
+      "system_fingerprint": "apple-foundation-models",
+      "choices": [
+        {
+          "index": 0,
+          "message": {
+            "role": "assistant",
+            "content": "메시지코드: AT-1923"
+          },
+          "finish_reason": "stop",
+          "logprobs": null
+        }
+      ]
+    }
+  }
+]

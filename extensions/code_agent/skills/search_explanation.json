@@ -1,0 +1,6 @@
+{
+  "id": "search_explanation",
+  "version": "1.0.1",
+  "instruction_file": "search_explanation.md",
+  "instruction_sha256": "59f2038792e373931132eefd2def9b954230616994c2a38b20264fa420429432"
+}

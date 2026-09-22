@@ -1,0 +1,87 @@
+{
+  "version": 2,
+  "scope": "demo synthetic only",
+  "frozen": true,
+  "notes": "Frozen accuracy follow-up after explanation 1.0.1 and uncited-candidate preservation. Six unchanged cases plus an unsupported premise with another code/unit and a supported premise. Evaluation-only expected answers; no runtime mappings. Not an independent generalization estimate.",
+  "cases": [
+    {
+      "id": "core-false-premise",
+      "suite": "core",
+      "kind": "false_premise",
+      "query": "AT-1923은 60초 이후에 인증하는 코드 맞아? 등록 문구를 근거로 확인해줘.",
+      "action": "explain",
+      "expected_codes": [
+        "AT-1923"
+      ],
+      "check_direction": true
+    },
+    {
+      "id": "core-direction",
+      "suite": "core",
+      "kind": "compare",
+      "query": "AT-1923과 EX-0104의 시간 조건 차이를 설명해줘.",
+      "action": "explain",
+      "expected_codes": [
+        "AT-1923",
+        "EX-0104"
+      ],
+      "check_direction": true
+    },
+    {
+      "id": "core-within",
+      "suite": "core",
+      "kind": "search",
+      "query": "인증을 30초 안에 끝내야 한다는 기존 안내 찾아줘",
+      "expected_codes": [
+        "EX-0104"
+      ],
+      "check_direction": true
+    },
+    {
+      "id": "core-unrelated",
+      "suite": "core",
+      "kind": "unrelated",
+      "query": "오늘 서울 날씨 어때?",
+      "expected_codes": []
+    },
+    {
+      "id": "core-broad",
+      "suite": "core",
+      "kind": "broad",
+      "query": "30초 관련메시지찾아줘",
+      "expected_codes": [],
+      "literal_fields": []
+    },
+    {
+      "id": "holdout-signup-variable",
+      "suite": "holdout",
+      "kind": "search",
+      "query": "가입 신청을 다시 요청하기까지 남은 초를 변수로 표시하는 기존 문구 찾아줘",
+      "expected_codes": [
+        "SM-1013"
+      ]
+    },
+    {
+      "id": "followup-other-code-minute-premise",
+      "suite": "core",
+      "kind": "false_premise",
+      "query": "SM-1006은 1분이 지나야 다시 가입 신청하는 코드야? 등록 문구를 기준으로 확인해줘.",
+      "action": "explain",
+      "expected_codes": [
+        "SM-1006"
+      ],
+      "check_direction": true
+    },
+    {
+      "id": "followup-supported-premise",
+      "suite": "core",
+      "kind": "false_premise",
+      "query": "AT-1923은 메뉴 확인 후 30초 이후에 인증하는 안내가 맞아? 등록 문구를 확인해줘.",
+      "action": "explain",
+      "expected_codes": [
+        "AT-1923"
+      ],
+      "check_direction": true
+    }
+  ]
+}

@@ -1,0 +1,72 @@
+{
+  "scope": "demo synthetic, exploratory metadata challenge; not generalized answer accuracy",
+  "settings_equal": true,
+  "snapshot_equal": true,
+  "cases": [
+    {
+      "id": "metadata-english-leave",
+      "before_rank": {
+        "EX-0401": 1
+      },
+      "after_rank": {
+        "EX-0401": 1
+      },
+      "before_seconds": 23.119,
+      "after_seconds": 40.608,
+      "candidate_set_equal": true,
+      "reranker_executed": true
+    },
+    {
+      "id": "metadata-english-available",
+      "before_rank": {
+        "EX-0203": 3
+      },
+      "after_rank": {
+        "EX-0203": 1
+      },
+      "before_seconds": 14.703,
+      "after_seconds": 27.812,
+      "candidate_set_equal": true,
+      "reranker_executed": true
+    },
+    {
+      "id": "metadata-note-variable",
+      "before_rank": {
+        "EX-0105": 28
+      },
+      "after_rank": {
+        "EX-0105": 1
+      },
+      "before_seconds": 26.285,
+      "after_seconds": 38.941,
+      "candidate_set_equal": true,
+      "reranker_executed": true
+    },
+    {
+      "id": "metadata-note-provided",
+      "before_rank": {
+        "AT-1923": 23
+      },
+      "after_rank": {
+        "AT-1923": 1
+      },
+      "before_seconds": 18.875,
+      "after_seconds": 37.639,
+      "candidate_set_equal": true,
+      "reranker_executed": true
+    },
+    {
+      "id": "metadata-purpose-dynamic",
+      "before_rank": {
+        "SM-1013": 12
+      },
+      "after_rank": {
+        "SM-1013": 1
+      },
+      "before_seconds": 26.369,
+      "after_seconds": 34.691,
+      "candidate_set_equal": true,
+      "reranker_executed": true
+    }
+  ]
+}

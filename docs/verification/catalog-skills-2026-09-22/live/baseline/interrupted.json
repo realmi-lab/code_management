@@ -1,0 +1,4 @@
+{
+  "status": "interrupted",
+  "reason": "Concurrent real CPU reranker jobs exceeded 150s search timeout. Stopped scheduling additional benchmark turns to diagnose oversubscription; partial results retained. No completed baseline/token comparison."
+}

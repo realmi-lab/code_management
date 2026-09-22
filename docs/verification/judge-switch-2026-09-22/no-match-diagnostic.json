@@ -1,0 +1,10 @@
+[
+  {
+    "text": "검색된 후보 중 질문과 관련된 알림을 확인하지 못했습니다.",
+    "result": "grounded_ratio: 0.00\nungrounded_claims: 검색된 후보 중 질문과 관련된 알림을 확인하지 못했습니다.\nverdict: FAIL"
+  },
+  {
+    "text": "검색 결과는 알림 문구입니다. 날씨 정보는 제공하지 않습니다.",
+    "result": "grounded_ratio: 0.00\nungrounded_claims: 검색 결과는 알림 문구입니다. 날씨 정보는 제공하지 않습니다.\nverdict: FAIL"
+  }
+]

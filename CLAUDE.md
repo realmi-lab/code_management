@@ -68,6 +68,7 @@ python3 scripts/test_upstream.py
 - `CODE_CATALOG_AUTHORITY` — `excel` / `system`. (README는 `excel`을 기본으로 설명하지만 compose.yaml 기본값은 `system`이므로 변경 전 확인)
 - `CODE_LLM_PROVIDER` — DeepSeek / Claude / OpenAI (Command Code 경유 DeepSeek 지원)
 - `CODE_LLM_JUDGE_MODEL` / `CODE_LLM_JUDGE_REASONING_EFFORT` — 충실도·근거 판정 두 단계만 다른 모델·effort로 전환(선택, 기본 비어 있음 = 생성 모델이 판정). 생성 모델은 바뀌지 않는다.
+- `CODE_LLM_JUDGE_PROVIDER` — `apple`이면 판정 두 단계만 이 Mac의 Apple Intelligence 온디바이스 브리지(`extensions/apple_bridge`, macOS 전용·선택)로 보낸다. 판정 선택은 이 env로만 하며 화면에는 판정 칸이 없다(대화 AI가 Apple이면 검증도 Apple). 브리지에 닿지 못하면 판정은 503으로 중단되며 생성 모델로 되돌아가지 않는다. Apple 판정은 근거를 한국어 표찰 문장으로 바꾸고 답변을 줄 단위로 나눠 원문 일치는 기계 비교, 자유 서술만 모델에 묻는다(`apple_judge.py`).
 - `CODE_EMBEDDING_PROVIDER` — `none`(키워드) / 로컬 E5 / OpenAI. 임베딩은 필수가 아님.
 
 ## 결과 보고 시

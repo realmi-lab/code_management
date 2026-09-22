@@ -5,8 +5,10 @@ import httpx
 from pathlib import Path
 from .store import DomainError
 
-KEYS={'commandcode':'COMMANDCODE_API_KEY','deepseek':'DEEPSEEK_API_KEY','anthropic':'ANTHROPIC_API_KEY','openai':'OPENAI_API_KEY'}
-MODELS={'commandcode':'deepseek/deepseek-v4.1-flash','deepseek':'deepseek-flash','anthropic':'claude-sonnet-5','openai':'gpt-4.1-mini'}
+KEYS={'commandcode':'COMMANDCODE_API_KEY','deepseek':'DEEPSEEK_API_KEY','anthropic':'ANTHROPIC_API_KEY','openai':'OPENAI_API_KEY','apple':'CODE_APPLE_BRIDGE_TOKEN'}
+MODELS={'commandcode':'deepseek/deepseek-v4.1-flash','deepseek':'deepseek-flash','anthropic':'claude-sonnet-5','openai':'gpt-4.1-mini','apple':'apple/on-device'}
+APPLE_BRIDGE_URL='http://host.docker.internal:8787/v1'
+MODEL_NAME=r'[A-Za-z0-9_./:-]{1,160}'
 _active=ContextVar('ai_configuration',default=None)
 
 
@@ -45,11 +47,28 @@ def local_status():
     return {'local_configured':True,'local_available':False,'local_state':'unavailable'}
 
 
-def public(config=None,local=None):
+def judge_apple_status():
+    """A bridge URL is not evidence that this Mac can judge; ask the bridge's health endpoint."""
+    if not os.getenv('CODE_APPLE_BRIDGE_TOKEN','').strip():
+        return {'apple_judge_state':'unconfigured','apple_judge_available':False}
+    base=(os.getenv('CODE_LLM_JUDGE_BASE_URL','').strip() or APPLE_BRIDGE_URL).rstrip('/')
+    health=(base[:-3] if base.endswith('/v1') else base)+'/health'
+    try:
+        response=httpx.get(health,timeout=3,follow_redirects=False)
+        data=response.json()
+        if response.status_code==200 and isinstance(data,dict) and data.get('ok') is True:
+            return {'apple_judge_state':'ready','apple_judge_available':True}
+        if isinstance(data,dict) and data.get('available') is False:
+            return {'apple_judge_state':'model_unavailable','apple_judge_available':False}
+    except (httpx.HTTPError,ValueError):pass
+    return {'apple_judge_state':'unavailable','apple_judge_available':False}
+
+
+def public(config=None,local=None,apple=None):
     c=config if config is not None else read()
     return {k:c[k] for k in ('version','provider','model','embedding')} | {
         'configured':{p:bool(c.get('keys',{}).get(k) or os.getenv(k)) for p,k in KEYS.items()},
-        'models':MODELS} | (local if local is not None else local_status())
+        'models':MODELS} | (local if local is not None else local_status()) | (apple if apple is not None else judge_apple_status())
 
 
 def save(body,actor_id):
@@ -59,9 +78,13 @@ def save(body,actor_id):
     if not isinstance(provider,str) or provider not in KEYS or embedding not in ('none','local','openai') or type(version) is not int or version<0:
         raise DomainError('AI 공급자와 검색 방식을 선택해주세요.',422)
     model=body.get('model',MODELS[provider])
-    if not isinstance(model,str) or not re.fullmatch(r'[A-Za-z0-9_./:-]{1,160}',model):raise DomainError('모델명을 확인해주세요.',422)
+    if not isinstance(model,str) or not re.fullmatch(MODEL_NAME,model):raise DomainError('모델명을 확인해주세요.',422)
+    if provider=='apple':
+        if model!=MODELS['apple']:raise DomainError('Apple 온디바이스 모델명은 apple/on-device입니다.',422)
+        if not judge_apple_status()['apple_judge_available']:raise DomainError('Apple 브리지가 준비되지 않아 대화 AI를 변경하지 않았습니다.',503)
     secret=body.get('api_key','')
     if not isinstance(secret,str) or len(secret)>4096 or any(ch.isspace() for ch in secret):raise DomainError('API 키 형식을 확인해주세요.',422)
+    if provider=='apple' and secret:raise DomainError('Apple은 외부 API 키를 입력하지 않습니다.',422)
     embedding_secret=body.get('embedding_api_key','')
     if not isinstance(embedding_secret,str) or len(embedding_secret)>4096 or any(ch.isspace() for ch in embedding_secret):raise DomainError('임베딩 API 키 형식을 확인해주세요.',422)
     if embedding_secret and (embedding!='openai' or provider=='openai'):

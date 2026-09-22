@@ -1,0 +1,106 @@
+........................................................................ [ 16%]
+...................................................FF................... [ 33%]
+........................................................................ [ 50%]
+........................................................................ [ 67%]
+........................................................................ [ 83%]
+.....................................................................    [100%]
+=================================== FAILURES ===================================
+___________ test_reranker_scores_only_top_hits_on_registered_wording ___________
+
+    @pytest.mark.asyncio
+    async def test_reranker_scores_only_top_hits_on_registered_wording():
+        records={f'AT-{i:04d}':{'code':f'AT-{i:04d}','message':f'문구 {i}','menu':'인증' if i%2 else '','trigger':f'조건 {i}'} for i in range(40)}
+        base=Base();docs=[Doc(f'AT-{i:04d}') for i in range(40)]+[Doc('AT-9999')]
+>       out=await CatalogReranker(base,records,redact=lambda v:v.replace('문구','[R]')).rerank('질의',docs,top_k=8,score_mode='replace',alpha=0.3)
+            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+integration_tests/test_catalog_reranker.py:33: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+extensions/code_agent/gateway.py:41: in rerank
+    return await run_rerank(self.base,query,docs,top_k,options)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+base = <test_catalog_reranker.Base object at 0x1107f9e80>, query = '질의'
+documents = [<test_catalog_reranker.Doc object at 0x117af12b0>, <test_catalog_reranker.Doc object at 0x117af0590>, <test_catalog_r...x117af06b0>, <test_catalog_reranker.Doc object at 0x117af1430>, <test_catalog_reranker.Doc object at 0x117af0530>, ...]
+top_k = 8, options = {'score_mode': 'replace', 'alpha': 0.3}
+
+    async def run_rerank(base, query, documents, top_k, options):
+        global _executor
+        loop = asyncio.get_running_loop()
+        gate = _gates.setdefault(loop, asyncio.BoundedSemaphore(1))
+        await gate.acquire()
+        try:
+            if _executor is None:
+                _executor = ThreadPoolExecutor(max_workers=1, initializer=_init_worker,
+                                               thread_name_prefix='catalog-rerank')
+            context = copy_context()
+            future = _executor.submit(context.run, lambda: asyncio.run(
+                base.rerank(query, documents, top_k=top_k, **options)))
+        except BaseException:
+            gate.release()
+            raise
+    
+        def release_when_finished(_):
+            # Cancelling an await cannot stop an active PyTorch call. Keep the gate
+            # until the actual job ends, so subsequent turns cannot pile up work.
+            try:
+                loop.call_soon_threadsafe(gate.release)
+            except RuntimeError:
+                pass  # The app loop already shut down; this gate cannot be reused.
+    
+        future.add_done_callback(release_when_finished)
+>       return await asyncio.wrap_future(future)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+E       concurrent.futures.thread.BrokenThreadPool: A thread initializer failed, the thread pool is not usable anymore
+
+extensions/code_agent/rerank_runtime.py:46: BrokenThreadPool
+------------------------------ Captured log call -------------------------------
+CRITICAL concurrent.futures:thread.py:101 Exception in initializer:
+Traceback (most recent call last):
+  File "/Library/Frameworks/Python.framework/Versions/3.14/lib/python3.14/concurrent/futures/thread.py", line 99, in _worker
+    ctx.initialize()
+    ~~~~~~~~~~~~~~^^
+  File "/Library/Frameworks/Python.framework/Versions/3.14/lib/python3.14/concurrent/futures/thread.py", line 66, in initialize
+    self.initializer(*self.initargs)
+    ~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^
+  File "/Users/apple/Documents/ChatGPT/code_management/extensions/code_agent/rerank_runtime.py", line 17, in _init_worker
+    import torch
+ModuleNotFoundError: No module named 'torch'
+_____________ test_reranker_keeps_unknown_hit_text_and_top_k_floor _____________
+
+    @pytest.mark.asyncio
+    async def test_reranker_keeps_unknown_hit_text_and_top_k_floor():
+        base=Base();docs=[Doc('ZZ-0001','raw')]*3
+>       await CatalogReranker(base,{},limit=1).rerank('q',docs,top_k=2)
+
+integration_tests/test_catalog_reranker.py:42: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+extensions/code_agent/gateway.py:41: in rerank
+    return await run_rerank(self.base,query,docs,top_k,options)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+extensions/code_agent/rerank_runtime.py:31: in run_rerank
+    future = _executor.submit(context.run, lambda: asyncio.run(
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+self = <concurrent.futures.thread.ThreadPoolExecutor object at 0x117aae990>
+fn = <built-in method run of _contextvars.Context object at 0x111f24240>
+args = (<function run_rerank.<locals>.<lambda> at 0x117b9cf60>,), kwargs = {}
+
+    def submit(self, fn, /, *args, **kwargs):
+        with self._shutdown_lock, _global_shutdown_lock:
+            if self._broken:
+>               raise self.BROKEN(self._broken)
+E               concurrent.futures.thread.BrokenThreadPool: A thread initializer failed, the thread pool is not usable anymore
+
+/Library/Frameworks/Python.framework/Versions/3.14/lib/python3.14/concurrent/futures/thread.py:202: BrokenThreadPool
+=============================== warnings summary ===============================
+.test-venv/lib/python3.14/site-packages/starlette/testclient.py:53
+  /Users/apple/Documents/ChatGPT/code_management/.test-venv/lib/python3.14/site-packages/starlette/testclient.py:53: DeprecationWarning: The anyio.abc.BlockingPortal alias is deprecated, use anyio.from_thread.BlockingPortal instead.
+    _PortalFactoryType = Callable[[], AbstractContextManager[anyio.abc.BlockingPortal]]
+
+-- Docs: https://docs.pytest.org/en/stable/how-to/capture-warnings.html
+=========================== short test summary info ============================
+FAILED integration_tests/test_catalog_reranker.py::test_reranker_scores_only_top_hits_on_registered_wording
+FAILED integration_tests/test_catalog_reranker.py::test_reranker_keeps_unknown_hit_text_and_top_k_floor
+2 failed, 427 passed, 1 warning in 587.05s (0:09:47)

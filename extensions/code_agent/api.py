@@ -84,6 +84,10 @@ def create_router(store,gateway,identity,enqueue=lambda:None,quota=None,sample_g
                 return all(term in text for term in terms)
             rows=[r for r in rows if matches(r)]
         return {'items':rows[offset:offset+limit],'total':len(rows),'catalog_version':s['version']}
+    @router.get('/quantity-matches')
+    def quantity_matches(q:str,offset:int=0,limit:int=20,version:int|None=None,namespace:Literal['production','demo']='production',a=Depends(actor)):
+        from .discovery import quantity_page
+        return quantity_page(scope(namespace),q,offset,limit,version)
     @router.post('/compare')
     async def compare_catalog(body:CatalogComparison,a=Depends(actor)):
         await quota.check(a.id,'review')

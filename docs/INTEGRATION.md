@@ -1,5 +1,7 @@
 # 원본 RAG + 코드 카탈로그 + 대화 에이전트 통합
 
+2026-09-22 최신 검색 연결: 원본 HybridSearchOrchestrator의 후보 상한 `reranker_top_k * 4`와 원본 KoreanCrossEncoder의 입력·순위 처리를 사용합니다. 확장 어댑터의 필드 재조립·별도 12건 제한·창별 집계는 제거했습니다. CPU 계산 직렬화와 `predict` 배치 4, 이중 sigmoid 교정은 명시된 실행/빌드 패치이며 원본 파일을 직접 수정하지 않습니다. [구현·검증 경계](CATALOG_SKILLS_2026-09-22.md).
+
 ## 사용자 확정: 관리자 로그인 메뉴 복원 금지
 
 `UrstoryRAG / 관리자 콘솔에 로그인하세요` 화면·메뉴·진입 링크는 절대 복원하거나 다시 노출하지 않는다. 이름이나 문구를 바꾼 재도입도 금지한다. 로그인 없는 `/codes` 진입을 유지하고, 원본 동기화·화면 복원·오류 처리 때문에 로그인으로 되돌리지 않는다. 원본 보존 및 아래 선택형 JWT 구현 설명보다 이 사용자 지시가 우선한다. 사용자가 명시적으로 금지를 철회하기 전에는 JWT 모드로 임의 전환하지 않는다. 고정 upstream 원본과 인증 actor·정식 등록 승인 검사는 보존한다.
@@ -128,3 +130,11 @@ AI 응답 충실도와 근거 검사는 같은 답변/근거에 대해 독립적
 ## Langfuse 트레이스 응답 정규화
 
 원본 모니터링 API가 반환하던 Langfuse 원문을 `code_agent.monitoring.normalize_trace`로 변환한다. timestamp → created_at, input/query → query, latency(초) → total_duration_ms(밀리초)를 연결한다. catalog-turn의 원문 미저장 정책은 유지하며 쿼리 대신 설명 라벨을 표시한다. output.status가 확인된 경우에만 성공/오류를 표시하고 상태가 없으면 unknown으로 둔다. 날짜·시간 누락/비정상값은 null 및 화면의 —로 표현한다. 목록과 상세에 동일 변환을 적용하고 기존 관리자 인증을 보존한다.
+
+## 2026-09-22 Apple 온디바이스 판정 브리지
+
+판정 모델은 `.env`의 `CODE_LLM_JUDGE_*`로만 정하고 관리자 화면에는 판정 칸을 두지 않는다(사용자 결정: 화면은 원래대로 대화 AI·검색 두 칸). 기본은 대화 AI가 검증도 맡는 것이며, 대화 AI가 Apple이면 `provider.judge_options()`가 판정도 Apple로 보낸다. 설정 API 응답의 `apple_judge_state`·`apple_judge_available`은 브리지 `/health`에서 읽은 준비 상태로, 화면이 Apple 대화 AI 항목을 켤지 정할 때 쓴다.
+
+Apple 경로의 구성은 세 부분이다. `extensions/apple_bridge/applefm.swift`는 FoundationModels 프레임워크로 모델을 호출하는 표준 입출력 워커이고, `extensions/apple_bridge/bridge.py`는 127.0.0.1:8787에서 OpenAI 호환 `chat/completions`를 제공하며 공유 토큰(`CODE_APPLE_BRIDGE_TOKEN`)을 요구한다. `extensions/code_agent/apple_judge.py`는 원본 판정 프롬프트에서 근거와 답변 JSON을 꺼내 근거를 한국어 표찰 문장으로 다시 적고 답변을 줄 단위 주장으로 나눈 뒤, `메시지코드` 블록의 표찰 줄은 DB 원문과 문자 단위로 비교하고 자유 서술 줄만 모델에 구조화 출력으로 묻는다. 뒷받침되지 않는 주장이 하나라도 있으면 UNFAITHFUL/FAIL로 적어 차단한다. 판정 프롬프트·임계값·StrictJudge 검사는 원본 그대로이고, 생성·HyDE·재작성·RAGAS 평가는 바뀌지 않는다.
+
+계약: 브리지는 `apple/on-device` 외의 모델명, 스트리밍, `json_object` 형식을 거절하고, 토큰 사용량을 추정해 넣지 않는다. 앱은 브리지에 닿지 못하면 503, 브리지 오류는 502, 형식이 어긋난 응답은 502로 중단하며 생성 모델로 되돌아가지 않는다. Docker 안의 API·worker는 compose의 `extra_hosts`(`host.docker.internal`)로 브리지에 접근한다. macOS에서 `manage.py start`는 브리지를 컴파일·기동하고(모델을 쓸 수 없으면 안내 후 계속, env로 강제했으면 중단), `stop`은 브리지도 내리고 `doctor`는 `apple_bridge` 항목을 보고한다. 판정 품질 실측은 TEST_REPORT의 2026-09-22 Apple 항목에 있다.

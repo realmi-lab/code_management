@@ -23,7 +23,7 @@ def raw_model_settings():
 
 def selected_provider():
     provider=ai_config.read()['provider']
-    if provider not in ('openai','commandcode','anthropic','deepseek'):
+    if provider not in ('openai','commandcode','anthropic','deepseek','apple'):
         raise ValueError('Unsupported CODE_LLM_PROVIDER')
     return provider
 
@@ -49,6 +49,10 @@ def model_name(fallback):
 
 _judge_stage = ContextVar('code_agent_judge_stage', default=False)
 JUDGE_MODEL_PATTERN = r'[A-Za-z0-9_./:-]{1,160}'
+JUDGE_PROVIDERS = ('apple',)
+APPLE_JUDGE_MODEL = 'apple/on-device'
+APPLE_BRIDGE_URL = ai_config.APPLE_BRIDGE_URL
+JUDGE_URL_PATTERN = r'https?://[A-Za-z0-9_.-]+(?::\d{1,5})?(?:/[A-Za-z0-9_./-]*)?'
 
 
 @contextmanager
@@ -62,19 +66,42 @@ def judge_stage():
 
 
 def judge_options():
-    """Env-only judge overrides; empty means the judge shares the generation model and effort."""
+    """Env-only judge overrides; empty means the judge shares the generation model and effort.
+
+    CODE_LLM_JUDGE_PROVIDER=apple routes only the two judge stages to the Mac-side Apple on-device
+    bridge (see extensions/apple_bridge). Generation, HyDE, rewrites and RAGAS never change.
+    """
     options = {}
+    provider = os.getenv('CODE_LLM_JUDGE_PROVIDER', '').strip()
     model = os.getenv('CODE_LLM_JUDGE_MODEL', '').strip()
+    if selected_provider()=='apple':
+        if model and model!=APPLE_JUDGE_MODEL:raise ValueError('Apple only supports apple/on-device')
+        provider='apple'
+    if provider:
+        if provider not in JUDGE_PROVIDERS:
+            raise ValueError('Unsupported CODE_LLM_JUDGE_PROVIDER')
+        options['provider'] = provider
     if model:
         if not re.fullmatch(JUDGE_MODEL_PATTERN, model):
             raise ValueError('Unsupported CODE_LLM_JUDGE_MODEL')
         options['model'] = model
+    elif provider == 'apple':
+        options['model'] = APPLE_JUDGE_MODEL
     effort = os.getenv('CODE_LLM_JUDGE_REASONING_EFFORT', '').strip()
     if effort:
         if effort not in ('low', 'medium', 'high', 'none'):
             raise ValueError('Unsupported CODE_LLM_JUDGE_REASONING_EFFORT')
         options['reasoning_effort'] = effort
+    if provider == 'apple':
+        base_url = os.getenv('CODE_LLM_JUDGE_BASE_URL', '').strip() or APPLE_BRIDGE_URL
+        if not re.fullmatch(JUDGE_URL_PATTERN, base_url):
+            raise ValueError('Unsupported CODE_LLM_JUDGE_BASE_URL')
+        options['base_url'] = base_url
     return options
+
+
+def judge_provider():
+    return judge_options().get('provider')
 
 
 def judge_model_name():
@@ -100,6 +127,10 @@ def reasoning_options():
 
 
 def client_options(api_key):
+    if selected_provider()=='apple':
+        token=os.getenv('CODE_APPLE_BRIDGE_TOKEN','').strip()
+        if not token:raise ValueError('CODE_APPLE_BRIDGE_TOKEN is required')
+        return {'api_key':token,'base_url':os.getenv('CODE_APPLE_BRIDGE_URL','').strip() or APPLE_BRIDGE_URL,'timeout':70,'max_retries':0}
     if anthropic_enabled():raise ValueError('Claude must use the native Anthropic Messages API')
     if selected_provider()=='deepseek':
         key=ai_config.key('DEEPSEEK_API_KEY').strip()
@@ -124,7 +155,7 @@ def apply_model_settings(settings):
     """Apply runtime selection to a fresh settings copy, never stored preferences."""
     if _raw_model_settings.get():
         return
-    if selected_provider() in ('commandcode','anthropic','deepseek') or ai_config.read()['version']:
+    if selected_provider() in ('commandcode','anthropic','deepseek','apple') or ai_config.read()['version']:
         settings.llm_provider = selected_provider()
         for field in ('llm_model', 'hyde_model', 'multi_query_model', 'contextual_chunking_model'):
             setattr(settings, field, model_name(None))
@@ -144,7 +175,8 @@ def apply_model_settings(settings):
 def public_settings():
     return {'provider': selected_provider(),
             'model': model_name(None), **reasoning_options(),
-            'judge_model': judge_model_name() or model_name(None)}
+            'judge_model': judge_model_name() or model_name(None),
+            'judge_provider': judge_provider() or selected_provider()}
 
 
 def evaluation_llm():

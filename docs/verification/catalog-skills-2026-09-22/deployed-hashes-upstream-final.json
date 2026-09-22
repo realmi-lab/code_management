@@ -1,0 +1,27 @@
+{
+  "verified_at": "2026-09-22T08:42:07.603378+00:00",
+  "source_files": 53,
+  "excluded": "README.md (documentation only)",
+  "containers": {
+    "rag-api": {
+      "match": true,
+      "differences": []
+    },
+    "rag-worker": {
+      "match": true,
+      "differences": []
+    },
+    "rag-beat": {
+      "match": true,
+      "differences": []
+    }
+  },
+  "reranker_patch": [
+    {
+      "path": "app/services/reranking/korean.py",
+      "before_sha256": "12286fd550969c16a2b4375c680d64e05278d9b37830f5e6048a141cd613311e",
+      "after_sha256": "fc6031bfce413496a6b80f2394f3888029c09d2a10a6075730d7b10e7d67599e",
+      "reason": "CrossEncoder.predict returns logits for one sigmoid; batch_size=4 bounds CPU memory without dropping candidates"
+    }
+  ]
+}

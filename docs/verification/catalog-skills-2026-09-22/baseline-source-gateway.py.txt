@@ -1,0 +1,180 @@
+"""Adapter to the REAL upstream search orchestrator; no lexical fallback in production."""
+from __future__ import annotations
+import asyncio,json,logging
+from pydantic import ValidationError
+from .store import DomainError
+from .compare import prioritize_waiting
+from .safety import CatalogSafety, NumericGroundingError, GroundingError
+from .operations import SearchCache, TrackedLLM
+
+log=logging.getLogger(__name__)
+INDEX='cm_catalog_chunks_v1'
+def catalog_index(namespace='production'):return INDEX+'__demo' if namespace=='demo' else INDEX
+def index_identity(model):return model+'|pii-policy-2'
+RERANK_CANDIDATES=12
+
+def rerank_text(rec):
+    """What the neural reranker scores: the registered wording, menu and trigger only."""
+    parts=[rec['message']]
+    if rec.get('menu'): parts.append('메뉴: '+rec['menu'])
+    if rec.get('trigger'): parts.append('노출 조건: '+rec['trigger'])
+    return '\n'.join(parts)
+
+class CatalogReranker:
+    """Bounded use of the upstream neural reranker for catalogue hits.
+
+    The indexed chunk carries every business field (English copy, notes, ...).
+    Scoring that full dump for 30+ RRF hits took ~14 s on CPU and blocked the
+    event loop for every other request. Score only the top RRF candidates on
+    the registered wording/menu/trigger and run the blocking model in a worker
+    thread. Hits are still resolved against DB originals by code/revision in
+    UrstoryGateway.search, so the shortened text never reaches the user.
+    """
+    def __init__(self,base,records,redact=lambda value:value,limit=RERANK_CANDIDATES):
+        self.base=base; self.records=records; self.redact=redact; self.limit=limit
+    async def rerank(self,query,documents,top_k=5,**options):
+        docs=[]
+        for doc in documents[:max(top_k,self.limit)]:
+            rec=self.records.get((doc.metadata or {}).get('code'))
+            docs.append(doc.model_copy(update={'content':self.redact(rerank_text(rec))}) if rec else doc)
+        # base.rerank only awaits nothing (pure model.predict); run it on its own loop off-thread.
+        return await asyncio.to_thread(asyncio.run,self.base.rerank(query,docs,top_k=top_k,**options))
+
+class UrstoryGateway:
+    def __init__(self,store,monitor=None): self.store=store; self.monitor=monitor; self._safety_instance=None; self.cache=SearchCache()
+    @property
+    def safety(self):
+        if self._safety_instance is None: self._safety_instance=CatalogSafety()
+        return self._safety_instance
+    async def _settings(self):
+        from app.models import database
+        from app.services.settings import SettingsService
+        async with database._async_session_factory() as session:
+            return await SettingsService(db=session).get_settings()
+    async def _llm(self, settings=None):
+        from app.config import get_settings
+        from app.services.generation.openai import OpenAILLM
+        settings=settings or await self._settings()
+        return OpenAILLM(api_key=get_settings().openai_api_key,model=settings.llm_model,temperature=settings.llm_temperature)
+    async def json(self,schema,system,payload):
+        from .models import Explanation
+        llm=TrackedLLM(await self._llm(),schema.__name__)
+        try:
+            safe=await self.safety.prepare(payload,llm)
+            output_contract=(system+'\n출력은 아래 JSON Schema를 따르는 JSON 객체 하나만 반환하세요. '
+                '설명이나 코드 블록을 덧붙이지 마세요. 선택 문자열 값이 없으면 null 대신 빈 문자열을 사용하세요.\n'
+                +json.dumps(schema.model_json_schema(),ensure_ascii=False))
+            rejected=None;rejection=None
+            for attempt in range(2):
+                from .apple import structured_response
+                with structured_response(schema.model_json_schema()):
+                    result=await asyncio.wait_for(llm.generate(json.dumps(safe,ensure_ascii=False),system_prompt=output_contract),timeout=75)
+                if not isinstance(result,str): raise TypeError('Expected text response')
+                result=result.strip()
+                if result.startswith('```') and result.endswith('```'):
+                    result=result.split('\n',1)[1].rsplit('```',1)[0].strip()
+                try:
+                    parsed=schema.model_validate_json(result)
+                except ValidationError as exc:
+                    from .operations import _validation_context
+                    # Log types/known fields only; Pydantic's input/context can
+                    # contain private answers or credentials and are excluded.
+                    errors=[{'type':e['type'],'field':e['loc'][0] if e['loc'] and e['loc'][0] in schema.model_fields else None}
+                            for e in exc.errors(include_input=False,include_context=False,include_url=False)][:5]
+                    log.info('catalog_validation %s',json.dumps({**(_validation_context.get() or {}),
+                        'stage':'response_schema','schema':schema.__name__,'attempt':attempt+1,'status':'blocked','errors':errors}))
+                    if attempt or schema is not Explanation:raise
+                    output_contract+='\n직전 응답은 JSON 형식 검사에서 차단됐습니다. text는 하나의 문자열, references는 코드번호 문자열 배열이어야 합니다. text 안의 행 구분은 이스케이프된 \\n을 사용하세요. 다른 속성이나 코드 블록 없이 JSON 객체 하나만 반환하세요. 동일한 근거로 다시 작성하고 원문과 조건을 바꾸지 마세요.'
+                    llm=llm.for_stage('format-repair')
+                    continue
+                if rejected==parsed.model_dump():
+                    # Never re-roll judges on an unchanged rejected answer.
+                    raise rejection
+                try:
+                    await asyncio.wait_for(self.safety.validate(parsed,safe,llm),timeout=150)
+                except (NumericGroundingError,GroundingError) as exc:
+                    if attempt or schema is not Explanation:raise
+                    # Only regenerate the explanation, against the SAME evidence.
+                    # Do not feed rejected model text back as trusted context.
+                    rejected=parsed.model_dump();rejection=exc
+                    output_contract+='\n직전 설명은 근거 검증에서 차단됐습니다. 동일한 자료만으로 설명을 새로 작성하세요. 가장 가까운 코드의 번호, 등록 문구, 메뉴, 노출 조건을 그대로 인용하세요. 근거에 명시된 숫자와 단위를 유지하고 추정·자료 부재 주장·화면 동작 설명을 제거하세요. 비교 요청이면 명시된 조건 차이만 남기세요. 등록 원문은 바꾸지 마세요.'
+                    llm=llm.for_stage('numeric-repair' if isinstance(exc,NumericGroundingError) else 'grounding-repair')
+                    continue
+                return parsed
+        except DomainError:
+            raise
+        except (ValueError,TypeError,IndexError) as exc:
+            raise DomainError('AI 응답 형식이 올바르지 않아 저장하지 않았습니다.',502) from exc
+        except TimeoutError as exc:
+            raise DomainError('AI 응답 시간이 초과되어 저장하지 않았습니다.',504) from exc
+        except Exception as exc:
+            raise DomainError('AI 연결에 실패하여 저장하지 않았습니다. 관리자에게 연결 상태를 확인해주세요.',503) from exc
+        finally: await llm.client.close()
+    async def search(self,query):
+        query=self.safety.redact(query)
+        s,records=self.store.snapshot()
+        if not records: return [],[{'name':'empty_catalogue','count':0}]
+        if not s['snapshot'] or s['indexed_version']!=s['version']:
+            raise DomainError('목록 변경분의 AI 검색 인덱싱이 필요합니다. 관리자 메뉴에서 검색 준비를 실행해주세요.',409)
+        from app.api.search import get_orchestrator
+        from app.config import get_settings
+        from app.models import database
+        from app.services.search.vector import VectorSearchEngine
+        from app.services.search.keyword_es import ElasticsearchNoriEngine
+        from app.services.search.hybrid import HybridSearchOrchestrator
+        from app.services.embedding.openai import OpenAIEmbedding
+        from app.services.hyde.generator import HyDEGenerator
+        from sqlalchemy import text
+        snapshot=s['snapshot']
+        actual_settings=await self._settings()
+        if s.get('indexed_model')!=index_identity(actual_settings.embedding_model):
+            raise DomainError('임베딩 모델이 변경되었습니다. 검색 준비를 다시 실행해주세요.',409)
+        cache_key=self.cache.key(query,s,actual_settings.model_dump()) if getattr(actual_settings,'cache_enabled',False) else None
+        if cache_key:
+            refs=await self.cache.get(cache_key)
+            current={record['code']:record for record in records}
+            if isinstance(refs,list) and all(isinstance(ref,dict) and ref.get('code') in current and current[ref['code']]['revision']==ref.get('revision') for ref in refs):
+                if self.store.status()['version']!=s['version']:raise DomainError('검색 도중 목록이 변경되었습니다. 다시 검색해주세요.')
+                return prioritize_waiting(query,[current[ref['code']] for ref in refs]),[{'name':'catalog_cache','passed':True,'results_count':len(refs)}]
+        # Inherit and invoke the upstream vector search implementation, changing ONLY
+        # the table used for the catalogue. The bound doc_id enforces snapshot scope.
+        class CatalogVector(VectorSearchEngine):
+            _FILTERED_SQL=text('SELECT id AS chunk_id, document_id, content, embedding <=> CAST(:query_embedding AS vector) AS distance, metadata FROM cm_search_chunks WHERE document_id = :doc_id AND embedding IS NOT NULL ORDER BY distance ASC LIMIT :top_k')
+            async def search(inner,query_embedding,top_k=20,doc_id=None):
+                return await super().search(query_embedding,top_k=top_k,doc_id=snapshot)
+        class CatalogKeyword(ElasticsearchNoriEngine):
+            async def search(inner,query,top_k=20,doc_id=None):
+                return await super().search(query,top_k=top_k,doc_id=snapshot)
+        settings=actual_settings; env=get_settings(); base=get_orchestrator()
+        llm=await self._llm(settings)
+        embedder=OpenAIEmbedding(api_key=env.openai_api_key,model=settings.embedding_model,dimensions=1536)
+        keyword=CatalogKeyword(es_url=env.elasticsearch_url,index_name=catalog_index(getattr(self.store,'namespace','production')))
+        current={r['code']:r for r in records}
+        engine=HybridSearchOrchestrator(embedder=embedder,vector_engine=CatalogVector(database._async_session_factory),keyword_engine=keyword,
+            reranker=CatalogReranker(base.reranker,current,self.safety.redact),hyde_generator=HyDEGenerator(llm=llm),llm=llm,langfuse_monitor=self.monitor)
+        try:
+            result=await asyncio.wait_for(engine.search(query,settings,generate_answer=False),timeout=150)
+            # A hard retrieval-gate failure must not become a catalogue explanation.
+            steps=[step.model_dump() for step in result.trace]
+            if any(step.get('name')=='retrieval_gate' and not step.get('passed') and not (step.get('detail') or {}).get('soft_fail') for step in steps):
+                raise DomainError('검색 근거가 충분하지 않습니다. 다른 조건으로 다시 검색해주세요.',422)
+            found=[];seen=set()
+            for hit in result.documents:
+                meta=hit.metadata or {}; rec=current.get(meta.get('code'))
+                # Never trust model/index copies as the source of truth.
+                if rec and rec['revision']==meta.get('revision') and rec['code'] not in seen:
+                    found.append(rec);seen.add(rec['code'])
+            if self.store.status()['version']!=s['version']: raise DomainError('검색 도중 목록이 변경되었습니다. 다시 검색해주세요.')
+            found=prioritize_waiting(query,found)
+            if cache_key:await self.cache.put(cache_key,found)
+            return found,steps
+        except DomainError:
+            raise
+        except TimeoutError as exc:
+            raise DomainError('원본 검색 엔진 응답 시간이 초과되었습니다.',504) from exc
+        except Exception as exc:
+            raise DomainError('원본 검색 엔진 연결에 실패했습니다. 인덱스와 모델 연결을 확인해주세요.',503) from exc
+        finally:
+            await keyword.close(); await llm.client.close()
+            client=getattr(embedder,'client',None)
+            if client is not None: await client.close()

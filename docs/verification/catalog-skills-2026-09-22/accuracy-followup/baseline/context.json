@@ -1,0 +1,19 @@
+{
+  "manifest_hash": "f8291a0e2fa81ca06238e8624ae025f2adfd156745b6541977c6eff785f5d111",
+  "corpus_hash": "03f51e3d5a8e47fd82f6aada43250bae5ee5e2201f755e99117e6c6f6c5bade1",
+  "settings_hash": "dc92db84a3ed1e5bbcddb4c0fe24dd8f375b3ce5cd2dc4fe8034aaa5a60d36eb",
+  "selected_cases": [
+    "core-false-premise",
+    "core-direction",
+    "core-within",
+    "core-unrelated",
+    "core-broad",
+    "holdout-signup-variable",
+    "followup-other-code-minute-premise",
+    "followup-supported-premise"
+  ],
+  "runs": 1,
+  "concurrency": 2,
+  "scope": "demo synthetic only",
+  "cache_policy": "existing service cache; no invalidation"
+}

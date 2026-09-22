@@ -110,7 +110,7 @@ def apply(root):
     replace('app/api/settings.py',
             '    return models',
             '    from code_agent.provider import selected_provider, model_name\n'
-            '    if selected_provider() in ("commandcode", "anthropic", "deepseek"):\n'
+            '    if selected_provider() in ("commandcode", "anthropic", "deepseek", "apple"):\n'
             '        models[selected_provider()] = [model_name(None)]\n'
             '    return models')
     replace('app/api/health.py',

@@ -1,0 +1,1339 @@
+{
+ "label": "apple-chat-final",
+ "at": "2026-09-22T14:16:33+0900",
+ "status_llm": {
+  "provider": "apple",
+  "model": "apple/on-device",
+  "judge_model": "apple/on-device",
+  "judge_provider": "apple"
+ },
+ "namespace": "demo",
+ "results": [
+  {
+   "id": 1,
+   "kind": "manual_paraphrase",
+   "query": "인증 전에 30초 기다리라는 알림 있어?",
+   "expected_code": "AT-1923",
+   "thread_id": "8d9f3063-7070-471e-ba36-fba436d1a054",
+   "request_id": "831ef24a-ec54-4b70-92ce-73506762cfad",
+   "http_status": 200,
+   "total_s": 8.4,
+   "action": "search",
+   "candidate_codes": [
+    "AT-1923",
+    "SM-1020",
+    "SM-1034",
+    "SM-1006",
+    "SM-1216",
+    "SM-1048",
+    "EX-0104",
+    "SM-1021"
+   ],
+   "rank": 1,
+   "answer_excerpt": "30초 이내에 인증을 완료해주세요.",
+   "answer_blocked": false,
+   "ai_used": true,
+   "trace_flags": [
+    {
+     "name": "guardrail_input",
+     "passed": true,
+     "duration_ms": 0.05,
+     "results_count": null,
+     "detail": null
+    },
+    {
+     "name": "question_classification",
+     "passed": true,
+     "duration_ms": 0.0,
+     "results_count": null,
+     "detail": {
+      "category": "explanatory",
+      "indicators": []
+     }
+    },
+    {
+     "name": "vector_search",
+     "passed": true,
+     "duration_ms": 499.23,
+     "results_count": 20,
+     "detail": null
+    },
+    {
+     "name": "keyword_search",
+     "passed": true,
+     "duration_ms": 499.23,
+     "results_count": 20,
+     "detail": null
+    },
+    {
+     "name": "rrf_fusion",
+     "passed": true,
+     "duration_ms": 0.13,
+     "results_count": 34,
+     "detail": null
+    },
+    {
+     "name": "reranking",
+     "passed": true,
+     "duration_ms": 2397.2,
+     "results_count": 8,
+     "detail": null
+    },
+    {
+     "name": "retrieval_gate",
+     "passed": true,
+     "duration_ms": 0.04,
+     "results_count": 8,
+     "detail": {
+      "top_score": 0.8030706921682713
+     }
+    },
+    {
+     "name": "guardrail_pii",
+     "passed": true,
+     "duration_ms": 0.2,
+     "results_count": null,
+     "detail": {
+      "pii_found": false
+     }
+    }
+   ],
+   "trace_id": "7cfc73e43ed097c6af937628f7394af4",
+   "trace_output": {
+    "status": "success",
+    "duration_ms": 8418
+   },
+   "spans": {
+    "Explanation/grounding": {
+     "duration_ms": 2,
+     "model": "apple/on-device",
+     "status": "success",
+     "judge_detail": {
+      "claims": 9,
+      "supported": 9,
+      "model_checked": 0,
+      "model_calls": 0
+     },
+     "completion_tokens": null,
+     "reasoning_tokens": null
+    },
+    "Explanation/faithfulness": {
+     "duration_ms": 2,
+     "model": "apple/on-device",
+     "status": "success",
+     "judge_detail": {
+      "claims": 9,
+      "supported": 9,
+      "model_checked": 0,
+      "model_calls": 0
+     },
+     "completion_tokens": null,
+     "reasoning_tokens": null
+    },
+    "Explanation": {
+     "duration_ms": 3470,
+     "model": "apple/on-device",
+     "status": "success",
+     "judge_detail": null,
+     "completion_tokens": null,
+     "reasoning_tokens": null
+    },
+    "Plan": {
+     "duration_ms": 1939,
+     "model": "apple/on-device",
+     "status": "success",
+     "judge_detail": null,
+     "completion_tokens": null,
+     "reasoning_tokens": null
+    }
+   }
+  },
+  {
+   "id": 2,
+   "kind": "manual_paraphrase",
+   "query": "인증번호 전송에 성공했을 때 보여줄 문구",
+   "expected_code": "EX-0101",
+   "thread_id": "e5ecea17-7281-4ffe-81ce-f8168ab6b122",
+   "request_id": "284f2815-f209-4269-863b-6d966f0335ca",
+   "http_status": 200,
+   "total_s": 5.9,
+   "action": "search",
+   "candidate_codes": [
+    "EX-0101",
+    "EX-0105",
+    "EX-0102",
+    "EX-0103",
+    "SM-1016",
+    "EX-0104",
+    "AT-1923",
+    "SM-1027"
+   ],
+   "rank": 1,
+   "answer_excerpt": "인증번호를 발송했습니다.",
+   "answer_blocked": false,
+   "ai_used": true,
+   "trace_flags": [
+    {
+     "name": "guardrail_input",
+     "passed": true,
+     "duration_ms": 0.12,
+     "results_count": null,
+     "detail": null
+    },
+    {
+     "name": "question_classification",
+     "passed": true,
+     "duration_ms": 0.0,
+     "results_count": null,
+     "detail": {
+      "category": "explanatory",
+      "indicators": []
+     }
+    },
+    {
+     "name": "vector_search",
+     "passed": true,
+     "duration_ms": 450.88,
+     "results_count": 20,
+     "detail": null
+    },
+    {
+     "name": "keyword_search",
+     "passed": true,
+     "duration_ms": 450.88,
+     "results_count": 20,
+     "detail": null
+    },
+    {
+     "name": "rrf_fusion",
+     "passed": true,
+     "duration_ms": 0.06,
+     "results_count": 32,
+     "detail": null
+    },
+    {
+     "name": "reranking",
+     "passed": true,
+     "duration_ms": 1638.51,
+     "results_count": 8,
+     "detail": null
+    },
+    {
+     "name": "retrieval_gate",
+     "passed": true,
+     "duration_ms": 0.02,
+     "results_count": 8,
+     "detail": {
+      "top_score": 0.8102497519092426
+     }
+    },
+    {
+     "name": "guardrail_pii",
+     "passed": true,
+     "duration_ms": 0.1,
+     "results_count": null,
+     "detail": {
+      "pii_found": false
+     }
+    }
+   ],
+   "trace_id": "56f9fd9bc726a2038512330507f81016",
+   "trace_output": {
+    "status": "success",
+    "duration_ms": 5902
+   },
+   "spans": {
+    "Explanation/grounding": {
+     "duration_ms": 1,
+     "model": "apple/on-device",
+     "status": "success",
+     "judge_detail": {
+      "claims": 2,
+      "supported": 2,
+      "model_checked": 0,
+      "model_calls": 0
+     },
+     "completion_tokens": null,
+     "reasoning_tokens": null
+    },
+    "Explanation/faithfulness": {
+     "duration_ms": 1,
+     "model": "apple/on-device",
+     "status": "success",
+     "judge_detail": {
+      "claims": 2,
+      "supported": 2,
+      "model_checked": 0,
+      "model_calls": 0
+     },
+     "completion_tokens": null,
+     "reasoning_tokens": null
+    },
+    "Explanation": {
+     "duration_ms": 2376,
+     "model": "apple/on-device",
+     "status": "success",
+     "judge_detail": null,
+     "completion_tokens": null,
+     "reasoning_tokens": null
+    },
+    "Plan": {
+     "duration_ms": 1355,
+     "model": "apple/on-device",
+     "status": "success",
+     "judge_detail": null,
+     "completion_tokens": null,
+     "reasoning_tokens": null
+    }
+   }
+  },
+  {
+   "id": 5,
+   "kind": "manual_paraphrase",
+   "query": "인증을 30초 안에 끝내야 한다는 안내",
+   "expected_code": "EX-0104",
+   "thread_id": "cc798d46-6c70-47db-acf9-1a4cf63c34bd",
+   "request_id": "333689e9-cdfd-443c-abe4-cc250622e6fb",
+   "http_status": 200,
+   "total_s": 10.2,
+   "action": "search",
+   "candidate_codes": [
+    "EX-0104",
+    "SM-1021",
+    "SM-1035",
+    "SM-1063",
+    "SM-1020",
+    "SM-1049",
+    "AT-1923",
+    "SM-1077"
+   ],
+   "rank": 1,
+   "answer_excerpt": "인증을 30초 이내에 끝내야 한다는 안내",
+   "answer_blocked": false,
+   "ai_used": true,
+   "trace_flags": [
+    {
+     "name": "guardrail_input",
+     "passed": true,
+     "duration_ms": 0.03,
+     "results_count": null,
+     "detail": null
+    },
+    {
+     "name": "question_classification",
+     "passed": true,
+     "duration_ms": 0.0,
+     "results_count": null,
+     "detail": {
+      "category": "explanatory",
+      "indicators": []
+     }
+    },
+    {
+     "name": "vector_search",
+     "passed": true,
+     "duration_ms": 318.02,
+     "results_count": 20,
+     "detail": null
+    },
+    {
+     "name": "keyword_search",
+     "passed": true,
+     "duration_ms": 318.02,
+     "results_count": 20,
+     "detail": null
+    },
+    {
+     "name": "rrf_fusion",
+     "passed": true,
+     "duration_ms": 0.06,
+     "results_count": 25,
+     "detail": null
+    },
+    {
+     "name": "reranking",
+     "passed": true,
+     "duration_ms": 2124.51,
+     "results_count": 8,
+     "detail": null
+    },
+    {
+     "name": "retrieval_gate",
+     "passed": true,
+     "duration_ms": 0.02,
+     "results_count": 8,
+     "detail": {
+      "top_score": 0.8117332610354085
+     }
+    },
+    {
+     "name": "guardrail_pii",
+     "passed": true,
+     "duration_ms": 0.1,
+     "results_count": null,
+     "detail": {
+      "pii_found": false
+     }
+    }
+   ],
+   "trace_id": "d38e902bdc18178403540ca1fff27f54",
+   "trace_output": {
+    "status": "success",
+    "duration_ms": 10206
+   },
+   "spans": {
+    "Explanation/grounding": {
+     "duration_ms": 1969,
+     "model": "apple/on-device",
+     "status": "success",
+     "judge_detail": {
+      "claims": 7,
+      "supported": 7,
+      "model_checked": 1,
+      "model_calls": 1
+     },
+     "completion_tokens": null,
+     "reasoning_tokens": null
+    },
+    "Explanation/faithfulness": {
+     "duration_ms": 3403,
+     "model": "apple/on-device",
+     "status": "success",
+     "judge_detail": {
+      "claims": 7,
+      "supported": 7,
+      "model_checked": 1,
+      "model_calls": 1
+     },
+     "completion_tokens": null,
+     "reasoning_tokens": null
+    },
+    "Explanation": {
+     "duration_ms": 3055,
+     "model": "apple/on-device",
+     "status": "success",
+     "judge_detail": null,
+     "completion_tokens": null,
+     "reasoning_tokens": null
+    },
+    "Plan": {
+     "duration_ms": 1218,
+     "model": "apple/on-device",
+     "status": "success",
+     "judge_detail": null,
+     "completion_tokens": null,
+     "reasoning_tokens": null
+    }
+   }
+  },
+  {
+   "id": 7,
+   "kind": "manual_paraphrase",
+   "query": "기존 회원 전화번호로 다시 가입하려는 경우",
+   "expected_code": "EX-0201",
+   "thread_id": "81dbf816-f6ad-452b-bae5-d4a0d2d195e5",
+   "request_id": "a6c0c69d-831d-49ad-8450-b544eaa0145d",
+   "http_status": 200,
+   "total_s": 6.7,
+   "action": "search",
+   "candidate_codes": [
+    "EX-0201",
+    "EX-0103",
+    "SM-1013",
+    "EX-0204",
+    "SM-1006",
+    "SM-1005",
+    "SM-1003",
+    "SM-1009"
+   ],
+   "rank": 1,
+   "answer_excerpt": "이미 가입된 휴대폰 번호입니다. 로그인해주세요.",
+   "answer_blocked": false,
+   "ai_used": true,
+   "trace_flags": [
+    {
+     "name": "guardrail_input",
+     "passed": true,
+     "duration_ms": 0.01,
+     "results_count": null,
+     "detail": null
+    },
+    {
+     "name": "question_classification",
+     "passed": true,
+     "duration_ms": 0.0,
+     "results_count": null,
+     "detail": {
+      "category": "regulatory",
+      "indicators": [
+       "금액"
+      ]
+     }
+    },
+    {
+     "name": "vector_search",
+     "passed": true,
+     "duration_ms": 282.04,
+     "results_count": 20,
+     "detail": null
+    },
+    {
+     "name": "keyword_search",
+     "passed": true,
+     "duration_ms": 282.04,
+     "results_count": 20,
+     "detail": null
+    },
+    {
+     "name": "rrf_fusion",
+     "passed": true,
+     "duration_ms": 0.08,
+     "results_count": 32,
+     "detail": null
+    },
+    {
+     "name": "reranking",
+     "passed": true,
+     "duration_ms": 2269.72,
+     "results_count": 8,
+     "detail": null
+    },
+    {
+     "name": "retrieval_gate",
+     "passed": true,
+     "duration_ms": 0.03,
+     "results_count": 8,
+     "detail": {
+      "top_score": 0.8116391602071871
+     }
+    },
+    {
+     "name": "guardrail_pii",
+     "passed": true,
+     "duration_ms": 0.14,
+     "results_count": null,
+     "detail": {
+      "pii_found": false
+     }
+    }
+   ],
+   "trace_id": "f95a83c478fd726cf0b457e25c86aafb",
+   "trace_output": {
+    "status": "success",
+    "duration_ms": 6662
+   },
+   "spans": {
+    "Explanation/grounding": {
+     "duration_ms": 1,
+     "model": "apple/on-device",
+     "status": "success",
+     "judge_detail": {
+      "claims": 2,
+      "supported": 2,
+      "model_checked": 0,
+      "model_calls": 0
+     },
+     "completion_tokens": null,
+     "reasoning_tokens": null
+    },
+    "Explanation/faithfulness": {
+     "duration_ms": 1,
+     "model": "apple/on-device",
+     "status": "success",
+     "judge_detail": {
+      "claims": 2,
+      "supported": 2,
+      "model_checked": 0,
+      "model_calls": 0
+     },
+     "completion_tokens": null,
+     "reasoning_tokens": null
+    },
+    "Explanation": {
+     "duration_ms": 2371,
+     "model": "apple/on-device",
+     "status": "success",
+     "judge_detail": null,
+     "completion_tokens": null,
+     "reasoning_tokens": null
+    },
+    "Plan": {
+     "duration_ms": 1682,
+     "model": "apple/on-device",
+     "status": "success",
+     "judge_detail": null,
+     "completion_tokens": null,
+     "reasoning_tokens": null
+    }
+   }
+  },
+  {
+   "id": 27,
+   "kind": "menu_trigger_template",
+   "query": "회원가입 메뉴에서 입력 형식 또는 입력값이 유효하지 않은 경우 상황에 표시할 기존 알림을 찾아줘.",
+   "expected_code": "SM-1005",
+   "thread_id": "f52da916-ddfd-40a3-ac28-c7280e4980c9",
+   "request_id": "dcdfcc11-284f-4a6e-98e8-8ebb75417ef4",
+   "http_status": 200,
+   "total_s": 10.7,
+   "action": "search",
+   "candidate_codes": [
+    "SM-1215",
+    "SM-1061",
+    "SM-1019",
+    "SM-1033",
+    "SM-1047",
+    "SM-1005",
+    "SM-1214",
+    "SM-1216"
+   ],
+   "rank": 6,
+   "answer_excerpt": "입력 형식 또는 입력값이 유효하지 않은 경우 <br> <br> 가입 신청 정보를 다시 확인해주세요.",
+   "answer_blocked": false,
+   "ai_used": true,
+   "trace_flags": [
+    {
+     "name": "guardrail_input",
+     "passed": true,
+     "duration_ms": 0.09,
+     "results_count": null,
+     "detail": null
+    },
+    {
+     "name": "question_classification",
+     "passed": true,
+     "duration_ms": 0.0,
+     "results_count": null,
+     "detail": {
+      "category": "regulatory",
+      "indicators": [
+       "횟수/기간"
+      ]
+     }
+    },
+    {
+     "name": "vector_search",
+     "passed": true,
+     "duration_ms": 379.17,
+     "results_count": 20,
+     "detail": null
+    },
+    {
+     "name": "keyword_search",
+     "passed": true,
+     "duration_ms": 379.17,
+     "results_count": 20,
+     "detail": null
+    },
+    {
+     "name": "rrf_fusion",
+     "passed": true,
+     "duration_ms": 0.1,
+     "results_count": 39,
+     "detail": null
+    },
+    {
+     "name": "reranking",
+     "passed": true,
+     "duration_ms": 1997.66,
+     "results_count": 8,
+     "detail": null
+    },
+    {
+     "name": "retrieval_gate",
+     "passed": true,
+     "duration_ms": 0.01,
+     "results_count": 8,
+     "detail": {
+      "top_score": 0.8117300452451055
+     }
+    },
+    {
+     "name": "guardrail_pii",
+     "passed": true,
+     "duration_ms": 0.09,
+     "results_count": null,
+     "detail": {
+      "pii_found": false
+     }
+    }
+   ],
+   "trace_id": "048acad436e06ae1c1f9171c7f694dae",
+   "trace_output": {
+    "status": "success",
+    "duration_ms": 10725
+   },
+   "spans": {
+    "Explanation/grounding": {
+     "duration_ms": 1945,
+     "model": "apple/on-device",
+     "status": "success",
+     "judge_detail": {
+      "claims": 3,
+      "supported": 3,
+      "model_checked": 1,
+      "model_calls": 1
+     },
+     "completion_tokens": null,
+     "reasoning_tokens": null
+    },
+    "Explanation/faithfulness": {
+     "duration_ms": 3379,
+     "model": "apple/on-device",
+     "status": "success",
+     "judge_detail": {
+      "claims": 3,
+      "supported": 3,
+      "model_checked": 1,
+      "model_calls": 1
+     },
+     "completion_tokens": null,
+     "reasoning_tokens": null
+    },
+    "Explanation": {
+     "duration_ms": 2767,
+     "model": "apple/on-device",
+     "status": "success",
+     "judge_detail": null,
+     "completion_tokens": null,
+     "reasoning_tokens": null
+    },
+    "Plan": {
+     "duration_ms": 2130,
+     "model": "apple/on-device",
+     "status": "success",
+     "judge_detail": null,
+     "completion_tokens": null,
+     "reasoning_tokens": null
+    }
+   }
+  },
+  {
+   "id": 67,
+   "kind": "menu_trigger_template",
+   "query": "계좌관리 메뉴에서 처리 유효시간이 30초인 합성 시나리오 상황에 표시할 기존 알림을 찾아줘.",
+   "expected_code": "SM-1091",
+   "thread_id": "1d45a263-b08f-40e0-827b-52dad4c6077e",
+   "request_id": "4f2e8c83-b4a2-45ad-aaba-0156b9afad3b",
+   "http_status": 200,
+   "total_s": 7.9,
+   "action": "search",
+   "candidate_codes": [
+    "SM-1035",
+    "SM-1007",
+    "SM-1231",
+    "SM-1049",
+    "SM-1189",
+    "SM-1021",
+    "SM-1259",
+    "SM-1091"
+   ],
+   "rank": 8,
+   "answer_excerpt": "계좌 등록을 30초 이내에 완료해주세요.",
+   "answer_blocked": false,
+   "ai_used": true,
+   "trace_flags": [
+    {
+     "name": "guardrail_input",
+     "passed": true,
+     "duration_ms": 0.04,
+     "results_count": null,
+     "detail": null
+    },
+    {
+     "name": "question_classification",
+     "passed": true,
+     "duration_ms": 0.0,
+     "results_count": null,
+     "detail": {
+      "category": "regulatory",
+      "indicators": [
+       "횟수/기간"
+      ]
+     }
+    },
+    {
+     "name": "vector_search",
+     "passed": true,
+     "duration_ms": 330.94,
+     "results_count": 20,
+     "detail": null
+    },
+    {
+     "name": "keyword_search",
+     "passed": true,
+     "duration_ms": 330.94,
+     "results_count": 20,
+     "detail": null
+    },
+    {
+     "name": "rrf_fusion",
+     "passed": true,
+     "duration_ms": 0.08,
+     "results_count": 20,
+     "detail": null
+    },
+    {
+     "name": "reranking",
+     "passed": true,
+     "duration_ms": 2532.27,
+     "results_count": 8,
+     "detail": null
+    },
+    {
+     "name": "retrieval_gate",
+     "passed": true,
+     "duration_ms": 0.02,
+     "results_count": 8,
+     "detail": {
+      "top_score": 0.8117408901949339
+     }
+    },
+    {
+     "name": "guardrail_pii",
+     "passed": true,
+     "duration_ms": 0.17,
+     "results_count": null,
+     "detail": {
+      "pii_found": false
+     }
+    }
+   ],
+   "trace_id": "feaec4cfee98015c3a6c463acb755c87",
+   "trace_output": {
+    "status": "success",
+    "duration_ms": 7932
+   },
+   "spans": {
+    "Explanation/grounding": {
+     "duration_ms": 0,
+     "model": "apple/on-device",
+     "status": "success",
+     "judge_detail": {
+      "claims": 2,
+      "supported": 2,
+      "model_checked": 0,
+      "model_calls": 0
+     },
+     "completion_tokens": null,
+     "reasoning_tokens": null
+    },
+    "Explanation/faithfulness": {
+     "duration_ms": 1,
+     "model": "apple/on-device",
+     "status": "success",
+     "judge_detail": {
+      "claims": 2,
+      "supported": 2,
+      "model_checked": 0,
+      "model_calls": 0
+     },
+     "completion_tokens": null,
+     "reasoning_tokens": null
+    },
+    "Explanation": {
+     "duration_ms": 3177,
+     "model": "apple/on-device",
+     "status": "success",
+     "judge_detail": null,
+     "completion_tokens": null,
+     "reasoning_tokens": null
+    },
+    "Plan": {
+     "duration_ms": 1795,
+     "model": "apple/on-device",
+     "status": "success",
+     "judge_detail": null,
+     "completion_tokens": null,
+     "reasoning_tokens": null
+    }
+   }
+  },
+  {
+   "id": 3,
+   "kind": "manual_paraphrase",
+   "query": "입력한 인증번호가 틀렸을 때 안내",
+   "expected_code": "EX-0102",
+   "thread_id": "9ca06041-4e8a-48af-b7c2-22d8249f05ac",
+   "request_id": "a49fa1a7-aae3-4918-9d15-f138bbaf3db8",
+   "http_status": 200,
+   "total_s": 7.2,
+   "action": "search",
+   "candidate_codes": [
+    "EX-0102",
+    "EX-0105",
+    "EX-0103",
+    "EX-0101",
+    "EX-0301",
+    "SM-1271",
+    "SM-1031",
+    "SM-1003"
+   ],
+   "rank": 1,
+   "answer_excerpt": "인증번호를 다시 확인해주세요.",
+   "answer_blocked": false,
+   "ai_used": true,
+   "trace_flags": [
+    {
+     "name": "guardrail_input",
+     "passed": true,
+     "duration_ms": 0.04,
+     "results_count": null,
+     "detail": null
+    },
+    {
+     "name": "question_classification",
+     "passed": true,
+     "duration_ms": 0.0,
+     "results_count": null,
+     "detail": {
+      "category": "explanatory",
+      "indicators": []
+     }
+    },
+    {
+     "name": "vector_search",
+     "passed": true,
+     "duration_ms": 312.01,
+     "results_count": 20,
+     "detail": null
+    },
+    {
+     "name": "keyword_search",
+     "passed": true,
+     "duration_ms": 312.01,
+     "results_count": 20,
+     "detail": null
+    },
+    {
+     "name": "rrf_fusion",
+     "passed": true,
+     "duration_ms": 0.08,
+     "results_count": 35,
+     "detail": null
+    },
+    {
+     "name": "reranking",
+     "passed": true,
+     "duration_ms": 2515.38,
+     "results_count": 8,
+     "detail": null
+    },
+    {
+     "name": "retrieval_gate",
+     "passed": true,
+     "duration_ms": 0.04,
+     "results_count": 8,
+     "detail": {
+      "top_score": 0.8002327554535477
+     }
+    },
+    {
+     "name": "guardrail_pii",
+     "passed": true,
+     "duration_ms": 0.17,
+     "results_count": null,
+     "detail": {
+      "pii_found": false
+     }
+    }
+   ],
+   "trace_id": "ce93b82beb85533f3cb885e952ee6b36",
+   "trace_output": {
+    "status": "success",
+    "duration_ms": 7166
+   },
+   "spans": {
+    "Explanation/grounding": {
+     "duration_ms": 1,
+     "model": "apple/on-device",
+     "status": "success",
+     "judge_detail": {
+      "claims": 2,
+      "supported": 2,
+      "model_checked": 0,
+      "model_calls": 0
+     },
+     "completion_tokens": null,
+     "reasoning_tokens": null
+    },
+    "Explanation/faithfulness": {
+     "duration_ms": 1,
+     "model": "apple/on-device",
+     "status": "success",
+     "judge_detail": {
+      "claims": 2,
+      "supported": 2,
+      "model_checked": 0,
+      "model_calls": 0
+     },
+     "completion_tokens": null,
+     "reasoning_tokens": null
+    },
+    "Explanation": {
+     "duration_ms": 2887,
+     "model": "apple/on-device",
+     "status": "success",
+     "judge_detail": null,
+     "completion_tokens": null,
+     "reasoning_tokens": null
+    },
+    "Plan": {
+     "duration_ms": 1381,
+     "model": "apple/on-device",
+     "status": "success",
+     "judge_detail": null,
+     "completion_tokens": null,
+     "reasoning_tokens": null
+    }
+   }
+  },
+  {
+   "id": 9,
+   "kind": "manual_paraphrase",
+   "query": "이메일 중복 검사 결과 이미 쓰고 있는 주소인 경우",
+   "expected_code": "EX-0204",
+   "thread_id": "7bc53425-789f-4ae4-9dce-d0c59b76a9e9",
+   "request_id": "4efb7985-7a73-4828-ac9b-1fd68a8b8488",
+   "http_status": 200,
+   "total_s": 8.4,
+   "action": "search",
+   "candidate_codes": [
+    "EX-0204",
+    "EX-0203",
+    "SM-1261",
+    "SM-1037",
+    "SM-1135",
+    "SM-1009",
+    "SM-1051",
+    "SM-1257"
+   ],
+   "rank": 1,
+   "answer_excerpt": "이미 사용 중인 이메일입니다.",
+   "answer_blocked": false,
+   "ai_used": true,
+   "trace_flags": [
+    {
+     "name": "guardrail_input",
+     "passed": true,
+     "duration_ms": 0.09,
+     "results_count": null,
+     "detail": null
+    },
+    {
+     "name": "question_classification",
+     "passed": true,
+     "duration_ms": 0.0,
+     "results_count": null,
+     "detail": {
+      "category": "explanatory",
+      "indicators": []
+     }
+    },
+    {
+     "name": "vector_search",
+     "passed": true,
+     "duration_ms": 569.94,
+     "results_count": 20,
+     "detail": null
+    },
+    {
+     "name": "keyword_search",
+     "passed": true,
+     "duration_ms": 569.94,
+     "results_count": 20,
+     "detail": null
+    },
+    {
+     "name": "rrf_fusion",
+     "passed": true,
+     "duration_ms": 0.3,
+     "results_count": 34,
+     "detail": null
+    },
+    {
+     "name": "reranking",
+     "passed": true,
+     "duration_ms": 3452.51,
+     "results_count": 8,
+     "detail": null
+    },
+    {
+     "name": "retrieval_gate",
+     "passed": true,
+     "duration_ms": 0.02,
+     "results_count": 8,
+     "detail": {
+      "top_score": 0.7780707302977355
+     }
+    },
+    {
+     "name": "guardrail_pii",
+     "passed": true,
+     "duration_ms": 0.15,
+     "results_count": null,
+     "detail": {
+      "pii_found": false
+     }
+    }
+   ],
+   "trace_id": "13498bec9866cfa29153b06456e8b3be",
+   "trace_output": {
+    "status": "success",
+    "duration_ms": 8356
+   },
+   "spans": {
+    "Explanation/grounding": {
+     "duration_ms": 1,
+     "model": "apple/on-device",
+     "status": "success",
+     "judge_detail": {
+      "claims": 2,
+      "supported": 2,
+      "model_checked": 0,
+      "model_calls": 0
+     },
+     "completion_tokens": null,
+     "reasoning_tokens": null
+    },
+    "Explanation/faithfulness": {
+     "duration_ms": 1,
+     "model": "apple/on-device",
+     "status": "success",
+     "judge_detail": {
+      "claims": 2,
+      "supported": 2,
+      "model_checked": 0,
+      "model_calls": 0
+     },
+     "completion_tokens": null,
+     "reasoning_tokens": null
+    },
+    "Explanation": {
+     "duration_ms": 2593,
+     "model": "apple/on-device",
+     "status": "success",
+     "judge_detail": null,
+     "completion_tokens": null,
+     "reasoning_tokens": null
+    },
+    "Plan": {
+     "duration_ms": 1639,
+     "model": "apple/on-device",
+     "status": "success",
+     "judge_detail": null,
+     "completion_tokens": null,
+     "reasoning_tokens": null
+    }
+   }
+  },
+  {
+   "id": 12,
+   "kind": "manual_paraphrase",
+   "query": "권한이 없는 메뉴에 들어가려고 할 때",
+   "expected_code": "EX-0403",
+   "thread_id": "5e497cbc-f15d-41c3-ad15-596229eae11f",
+   "request_id": "d90e19a2-22d2-452b-a842-50973e749e00",
+   "http_status": 200,
+   "total_s": 7.9,
+   "action": "search",
+   "candidate_codes": [
+    "EX-0403",
+    "EX-0302",
+    "SM-1010",
+    "SM-1031",
+    "AT-1923",
+    "SM-1036",
+    "SM-1008",
+    "EX-0105"
+   ],
+   "rank": 1,
+   "answer_excerpt": "접근 권한이 없습니다.",
+   "answer_blocked": false,
+   "ai_used": true,
+   "trace_flags": [
+    {
+     "name": "guardrail_input",
+     "passed": true,
+     "duration_ms": 0.03,
+     "results_count": null,
+     "detail": null
+    },
+    {
+     "name": "question_classification",
+     "passed": true,
+     "duration_ms": 0.0,
+     "results_count": null,
+     "detail": {
+      "category": "explanatory",
+      "indicators": []
+     }
+    },
+    {
+     "name": "vector_search",
+     "passed": true,
+     "duration_ms": 365.08,
+     "results_count": 20,
+     "detail": null
+    },
+    {
+     "name": "keyword_search",
+     "passed": true,
+     "duration_ms": 365.08,
+     "results_count": 20,
+     "detail": null
+    },
+    {
+     "name": "rrf_fusion",
+     "passed": true,
+     "duration_ms": 0.09,
+     "results_count": 39,
+     "detail": null
+    },
+    {
+     "name": "reranking",
+     "passed": true,
+     "duration_ms": 3496.92,
+     "results_count": 8,
+     "detail": null
+    },
+    {
+     "name": "retrieval_gate",
+     "passed": true,
+     "duration_ms": 0.03,
+     "results_count": 8,
+     "detail": {
+      "top_score": 0.8117225634761694
+     }
+    },
+    {
+     "name": "guardrail_pii",
+     "passed": true,
+     "duration_ms": 0.15,
+     "results_count": null,
+     "detail": {
+      "pii_found": false
+     }
+    }
+   ],
+   "trace_id": "10f85dc1b561cd6f9d882abcaeb1962e",
+   "trace_output": {
+    "status": "success",
+    "duration_ms": 7920
+   },
+   "spans": {
+    "Explanation/grounding": {
+     "duration_ms": 0,
+     "model": "apple/on-device",
+     "status": "success",
+     "judge_detail": {
+      "claims": 2,
+      "supported": 2,
+      "model_checked": 0,
+      "model_calls": 0
+     },
+     "completion_tokens": null,
+     "reasoning_tokens": null
+    },
+    "Explanation/faithfulness": {
+     "duration_ms": 0,
+     "model": "apple/on-device",
+     "status": "success",
+     "judge_detail": {
+      "claims": 2,
+      "supported": 2,
+      "model_checked": 0,
+      "model_calls": 0
+     },
+     "completion_tokens": null,
+     "reasoning_tokens": null
+    },
+    "Explanation": {
+     "duration_ms": 2923,
+     "model": "apple/on-device",
+     "status": "success",
+     "judge_detail": null,
+     "completion_tokens": null,
+     "reasoning_tokens": null
+    },
+    "Plan": {
+     "duration_ms": 1067,
+     "model": "apple/on-device",
+     "status": "success",
+     "judge_detail": null,
+     "completion_tokens": null,
+     "reasoning_tokens": null
+    }
+   }
+  },
+  {
+   "id": "weather",
+   "kind": "unrelated",
+   "query": "오늘 서울 날씨 어때?",
+   "expected_code": null,
+   "thread_id": "5201d492-f135-42f9-908d-df4448636458",
+   "request_id": "fe7a6054-fae2-4b3d-8079-972d19ee649a",
+   "http_status": 422,
+   "total_s": 8.9,
+   "detail": "AI 결과의 근거 검증을 통과하지 못했습니다. 원문과 조건을 확인해주세요.",
+   "answer_blocked": true,
+   "trace_id": "4f52ed01339ebabb96147adcc300faec",
+   "trace_output": {
+    "status": "failed",
+    "error_type": "GroundingError"
+   },
+   "spans": {
+    "Explanation/grounding-repair": {
+     "duration_ms": 424,
+     "model": "apple/on-device",
+     "status": "success",
+     "judge_detail": null,
+     "completion_tokens": null,
+     "reasoning_tokens": null
+    },
+    "Explanation/grounding": {
+     "duration_ms": 2234,
+     "model": "apple/on-device",
+     "status": "success",
+     "judge_detail": {
+      "claims": 1,
+      "supported": 0,
+      "model_checked": 1,
+      "model_calls": 1
+     },
+     "completion_tokens": null,
+     "reasoning_tokens": null
+    },
+    "Explanation/faithfulness": {
+     "duration_ms": 4303,
+     "model": "apple/on-device",
+     "status": "success",
+     "judge_detail": {
+      "claims": 1,
+      "supported": 0,
+      "model_checked": 1,
+      "model_calls": 1
+     },
+     "completion_tokens": null,
+     "reasoning_tokens": null
+    },
+    "Explanation": {
+     "duration_ms": 540,
+     "model": "apple/on-device",
+     "status": "success",
+     "judge_detail": null,
+     "completion_tokens": null,
+     "reasoning_tokens": null
+    },
+    "Plan": {
+     "duration_ms": 1259,
+     "model": "apple/on-device",
+     "status": "success",
+     "judge_detail": null,
+     "completion_tokens": null,
+     "reasoning_tokens": null
+    }
+   }
+  }
+ ]
+}

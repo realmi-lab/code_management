@@ -1,0 +1,3 @@
+{"case_id": "core-direct", "repeat": 1, "status": 200, "seconds": 2.183, "objective_pass": true}
+{"case_id": "core-sent", "repeat": 1, "status": 504, "seconds": 161.898, "objective_pass": false}
+{"case_id": "core-wait", "repeat": 1, "status": 504, "seconds": 169.413, "objective_pass": false}
